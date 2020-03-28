@@ -19,3 +19,5 @@ There are two, get the one here https://store.unity.com/download?ref=personal, n
 * dead2.png: Modified color, taken from [publicdomainvectors](https://publicdomainvectors.org/en/free-clipart/Vector-illustration-of-cartoon-ghost/15086.html)
 * healthy.png:  [Smiley PNG](http://pngimg.com/download/36231) under License: [Creative Commons 4.0 BY-NC](https://creativecommons.org/licenses/by-nc/4.0/)
 * infected.png [Smiley PNG](http://pngimg.com/download/36229) under License: [Creative Commons 4.0 BY-NC](https://creativecommons.org/licenses/by-nc/4.0/)
+* myself3.png: afraid purple smiley from [pixcove](https://www.pixcove.com/tag/scared/page/5/)
+* map.png: Daten von [OpenStreetMap](http://www.openstreetmap.org) - Veröffentlicht unter [ODbl](http://opendatacommons.org/licenses/odbl/)
