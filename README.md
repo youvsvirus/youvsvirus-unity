@@ -9,6 +9,8 @@ Currently a python version is implemented that can be executed locally.
 We are now working on an implementation based on unity that can be directly integrated
 in our homepage [www.youvsvirus.de](http://www.youvsvirus.de).
 
+## Unity version
+There are two, get the one here https://store.unity.com/download?ref=personal, namely version 2019.3.7
 
 ## Smiley pictures
 
