@@ -12,6 +12,13 @@ in our homepage [www.youvsvirus.de](http://www.youvsvirus.de).
 ## Unity version
 There are two, get the one here https://store.unity.com/download?ref=personal, namely version 2019.3.7
 
+## How to work on this
+* Grab an issue so that everyone knows what you are working on!!!
+* Checkout your own feature branch 
+* Comment your code
+* Merge master into feature branch before pull request
+* For details see the [coding guidelines](https://github.com/Davknapp/WirvsVirus/blob/master/CODINGGUIDELINES.md)
+
 ## Smiley pictures
 * myselfSeriouslyInfected.png: Bild von [Vektor Kunst iXimus](https://pixabay.com/de/users/iximus-2352783/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4906550) auf [Pixabay](https://pixabay.com/de/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4906550)
 * mySelfInfected.png Bild von [Nina Garman](https://pixabay.com/de/users/BilliTheCat-7996303/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4004029) auf [Pixabay](https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4004029)
