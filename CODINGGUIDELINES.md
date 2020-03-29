@@ -1,5 +1,7 @@
 # Unity Coding and Development Guidelines
 
+We use Unity Version 2019.3.7, as available from the [Unity Hub](https://unity3d.com/de/get-unity/download). Due to incompatibility between versions, all contributors have to use this version.
+
 ## Git Workflow
 
 1. Pick an unassigned issue from the GitHub repository and assign it to yourself.
