@@ -3,7 +3,7 @@
 ## Git Workflow
 
 1. Pick an unassigned issue from the GitHub repository and assign it to yourself.
-2. Create a branch <yourname>/<yourissue> for work on that issue.
+2. Create a branch `yourname>/<yourissue>` for work on that issue.
 3. Implement and *test* your code.
 4. Merge the (potentially changed) master branch into your issue branch
 5. Push your issue branch and create a pull request.
