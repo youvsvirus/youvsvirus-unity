@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace Components
 {
-	public class Player : MonoBehaviour
+	public class Player : HumanBase
 	{
 
 		// The player's input vector will be multiplied by this factor.
 		public float speedMultiplier = 5.0f;
 
 		// Start is called before the first frame update
-		void Start()
+		public override void Start()
 		{
-
+			base.Start();
 		}
 
 		// Update is called once per frame
