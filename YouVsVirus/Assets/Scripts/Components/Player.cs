@@ -17,7 +17,7 @@ namespace Components
 		}
 
 		// Update is called once per frame
-		void Update()
+		void FixedUpdate()
 		{
 			// What is the player doing with the controls?
 			Vector3 move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * speedMultiplier;
@@ -25,5 +25,6 @@ namespace Components
 			// Find the rigidbody, update its velocity and let the physics engine do the rest.
 			GetComponent<Rigidbody2D>().velocity = move;
 		}
+
 	}
 }
