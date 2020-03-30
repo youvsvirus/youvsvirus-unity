@@ -25,5 +25,6 @@ namespace Components
 			// Find the rigidbody, update its velocity and let the physics engine do the rest.
 			GetComponent<Rigidbody2D>().velocity = move;
 		}
+
 	}
 }

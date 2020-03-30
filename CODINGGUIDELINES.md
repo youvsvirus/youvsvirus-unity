@@ -20,6 +20,7 @@ To keep our project in order, all files should be stored in their dedicated fold
 
 - **Audio** : Folder for audio files
 - **Materials** : Folder for Unity Materials
+- **Prefabs** : All prefabs go in here.
 - **Scenes** : All Unity Scenes belong in here
 - **Sprites** : Folder for all sprite textures
 - **Scripts** : All C#-Scripts belong in this folder and its subfolders.

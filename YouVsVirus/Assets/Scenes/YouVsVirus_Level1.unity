@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 298836824}
   - component: {fileID: 298836825}
   m_Layer: 0
-  m_Name: healthy (1)
+  m_Name: DefaultNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,13 +258,13 @@ CircleCollider2D:
   m_GameObject: {fileID: 298836820}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 8c98871d03e5e7c41a929e8bd67ee53a, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 12.190001
+  m_Radius: 2.56
 --- !u!212 &298836822
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -324,7 +324,7 @@ Transform:
   m_GameObject: {fileID: 298836820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.84, y: 0.161, z: 0}
-  m_LocalScale: {x: 0.02456168, y: 0.02456168, z: 0.02456168}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children:
   - {fileID: 859465388}
   m_Father: {fileID: 0}
@@ -363,6 +363,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2a997f20f561e42940449bcd2c9702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialCondition: WELL
+  WellSprite: {fileID: 21300000, guid: df912cafddbc09644874b27fd53035e0, type: 3}
+  InfectedSprite: {fileID: 21300000, guid: e8c79f7daf16f714aab316aec44b2fa2, type: 3}
+  IllSprite: {fileID: 21300000, guid: 91cb529c156e56b489e12d0b7a2e88c3, type: 3}
+  RecoveredSprite: {fileID: 21300000, guid: fbb48683e144857478b8657e957103b3, type: 3}
+  DeadSprite: {fileID: 21300000, guid: 7f5442be6905f404e8f8238fe161db64, type: 3}
 --- !u!1 &314978842
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +383,7 @@ GameObject:
   - component: {fileID: 314978846}
   - component: {fileID: 314978847}
   m_Layer: 0
-  m_Name: myself3
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -463,8 +469,9 @@ Transform:
   m_GameObject: {fileID: 314978842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.101, y: 2.28, z: 0}
-  m_LocalScale: {x: 0.252, y: 0.252, z: 0.252}
-  m_Children: []
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_Children:
+  - {fileID: 1210954246}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -480,6 +487,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d16d28abfceae4facf0e7150a2b2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialCondition: WELL
+  WellSprite: {fileID: 21300000, guid: 5a3133273f85a234ca33d467aa64a11f, type: 3}
+  InfectedSprite: {fileID: 21300000, guid: 4bd177664d1600d4abd26abc7369dddd, type: 3}
+  IllSprite: {fileID: 21300000, guid: 77d5687f9736fe5488c71b73aee7b7f7, type: 3}
+  RecoveredSprite: {fileID: 21300000, guid: fbb48683e144857478b8657e957103b3, type: 3}
+  DeadSprite: {fileID: 21300000, guid: 416a498273b219547b8862bae133659a, type: 3}
   speedMultiplier: 5
 --- !u!58 &314978847
 CircleCollider2D:
@@ -496,7 +509,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.7
+  m_Radius: 2.56
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,8 +605,9 @@ GameObject:
   - component: {fileID: 845853349}
   - component: {fileID: 845853348}
   - component: {fileID: 845853351}
+  - component: {fileID: 845853352}
   m_Layer: 0
-  m_Name: healthy
+  m_Name: DefaultNPC(2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -608,13 +622,13 @@ CircleCollider2D:
   m_GameObject: {fileID: 845853347}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 8c98871d03e5e7c41a929e8bd67ee53a, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 12.190001
+  m_Radius: 2.56
 --- !u!212 &845853349
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -674,8 +688,9 @@ Transform:
   m_GameObject: {fileID: 845853347}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.391, y: 0.161, z: 0}
-  m_LocalScale: {x: 0.02456168, y: 0.02456168, z: 0.02456168}
-  m_Children: []
+  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_Children:
+  - {fileID: 1101247771}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -700,6 +715,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &845853352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845853347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2a997f20f561e42940449bcd2c9702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialCondition: INFECTED
+  WellSprite: {fileID: 21300000, guid: df912cafddbc09644874b27fd53035e0, type: 3}
+  InfectedSprite: {fileID: 21300000, guid: e8c79f7daf16f714aab316aec44b2fa2, type: 3}
+  IllSprite: {fileID: 21300000, guid: 91cb529c156e56b489e12d0b7a2e88c3, type: 3}
+  RecoveredSprite: {fileID: 21300000, guid: fbb48683e144857478b8657e957103b3, type: 3}
+  DeadSprite: {fileID: 21300000, guid: 7f5442be6905f404e8f8238fe161db64, type: 3}
 --- !u!1 &859465387
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,8 +743,9 @@ GameObject:
   m_Component:
   - component: {fileID: 859465388}
   - component: {fileID: 859465389}
+  - component: {fileID: 859465390}
   m_Layer: 8
-  m_Name: InfectionCollider
+  m_Name: InfectionTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -741,12 +775,25 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 13
+  m_Radius: 4
+--- !u!114 &859465390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859465387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04aaa0707f970cb4e8124016f573e04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InfectionRadius: 4
 --- !u!1 &882962247
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +847,128 @@ MonoBehaviour:
   - {fileID: 1267081087}
   - {fileID: 1984582656}
   - {fileID: 1552763172}
-  BarrierWidthScale: 0.2
+--- !u!1 &1101247770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1101247771}
+  - component: {fileID: 1101247773}
+  - component: {fileID: 1101247772}
+  m_Layer: 8
+  m_Name: InfectionTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1101247771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101247770}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 845853350}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1101247772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101247770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04aaa0707f970cb4e8124016f573e04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InfectionRadius: 4
+--- !u!58 &1101247773
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101247770}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 4
+--- !u!1 &1210954245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1210954246}
+  - component: {fileID: 1210954248}
+  - component: {fileID: 1210954247}
+  m_Layer: 8
+  m_Name: InfectionTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1210954246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210954245}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 314978845}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1210954247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210954245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04aaa0707f970cb4e8124016f573e04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InfectionRadius: 4
+--- !u!58 &1210954248
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210954245}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 4
 --- !u!1 &1267081087
 GameObject:
   m_ObjectHideFlags: 0
