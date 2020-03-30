@@ -17,7 +17,7 @@ namespace Components
 		}
 
 		// Update is called once per frame
-		void Update()
+		void FixedUpdate()
 		{
 			// What is the player doing with the controls?
 			Vector3 move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * speedMultiplier;
