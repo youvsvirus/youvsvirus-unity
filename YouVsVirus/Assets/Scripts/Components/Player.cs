@@ -7,6 +7,7 @@ namespace Components
 	public class Player : MonoBehaviour
 	{
 
+		// The player's input vector will be multiplied by this factor.
 		public float speedMultiplier = 5.0f;
 
 		// Start is called before the first frame update
@@ -21,7 +22,7 @@ namespace Components
 			// What is the player doing with the controls?
 			Vector3 move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * speedMultiplier;
 
-			// Update the players position each frame
+			// Find the rigidbody, update its velocity and let the physics engine do the rest.
 			GetComponent<Rigidbody2D>().velocity = move;
 		}
 	}
