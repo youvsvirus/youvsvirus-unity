@@ -6,7 +6,9 @@ namespace Components
 {
 	public class Player : MonoBehaviour
 	{
-		float speed = 10f;
+
+		public float speedMultiplier = 5.0f;
+
 		// Start is called before the first frame update
 		void Start()
 		{
@@ -17,12 +19,10 @@ namespace Components
 		void Update()
 		{
 			// What is the player doing with the controls?
-			Vector3 move = new Vector3(Input.GetAxis("Horizontal"),
-				Input.GetAxis("Vertical"), 0);
+			Vector3 move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * speedMultiplier;
 
 			// Update the players position each frame
-			transform.position += move
-				* speed * Time.deltaTime;
+			GetComponent<Rigidbody2D>().velocity = move;
 		}
 	}
 }
