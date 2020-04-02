@@ -12,18 +12,20 @@ namespace Components
         private HumanCondition _condition = HumanCondition.WELL;
         private int daysSinceInfection = 0;
 
-        /// <summary>
-        /// This human's condition. Setting this also updates the sprite image accordingly.
-        /// </summary>
+ 
+
         public HumanCondition Condition {
             get { return _condition; }
     
-            private set 
+            protected set 
             {
                 _condition = value;
                 UpdateSpriteImage();
             }
         }
+        /// <summary>
+        /// This human's condition. Setting this also updates the sprite image accordingly.
+        /// </summary>
 
         /// <summary>
         /// This human's condition at the start of the simulation
