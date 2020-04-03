@@ -18,14 +18,14 @@ namespace Components
 		/// Start is called before the first frame update
 		/// </summary>
 		public override void Start()
-		{
-
-			//	SetCondition(WELL);
-			base.Start();
-		//	SetInitialHealthCondition(WELL);
+		{			
+			base.Start(); // call base class
 		}
 
-		// Update is called once per frame
+
+		/// <summary>
+		/// Update is called once per frame
+		/// </summary>
 		void FixedUpdate()
 		{
 			// What is the player doing with the infections?
@@ -35,6 +35,10 @@ namespace Components
 			GetComponent<Rigidbody2D>().velocity = move;
 		}
 
+
+		/// <summary>
+		/// Sprite images corresponding to infections states of the player
+		/// </summary>
 		public override void SetSpriteImages()
 		{
 			WellSprite = Resources.Load<Sprite>("SmileyPictures/player_healthy");
