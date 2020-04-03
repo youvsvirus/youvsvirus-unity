@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/YouVsVirus_Level1.unity
     guid: cbd250d7089e79c409e7a75903196f93
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: 00ffe3be83ede3a42ac68a0cc5953f6e
   m_configObjects: {}
