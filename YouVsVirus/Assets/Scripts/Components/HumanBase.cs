@@ -76,8 +76,8 @@ namespace Components
             /// Need this to decide if this human is infected
             /// This is how we get an instance from that class 
             /// </summary>
-            GameObject  InfectionControl = GameObject.Find(" InfectionControl");
-            infection =  InfectionControl.GetComponent< InfectionControl>();
+            GameObject  InfectionControl = GameObject.Find("InfectionControl");
+            infection = InfectionControl.GetComponent< InfectionControl>();
             // The player and npc class set their corresponding sprite images
             SetSpriteImages();
             // We want to change smiley's images and do not want use GetComponent again
