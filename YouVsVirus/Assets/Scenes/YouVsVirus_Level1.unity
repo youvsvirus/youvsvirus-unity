@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 934205704}
   - component: {fileID: 934205703}
   m_Layer: 0
-  m_Name: SimulationController
+  m_Name: InfectionControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -436,7 +436,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 934205702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e165ac5067fb77d429928ad9157290d6, type: 3}
+  m_Script: {fileID: 11500000, guid: d4422b2b149cdc94297f2dd633b10b92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   InfectionRate: 0.8

@@ -2,65 +2,103 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Model;
 
 namespace Components
 {
+    /// <summary>
+    /// All elements in our game are human
+    /// </summary>
     public abstract class HumanBase : MonoBehaviour
     {
-        private SimulationController simulationController;
+        /// <summary>
+        /// Contains parmams about how fast infection spreads
+        /// </summary>
+        private InfectionControl infection;
 
+        /// <summary>
+        /// How long this human has been exposed to the virus
+        /// </summary>
+        private int daysSinceExposure = 0;
 
-        private int daysSinceInfection = 0;
-
+        /// <summary>
+        /// This human's infection stages
+        /// </summary>
         public const int WELL        = 0;
         public const int EXPOSED     = 1;
         public const int INFECTIOUS  = 2;
         public const int RECOVERED   = 3;
         public const int DEAD        = 4;
 
+        /// <summary>
+        /// This human is well at the beginning
+        /// </summary>
         private int _mycondition = WELL;
 
+        /// <summary>
+        /// Get stage of infection
+        /// </summary>
         public int GetCondition()
         {
             return _mycondition;
         }
+
+        /// <summary>
+        /// Set stage of infection and update smiley's image
+        /// </summary>
         public void SetCondition(int condition)
         {
             _mycondition = condition;
             UpdateSpriteImage();
         }
-                       
-        // The Sprites corresponding to the images for the different conditions
-        // Images have to be set in the derived classes
-        protected  Sprite WellSprite=null, ExposedSprite = null, InfectiousSprite = null, RecoveredSprite = null, DeadSprite = null;
+        /// <summary>
+        /// The Sprites corresponding to the images for the different conditions
+        /// Images have to be set in the derived classes
+        /// </summary>     
+        protected Sprite WellSprite=null, ExposedSprite = null, InfectiousSprite = null, RecoveredSprite = null, DeadSprite = null;
 
-        // Set the sprite images which correspond to the condition
+        /// <summary>
+        /// Set images corresponding to stages of infection
+        /// Have to be set in player and npc class
+        /// </summary>   
         public abstract void SetSpriteImages();
 
-        public void SetInitialHealthCondition(int condition)
-        {
-            SetCondition(condition);
-        }
-
+        /// <summary>
+        /// With the help of the SpriteRenderer we can change the smiley's images when infected
+        /// </summary>
         protected SpriteRenderer mySpriteRenderer;
 
+        /// <summary>
+        /// Start is called on the frame when a script is enabled just before any of the Update methods are called the first time.
+        /// </summary>
         public virtual void Start()
         {
-            GameObject SimulationController = GameObject.Find("SimulationController");
-            simulationController = SimulationController.GetComponent<SimulationController>();
+            /// <summary>
+            /// Need this to decide if this human is infected
+            /// This is how we get an instance from that class 
+            /// </summary>
+            GameObject  InfectionControl = GameObject.Find(" InfectionControl");
+            infection =  InfectionControl.GetComponent< InfectionControl>();
+            // The player and npc class set their corresponding sprite images
             SetSpriteImages();
+            // We want to change smiley's images and do not want use GetComponent again
+            // and again in the corresponding function
             mySpriteRenderer = GetComponent<SpriteRenderer>();
         }
-       
+
+        /// <summary>
+        /// Every day updates the human's condition
+        /// </summary>
         public virtual void Update()
         {
-            if(simulationController.IsNewDay())
+            if(infection.IsNewDay())
             {
                 UpdateCondition();
             }
         }
 
+        /// <summary>
+        /// Update the human's condition
+        /// </summary>
         private void UpdateCondition()
         {
             switch (GetCondition())
@@ -68,36 +106,35 @@ namespace Components
                 case EXPOSED:
                     {
                         // Damn, we're EXPOSED. But wINFECTIOUS the sickness actually break out?
-
                         //  Incubation time has passed without infection --> recovered!
-                        if (daysSinceInfection > simulationController.IncubationTime)
+                        if (daysSinceExposure > infection.IncubationTime)
                         {
                             SetCondition(RECOVERED);
                             return;
                         }
 
                         //  Maybe it breaks out today?
-                        if(Random.value <= simulationController.OutbreakRate)
+                        if(Random.value <= infection.OutbreakRate)
                         {
                             SetCondition(INFECTIOUS);
                             return;
                         }
 
-                        daysSinceInfection++;
+                        daysSinceExposure++;
                         return;
                     }
 
                 case INFECTIOUS:
                     {
                         // Maybe we recover today...
-                        if(Random.value <= simulationController.RecoveryRate)
+                        if(Random.value <= infection.RecoveryRate)
                         {
                             SetCondition(RECOVERED);
                             return;
                         }
 
                         // Maybe we die today.
-                        if (Random.value <= simulationController.DeathRate)
+                        if (Random.value <= infection.DeathRate)
                         {
                             SetCondition(DEAD);
                             return;
@@ -119,10 +156,9 @@ namespace Components
             if (IsSusceptible())
             {
                 SetCondition(EXPOSED);
-                daysSinceInfection = 0;
+                daysSinceExposure = 0;
                 return true;
             }
-
             return false;
         }
 
