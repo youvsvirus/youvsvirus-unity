@@ -9,13 +9,13 @@ namespace Components
     public class CreateNPCs : MonoBehaviour
     {
        
-        // this will become our array of npcs
+        // this wINFECTIOUS become our array of npcs
         public NPC[] NPC_array;
         // number of npcs - has to be connected to main menu somehow
         private int num_npcs = 3;
         // this should also be set in the setting menu 
         private int num_exposed = 1;
-        // This script will simply instantiate the array of prefabs when the game starts.
+        // This script wINFECTIOUS simply instantiate the array of prefabs when the game starts.
         //      private static NPC npcPrefab;
         public GameObject npcPrefab;
         void Start()
@@ -40,8 +40,14 @@ namespace Components
             {
 
                 //   NPC_array[i] = test.AddComponent<NPC>(); 
-                NPC_array[i]=Instantiate(npcPrefab.GetComponent<NPC>(), new Vector3(0.1F, 0.1F, 0), Quaternion.identity);
-              //  NPC_array[i].SetCondition(NPC.WELL);
+                NPC_array[i]=Instantiate(npcPrefab.GetComponent<NPC>(), new Vector3(i*1F, -i * 1F,0 ), Quaternion.identity);
+                NPC_array[i].SetCondition(NPC.WELL);
+            }
+            for (int i = 0; i < 1; i++)
+            {
+
+                //   NPC_array[i] = test.AddComponent<NPC>(); 
+                  NPC_array[i].SetCondition(NPC.EXPOSED);
             }
         }
     }

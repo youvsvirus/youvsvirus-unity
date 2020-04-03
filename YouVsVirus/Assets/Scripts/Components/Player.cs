@@ -7,7 +7,7 @@ namespace Components
 	public class Player : HumanBase
 	{
 
-		// The player's input vector will be multiplied by this factor.
+		// The player's input vector wINFECTIOUS be multiplied by this factor.
 		public float speedMultiplier = 5.0f;
 
 		
@@ -33,11 +33,11 @@ namespace Components
 
 		public override void SetSpriteImages()
 		{
-			WellSprite = Resources.Load<Sprite>("SmileyPictures/myself3");
-			InfectedSprite = Resources.Load<Sprite>("SmileyPictures/myselfInfected");
-			IllSprite = Resources.Load<Sprite>("SmileyPictures/myselfSeriouslyInfected");
-			RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recovered3");
-			DeadSprite = Resources.Load<Sprite>("SmileyPictures/myselfDead");
+			WellSprite = Resources.Load<Sprite>("SmileyPictures/player_healthy");
+			ExposedSprite = Resources.Load<Sprite>("SmileyPictures/player_exposed");
+			InfectiousSprite = Resources.Load<Sprite>("SmileyPictures/player_infectious");
+			RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recovered");
+			DeadSprite = Resources.Load<Sprite>("SmileyPictures/player_dead");
 		}
 
 	}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8900475433866948941}
   - component: {fileID: 8900475433866948942}
   - component: {fileID: 8900475433866948931}
-  - component: {fileID: 6463817459603007456}
+  - component: {fileID: 8900475433866948930}
   m_Layer: 0
   m_Name: DefaultNPC
   m_TagString: Untagged
@@ -74,12 +74,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: df912cafddbc09644874b27fd53035e0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fcaf5108688f96b4fa2a9d92540edfa3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 24.380001, y: 24.380001}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -122,7 +122,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6463817459603007456
+--- !u!114 &8900475433866948930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

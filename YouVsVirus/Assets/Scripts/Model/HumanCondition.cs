@@ -9,8 +9,8 @@ namespace Model
     public enum HumanCondition
     {
         WELL = 0,
-        INFECTED = 1,
-        ILL = 2,
+        EXPOSED = 1,
+        INFECTIOUS = 2,
         RECOVERED = 3,
         DEAD = 4
     }

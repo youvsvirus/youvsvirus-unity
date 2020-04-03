@@ -6,14 +6,14 @@ using UnityEngine;
 public class SimulationController : MonoBehaviour
 {
     /// <summary>
-    /// The probability by which an infected person infects another person
+    /// The probability by which an EXPOSED person infects another person
     /// </summary>
-    public float InfectionRate = 0.8f;
+    public float InfectionRate = 0.2f;
 
     /// <summary>
-    /// The probabilty that an infected person will actually become ill on a given day.
+    /// The probabilty that an EXPOSED person wINFECTIOUS actually become INFECTIOUS on a given day.
     /// </summary>
-    public float OutbreakRate = 0.02f;
+    public float OutbreakRate = 0.01f;
 
     /// <summary>
     /// The incubation time of the virus, in days. Anyone not showing symptoms after this time is recovered.
@@ -21,12 +21,12 @@ public class SimulationController : MonoBehaviour
     public int IncubationTime = 20;
 
     /// <summary>
-    /// The probabilty for an ill person to recover on a given day.
+    /// The probabilty for an INFECTIOUS person to recover on a given day.
     /// </summary>
     public float RecoveryRate = 0.04f;
 
     /// <summary>
-    /// The probability for an ill person to die on a given day.
+    /// The probability for an INFECTIOUS person to die on a given day.
     /// </summary>
     public float DeathRate = 0.02f;
 

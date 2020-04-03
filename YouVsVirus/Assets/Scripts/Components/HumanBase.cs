@@ -13,11 +13,11 @@ namespace Components
 
         private int daysSinceInfection = 0;
 
-        public const int WELL = 0;
-        public const int INFECTED = 1;
-        protected const int ILL = 2;
-        protected const int RECOVERED = 3;
-        protected const  int DEAD = 4;
+        public const int WELL        = 0;
+        public const int EXPOSED     = 1;
+        public const int INFECTIOUS  = 2;
+        public const int RECOVERED   = 3;
+        public const int DEAD        = 4;
 
         private int _mycondition = WELL;
 
@@ -33,7 +33,7 @@ namespace Components
                        
         // The Sprites corresponding to the images for the different conditions
         // Images have to be set in the derived classes
-        protected  Sprite WellSprite=null, InfectedSprite = null, IllSprite = null, RecoveredSprite = null, DeadSprite = null;
+        protected  Sprite WellSprite=null, ExposedSprite = null, InfectiousSprite = null, RecoveredSprite = null, DeadSprite = null;
 
         // Set the sprite images which correspond to the condition
         public abstract void SetSpriteImages();
@@ -65,9 +65,9 @@ namespace Components
         {
             switch (GetCondition())
             {
-                case INFECTED:
+                case EXPOSED:
                     {
-                        // Damn, we're infected. But will the sickness actually break out?
+                        // Damn, we're EXPOSED. But wINFECTIOUS the sickness actually break out?
 
                         //  Incubation time has passed without infection --> recovered!
                         if (daysSinceInfection > simulationController.IncubationTime)
@@ -79,7 +79,7 @@ namespace Components
                         //  Maybe it breaks out today?
                         if(Random.value <= simulationController.OutbreakRate)
                         {
-                            SetCondition(ILL);
+                            SetCondition(INFECTIOUS);
                             return;
                         }
 
@@ -87,7 +87,7 @@ namespace Components
                         return;
                     }
 
-                case ILL:
+                case INFECTIOUS:
                     {
                         // Maybe we recover today...
                         if(Random.value <= simulationController.RecoveryRate)
@@ -113,12 +113,12 @@ namespace Components
         /// <summary>
         /// Infects this human if it is susceptible.
         /// </summary>
-        /// <returns>True if this human became infected, false otherwise.</returns>
+        /// <returns>True if this human became EXPOSED, false otherwise.</returns>
         public bool Infect()
         {
             if (IsSusceptible())
             {
-                SetCondition(INFECTED);
+                SetCondition(EXPOSED);
                 daysSinceInfection = 0;
                 return true;
             }
@@ -132,7 +132,7 @@ namespace Components
         /// <returns>True if this human is infectious, false otherwise.</returns>
         public bool IsInfectious()
         {
-            return GetCondition() == INFECTED || GetCondition() == ILL;
+            return GetCondition() == EXPOSED || GetCondition() == INFECTIOUS;
         }
 
         /// <summary>
@@ -157,16 +157,16 @@ namespace Components
                                mySpriteRenderer.sprite = WellSprite;                                    
                         break;
                     }
-                case INFECTED:
+                case EXPOSED:
                     {
-                        if (InfectedSprite != null)
-                            mySpriteRenderer.sprite = InfectedSprite;
+                        if (ExposedSprite != null)
+                            mySpriteRenderer.sprite = ExposedSprite;
                         break;
                     }
-                case ILL:
+                case INFECTIOUS:
                     {
-                        if (IllSprite != null)
-                            mySpriteRenderer.sprite = IllSprite;
+                        if (InfectiousSprite != null)
+                            mySpriteRenderer.sprite = InfectiousSprite;
                         break;
                     }
                 case DEAD:

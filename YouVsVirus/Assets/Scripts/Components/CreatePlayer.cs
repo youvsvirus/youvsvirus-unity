@@ -8,9 +8,9 @@ namespace Components
     public class CreatePlayer : MonoBehaviour
     {
        
-        // this will become our array of npcs
+        // this wINFECTIOUS become our array of npcs
         public Player my_player;
-        // This script will simply instantiate the array of prefabs when the game starts.
+        // This script wINFECTIOUS simply instantiate the array of prefabs when the game starts.
         //private GameObject test;
         public GameObject playerPrefab;
         void Start()
@@ -24,7 +24,8 @@ namespace Components
             //  Debug.Log("Create");
             //  test = Resources.Load("Player") as GameObject;
             //  test.AddComponent<InfectionTrigger>().SetInfectionRadius(5);
-            my_player = Instantiate(playerPrefab.GetComponent<Player>(), new Vector3(0, 0, 0), Quaternion.identity);
+            my_player = Instantiate(playerPrefab.GetComponent<Player>(), new Vector3(4F, 4F, 2F), Quaternion.identity);
+            my_player.SetCondition(Player.WELL);
          
         }
     }
