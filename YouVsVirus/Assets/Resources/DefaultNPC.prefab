@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8900475433866948941}
   - component: {fileID: 8900475433866948942}
   - component: {fileID: 8900475433866948931}
+  - component: {fileID: 6463817459603007456}
   m_Layer: 0
   m_Name: DefaultNPC
   m_TagString: Untagged
@@ -121,6 +122,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &6463817459603007456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8900475433866948943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2a997f20f561e42940449bcd2c9702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8900475434363221168
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,10 +10,15 @@ namespace Components
 		// The player's input vector will be multiplied by this factor.
 		public float speedMultiplier = 5.0f;
 
+		
+
 		// Start is called before the first frame update
 		public override void Start()
 		{
+
+			//	SetCondition(WELL);
 			base.Start();
+		//	SetInitialHealthCondition(WELL);
 		}
 
 		// Update is called once per frame
@@ -24,6 +29,15 @@ namespace Components
 
 			// Find the rigidbody, update its velocity and let the physics engine do the rest.
 			GetComponent<Rigidbody2D>().velocity = move;
+		}
+
+		public override void SetSpriteImages()
+		{
+			WellSprite = Resources.Load<Sprite>("SmileyPictures/myself3");
+			InfectedSprite = Resources.Load<Sprite>("SmileyPictures/myselfInfected");
+			IllSprite = Resources.Load<Sprite>("SmileyPictures/myselfSeriouslyInfected");
+			RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recovered3");
+			DeadSprite = Resources.Load<Sprite>("SmileyPictures/myselfDead");
 		}
 
 	}

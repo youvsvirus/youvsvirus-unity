@@ -19,12 +19,7 @@ namespace Components
             SetInfectionRadius(InfectionRadius);
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
+   
         void OnTriggerEnter2D(Collider2D other)
         {
             // Something entered the trigger zone!

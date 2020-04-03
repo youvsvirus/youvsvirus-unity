@@ -41,7 +41,7 @@ public class SimulationController : MonoBehaviour
     {
         if (IsNewDay())
         {
-            Debug.Log("The sun rises to greet a new day!");
+            //Debug.Log("The sun rises to greet a new day!");
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Model;
 
@@ -9,30 +10,38 @@ namespace Components
     {
         private SimulationController simulationController;
 
-        private HumanCondition _condition = HumanCondition.WELL;
+
         private int daysSinceInfection = 0;
 
- 
+        public const int WELL = 0;
+        public const int INFECTED = 1;
+        protected const int ILL = 2;
+        protected const int RECOVERED = 3;
+        protected const  int DEAD = 4;
 
-        public HumanCondition Condition {
-            get { return _condition; }
-    
-            protected set 
-            {
-                _condition = value;
-                UpdateSpriteImage();
-            }
+        private int _mycondition = WELL;
+
+        public int GetCondition()
+        {
+            return _mycondition;
         }
-        /// <summary>
-        /// This human's condition. Setting this also updates the sprite image accordingly.
-        /// </summary>
+        public void SetCondition(int condition)
+        {
+            _mycondition = condition;
+            UpdateSpriteImage();
+        }
+                       
+        // The Sprites corresponding to the images for the different conditions
+        // Images have to be set in the derived classes
+        protected  Sprite WellSprite=null, InfectedSprite = null, IllSprite = null, RecoveredSprite = null, DeadSprite = null;
 
-        /// <summary>
-        /// This human's condition at the start of the simulation
-        /// </summary>
-        public string initialCondition = "WELL";
-        
-        public Sprite WellSprite, InfectedSprite, IllSprite, RecoveredSprite, DeadSprite;
+        // Set the sprite images which correspond to the condition
+        public abstract void SetSpriteImages();
+
+        public void SetInitialHealthCondition(int condition)
+        {
+            SetCondition(condition);
+        }
 
         protected SpriteRenderer mySpriteRenderer;
 
@@ -40,40 +49,10 @@ namespace Components
         {
             GameObject SimulationController = GameObject.Find("SimulationController");
             simulationController = SimulationController.GetComponent<SimulationController>();
-
+            SetSpriteImages();
             mySpriteRenderer = GetComponent<SpriteRenderer>();
-
-            switch (initialCondition.ToUpper())
-            {
-                case "WELL":
-                    {
-                        Condition = HumanCondition.WELL;
-                        break;
-                    }
-                case "INFECTED":
-                    {
-                        Condition = HumanCondition.INFECTED;
-                        break;
-                    }
-                case "ILL":
-                    {
-                        Condition = HumanCondition.ILL;
-                        break;
-                    }
-                case "DEAD":
-                    {
-                        Condition = HumanCondition.DEAD;
-                        break;
-                    }
-                case "RECOVERED":
-                    {
-                        Condition = HumanCondition.RECOVERED;
-                        break;
-                    }
-                default: break;
-            }
         }
-
+       
         public virtual void Update()
         {
             if(simulationController.IsNewDay())
@@ -84,23 +63,23 @@ namespace Components
 
         private void UpdateCondition()
         {
-            switch (Condition)
+            switch (GetCondition())
             {
-                case HumanCondition.INFECTED:
+                case INFECTED:
                     {
                         // Damn, we're infected. But will the sickness actually break out?
 
                         //  Incubation time has passed without infection --> recovered!
                         if (daysSinceInfection > simulationController.IncubationTime)
                         {
-                            Condition = HumanCondition.RECOVERED;
+                            SetCondition(RECOVERED);
                             return;
                         }
 
                         //  Maybe it breaks out today?
                         if(Random.value <= simulationController.OutbreakRate)
                         {
-                            Condition = HumanCondition.ILL;
+                            SetCondition(ILL);
                             return;
                         }
 
@@ -108,19 +87,19 @@ namespace Components
                         return;
                     }
 
-                case HumanCondition.ILL:
+                case ILL:
                     {
                         // Maybe we recover today...
                         if(Random.value <= simulationController.RecoveryRate)
                         {
-                            Condition = HumanCondition.RECOVERED;
+                            SetCondition(RECOVERED);
                             return;
                         }
 
                         // Maybe we die today.
                         if (Random.value <= simulationController.DeathRate)
                         {
-                            Condition = HumanCondition.DEAD;
+                            SetCondition(DEAD);
                             return;
                         }
 
@@ -139,7 +118,7 @@ namespace Components
         {
             if (IsSusceptible())
             {
-                Condition = HumanCondition.INFECTED;
+                SetCondition(INFECTED);
                 daysSinceInfection = 0;
                 return true;
             }
@@ -153,7 +132,7 @@ namespace Components
         /// <returns>True if this human is infectious, false otherwise.</returns>
         public bool IsInfectious()
         {
-            return Condition == HumanCondition.INFECTED || Condition == HumanCondition.ILL;
+            return GetCondition() == INFECTED || GetCondition() == ILL;
         }
 
         /// <summary>
@@ -162,7 +141,7 @@ namespace Components
         /// <returns>True if this human is susceptible, false otherwise.</returns>
         public bool IsSusceptible()
         {
-            return Condition == HumanCondition.WELL;
+            return GetCondition() == WELL;
         }
 
         /// <summary>
@@ -170,34 +149,41 @@ namespace Components
         /// </summary>
         public void UpdateSpriteImage()
         {
-            switch (Condition)
+            switch (GetCondition())
             {
-                case HumanCondition.WELL:
+                case WELL:
                     {
-                        mySpriteRenderer.sprite = WellSprite;
+                        if (WellSprite != null)
+                               mySpriteRenderer.sprite = WellSprite;                                    
                         break;
                     }
-                case HumanCondition.INFECTED:
+                case INFECTED:
                     {
-                        mySpriteRenderer.sprite = InfectedSprite;
+                        if (InfectedSprite != null)
+                            mySpriteRenderer.sprite = InfectedSprite;
                         break;
                     }
-                case HumanCondition.ILL:
+                case ILL:
                     {
-                        mySpriteRenderer.sprite = IllSprite;
+                        if (IllSprite != null)
+                            mySpriteRenderer.sprite = IllSprite;
                         break;
                     }
-                case HumanCondition.DEAD:
+                case DEAD:
                     {
-                        mySpriteRenderer.sprite = DeadSprite;
+                        if (DeadSprite != null)
+                            mySpriteRenderer.sprite = DeadSprite;
                         break;
                     }
-                case HumanCondition.RECOVERED:
+                case RECOVERED:
                     {
-                        mySpriteRenderer.sprite = RecoveredSprite;
+                        if (RecoveredSprite != null)
+                            mySpriteRenderer.sprite = RecoveredSprite;
                         break;
                     }
-                default: break;
+                default:
+                    Debug.LogError("Sprite now known or its image not set.");
+                    break;
             }
         }
 
