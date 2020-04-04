@@ -1,124 +1,163 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using Model;
 
 namespace Components
 {
+    /// <summary>
+    /// All elements in our game are human
+    /// </summary>
     public abstract class HumanBase : MonoBehaviour
     {
-        private SimulationController simulationController;
-
-        private HumanCondition _condition = HumanCondition.WELL;
-        private int daysSinceInfection = 0;
+        /// <summary>
+        /// Contains parmams about how fast infection spreads
+        /// </summary>
+        private InfectionControl infection;
 
         /// <summary>
-        /// This human's condition. Setting this also updates the sprite image accordingly.
+        /// How long this human has been exposed to the virus
         /// </summary>
-        public HumanCondition Condition {
-            get { return _condition; }
-    
-            private set 
-            {
-                _condition = value;
-                UpdateSpriteImage();
-            }
+        private int daysSinceExposure = 0;
+
+        /// <summary>
+        /// This human's infection stages
+        /// </summary>
+        public const int WELL        = 0;
+        public const int EXPOSED     = 1;
+        public const int INFECTIOUS  = 2;
+        public const int RECOVERED   = 3;
+        public const int DEAD        = 4;
+
+
+        /// <summary>
+        /// This human's inital condition
+        /// </summary>
+        protected int _initialCondition = WELL;
+
+        /// <summary>
+        /// Set the human's initial condition
+        /// Default: well
+        /// This function is called by base classes even before Start() who are allowed
+        /// to modify _initialCondition in advance. In Start() the _initialCondition
+        /// value ist transferred to _mycondition
+        /// </summary>
+        public void SetInitialCondition(int condition)
+        {
+            _initialCondition = condition;
         }
 
         /// <summary>
-        /// This human's condition at the start of the simulation
+        /// This human's condition in the game
         /// </summary>
-        public string initialCondition = "WELL";
-        
-        public Sprite WellSprite, InfectedSprite, IllSprite, RecoveredSprite, DeadSprite;
+        private int _mycondition =  WELL;
 
+        /// <summary>
+        /// Get stage of infection
+        /// </summary>
+        public int GetCondition()
+        {
+            return _mycondition;
+        }
+
+        /// <summary>
+        /// Set stage of infection and update smiley's image
+        /// </summary>
+        public void SetCondition(int condition)
+        {
+            _mycondition = condition;
+            UpdateSpriteImage();
+        }
+        /// <summary>
+        /// The Sprites corresponding to the images for the different conditions
+        /// Images have to be set in the derived classes
+        /// </summary>     
+        protected Sprite WellSprite=null, ExposedSprite = null, InfectiousSprite = null, RecoveredSprite = null, DeadSprite = null;
+
+        /// <summary>
+        /// Set images corresponding to stages of infection
+        /// Have to be set in player and npc class
+        /// </summary>   
+        public abstract void SetSpriteImages();
+
+        /// <summary>
+        /// With the help of the SpriteRenderer we can change the smiley's images when infected
+        /// </summary>
         protected SpriteRenderer mySpriteRenderer;
 
+        /// <summary>
+        /// Start is called on the frame when a script is enabled just before any of the Update methods are called the first time.
+        /// </summary>
         public virtual void Start()
         {
-            GameObject SimulationController = GameObject.Find("SimulationController");
-            simulationController = SimulationController.GetComponent<SimulationController>();
-
+            /// <summary>
+            /// Need this to decide if this human is infected
+            /// This is how we get an instance from that class 
+            /// </summary>
+            GameObject  InfectionControl = GameObject.Find("InfectionControl");
+            infection = InfectionControl.GetComponent< InfectionControl>();
+            // We want to change smiley's images and do not want use GetComponent again
+            // and again in the corresponding function
             mySpriteRenderer = GetComponent<SpriteRenderer>();
-
-            switch (initialCondition.ToUpper())
-            {
-                case "WELL":
-                    {
-                        Condition = HumanCondition.WELL;
-                        break;
-                    }
-                case "INFECTED":
-                    {
-                        Condition = HumanCondition.INFECTED;
-                        break;
-                    }
-                case "ILL":
-                    {
-                        Condition = HumanCondition.ILL;
-                        break;
-                    }
-                case "DEAD":
-                    {
-                        Condition = HumanCondition.DEAD;
-                        break;
-                    }
-                case "RECOVERED":
-                    {
-                        Condition = HumanCondition.RECOVERED;
-                        break;
-                    }
-                default: break;
-            }
+            // The player and npc class set their corresponding sprite images
+            SetSpriteImages();
+            // _initialCondition may have been modified by base classes
+            // this becomes _mycondition during Start()
+            SetCondition(_initialCondition);
         }
 
+        /// <summary>
+        /// Every day updates the human's condition
+        /// </summary>
         public virtual void Update()
         {
-            if(simulationController.IsNewDay())
+            if(infection.IsNewDay())
             {
                 UpdateCondition();
             }
         }
 
+        /// <summary>
+        /// Update the human's condition
+        /// </summary>
         private void UpdateCondition()
         {
-            switch (Condition)
+            switch (GetCondition())
             {
-                case HumanCondition.INFECTED:
+                case EXPOSED:
                     {
-                        // Damn, we're infected. But will the sickness actually break out?
-
+                        // Damn, we're EXPOSED. But wINFECTIOUS the sickness actually break out?
                         //  Incubation time has passed without infection --> recovered!
-                        if (daysSinceInfection > simulationController.IncubationTime)
+                        if (daysSinceExposure > infection.IncubationTime)
                         {
-                            Condition = HumanCondition.RECOVERED;
+                            SetCondition(RECOVERED);
                             return;
                         }
 
                         //  Maybe it breaks out today?
-                        if(Random.value <= simulationController.OutbreakRate)
+                        if(Random.value <= infection.OutbreakRate)
                         {
-                            Condition = HumanCondition.ILL;
+                            SetCondition(INFECTIOUS);
                             return;
                         }
 
-                        daysSinceInfection++;
+                        daysSinceExposure++;
                         return;
                     }
 
-                case HumanCondition.ILL:
+                case INFECTIOUS:
                     {
                         // Maybe we recover today...
-                        if(Random.value <= simulationController.RecoveryRate)
+                        if(Random.value <= infection.RecoveryRate)
                         {
-                            Condition = HumanCondition.RECOVERED;
+                            SetCondition(RECOVERED);
                             return;
                         }
 
                         // Maybe we die today.
-                        if (Random.value <= simulationController.DeathRate)
+                        if (Random.value <= infection.DeathRate)
                         {
-                            Condition = HumanCondition.DEAD;
+                            SetCondition(DEAD);
                             return;
                         }
 
@@ -132,16 +171,15 @@ namespace Components
         /// <summary>
         /// Infects this human if it is susceptible.
         /// </summary>
-        /// <returns>True if this human became infected, false otherwise.</returns>
+        /// <returns>True if this human became EXPOSED, false otherwise.</returns>
         public bool Infect()
         {
             if (IsSusceptible())
             {
-                Condition = HumanCondition.INFECTED;
-                daysSinceInfection = 0;
+                SetCondition(EXPOSED);
+                daysSinceExposure = 0;
                 return true;
             }
-
             return false;
         }
 
@@ -151,7 +189,7 @@ namespace Components
         /// <returns>True if this human is infectious, false otherwise.</returns>
         public bool IsInfectious()
         {
-            return Condition == HumanCondition.INFECTED || Condition == HumanCondition.ILL;
+            return GetCondition() == EXPOSED || GetCondition() == INFECTIOUS;
         }
 
         /// <summary>
@@ -160,7 +198,7 @@ namespace Components
         /// <returns>True if this human is susceptible, false otherwise.</returns>
         public bool IsSusceptible()
         {
-            return Condition == HumanCondition.WELL;
+            return GetCondition() == WELL;
         }
 
         /// <summary>
@@ -168,34 +206,41 @@ namespace Components
         /// </summary>
         public void UpdateSpriteImage()
         {
-            switch (Condition)
+            switch (GetCondition())
             {
-                case HumanCondition.WELL:
+                case WELL:
                     {
-                        mySpriteRenderer.sprite = WellSprite;
+                        if (WellSprite != null)
+                               mySpriteRenderer.sprite = WellSprite;                                    
                         break;
                     }
-                case HumanCondition.INFECTED:
+                case EXPOSED:
                     {
-                        mySpriteRenderer.sprite = InfectedSprite;
+                        if (ExposedSprite != null)
+                            mySpriteRenderer.sprite = ExposedSprite;
                         break;
                     }
-                case HumanCondition.ILL:
+                case INFECTIOUS:
                     {
-                        mySpriteRenderer.sprite = IllSprite;
+                        if (InfectiousSprite != null)
+                            mySpriteRenderer.sprite = InfectiousSprite;
                         break;
                     }
-                case HumanCondition.DEAD:
+                case DEAD:
                     {
-                        mySpriteRenderer.sprite = DeadSprite;
+                        if (DeadSprite != null)
+                            mySpriteRenderer.sprite = DeadSprite;
                         break;
                     }
-                case HumanCondition.RECOVERED:
+                case RECOVERED:
                     {
-                        mySpriteRenderer.sprite = RecoveredSprite;
+                        if (RecoveredSprite != null)
+                            mySpriteRenderer.sprite = RecoveredSprite;
                         break;
                     }
-                default: break;
+                default:
+                    Debug.LogError("Sprite not known or its image not set.");
+                    break;
             }
         }
 

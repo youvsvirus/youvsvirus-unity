@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InfectionSpreader : MonoBehaviour
+public class  InfectionControl : MonoBehaviour
 {
     /// <summary>
     /// The probability by which an EXPOSED person infects another person

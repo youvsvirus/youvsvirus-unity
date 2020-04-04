@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,13 @@ public class ViewportBoundMapLimit : MonoBehaviour
 
     private float BarrierWidthScale = 0.1f;
 
+    public Vector3 barrierPosition;
+
+    public Vector3 GetMapExtents()
+    {
+        return MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +34,7 @@ public class ViewportBoundMapLimit : MonoBehaviour
     /// </summary>
     public void PlaceBarriers()
     {
-        Vector3 screenBoundsGlobal = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
+        Vector3 screenBoundsGlobal = GetMapExtents();
 
         // Scale the barriers so they encompass the viewport.
         // Assuming this GameObject's scale in all directions is one!
@@ -37,7 +45,7 @@ public class ViewportBoundMapLimit : MonoBehaviour
         Barriers[3].transform.localScale = new Vector3(BarrierWidthScale, 2 * screenBoundsGlobal.y, 1);
 
         // Place map limits just outside viewport
-        Vector3 barrierPosition = screenBoundsGlobal + new Vector3(BarrierWidthScale / 2f, BarrierWidthScale / 2f, 0);
+        barrierPosition = screenBoundsGlobal + new Vector3(BarrierWidthScale / 2f, BarrierWidthScale / 2f, 0);
 
         Barriers[0].transform.position = new Vector3(0, barrierPosition.y, 0);
         Barriers[1].transform.position = new Vector3(0, -barrierPosition.y, 0);
@@ -45,4 +53,5 @@ public class ViewportBoundMapLimit : MonoBehaviour
         Barriers[2].transform.position = new Vector3(barrierPosition.x, 0, 0);
         Barriers[3].transform.position = new Vector3(-barrierPosition.x, 0, 0);
     }
+
 }
