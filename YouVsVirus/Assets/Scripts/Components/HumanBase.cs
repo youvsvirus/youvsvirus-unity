@@ -29,10 +29,28 @@ namespace Components
         public const int RECOVERED   = 3;
         public const int DEAD        = 4;
 
+
         /// <summary>
-        /// This human is well at the beginning
+        /// This human's inital condition
         /// </summary>
-        private int _mycondition = WELL;
+        protected int _initialCondition = WELL;
+
+        /// <summary>
+        /// Set the human's initial condition
+        /// Default: well
+        /// This function is called by base classes even before Start() who are allowed
+        /// to modify _initialCondition in advance. In Start() the _initialCondition
+        /// value ist transferred to _mycondition
+        /// </summary>
+        public void SetInitialCondition(int condition)
+        {
+            _initialCondition = condition;
+        }
+
+        /// <summary>
+        /// This human's condition in the game
+        /// </summary>
+        private int _mycondition =  WELL;
 
         /// <summary>
         /// Get stage of infection
@@ -78,11 +96,14 @@ namespace Components
             /// </summary>
             GameObject  InfectionControl = GameObject.Find("InfectionControl");
             infection = InfectionControl.GetComponent< InfectionControl>();
-            // The player and npc class set their corresponding sprite images
-            SetSpriteImages();
             // We want to change smiley's images and do not want use GetComponent again
             // and again in the corresponding function
             mySpriteRenderer = GetComponent<SpriteRenderer>();
+            // The player and npc class set their corresponding sprite images
+            SetSpriteImages();
+            // _initialCondition may have been modified by base classes
+            // this becomes _mycondition during Start()
+            SetCondition(_initialCondition);
         }
 
         /// <summary>
@@ -218,7 +239,7 @@ namespace Components
                         break;
                     }
                 default:
-                    Debug.LogError("Sprite now known or its image not set.");
+                    Debug.LogError("Sprite not known or its image not set.");
                     break;
             }
         }

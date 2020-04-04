@@ -24,7 +24,13 @@ namespace Components
 
 
 		/// <summary>
-		/// Update is called once per frame
+		/// FixedUpdate: FixedUpdate is often called more frequently than Update. 
+        /// It can be called multiple times per frame, if the frame rate is low and 
+        /// it may not be called between frames at all if the frame rate is high. 
+        /// All physics calculations and updates occur immediately after FixedUpdate. 
+        /// When applying movement calculations inside FixedUpdate, you do not need 
+        /// to multiply your values by Time.deltaTime. This is because FixedUpdate 
+        /// is called on a reliable timer, independent of the frame rate.
 		/// </summary>
 		void FixedUpdate()
 		{
@@ -34,7 +40,6 @@ namespace Components
 			// Find the rigidbody, update its velocity and let the physics engine do the rest.
 			GetComponent<Rigidbody2D>().velocity = move;
 		}
-
 
 		/// <summary>
 		/// Sprite images corresponding to infections states of the player
