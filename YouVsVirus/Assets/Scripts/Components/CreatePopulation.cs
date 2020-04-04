@@ -92,6 +92,10 @@ namespace Components
             }
         }
 
+
+        /// <summary>
+        ///     Compute the grid coordinates
+        /// </summary>
         private Vector3 GetCoordinatesInGrid(int idx, int gridColumns, float cellRadius, Vector3 origin)
         {
             int row = idx / gridColumns;
@@ -123,7 +127,7 @@ namespace Components
         }
 
         /// <summary>
-        /// Calucaltes the number of rows and columns of a grid of quadratic cells of given cell sidelength on the map.
+        /// Calclates the number of rows and columns of a grid of quadratic cells of given cell sidelength on the map.
         /// </summary>
         /// <param name="cellSidelength">The side length of a single cell</param>
         /// <returns>An array of shape { rows, columns }</returns>
