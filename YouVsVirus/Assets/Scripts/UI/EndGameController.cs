@@ -56,7 +56,7 @@ public class EndGameController : MonoBehaviour
     void FixedUpdate()
     {
         // Debugging log
-        Debug.Log("EndGameController update.");
+        //Debug.Log("EndGameController update.");
         // Update the timer
         timeSinceGameStartInSeconds += Time.deltaTime;
         // Check whether the game is over
