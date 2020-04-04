@@ -44,6 +44,7 @@ namespace Components
             NPC_array = new NPC[num_npcs];
             // load prefab from resources folder
             npcPrefab = Resources.Load("DefaultNPC") as GameObject;
+            Vector3 prefabScale = npcPrefab.transform.localScale;
 
 
             for (int i = 0; i < num_npcs; i++)
@@ -51,7 +52,7 @@ namespace Components
                 // puts clones of the prefab in our scene at position of new Vector with rotation Quaternion.identity
                 // the prefab has an infection trigger already attached and the script of the NPC class
                 // we can access the latter by using GetComponent here
-                NPC_array[i]=Instantiate(npcPrefab.GetComponent<NPC>(), GenerateRandomPosition(), Quaternion.identity);
+                NPC_array[i]=Instantiate(npcPrefab.GetComponent<NPC>(), GenerateRandomPosition(prefabScale), Quaternion.identity);
             }
             for (int i = 0; i < num_exposed; i++)
             {   
@@ -63,13 +64,15 @@ namespace Components
         /// <summary>
         /// Creates a random starting position for our NPCs
         /// </summary>
-        private Vector3 GenerateRandomPosition()
+        private Vector3 GenerateRandomPosition(Vector3 spriteScale)
         {
             // get the game object "MapLimits"
             GameObject MapLimits = GameObject.Find("MapLimits");
             // this contains the script ViewportBoundMapLimit, where the limits of our 
             // map are stored in barrier Position
-            Vector3 limit = MapLimits.GetComponent<ViewportBoundMapLimit>().barrierPosition;
+            Vector3 limit = MapLimits.GetComponent<ViewportBoundMapLimit>().GetMapExtents();
+            limit -= new Vector3(0.5f * spriteScale.x, 0.5f * spriteScale.y, 0);
+
             // create a random starting position for our NPCs
             float x = Random.Range(-limit[0], limit[0]);
             float y = Random.Range(-limit[1], limit[1]);
