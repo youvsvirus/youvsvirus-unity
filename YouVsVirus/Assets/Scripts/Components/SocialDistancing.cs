@@ -16,11 +16,13 @@ public class SocialDistancing : MonoBehaviour
     /// </summary>
     public float sd = 1f;
 
+    /// <summary>
+    /// This will be the NPC's circle collider
+    /// </summary>
     public CircleCollider2D m_coll;
 
     public void Start()
     {
-       // m_coll = GetComponent<CircleCollider2D>();
         // we set social distancing by adjusting the radius of our collider
         SetSocialDistancingRadius(sd);
 
@@ -31,7 +33,6 @@ public class SocialDistancing : MonoBehaviour
     /// </summary>
     public void SetSocialDistancingRadius(float s)
     {
-       print(s);
         // the radius of our collider is set depending on social distancing factor, a random deviation of about 20% from sd multiplied by 1.5 times the usual radius
         m_coll.radius = m_coll.radius + s * UnityEngine.Random.Range(1 - (s / 100) * 20f, 1 + (s / 100) * 20f) * 0.8f*m_coll.radius;
     }
