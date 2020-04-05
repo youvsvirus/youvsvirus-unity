@@ -66,6 +66,13 @@ namespace Components
         public void SetCondition(int condition)
         {
             _mycondition = condition;
+
+            if(_mycondition == DEAD)
+            {
+                GetComponent<Rigidbody2D>().simulated = false;
+                GetComponent<SpriteRenderer>().sortingLayerName = "Dead";
+            }
+
             UpdateSpriteImage();
         }
         /// <summary>
