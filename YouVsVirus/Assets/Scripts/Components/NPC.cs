@@ -27,13 +27,13 @@ namespace Components
         /// </summary>
         public float AccelerationFactor = 0.5f;
 
-        private Rigidbody2D m_Rigidbody;
+
         // Start is called before the first frame update
         public override void Start()
         {
-            m_Rigidbody = GetComponent<Rigidbody2D>();
+            myRigidbody = GetComponent<Rigidbody2D>();
             // set an initial velocity for our npc in a random direction
-            m_Rigidbody.velocity = UnityEngine.Random.onUnitSphere*3f;
+            myRigidbody.velocity = UnityEngine.Random.onUnitSphere*3f;
             base.Start(); // call base class
         }
         /// <summary>
@@ -47,7 +47,10 @@ namespace Components
 		/// </summary>
 		void FixedUpdate()
         {
-            RandomMovement();
+            if (CanMove())
+            {
+                RandomMovement();
+            }
         }
                
         /// <summary>
@@ -71,7 +74,7 @@ namespace Components
             // checks if we need to increase the velocity
             bool increase_vel = false;
             // the velocity norm to check how fast we are going
-            float vel_norm = m_Rigidbody.velocity.sqrMagnitude;
+            float vel_norm = myRigidbody.velocity.sqrMagnitude;
             
             // if we are getting too slow
             if (vel_norm < MinVelocity)
@@ -82,7 +85,7 @@ namespace Components
                 if (UnityEngine.Random.value < 0.2f)
                     // Random.onUnitSphere returns  a random point on the surface of a sphere with radius 1
                     // so we do not change the velocity, just the direction
-                    m_Rigidbody.velocity = UnityEngine.Random.onUnitSphere;                             
+                    myRigidbody.velocity = UnityEngine.Random.onUnitSphere;                             
             }
 
             //  Stop! This is too fast!
@@ -96,7 +99,7 @@ namespace Components
             if (vel_norm < MaxVelocity && increase_vel == true)
             {
                 // increase the velocity in every call to this function
-                m_Rigidbody.velocity *= (1f + AccelerationFactor);                    
+                myRigidbody.velocity *= (1f + AccelerationFactor);                    
             } 
             
 

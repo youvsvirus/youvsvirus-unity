@@ -34,11 +34,19 @@ namespace Components
 		/// </summary>
 		void FixedUpdate()
 		{
-			// What is the player doing with the infections?
+			if (CanMove())
+			{
+				ProcessMovementInput();
+			}
+		}
+
+		private void ProcessMovementInput()
+		{
+			// What is the player doing?
 			Vector3 move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * speedMultiplier;
 
 			// Find the rigidbody, update its velocity and let the physics engine do the rest.
-			GetComponent<Rigidbody2D>().velocity = move;
+			myRigidbody.velocity = move;
 		}
 
 		/// <summary>
