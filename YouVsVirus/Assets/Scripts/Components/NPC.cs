@@ -22,6 +22,11 @@ namespace Components
         /// </summary>
         public float MaxVelocity = 3.0f;
 
+        /// <summary>
+        /// The factor by which the velocity increases each se
+        /// </summary>
+        public float AccelerationFactor = 0.5f;
+
         private Rigidbody2D m_Rigidbody;
         // Start is called before the first frame update
         public override void Start()
@@ -67,6 +72,7 @@ namespace Components
             bool increase_vel = false;
             // the velocity norm to check how fast we are going
             float vel_norm = m_Rigidbody.velocity.sqrMagnitude;
+            
             // if we are getting too slow
             if (vel_norm < MinVelocity)
             {
@@ -78,15 +84,22 @@ namespace Components
                     // so we do not change the velocity, just the direction
                     m_Rigidbody.velocity = UnityEngine.Random.onUnitSphere;                             
             }
+
+            //  Stop! This is too fast!
+            if (vel_norm > MaxVelocity)
+            {
+                vel_norm = MaxVelocity;
+                increase_vel = false;
+            }
+
             // we are slow at the moment but do not want to become too fast
-            if(vel_norm < MaxVelocity && increase_vel == true)
+            if (vel_norm < MaxVelocity && increase_vel == true)
             {
                 // increase the velocity in every call to this function
-                m_Rigidbody.velocity *= 1.5f;
-                // as long as we are not going too fast
-                if (m_Rigidbody.velocity.sqrMagnitude > MaxVelocity)
-                    increase_vel = false;
-            }         
+                m_Rigidbody.velocity *= (1f + AccelerationFactor);                    
+            } 
+            
+
         }             
     }
 }
