@@ -27,28 +27,21 @@ namespace Components
         public Player Player { get; private set; }
 
         /// <summary>
-        /// All instantiated NPCs
+        /// All instantiated NPCs. This is a dynamic list, it can be extended during runtime.
         /// </summary>
         public List<NPC> NPCs { get; private set; }
 
-        /// <summary>
-        ///number of npcs - has to be connected to main menu in the future
-        /// </summary>
-        private int num_npcs = 30;
-
-        /// <summary>
-        ///number of initially exposed npcs - has to be connected to main menu or settings menu in the future
-        /// </summary>
-        private int num_exposed = 1;
+        private LevelSettings levelSettings;
 
         public CreatePopulation()
         {
-            NPCs = new List<NPC>(num_npcs);
+            NPCs = new List<NPC>(30);
         }
 
         // Start is called before the first frame update
         void Start()
         {
+            levelSettings = GameObject.Find("LevelSettings").GetComponent<LevelSettings>();
             PlaceHumans();
         }
 
@@ -68,7 +61,7 @@ namespace Components
             int cellCount = rows * columns;
 
             //  Randomly select grid indices
-            int[] indices = ChooseUnique(num_npcs + 1, 0, cellCount);
+            int[] indices = ChooseUnique(levelSettings.NumberOfNPCs + 1, 0, cellCount);
 
             Vector3 origin = - GameObject.Find("MapLimits").GetComponent<ViewportBoundMapLimit>().GetMapExtents();
 
@@ -78,7 +71,7 @@ namespace Components
                                     Quaternion.identity);
 
             //  Place the NPCs in the grid
-            for(int i = 1; i <= num_npcs; i++)
+            for(int i = 1; i <= levelSettings.NumberOfNPCs; i++)
             {
                 NPCs.Add(Instantiate(   npcPrefab.GetComponent<NPC>(),
                                         GetCoordinatesInGrid(indices[i], columns, cellRadius, origin),
@@ -86,7 +79,8 @@ namespace Components
             }
 
             //  Infect a few of them.
-            for(int i = 0; i < num_exposed; i++)
+            //  If (for some reason) NumberInitiallyExposed > NumberOfNPCs, just infect all of them.
+            for (int i = 0; i < Math.Min(levelSettings.NumberOfNPCs, levelSettings.NumberInitiallyExposed); i++)
             {
                 NPCs[i].SetInitialCondition(NPC.EXPOSED);
             }
