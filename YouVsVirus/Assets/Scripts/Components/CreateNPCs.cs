@@ -71,6 +71,8 @@ namespace Components
             // this contains the script ViewportBoundMapLimit, where the limits of our 
             // map are stored in barrier Position
             Vector3 limit = MapLimits.GetComponent<ViewportBoundMapLimit>().GetMapExtents();
+            // since placing the sprite considers its center point, we substract half of its length
+            // hence all sprites are placed in the domain and not half in half out
             limit -= new Vector3(0.5f * spriteScale.x, 0.5f * spriteScale.y, 0);
 
             // create a random starting position for our NPCs
