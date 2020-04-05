@@ -17,12 +17,14 @@ public class SocialDistancing : MonoBehaviour
     public float sd = 1f;
 
     /// <summary>
-    /// This will be the NPC's circle collider
+    /// The NPC's circle collider
     /// </summary>
-    public CircleCollider2D m_coll;
+    private CircleCollider2D m_coll;
 
     public void Start()
     {
+        m_coll = GetComponent<CircleCollider2D>();
+
         // we set social distancing by adjusting the radius of our collider
         SetSocialDistancingRadius(sd);
 

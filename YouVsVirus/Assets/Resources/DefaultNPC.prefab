@@ -1,50 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3961469683096746521
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8099301736306529047}
-  - component: {fileID: 7999780960464876108}
-  m_Layer: 0
-  m_Name: SocialDistancing
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8099301736306529047
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3961469683096746521}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8900475433866948940}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7999780960464876108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3961469683096746521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa021da745fb98843b1f110e6b40b098, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sd: 0
-  m_coll: {fileID: 8900475433866948942}
 --- !u!1 &8900475433866948943
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,6 +13,7 @@ GameObject:
   - component: {fileID: 8900475433866948942}
   - component: {fileID: 8900475433866948931}
   - component: {fileID: 8900475433866948930}
+  - component: {fileID: 7271644411175272605}
   m_Layer: 0
   m_Name: DefaultNPC
   m_TagString: Untagged
@@ -77,7 +33,6 @@ Transform:
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children:
   - {fileID: 8900475434363221175}
-  - {fileID: 8099301736306529047}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -183,6 +138,19 @@ MonoBehaviour:
   MinVelocity: 1
   MaxVelocity: 3
   AccelerationFactor: 0.5
+--- !u!114 &7271644411175272605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8900475433866948943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa021da745fb98843b1f110e6b40b098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sd: 1
 --- !u!1 &8900475434363221168
 GameObject:
   m_ObjectHideFlags: 0
