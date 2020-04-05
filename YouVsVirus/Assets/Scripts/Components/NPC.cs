@@ -12,7 +12,17 @@ namespace Components
     /// </summary>
     public class NPC : HumanBase
     {
-        Rigidbody2D m_Rigidbody;
+        /// <summary>
+        /// the minimum velocity we allow for the npcs
+        /// </summary>
+        public float MinVelocity = 1.0f;
+
+        /// <summary>
+        /// the maximum velocity we allow for the npcs
+        /// </summary>
+        public float MaxVelocity = 3.0f;
+
+        private Rigidbody2D m_Rigidbody;
         // Start is called before the first frame update
         public override void Start()
         {
@@ -52,17 +62,13 @@ namespace Components
         /// then the velocity is gradually increased
         /// </summary>
         public void RandomMovement()
-        {
-            // the minimum velocity we allow for the npcs
-            float min_vel = 1.0f;
-            // the maximum velocity we allow for the npcs
-            float max_vel = 3.0f;
+        { 
             // checks if we need to increase the velocity
             bool increase_vel = false;
             // the velocity norm to check how fast we are going
             float vel_norm = m_Rigidbody.velocity.sqrMagnitude;
             // if we are getting too slow
-            if (vel_norm < min_vel)
+            if (vel_norm < MinVelocity)
             {
                 // increase velocity later on
                 increase_vel = true;
@@ -73,12 +79,12 @@ namespace Components
                     m_Rigidbody.velocity = UnityEngine.Random.onUnitSphere;                             
             }
             // we are slow at the moment but do not want to become too fast
-            if(vel_norm < max_vel && increase_vel == true)
+            if(vel_norm < MaxVelocity && increase_vel == true)
             {
                 // increase the velocity in every call to this function
                 m_Rigidbody.velocity *= 1.5f;
                 // as long as we are not going too fast
-                if (m_Rigidbody.velocity.sqrMagnitude > max_vel)
+                if (m_Rigidbody.velocity.sqrMagnitude > MaxVelocity)
                     increase_vel = false;
             }         
         }             
