@@ -62,7 +62,7 @@ public class LevelStats : MonoBehaviour
     public void aHumanGotExposed()
     {
         NumberExposed++;
-        debugPrint("a human got exposed");
+        debugPrint("a human got exposed. Total exposed: " + GetExposed());
     }
 
     /// <summary>
@@ -71,7 +71,7 @@ public class LevelStats : MonoBehaviour
     public void aHumanGotInfected()
     {
         NumberInfected++;
-        debugPrint("a human got infected");
+        debugPrint("a human got infected. Total infected: " + GetInfected());
     }
 
     /// <summary>
@@ -80,7 +80,7 @@ public class LevelStats : MonoBehaviour
     public void aHumanRecovered()
     {
         NumberRecovered++;
-        debugPrint("a human revovered :)");
+        debugPrint("a human revovered :). Total Rec: " + GetRecovered());
     }
 
     /// <summary>
@@ -89,7 +89,43 @@ public class LevelStats : MonoBehaviour
     public void aHumanDied()
     {
         NumberDead++;
-        debugPrint("a human died :(");
+        debugPrint("a human died :(. Total Dead:" + GetDead());
+    }
+
+    /// <summary>
+    /// Get the total number of infected humans
+    /// </summary>
+    /// <returns>The total count of infected humans</returns>
+    public int GetInfected()
+    {
+        return NumberInfected;
+    }
+
+    /// <summary>
+    /// Get the total number of dead humans
+    /// </summary>
+    /// <returns>The total count of dead humans</returns>
+    public int GetDead()
+    {
+        return NumberDead;
+    }
+
+    /// <summary>
+    /// Get the total number of recovered humans
+    /// </summary>
+    /// <returns>The total count of recovered humans</returns>
+    public int GetRecovered()
+    {
+        return NumberRecovered;
+    }
+
+    /// <summary>
+    /// Get the total number of exposed humans
+    /// </summary>
+    /// <returns>The total count of exposed humans</returns>
+    public int GetExposed()
+    {
+        return NumberExposed;
     }
 
     /// <summary>
@@ -101,7 +137,7 @@ public class LevelStats : MonoBehaviour
         {
             Debug.Log("WARNING: This LevelStats instance is not initialized!");
         }
-        Debug.Log("Test " + message);
+        Debug.Log("Level Stats: " + message);
     }
 
     // Start is called before the first frame update
