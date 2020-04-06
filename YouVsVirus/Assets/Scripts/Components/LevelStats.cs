@@ -42,18 +42,35 @@ public class LevelStats : MonoBehaviour
     private bool isInit = false;
 
     /// <summary>
+    ///  The globally unique, single LevelStats object.
+    ///  Retrieve this with GetActiveLevelStats().
+    /// </summary>
+    private static LevelStats _singleton = null;
+
+    /// <summary>
     /// Initialize with initial number of NPCs and initial number
     /// of infected.
     /// </summary>
     public void Init(int InitialNumberOfNPCs, int NumberOfInitiallyInfected)
     {
-        // Set initiali numbers of NPCs and infected humans
+        // Set initial numbers of NPCs and infected humans
         NumberOfNPCs = InitialNumberOfNPCs;
         NumberInfected = NumberOfInitiallyInfected;
-        // At the beginning only the infected humans are exposed
-        NumberExposed = NumberOfInitiallyInfected;
         // Mark this instance as initialized
         isInit = true;
+    }
+
+    /// <summary>
+    /// Set all counters back to 0 and mark as not initialized.
+    /// </summary>
+    public void Reset()
+    {
+        NumberOfNPCs = 0;
+        NumberExposed = 0;
+        NumberInfected = 0;
+        NumberDead = 0;
+        NumberRecovered = 0;
+        isInit = false;
     }
 
     /// <summary>
@@ -146,6 +163,33 @@ public class LevelStats : MonoBehaviour
         //  Make sure this object survives the scene change
         //  We will need it in the end screen to evaluate the stats
         DontDestroyOnLoad(gameObject);
+    }
+
+    /// <summary>
+    /// Returns the LevelStats object.
+    /// Makes sure that, at all times, there is at most one LevelStats object
+    /// active and that it can be found by all other scripts.
+    /// 
+    /// Use this to locate active LevelStats.
+    /// </summary>
+    /// <returns>The LevelStats object.</returns>
+    public static LevelStats GetActiveLevelStats()
+    {
+        if (_singleton == null)
+        {
+            GameObject levelStatsGO = GameObject.Find("LevelStats");
+            if (levelStatsGO != null)
+            {
+                _singleton = levelStatsGO.GetComponent<LevelStats>();
+            }
+            else
+            {
+                levelStatsGO = new GameObject("LevelStats");
+                _singleton = levelStatsGO.AddComponent<LevelStats>();
+            }
+        }
+
+        return _singleton;
     }
 }
 

@@ -28,12 +28,11 @@ public class StartButton : MonoBehaviour
 
         // Get the statistics object that counts the number of infected humans
         // and initialize it.
-        //
-        // For some strange reason i cannot use
-        //      GameObject.Find("LevelStats").LevelStatObject.GetComponent<LevelStats>()
-        // since this produces a "The type or namespace name LevelStats could not be found" Error
-        GameObject LevelStatObject = GameObject.Find("LevelStats");
-        LevelStats levelStats = LevelStatObject.GetComponent<LevelStats>();
+        LevelStats levelStats = LevelStats.GetActiveLevelStats();
+        // Reset the level stats if it was active.
+        // This is necessary if we restart from a previous run.
+        levelStats.Reset();
+        // Initialize the level stats.
         levelStats.Init(LevelSettings.NumberOfNPCs, LevelSettings.NumberInitiallyExposed);
 
         // Load the Scene for level1
