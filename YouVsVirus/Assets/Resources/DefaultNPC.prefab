@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8900475433866948942}
   - component: {fileID: 8900475433866948931}
   - component: {fileID: 8900475433866948930}
+  - component: {fileID: 7271644411175272605}
   m_Layer: 0
   m_Name: DefaultNPC
   m_TagString: Untagged
@@ -134,9 +135,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2a997f20f561e42940449bcd2c9702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinVelocity: 2
+  MinVelocity: 1
   MaxVelocity: 3
   AccelerationFactor: 0.5
+--- !u!114 &7271644411175272605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8900475433866948943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa021da745fb98843b1f110e6b40b098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sd: 1
 --- !u!1 &8900475434363221168
 GameObject:
   m_ObjectHideFlags: 0
