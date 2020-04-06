@@ -21,6 +21,11 @@ namespace Components
         private int daysSinceExposure = 0;
 
         /// <summary>
+        /// This human's rigidbody component.
+        /// </summary>
+        protected Rigidbody2D myRigidbody = null;
+
+        /// <summary>
         /// This human's infection stages
         /// </summary>
         public const int WELL        = 0;
@@ -61,11 +66,37 @@ namespace Components
         }
 
         /// <summary>
+        /// Checks if this Human is allowed to move.
+        /// Currently, it can always move, unless it is dead.
+        /// </summary>
+        /// <returns></returns>
+        protected bool CanMove()
+        {
+            return GetCondition() != DEAD;
+        }
+
+        /// <summary>
         /// Set stage of infection and update smiley's image
         /// </summary>
         public void SetCondition(int condition)
         {
             _mycondition = condition;
+
+            if(_mycondition == DEAD)
+            {
+                //  Removes this human's Rigidbody from the physics simulation, 
+                //  which disables movement and collision detection.
+                myRigidbody.simulated = false;
+
+                //  Set the simulated velocity to zero.
+                myRigidbody.velocity = Vector3.zero;
+
+                //  Put this human's sprite on the 'Dead' sorting layer.
+                //  This layer is below the others, causing Dead humans to be rendered
+                //  below the living.
+                GetComponent<SpriteRenderer>().sortingLayerName = "Dead";
+            }
+
             UpdateSpriteImage();
         }
         /// <summary>
@@ -99,6 +130,7 @@ namespace Components
             // We want to change smiley's images and do not want use GetComponent again
             // and again in the corresponding function
             mySpriteRenderer = GetComponent<SpriteRenderer>();
+            myRigidbody = GetComponent<Rigidbody2D>();
             // The player and npc class set their corresponding sprite images
             SetSpriteImages();
             // _initialCondition may have been modified by base classes

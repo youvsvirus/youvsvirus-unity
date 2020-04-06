@@ -27,6 +27,7 @@ namespace Components
         public Player Player { get; private set; }
 
         /// <summary>
+
         /// All instantiated NPCs. This is a dynamic list, it can be extended during runtime.
         /// </summary>
         public List<NPC> NPCs { get; private set; }
