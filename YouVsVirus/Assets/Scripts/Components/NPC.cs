@@ -31,10 +31,10 @@ namespace Components
         // Start is called before the first frame update
         public override void Start()
         {
-            myRigidbody = GetComponent<Rigidbody2D>();
+            base.Start(); // call base class
+
             // set an initial velocity for our npc in a random direction
             myRigidbody.velocity = UnityEngine.Random.onUnitSphere*UnityEngine.Random.Range(MinVelocity,MaxVelocity);
-            base.Start(); // call base class
         }
         /// <summary>
 		/// FixedUpdate: FixedUpdate is often called more frequently than Update. 

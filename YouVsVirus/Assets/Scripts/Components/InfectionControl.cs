@@ -37,13 +37,6 @@ public class  InfectionControl : MonoBehaviour
 
     private float lastDayTick = 0;
 
-    private void Update()
-    {
-        if (IsNewDay())
-        {
-            //Debug.Log("The sun rises to greet a new day!");
-        }
-    }
     /// <summary>
     ///  Runs after all other update calls, ensuring that lastDayTick gets updated AFTER all humans have called IsNewDay().
     ///  After all, we don't want a day to end early.

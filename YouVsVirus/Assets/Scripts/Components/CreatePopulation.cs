@@ -42,7 +42,8 @@ namespace Components
         // Start is called before the first frame update
         void Start()
         {
-            levelSettings = GameObject.Find("LevelSettings").GetComponent<LevelSettings>();
+            levelSettings = LevelSettings.GetActiveLevelSettings();
+
             PlaceHumans();
         }
 
