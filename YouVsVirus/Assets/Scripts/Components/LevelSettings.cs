@@ -32,6 +32,10 @@ public class LevelSettings : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    //  The globally unique, single LevelSettings object.
+    //  Retrieve this with GetActiveLevelSettings().
+    private static LevelSettings _singleton = null;
+
     /// <summary>
     /// Returns the LevelSettings object for the active level.
     /// Makes sure that, at all times, there is at most one LevelSettings object
@@ -42,14 +46,22 @@ public class LevelSettings : MonoBehaviour
     /// <returns>The LevelSettings object.</returns>
     public static LevelSettings GetActiveLevelSettings()
     {
-        GameObject levelSettingsGO = GameObject.Find("LevelSettings");
-        if(levelSettingsGO == null)
+        if(_singleton == null)
         {
-            levelSettingsGO = new GameObject("LevelSettings");
-            levelSettingsGO.AddComponent<LevelSettings>();
+            GameObject levelSettingsGO = GameObject.Find("LevelSettings");
+            if (levelSettingsGO != null)
+            {
+                _singleton = levelSettingsGO.GetComponent<LevelSettings>();
+            }
+            else
+            {
+                levelSettingsGO = new GameObject("LevelSettings");
+                _singleton = levelSettingsGO.AddComponent<LevelSettings>();
+            }
         }
 
-        return levelSettingsGO.GetComponent<LevelSettings>();
+
+        return _singleton;
     }
 }
 
