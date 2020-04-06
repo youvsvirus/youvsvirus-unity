@@ -23,7 +23,7 @@ public class LevelSettings : MonoBehaviour
     /// <summary>
     /// The social distancing factor for the level
     /// </summary>
-    public float SocialDistancingFactor = 0.5f;
+    public float SocialDistancingFactor = 50f;
 
     // Start is called before the first frame update
     void Start()
