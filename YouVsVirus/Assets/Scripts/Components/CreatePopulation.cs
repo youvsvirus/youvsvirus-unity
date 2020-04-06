@@ -42,7 +42,19 @@ namespace Components
         // Start is called before the first frame update
         void Start()
         {
-            levelSettings = GameObject.Find("LevelSettings").GetComponent<LevelSettings>();
+            GameObject levelSettingsGO = GameObject.Find("LevelSettings");
+
+            //  The LevelSettings GameObject is created by the Main Menu. When, during development
+            //  and debugging, the menu was never active, we need to create our own LevelSettings.
+            if(levelSettingsGO != null)
+            {
+                levelSettings = levelSettingsGO.GetComponent<LevelSettings>();
+            }
+            else
+            {
+                levelSettings = gameObject.AddComponent<LevelSettings>();
+            }
+
             PlaceHumans();
         }
 
