@@ -10,7 +10,13 @@ public class StartButton : MonoBehaviour
 {
     public Slider NumberOfNPCsSlider;
     public Slider SocialDistancingSlider;
-    public LevelSettings LevelSettings;
+    
+    private LevelSettings LevelSettings;
+
+    public void Start()
+    {
+        LevelSettings = LevelSettings.GetActiveLevelSettings();
+    }
 
     public void StartGame()
     {

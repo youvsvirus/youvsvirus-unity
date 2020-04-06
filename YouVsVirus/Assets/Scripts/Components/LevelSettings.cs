@@ -31,5 +31,25 @@ public class LevelSettings : MonoBehaviour
         //  Make sure this object survives the scene change
         DontDestroyOnLoad(gameObject);
     }
+
+    /// <summary>
+    /// Returns the LevelSettings object for the active level.
+    /// Makes sure that, at all times, there is at most one LevelSettings object
+    /// active and that it can be found by all other scripts.
+    /// 
+    /// Use this to locate active LevelSettings.
+    /// </summary>
+    /// <returns>The LevelSettings object.</returns>
+    public static LevelSettings GetActiveLevelSettings()
+    {
+        GameObject levelSettingsGO = GameObject.Find("LevelSettings");
+        if(levelSettingsGO == null)
+        {
+            levelSettingsGO = new GameObject("LevelSettings");
+            levelSettingsGO.AddComponent<LevelSettings>();
+        }
+
+        return levelSettingsGO.GetComponent<LevelSettings>();
+    }
 }
 
