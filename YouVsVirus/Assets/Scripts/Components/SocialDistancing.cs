@@ -31,28 +31,16 @@ private CircleCollider2D m_coll;
         // setting from main menu
         levelSettings = LevelSettings.GetActiveLevelSettings();
         // adapt sd value from setting value (the latter is in %)
-       // sd.set(levelSettings.SocialDistancingFactor / 100);
-       // sd.set(levelSettings.SocialDistancingFactor / 100);
-       // SetSDValue(levelSettings.SocialDistancingFactor/100);
         sd = levelSettings.SocialDistancingFactor / 100;
         // we set social distancing by adjusting the radius of our collider
         SetSocialDistancingRadius();
+        // more social distancing makes us less bouncy
+        // A value of 0 will not bounce. A value of 1 will bounce without any loss of energy.
+        m_coll.sharedMaterial.bounciness = 1-sd;
+        // more social distancing makes us crave less friction
+        m_coll.sharedMaterial.friction   =  1-sd;
 
     }
-    ///// <summary>
-    ///// Set SD value
-    ///// </summary>
-    //private void SetSDValue(float val)
-    //{
-    //    sd = val;
-    //}
-    ///// <summary>
-    ///// Get SD value
-    ///// </summary>
-    //public float GetSDValue()
-    //{
-    //    return (sd);
-    //}
 
     /// <summary>
     /// Set social distancing by adjusting the radius of the collider
