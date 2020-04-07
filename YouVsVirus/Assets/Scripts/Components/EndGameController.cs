@@ -21,8 +21,6 @@ public class EndGameController : MonoBehaviour
 
     private bool playerDied = false;
     private int activeInfections = 0;
-
-    private bool endConditionMet = false;
     
     /// <summary>
     /// Time when the end condition was met.
@@ -49,13 +47,13 @@ public class EndGameController : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks whether the game is over
+    /// Coroutine that waits for delay seconds and then ends the game.
     /// </summary>
-    /// <returns>True if and only if the game is over.</returns>
-    public bool IsEnd()
+    /// <param name="delay">The delay before EndGame is called.</param>
+    private IEnumerator DelayedEndGame(float delay)
     {
-        
-        return false;
+        yield return new WaitForSeconds(delay);
+        EndGame();
     }
 
     /// <summary>
@@ -84,40 +82,38 @@ public class EndGameController : MonoBehaviour
 
     void Update()
     {
-        if (endConditionMet)
+        //  If the level timeout has been reached, finish the game
+        if (LevelTimeoutReached())
         {
-            //  Wait for the end delay
-            if(Time.time - endConditionMark > EndConditionMetDelay)
-            {
-                EndGame();
-            }
+            EndGame();
         }
-        else
+
+        //  If an end condition has been met, end the game after a given delay.
+        if (CheckEndCondition())
         {
-            //  Check for end conditions
-            CheckEndCondition();
+            //  Starts the delayed endgame coroutine, which will wait for EndConditionMetDelay seconds
+            //  and then call EndGame().
+            StartCoroutine(DelayedEndGame(EndConditionMetDelay));
         }
+
+
+    }
+
+    /// <summary>
+    /// Checks if the level timeout has been reached.
+    /// </summary>
+    /// <returns></returns>
+    private bool LevelTimeoutReached()
+    {
+        return LevelTimeout > 0f && Time.time - startTime > LevelTimeout;
     }
 
     /// <summary>
     /// Checks if any end condition has been met.
     /// </summary>
-    private void CheckEndCondition()
+    private bool CheckEndCondition()
     {
-        // Check if the level timeout has been reached.
-        // In this case, do not delay any longer and terminate the level.
-        if (LevelTimeout > 0f && Time.time - startTime > LevelTimeout)
-        {
-            EndGame();
-        }
+        return playerDied || activeInfections == 0;
 
-        //  If another end condition has been met, mark the time.
-        if (playerDied || activeInfections == 0)
-        {
-            endConditionMet = true;
-            endConditionMark = Time.time;
-
-            Debug.Log("End Condition Met! Starting delayed shutdown.");
-        }
     }
 }
