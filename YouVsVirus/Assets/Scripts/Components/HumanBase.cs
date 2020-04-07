@@ -82,7 +82,7 @@ namespace Components
         /// <summary>
         /// Set stage of infection and update smiley's image
         /// </summary>
-        public void SetCondition(int condition)
+        public virtual void SetCondition(int condition)
         {
             _mycondition = condition;
 
