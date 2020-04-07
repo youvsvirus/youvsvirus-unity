@@ -21,11 +21,9 @@ public class EndGameController : MonoBehaviour
 
     private bool playerDied = false;
     private int activeInfections = 0;
-    
-    /// <summary>
-    /// Time when the end condition was met.
-    /// </summary>
-    private float endConditionMark = 0f;
+
+    //  Has an end condition been met?
+    private bool endConditionMet = false;
 
     public void Start()
     {
@@ -52,6 +50,7 @@ public class EndGameController : MonoBehaviour
     /// <param name="delay">The delay before EndGame is called.</param>
     private IEnumerator DelayedEndGame(float delay)
     {
+        Debug.Log("Finishing up...");
         yield return new WaitForSeconds(delay);
         EndGame();
     }
@@ -82,15 +81,20 @@ public class EndGameController : MonoBehaviour
 
     void Update()
     {
+        //  The game is already ending, so just do nothing and wait.
+        if (endConditionMet) return;
+
         //  If the level timeout has been reached, finish the game
         if (LevelTimeoutReached())
         {
             EndGame();
         }
 
-        //  If an end condition has been met, end the game after a given delay.
+        //  If an end condition has been met this frame, end the game after a given delay.
         if (CheckEndCondition())
         {
+            endConditionMet = true;
+
             //  Starts the delayed endgame coroutine, which will wait for EndConditionMetDelay seconds
             //  and then call EndGame().
             StartCoroutine(DelayedEndGame(EndConditionMetDelay));
