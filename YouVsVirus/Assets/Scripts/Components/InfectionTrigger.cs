@@ -27,12 +27,12 @@ namespace Components
             HumanBase otherHuman = other.GetComponentInParent<HumanBase>();
 
             //  If a human came into infection radius, try to infect it.
-            if(otherHuman != null)
+            if (otherHuman != null)
             {
                 HumanBase myHuman = GetComponentInParent<HumanBase>();
                 if (myHuman.IsInfectious())
                 {
-                    otherHuman.Infect();
+                    otherHuman.Infect();     
                 }
             }
         }

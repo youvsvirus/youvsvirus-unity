@@ -25,6 +25,10 @@ namespace Components
         /// </summary>
         protected Rigidbody2D myRigidbody = null;
 
+
+        // The statistics object that counts the number of infected humans
+        private LevelStats levelStats;
+
         /// <summary>
         /// This human's infection stages
         /// </summary>
@@ -97,6 +101,32 @@ namespace Components
                 GetComponent<SpriteRenderer>().sortingLayerName = "Dead";
             }
 
+            // Update the stats
+            switch (condition)
+            {
+                case EXPOSED:
+                    {
+                        levelStats.aHumanGotExposed();
+                        break;
+                    }
+                case INFECTIOUS:
+                    {
+                        levelStats.aHumanGotInfected();
+                        break;
+                    }
+                case DEAD:
+                    {
+                        levelStats.aHumanDied();
+                        break;
+                    }
+                case RECOVERED:
+                    {
+                        levelStats.aHumanRecovered();
+                        break;
+                    }
+            }
+
+            // Update the sprite image
             UpdateSpriteImage();
         }
         /// <summary>
@@ -127,6 +157,8 @@ namespace Components
             /// </summary>
             GameObject  InfectionControl = GameObject.Find("InfectionControl");
             infection = InfectionControl.GetComponent< InfectionControl>();
+            // Get the statistics object that counts the numbers of infected/dead etc players
+            levelStats = LevelStats.GetActiveLevelStats();
             // We want to change smiley's images and do not want use GetComponent again
             // and again in the corresponding function
             mySpriteRenderer = GetComponent<SpriteRenderer>();
@@ -154,6 +186,7 @@ namespace Components
         /// </summary>
         private void UpdateCondition()
         {
+
             switch (GetCondition())
             {
                 case EXPOSED:
