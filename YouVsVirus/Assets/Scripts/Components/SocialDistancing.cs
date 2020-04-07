@@ -38,7 +38,7 @@ private CircleCollider2D m_coll;
         // A value of 0 will not bounce. A value of 1 will bounce without any loss of energy.
         m_coll.sharedMaterial.bounciness = 1-sd;
         // more social distancing makes us crave less friction
-        m_coll.sharedMaterial.friction   =  1-sd;
+        m_coll.sharedMaterial.friction   = 1-sd;
 
     }
 
@@ -47,10 +47,29 @@ private CircleCollider2D m_coll;
     /// </summary>
     public void SetSocialDistancingRadius()
     {
-        print(sd);
-        float s = sd;
         // the radius of our collider is set depending on social distancing factor, a random deviation of about 20% from sd multiplied by 1.5 times the usual radius
-        m_coll.radius = m_coll.radius + s * UnityEngine.Random.Range(1 - (s / 100) * 20f, 1 + (s / 100) * 20f) * 0.8f*m_coll.radius;
+        m_coll.radius = m_coll.radius + sd * UnityEngine.Random.Range(1 - (sd / 100) * 20f, 1 + (sd / 100) * 20f) * 0.8f*m_coll.radius;
+    }
+
+    /// <summary>
+    /// If NPC encounters the player or the map limits
+    /// we disable the collision. We have a second collider closer
+    /// to the object with which we can still collide later. In this way
+    /// the NPCs keep their distance from each other but not from the walls
+    /// or the player.
+    /// Potential Problem: We have two circle colliders attached to NPC prefab.
+    /// I have no idea how those are distinguished.
+    /// </summary>
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (m_coll != null)
+        {
+            if (other.gameObject.tag == "Player" || other.gameObject.tag == "Map")
+            {
+                Physics2D.IgnoreCollision(other.collider, m_coll);
+            }
+        }
+
     }
 }
 
