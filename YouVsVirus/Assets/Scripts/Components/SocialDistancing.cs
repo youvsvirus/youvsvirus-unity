@@ -14,12 +14,12 @@ public class SocialDistancing : MonoBehaviour
     ///  Set 'social distancing' to a value between zero and one; zero indicating everyone constantly partying and one meaning(almost) everyone stays at home.
     /// Edit this member only from the editor!
     /// </summary>
-    private float sd = 1f;
+    public float sd { get; private set; }
 
-    /// <summary>
-    /// The NPC's circle collider
-    /// </summary>
-    private CircleCollider2D m_coll;
+/// <summary>
+/// The NPC's circle collider
+/// </summary>
+private CircleCollider2D m_coll;
     /// <summary>
     /// Get setting for SD from main menu
     /// </summary>
@@ -29,27 +29,30 @@ public class SocialDistancing : MonoBehaviour
     {
         m_coll = GetComponent<CircleCollider2D>();
         // setting from main menu
-        levelSettings = GameObject.Find("LevelSettings").GetComponent<LevelSettings>();
+        levelSettings = LevelSettings.GetActiveLevelSettings();
         // adapt sd value from setting value (the latter is in %)
-        SetSDValue(levelSettings.SocialDistancingFactor/100);
+       // sd.set(levelSettings.SocialDistancingFactor / 100);
+       // sd.set(levelSettings.SocialDistancingFactor / 100);
+       // SetSDValue(levelSettings.SocialDistancingFactor/100);
+        sd = levelSettings.SocialDistancingFactor / 100;
         // we set social distancing by adjusting the radius of our collider
         SetSocialDistancingRadius();
 
     }
-    /// <summary>
-    /// Set SD value
-    /// </summary>
-    private void SetSDValue(float val)
-    {
-        sd = val;
-    }
-    /// <summary>
-    /// Get SD value
-    /// </summary>
-    public float GetSDValue()
-    {
-        return (sd);
-    }
+    ///// <summary>
+    ///// Set SD value
+    ///// </summary>
+    //private void SetSDValue(float val)
+    //{
+    //    sd = val;
+    //}
+    ///// <summary>
+    ///// Get SD value
+    ///// </summary>
+    //public float GetSDValue()
+    //{
+    //    return (sd);
+    //}
 
     /// <summary>
     /// Set social distancing by adjusting the radius of the collider
