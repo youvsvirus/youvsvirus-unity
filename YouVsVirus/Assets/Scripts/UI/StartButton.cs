@@ -20,12 +20,22 @@ public class StartButton : MonoBehaviour
 
     public void StartGame()
     {
+        // Play Now Button has been pressed, here you can initialize your game 
 
         //  Set the level parameters
         LevelSettings.NumberOfNPCs = (int)NumberOfNPCsSlider.value;
         LevelSettings.SocialDistancingFactor = SocialDistancingSlider.value;
 
-        // Play Now Button has been pressed, here you can initialize your game 
+        // Get the statistics object that counts the number of infected humans
+        // and initialize it.
+        LevelStats levelStats = LevelStats.GetActiveLevelStats();
+        // Reset the level stats if it was active.
+        // This is necessary if we restart from a previous run.
+        levelStats.Reset();
+        // Initialize the level stats.
+        levelStats.Init(LevelSettings.NumberOfNPCs, LevelSettings.NumberInitiallyExposed);
+
+        // Load the Scene for level1
         UnityEngine.SceneManagement.SceneManager.LoadScene("YouVsVirus_Level1");
     }
 }

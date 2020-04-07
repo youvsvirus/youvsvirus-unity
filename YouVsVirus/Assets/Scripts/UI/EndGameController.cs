@@ -7,7 +7,7 @@ public class EndGameController : MonoBehaviour
 {
     private float timeSinceGameStartInSeconds = 0;
     // Number of seconds after which the game ends
-    private const float EndTime = 30;
+    private const float EndTime = 10;
 
     /// <summary>
     /// Initializes the end game controller.
