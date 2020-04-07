@@ -16,7 +16,7 @@ public class TextNExposed : MonoBehaviour
         m_TextComponent = GetComponent<TMP_Text>();
 
         // Get the statistics object that counts the numbers of infected/dead etc players
-        levelStats = GameObject.Find("LevelStats").GetComponent<LevelStats>();
+        levelStats = LevelStats.GetActiveLevelStats();
 
         // the number in the text is set by the level stats
         m_TextComponent.text = levelStats.GetExposed().ToString();

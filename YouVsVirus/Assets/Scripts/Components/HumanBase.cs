@@ -158,7 +158,7 @@ namespace Components
             GameObject  InfectionControl = GameObject.Find("InfectionControl");
             infection = InfectionControl.GetComponent< InfectionControl>();
             // Get the statistics object that counts the numbers of infected/dead etc players
-            levelStats = GameObject.Find("LevelStats").GetComponent<LevelStats>();
+            levelStats = LevelStats.GetActiveLevelStats();
             // We want to change smiley's images and do not want use GetComponent again
             // and again in the corresponding function
             mySpriteRenderer = GetComponent<SpriteRenderer>();
