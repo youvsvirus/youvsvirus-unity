@@ -7,6 +7,13 @@ using UnityEngine;
 /// Social distancing
 /// 100%: players keep 1.5 as much the distance as usual 
 /// npcs are allows to deviate from the typical social distancing factor by 20%
+/// We also adjust the radius of the collider. But we attached a second collider that 
+/// keeps the former "narrow radius" for collision. If NPC encounters the player or the map limits
+/// we disable the collision with collider1.It will still collide with collider2.
+/// In this way the NPCs keep their distance from each other but not from the walls or the player.
+/// In addition, we adjust the bounciness of collider1, since more social distancing makes us less bouncy. T
+/// his should also result in a lower velocity for more social distance.
+/// More social distancing makes us crave less friction, so we adapt that value as well.
 /// </summary>
 public class SocialDistancing : MonoBehaviour
 {
