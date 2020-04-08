@@ -55,7 +55,6 @@ public class LevelStats : MonoBehaviour
     {
         // Set initial numbers of NPCs and infected humans
         NumberOfNPCs = InitialNumberOfNPCs;
-        NumberInfected = NumberOfInitiallyInfected;
         // Mark this instance as initialized
         isInit = true;
     }
