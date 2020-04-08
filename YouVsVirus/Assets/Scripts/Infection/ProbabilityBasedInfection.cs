@@ -9,7 +9,6 @@ namespace Infection
 {
     public class ProbabilityBasedInfection : AbstractInfection
     {
-
         /// <summary>
         /// How long my human has been exposed to the virus
         /// </summary>
