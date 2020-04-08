@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 8900475433866948931}
   - component: {fileID: 8900475433866948930}
   - component: {fileID: 7271644411175272605}
+  - component: {fileID: 2379060102389004291}
   m_Layer: 0
   m_Name: DefaultNPC
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,13 +96,13 @@ CircleCollider2D:
   m_GameObject: {fileID: 8900475433866948943}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 8c98871d03e5e7c41a929e8bd67ee53a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.56
+  m_Radius: 2.55
 --- !u!50 &8900475433866948931
 Rigidbody2D:
   serializedVersion: 4
@@ -150,7 +151,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa021da745fb98843b1f110e6b40b098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sd: 1
+--- !u!58 &2379060102389004291
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8900475433866948943}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: f8437a7049c31874d9b01620ef87b887, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.56
 --- !u!1 &8900475434363221168
 GameObject:
   m_ObjectHideFlags: 0
