@@ -31,12 +31,21 @@ namespace Components
         public const int DEAD        = 4;
 
 
-        
+        /// <summary>
+        /// This human's inital condition
+        /// </summary>
+        protected int _initialCondition = WELL;
+
         /// <summary>
         /// Set the human's initial condition
+        /// Default: well
+        /// This function is called by base classes even before Start() who are allowed
+        /// to modify _initialCondition in advance. In Start() the _initialCondition
+        /// value ist transferred to _mycondition
         /// </summary>
         public void SetInitialCondition(int condition)
         {
+            _initialCondition = condition;
             _mycondition = condition;
         }
 
@@ -149,6 +158,9 @@ namespace Components
             myRigidbody = GetComponent<Rigidbody2D>();
             // The player and npc class set their corresponding sprite images
             SetSpriteImages();
+            // _initialCondition may have been modified by base classes
+            // this becomes _mycondition during Start()
+            SetCondition(_initialCondition);
         }
 
 
