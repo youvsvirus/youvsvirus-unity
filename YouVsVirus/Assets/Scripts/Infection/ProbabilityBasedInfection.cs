@@ -48,9 +48,9 @@ namespace Infection
         }
 
         /// <summary>
-        /// Update the human's condition
+        /// Update my human's condition
         /// </summary>
-        public override void UpdateCondition()
+        private void UpdateCondition()
         {
 
             switch (myHuman.GetCondition())

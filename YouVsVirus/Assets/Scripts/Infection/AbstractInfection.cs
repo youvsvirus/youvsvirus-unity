@@ -31,10 +31,5 @@ namespace Infection
         /// </summary>
         public abstract void Expose();
 
-        /// <summary>
-        /// Implemented in a derived class, checks and updates my human's 
-        /// condition depending on the infection model.
-        /// </summary>
-        public abstract void UpdateCondition();
     }
 }
