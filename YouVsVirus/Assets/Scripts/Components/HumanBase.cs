@@ -15,16 +15,24 @@ namespace Components
         /// </summary>
         private InfectionControl infection;
 
+        private SEIR seir;
+
         /// <summary>
         /// How long this human has been exposed to the virus
         /// </summary>
         private int daysSinceExposure = 0;
+
+        private float timeSinceExposure = 0.0f;
+
+        private float timeSinceInfectious = 0.0f;
 
         /// <summary>
         /// This human's rigidbody component.
         /// </summary>
         protected Rigidbody2D myRigidbody = null;
 
+        public float dist = 0.0f;
+        public int num_contacts = 0;
 
         // The statistics object that counts the number of infected humans
         private LevelStats levelStats;
@@ -157,6 +165,9 @@ namespace Components
             /// </summary>
             GameObject  InfectionControl = GameObject.Find("InfectionControl");
             infection = InfectionControl.GetComponent< InfectionControl>();
+
+            GameObject SEIR = GameObject.Find("SEIR");
+            seir = SEIR.GetComponent<SEIR>();
             // Get the statistics object that counts the numbers of infected/dead etc players
             levelStats = LevelStats.GetActiveLevelStats();
             // We want to change smiley's images and do not want use GetComponent again
@@ -177,7 +188,11 @@ namespace Components
         {
             if(infection.IsNewDay())
             {
+                print(dist / num_contacts);
                 UpdateCondition();
+                dist = 0;
+                num_contacts = 0;
+
             }
         }
 

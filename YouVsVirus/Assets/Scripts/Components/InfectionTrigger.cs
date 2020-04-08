@@ -34,6 +34,12 @@ namespace Components
                 {
                     otherHuman.Infect();     
                 }
+                float dist = Vector3.Distance(myHuman.transform.position, otherHuman.transform.position);
+                if (dist < InfectionRadius) if(otherHuman.IsInfectious())
+                {
+                    myHuman.num_contacts++;
+                    myHuman.dist += dist;
+                }
             }
         }
 

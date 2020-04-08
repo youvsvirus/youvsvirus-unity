@@ -6,51 +6,98 @@ using System.Linq;
 
 namespace Components
 {
-    public class CreatePopulation : MonoBehaviour
+    public class HumanInstants : MonoBehaviour
     {
-        private float safetyMargin = 0.2f;
-
-
-        /// <summary>
-        /// Player prefab to be set in the editor.
-        /// </summary>
-        public GameObject playerPrefab;
+        public List<Vector2> RandomCoords;
+        private float safetyMarginCellRadius = 0.2f;
 
         /// <summary>
         /// NPC prefab to be set in the editor.
         /// </summary>
-        public GameObject npcPrefab;
+        public GameObject npcPrefab { get; private set; }
+
+        /// <summary>
+        /// Player prefab to be set in the editor.
+        /// </summary>
+        public GameObject playerPrefab { get; private set; }
 
         /// <summary>
         /// The instantiated player object.
         /// </summary>
-        public Player Player { get; private set; }
+        public Player player { get; private set; }
+
+
+        public int npcNumber { get; private set; }
 
         /// <summary>
-
         /// All instantiated NPCs. This is a dynamic list, it can be extended during runtime.
         /// </summary>
-        public List<NPC> NPCs { get; private set; }
+        public List<NPC> npcs { get; private set; }
+       
+       
+         
 
+
+        private float playerInfectionRadius;
+
+        private float playerScale;
+
+        private int humanNumber;
         private LevelSettings levelSettings;
-
-        public CreatePopulation()
-        {
-            NPCs = new List<NPC>(30);
-        }
 
         // Start is called before the first frame update
         void Start()
         {
             levelSettings = LevelSettings.GetActiveLevelSettings();
-
-            PlaceHumans();
+            npcNumber = levelSettings.NumberOfNPCs;
+            humanNumber = npcNumber + 1;
+            playerPrefab = Resources.Load("Player")     as GameObject;
+            npcPrefab    = Resources.Load("DefaultNPC") as GameObject;
+            playerScale = playerPrefab.transform.localScale.x;
+            playerInfectionRadius = playerPrefab.GetComponentInChildren<InfectionTrigger>().InfectionRadius;
+            npcs = new List<NPC>(npcNumber);
+            GenerateRandomCoords();
+            CreateHumans();
         }
 
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        void CreateHumans()
+        {
+            //  Place the player
+            player = Instantiate(playerPrefab.GetComponent<Player>(),
+                                RandomCoords[0],
+                                Quaternion.identity);
+
+            //  Place the NPCs in the grid
+            for (int i = 1; i <= levelSettings.NumberOfNPCs; i++)
+            {
+                print(RandomCoords[i].x);
+                npcs.Add(Instantiate(npcPrefab.GetComponent<NPC>(),
+                                       RandomCoords[i],
+                                       Quaternion.identity));
+            }
+
+            //  Infect a few of them.
+            //  If (for some reason) NumberInitiallyExposed > NumberOfNPCs, just infect all of them.
+            for (int i = 0; i < Math.Min(npcNumber, levelSettings.NumberInitiallyExposed); i++)
+            {
+                npcs[i].SetInitialCondition(NPC.EXPOSED);
+            }
+        }
+
+
+        // Generate Random Grid
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>
         /// Places the player and all NPCs on the map randomly.
         /// </summary>
-        private void PlaceHumans()
+        //private void PlaceHumans()
+        void GenerateRandomCoords()
         {
             //  Determine the size of a single cell
             float cellRadius = GetCellRadius();
@@ -63,28 +110,12 @@ namespace Components
             int cellCount = rows * columns;
 
             //  Randomly select grid indices
-            int[] indices = ChooseUnique(levelSettings.NumberOfNPCs + 1, 0, cellCount);
+            int[] indices = ChooseUnique(humanNumber, 0, cellCount);
 
-            Vector3 origin = - GameObject.Find("MapLimits").GetComponent<ViewportBoundMapLimit>().GetMapExtents();
-
-            //  Place the player
-            Player = Instantiate(   playerPrefab.GetComponent<Player>(), 
-                                    GetCoordinatesInGrid(indices[0], columns, cellRadius, origin), 
-                                    Quaternion.identity);
-
-            //  Place the NPCs in the grid
-            for(int i = 1; i <= levelSettings.NumberOfNPCs; i++)
+            Vector3 origin = -GameObject.Find("MapLimits").GetComponent<ViewportBoundMapLimit>().GetMapExtents();
+            for (int i = 0; i < humanNumber; i++)
             {
-                NPCs.Add(Instantiate(   npcPrefab.GetComponent<NPC>(),
-                                        GetCoordinatesInGrid(indices[i], columns, cellRadius, origin),
-                                        Quaternion.identity));   
-            }
-
-            //  Infect a few of them.
-            //  If (for some reason) NumberInitiallyExposed > NumberOfNPCs, just infect all of them.
-            for (int i = 0; i < Math.Min(levelSettings.NumberOfNPCs, levelSettings.NumberInitiallyExposed); i++)
-            {
-                NPCs[i].SetInitialCondition(NPC.EXPOSED);
+                RandomCoords.Add(GetCoordinatesInGrid(indices[i], columns, cellRadius, origin));
             }
         }
 
@@ -111,14 +142,7 @@ namespace Components
         private float GetCellRadius()
         {
             //  Get the player's radius as the minimum cell size
-            float infectionRadius = playerPrefab.GetComponentInChildren<InfectionTrigger>().InfectionRadius;
-
-            //  Get the player's scale.
-            //  Assuming X and Y components of the scale to be identical.
-            float playerScale = playerPrefab.transform.localScale.x;
-
-            float cellRadius = (1f + safetyMargin) * (infectionRadius * playerScale);
-
+            float cellRadius = (1f + safetyMarginCellRadius) * (playerInfectionRadius * playerScale);
             return cellRadius;
         }
 
@@ -134,7 +158,7 @@ namespace Components
             float mapWidth = 2f * mapExtents.x;
             float mapHeight = 2f * mapExtents.y;
 
-            int columns = (int) (mapWidth / cellSidelength);
+            int columns = (int)(mapWidth / cellSidelength);
             int rows = (int)(mapHeight / cellSidelength);
 
             return new int[] { rows, columns };
@@ -163,11 +187,11 @@ namespace Components
         /// <param name="list">The list to be shuffled</param>
         private void shuffleInPlace(int[] list)
         {
-            for(int i = list.Length - 1; i > 0; i--)
+            for (int i = list.Length - 1; i > 0; i--)
             {
                 //  Find source index.
                 int j = UnityEngine.Random.Range(0, i + 1);
-                
+
                 //  Swap.
                 int tmp = list[i];
                 list[i] = list[j];
