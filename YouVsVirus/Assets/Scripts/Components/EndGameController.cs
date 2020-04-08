@@ -25,13 +25,21 @@ public class EndGameController : MonoBehaviour
     //  Has an end condition been met?
     private bool endConditionMet = false;
 
+    private bool initComplete = false;
+
     public void Start()
     {
-        // Debugging output on startup
-        Debug.Log("EndGameController starts.");
-
         // Remember the starting time to check for the timeout end condition
         startTime = Time.time;
+    }
+
+    /// <summary>
+    /// Notify the end game controller that level initialization has been completed.
+    /// Otherwise, it might end the game before it has begun.
+    /// </summary>
+    public void InitComplete()
+    {
+        initComplete = true;
     }
 
     /// <summary>
@@ -81,6 +89,9 @@ public class EndGameController : MonoBehaviour
 
     void Update()
     {
+        //  Do nothing before initialization has not been completed
+        if (!initComplete) return;
+
         //  The game is already ending, so just do nothing and wait.
         if (endConditionMet) return;
 

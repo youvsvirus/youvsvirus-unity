@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Infection;
 
 namespace Components
 {
@@ -10,15 +11,6 @@ namespace Components
     /// </summary>
     public abstract class HumanBase : MonoBehaviour
     {
-        /// <summary>
-        /// Contains parmams about how fast infection spreads
-        /// </summary>
-        private InfectionControl infection;
-
-        /// <summary>
-        /// How long this human has been exposed to the virus
-        /// </summary>
-        private int daysSinceExposure = 0;
 
         /// <summary>
         /// This human's rigidbody component.
@@ -101,6 +93,12 @@ namespace Components
                 GetComponent<SpriteRenderer>().sortingLayerName = "Dead";
             }
 
+            if(_mycondition == EXPOSED)
+            {
+                //  Notify our infection model that we've been exposed
+                GetComponent<AbstractInfection>().Expose();
+            }
+
             // Update the stats
             switch (condition)
             {
@@ -151,12 +149,6 @@ namespace Components
         /// </summary>
         public virtual void Start()
         {
-            /// <summary>
-            /// Need this to decide if this human is infected
-            /// This is how we get an instance from that class 
-            /// </summary>
-            GameObject  InfectionControl = GameObject.Find("InfectionControl");
-            infection = InfectionControl.GetComponent< InfectionControl>();
             // Get the statistics object that counts the numbers of infected/dead etc players
             levelStats = LevelStats.GetActiveLevelStats();
             // We want to change smiley's images and do not want use GetComponent again
@@ -170,68 +162,6 @@ namespace Components
             SetCondition(_initialCondition);
         }
 
-        /// <summary>
-        /// Every day updates the human's condition
-        /// </summary>
-        public virtual void Update()
-        {
-            if(infection.IsNewDay())
-            {
-                UpdateCondition();
-            }
-        }
-
-        /// <summary>
-        /// Update the human's condition
-        /// </summary>
-        private void UpdateCondition()
-        {
-
-            switch (GetCondition())
-            {
-                case EXPOSED:
-                    {
-                        // Damn, we're EXPOSED. But wINFECTIOUS the sickness actually break out?
-                        //  Incubation time has passed without infection --> recovered!
-                        if (daysSinceExposure > infection.IncubationTime)
-                        {
-                            SetCondition(RECOVERED);
-                            return;
-                        }
-
-                        //  Maybe it breaks out today?
-                        if(Random.value <= infection.OutbreakRate)
-                        {
-                            SetCondition(INFECTIOUS);
-                            return;
-                        }
-
-                        daysSinceExposure++;
-                        return;
-                    }
-
-                case INFECTIOUS:
-                    {
-                        // Maybe we recover today...
-                        if(Random.value <= infection.RecoveryRate)
-                        {
-                            SetCondition(RECOVERED);
-                            return;
-                        }
-
-                        // Maybe we die today.
-                        if (Random.value <= infection.DeathRate)
-                        {
-                            SetCondition(DEAD);
-                            return;
-                        }
-
-                        return;
-                    }
-
-                default: return;
-            }
-        }
 
         /// <summary>
         /// Infects this human if it is susceptible.
@@ -242,7 +172,6 @@ namespace Components
             if (IsSusceptible())
             {
                 SetCondition(EXPOSED);
-                daysSinceExposure = 0;
                 return true;
             }
             return false;
@@ -308,6 +237,5 @@ namespace Components
                     break;
             }
         }
-
     }
 }
