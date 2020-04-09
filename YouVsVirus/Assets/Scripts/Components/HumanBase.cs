@@ -46,6 +46,7 @@ namespace Components
         public void SetInitialCondition(int condition)
         {
             _initialCondition = condition;
+            _mycondition = condition;
         }
 
         /// <summary>
