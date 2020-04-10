@@ -30,9 +30,11 @@ namespace Components
             if (otherHuman != null)
             {
                 HumanBase myHuman = GetComponentInParent<HumanBase>();
-                if (myHuman.IsInfectious())
+                float dist = Vector3.Distance(myHuman.transform.position, otherHuman.transform.position);
+                if (dist < InfectionRadius) if (otherHuman.IsInfectious())
                 {
-                    otherHuman.Infect();     
+                    myHuman.num_contacts++; 
+                    //otherHuman.Infect();     
                 }
             }
         }

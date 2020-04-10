@@ -29,6 +29,11 @@ namespace Components
         public List<NPC> npcs { get; private set; }
 
         /// <summary>
+        /// All instantiated humans (npcs & player). This is a dynamic list, it can be extended during runtime.
+        /// </summary>
+        public List<HumanBase> all { get; private set; }
+
+        /// <summary>
         /// Number of instantiated NPCs.
         /// </summary>
         private int npcNumber;
@@ -46,6 +51,8 @@ namespace Components
             npcNumber = levelSettings.NumberOfNPCs;
             // create our list of NPCs
             npcs = new List<NPC>(npcNumber);
+            // create our list of humans
+            all = new List<HumanBase>(npcNumber+1);
             // create the random grid with coordinates 
             // the grid cell has to be as large as the player's infection radius
             GetComponent<RandomGrid>().GenerateRandomCoords(playerPrefab.transform.localScale.x,
@@ -72,16 +79,26 @@ namespace Components
                 npcs.Add(Instantiate(npcPrefab.GetComponent<NPC>(),
                                        GetComponent<RandomGrid>().RandomCoords[i+1],
                                        Quaternion.identity));
-                // give an ID to NPCs for later use
-                // npcs[i].myID = i;
+                // give an ID to NPCs for use in spread of SEIR model
+                npcs[i].myID = i;
             }
             //  Expose a few of them to the virus.
             //  If (for some reason) NumberInitiallyExposed > NumberOfNPCs, just infect all of them.
             for (int i = 0; i < Math.Min(npcNumber, levelSettings.NumberInitiallyExposed); i++)
             {
                 npcs[i].SetInitialCondition(NPC.EXPOSED);
-            }          
-        }
-       
+            }
+            // Make a few of them infectious.
+            //  If (for some reason) NumberInitiallyInfectious > NumberOfNPCs, just infect all of them.
+            for (int i = npcNumber - 1; i > Math.Max(npcNumber - levelSettings.NumberInitiallyInfectious - 1, 0); i--)
+            {
+                npcs[i].SetInitialCondition(NPC.INFECTIOUS);
+            }
+            for (int i = 0; i < npcNumber; i++)
+            {
+                all.Add(npcs[i]);
+            }
+            all.Add(Player);
+        }       
     }
 }

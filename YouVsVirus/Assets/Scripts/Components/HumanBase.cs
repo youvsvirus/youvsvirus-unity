@@ -30,6 +30,26 @@ namespace Components
         public const int RECOVERED   = 3;
         public const int DEAD        = 4;
 
+        /// <summary>
+        /// Each human has a unique ID set during instantiaton
+        /// </summary>
+        public int myID;
+
+        /// <summary>
+        /// My smartphone app tells me how many contacts I had
+        /// with infectious
+        /// </summary>
+        public int num_contacts;
+
+        /// <summary>
+        /// Time that passes until I am infectious
+        /// </summary>
+        public float t_incubation;
+
+        /// <summary>
+        /// Time that has to pass until recovery
+        /// </summary>
+        public float t_infectious;
 
         /// <summary>
         /// This human's inital condition
@@ -97,7 +117,7 @@ namespace Components
             if(_mycondition == EXPOSED)
             {
                 //  Notify our infection model that we've been exposed
-                GetComponent<AbstractInfection>().Expose();
+                //GetComponent<AbstractInfection>().Expose();
             }
 
             // Update the stats
@@ -106,11 +126,13 @@ namespace Components
                 case EXPOSED:
                     {
                         levelStats.aHumanGotExposed();
+                        t_incubation = Time.fixedTime;
                         break;
                     }
                 case INFECTIOUS:
                     {
                         levelStats.aHumanGotInfected();
+                        t_infectious = Time.fixedTime;
                         break;
                     }
                 case DEAD:
@@ -150,6 +172,11 @@ namespace Components
         /// </summary>
         public virtual void Start()
         {
+            // initial infection values
+            t_incubation = float.MaxValue;
+            t_infectious = float.MaxValue;
+            num_contacts = 0;
+
             // Get the statistics object that counts the numbers of infected/dead etc players
             levelStats = LevelStats.GetActiveLevelStats();
             // We want to change smiley's images and do not want use GetComponent again
@@ -184,7 +211,10 @@ namespace Components
         /// <returns>True if this human is infectious, false otherwise.</returns>
         public bool IsInfectious()
         {
-            return GetCondition() == EXPOSED || GetCondition() == INFECTIOUS;
+            // 40% chance of getting infected from exposed
+            if (GetCondition() == EXPOSED)
+                return (UnityEngine.Random.value < 0.4f);
+            return GetCondition() == INFECTIOUS;
         }
 
         /// <summary>

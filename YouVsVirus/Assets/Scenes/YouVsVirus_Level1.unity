@@ -640,6 +640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1431600252}
   - component: {fileID: 1431600251}
+  - component: {fileID: 1431600253}
   m_Layer: 0
   m_Name: SEIR
   m_TagString: Untagged
@@ -659,7 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e8d05040b12154bb7cf8dda2bf429a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r_0: 0
+  r_0: 2
   S: 0
   E: 0
   I: 0
@@ -680,6 +681,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1431600253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431600250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b21c78237a4034845b08e7b776ee3379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  susceptible: []
+  exp: 
+  inf: 
 --- !u!1 &1552763172
 GameObject:
   m_ObjectHideFlags: 0

@@ -67,10 +67,11 @@ public class SEIR : MonoBehaviour
 		// initial # of recovered
 		R = 0;
 		// initial # of susceptible / well
-		S = N - E - I - R;                       
+		S = N - E - I - R;
+		// r_0 = 2.68f; for COVID-19
 		r_0 = 2.68f;
-		// in this model rho is the opposite of our social distancing factor
-		rho = 1 - levelSettings.SocialDistancingFactor / 100;
+		// in this model rho is the opposite of our social distancing factor (we make this 0.5 higher than usual)
+		rho = 1 - levelSettings.SocialDistancingFactor / 100 + 0.5f;
 		t_incubation = 5.2f;
 		t_infectious = 2f;
 	}
@@ -107,12 +108,12 @@ public class SEIR : MonoBehaviour
 		I = I + delta_t * dIdt;
 		R = R + delta_t * dRdt;
 		
-		if (Time.frameCount % 100 == 0)
-		{
-			print(Time.fixedTime);
-			print(E);
-			print(I);
-			print(R);
-		}
+		//if (Time.frameCount % 100 == 0)
+		//{
+		//	print(Time.fixedTime);
+		//	print(E);
+		//	print(I);
+		//	print(R);
+		//}
 	}
 }
