@@ -77,10 +77,8 @@ namespace Components
             for (int i = 0; i < levelSettings.NumberOfNPCs; i++)
             {
                 npcs.Add(Instantiate(npcPrefab.GetComponent<NPC>(),
-                                       GetComponent<RandomGrid>().RandomCoords[i+1],
+                                       GetComponent<RandomGrid>().RandomCoords[i + 1],
                                        Quaternion.identity));
-                // give an ID to NPCs for use in spread of SEIR model
-                npcs[i].myID = i;
             }
             //  Expose a few of them to the virus.
             //  If (for some reason) NumberInitiallyExposed > NumberOfNPCs, just infect all of them.
@@ -97,8 +95,12 @@ namespace Components
             for (int i = 0; i < npcNumber; i++)
             {
                 all.Add(npcs[i]);
+                // give an ID to NPCs for use in spread of SEIR model
+                all[i].myID = i;
             }
+            // add the player and give him an id
             all.Add(Player);
+            all[npcNumber].myID = npcNumber;
         }       
     }
 }

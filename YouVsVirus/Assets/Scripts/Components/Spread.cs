@@ -36,7 +36,7 @@ namespace Components
         /// will be sorted depending on contacts
         /// with infectious
         /// </summary>
-        public List<NPC> susceptible;
+        public List<HumanBase> susceptible;
 
         /// <summary>
         /// list of exposed, sorted by time of exposure
@@ -47,6 +47,10 @@ namespace Components
         /// </summary>
         public List<int> inf;
 
+        /// <summary>
+        /// number of npcs + player
+        /// </summary>
+        private int numHumans;
 
         // Start is called before the first frame update
         void Start()
@@ -59,6 +63,7 @@ namespace Components
             seir = GetComponent<SEIR>();
 
             levelSettings = LevelSettings.GetActiveLevelSettings();
+            numHumans = levelSettings.NumberOfNPCs + 1;
 
             // Set one time entries in our list
             // due to initially exposed or infected
@@ -74,16 +79,16 @@ namespace Components
         private void SetInitialEntries()
         {
 
-            for (int i = 0; i < levelSettings.NumberOfNPCs; i++)
+            for (int i = 0; i < numHumans; i++)
             {
-                if (humans.npcs[i].GetCondition() == NPC.EXPOSED)
+                if (humans.all[i].GetCondition() == NPC.EXPOSED)
                 {
-                    exp.Add(humans.npcs[i].myID);
+                    exp.Add(humans.all[i].myID);
 
                 }
-                if (humans.npcs[i].GetCondition() == NPC.INFECTIOUS)
+                if (humans.all[i].GetCondition() == NPC.INFECTIOUS)
                 {
-                    inf.Add(humans.npcs[i].myID);
+                    inf.Add(humans.all[i].myID);
                 }
             }
         }
@@ -116,7 +121,7 @@ namespace Components
                     if (susceptible[i].num_contacts > 0)
                     {
                         // these humans are than exposed, myID gives us the correct index after sorting
-                        humans.npcs[susceptible[i].myID].SetCondition(NPC.EXPOSED);
+                        humans.all[susceptible[i].myID].SetCondition(NPC.EXPOSED);
                         // make a list of those humans who have been exposed first
                         exp.Add(susceptible[i].myID);
                     }
@@ -133,10 +138,10 @@ namespace Components
                     // the incubation time might be a normal distribution
                     float rand_incubation_time = NextGaussian(seir.t_incubation, Mathf.Sqrt(seir.t_incubation - 0.2f));
                     // only if the incubation time is over, the human gets infectious
-                    if (Time.fixedTime - humans.npcs[exp[i]].t_incubation > rand_incubation_time)
+                    if (Time.fixedTime - humans.all[exp[i]].t_incubation > rand_incubation_time)
                     {
                         // infect the previously and longest exposed humans, again exp[i] stores myID
-                        humans.npcs[exp[i]].SetCondition(NPC.INFECTIOUS);
+                        humans.all[exp[i]].SetCondition(NPC.INFECTIOUS);
                         // add human to list of infected, 
                         // again the order in this list tells us who has been infected first 
                         // and should recover first later on
@@ -153,13 +158,13 @@ namespace Components
                 // this is the time in which the human is infecitous
                 float rand_inf = NextGaussian(seir.t_infectious, Mathf.Sqrt(seir.t_infectious - 0.2f));
                 // only if we have been infectious long enough
-                if (Time.fixedTime - humans.npcs[inf[i]].t_infectious > seir.t_infectious)
+                if (Time.fixedTime - humans.all[inf[i]].t_infectious > seir.t_infectious)
                 {
                     // 2% chance of death or else recovery
                     if (UnityEngine.Random.value < 0.02f)
-                        humans.npcs[inf[i]].SetCondition(NPC.DEAD);
+                        humans.all[inf[i]].SetCondition(NPC.DEAD);
                     else
-                        humans.npcs[inf[i]].SetCondition(NPC.RECOVERED);
+                        humans.all[inf[i]].SetCondition(NPC.RECOVERED);
                     //remove from infectious list
                     inf.RemoveAt(i);
                 }
@@ -176,20 +181,21 @@ namespace Components
         private void SortAndCountHumans()
         {
             sum_e = sum_i = sum_r = 0;
-            for (int i = 0; i < levelSettings.NumberOfNPCs; i++)
+            for (int i = 0; i < numHumans; i++)
             {
                 // list of susceptibles
-                if (humans.npcs[i].GetCondition() == NPC.WELL)
+                if (humans.all[i].GetCondition() == NPC.WELL)
                 {
-                    susceptible.Add(humans.npcs[i]);
+                    susceptible.Add(humans.all[i]);
                 }
                 // count others
-                if (humans.npcs[i].GetCondition() == NPC.EXPOSED)
+                if (humans.all[i].GetCondition() == NPC.EXPOSED)
                     sum_e++;
-                if (humans.npcs[i].GetCondition() == NPC.INFECTIOUS)
+                if (humans.all[i].GetCondition() == NPC.INFECTIOUS)
                     sum_i++;
-                if (humans.npcs[i].GetCondition() == NPC.RECOVERED)
+                if (humans.all[i].GetCondition() == NPC.RECOVERED)
                     sum_r++;
+
             }
         }
 
