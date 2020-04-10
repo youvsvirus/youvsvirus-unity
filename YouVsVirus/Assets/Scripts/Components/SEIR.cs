@@ -56,8 +56,9 @@ public class SEIR : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+		// population is npcs plus player
 		levelSettings = LevelSettings.GetActiveLevelSettings();
-		N = levelSettings.NumberOfNPCs;
+		N = levelSettings.NumberOfNPCs+1;
 
 		// Initial values for ODE
 		// initial # of exposed
