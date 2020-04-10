@@ -322,8 +322,9 @@ GameObject:
   m_Component:
   - component: {fileID: 742637916}
   - component: {fileID: 742637915}
+  - component: {fileID: 742637917}
   m_Layer: 0
-  m_Name: CreateHumans
+  m_Name: HumanInstants
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338,7 +339,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 742637914}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e46ce8eeb52f04499399342787bc583, type: 3}
+  m_Script: {fileID: 11500000, guid: c591f545009645941a2104a63f665527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 2318940163048237835, guid: bf11b32d68aa29c4d9453c107b77daa5,
@@ -359,6 +360,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &742637917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742637914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a121f995152975644906a5c6d95d295a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  safetyMarginCellRadius: 0.2
+  RandomCoords: []
 --- !u!1 &882962247
 GameObject:
   m_ObjectHideFlags: 0

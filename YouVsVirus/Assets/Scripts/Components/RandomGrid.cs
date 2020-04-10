@@ -6,54 +6,31 @@ using System.Linq;
 
 namespace Components
 {
-    public class CreatePopulation : MonoBehaviour
+    public class RandomGrid : MonoBehaviour
     {
-        private float safetyMargin = 0.2f;
+        /// <summary>
+        /// a safety margin to ensure that all cells are large enough
+        /// </summary>
+        public float safetyMarginCellRadius = 0.2f;
+
+        /// <summary>
+        /// a list of random coords generated so that all prefab clones
+        /// are placed on a grid in safe distance from each other
+        /// </summary>
+        public List<Vector2> RandomCoords;
 
 
         /// <summary>
-        /// Player prefab to be set in the editor.
+        /// compute a list of random coords generated so that all prefab clones
+        /// are placed on a grid in safe distance from each other
+        /// <param name="scale"> e.g. the player's scale needed for grid size </param>
+        /// <param name="infection_radius"> e.g. the player's infection radius for grid size </param>
+        /// <param name="npcNumber"> number of prefabs clones to be placed, player is +1 </param>
         /// </summary>
-        public GameObject playerPrefab;
-
-        /// <summary>
-        /// NPC prefab to be set in the editor.
-        /// </summary>
-        public GameObject npcPrefab;
-
-        /// <summary>
-        /// The instantiated player object.
-        /// </summary>
-        public Player Player { get; private set; }
-
-        /// <summary>
-
-        /// All instantiated NPCs. This is a dynamic list, it can be extended during runtime.
-        /// </summary>
-        public List<NPC> NPCs { get; private set; }
-
-        private LevelSettings levelSettings;
-
-        public CreatePopulation()
-        {
-            NPCs = new List<NPC>(30);
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            levelSettings = LevelSettings.GetActiveLevelSettings();
-
-            PlaceHumans();
-        }
-
-        /// <summary>
-        /// Places the player and all NPCs on the map randomly.
-        /// </summary>
-        private void PlaceHumans()
+        public void GenerateRandomCoords(float scale, float infection_radius, int npcNumber)
         {
             //  Determine the size of a single cell
-            float cellRadius = GetCellRadius();
+            float cellRadius = GetCellRadius(scale, infection_radius);
             float cellSidelength = 2f * cellRadius;
 
             //  Determine the total size of the grid
@@ -63,35 +40,17 @@ namespace Components
             int cellCount = rows * columns;
 
             //  Randomly select grid indices
-            int[] indices = ChooseUnique(levelSettings.NumberOfNPCs + 1, 0, cellCount);
+            int[] indices = ChooseUnique(npcNumber + 1, 0, cellCount);
 
-            Vector3 origin = - GameObject.Find("MapLimits").GetComponent<ViewportBoundMapLimit>().GetMapExtents();
-
-            //  Place the player
-            Player = Instantiate(   playerPrefab.GetComponent<Player>(), 
-                                    GetCoordinatesInGrid(indices[0], columns, cellRadius, origin), 
-                                    Quaternion.identity);
-
-            //  Place the NPCs in the grid
-            for(int i = 1; i <= levelSettings.NumberOfNPCs; i++)
+            Vector3 origin = -GameObject.Find("MapLimits").GetComponent<ViewportBoundMapLimit>().GetMapExtents();
+            for (int i = 0; i < npcNumber + 1; i++)
             {
-                NPCs.Add(Instantiate(   npcPrefab.GetComponent<NPC>(),
-                                        GetCoordinatesInGrid(indices[i], columns, cellRadius, origin),
-                                        Quaternion.identity));   
+                RandomCoords.Add(GetCoordinatesInGrid(indices[i], columns, cellRadius, origin));
             }
-
-            //  Infect a few of them.
-            //  If (for some reason) NumberInitiallyExposed > NumberOfNPCs, just infect all of them.
-            for (int i = 0; i < Math.Min(levelSettings.NumberOfNPCs, levelSettings.NumberInitiallyExposed); i++)
-            {
-                NPCs[i].SetInitialCondition(NPC.EXPOSED);
-            }
-            GameObject.Find("EndGameController").GetComponent<EndGameController>().InitComplete();
         }
 
-
         /// <summary>
-        ///     Compute the grid coordinates
+        /// Compute the grid coordinates
         /// </summary>
         private Vector3 GetCoordinatesInGrid(int idx, int gridColumns, float cellRadius, Vector3 origin)
         {
@@ -105,21 +64,14 @@ namespace Components
         }
 
         /// <summary>
-        ///     Calculates the radius of a single grid cell for placement on the map. The cell
-        ///     radius is HALF it's sidelength.
+        /// Calculates the radius of a single grid cell for placement on the map. The cell
+        /// radius is HALF it's sidelength.
         /// </summary>
         /// <returns>The cell radius.</returns>
-        private float GetCellRadius()
+        private float GetCellRadius(float scale, float infection_radius)
         {
             //  Get the player's radius as the minimum cell size
-            float infectionRadius = playerPrefab.GetComponentInChildren<InfectionTrigger>().InfectionRadius;
-
-            //  Get the player's scale.
-            //  Assuming X and Y components of the scale to be identical.
-            float playerScale = playerPrefab.transform.localScale.x;
-
-            float cellRadius = (1f + safetyMargin) * (infectionRadius * playerScale);
-
+            float cellRadius = (1f + safetyMarginCellRadius) * (infection_radius * scale);
             return cellRadius;
         }
 
@@ -135,7 +87,7 @@ namespace Components
             float mapWidth = 2f * mapExtents.x;
             float mapHeight = 2f * mapExtents.y;
 
-            int columns = (int) (mapWidth / cellSidelength);
+            int columns = (int)(mapWidth / cellSidelength);
             int rows = (int)(mapHeight / cellSidelength);
 
             return new int[] { rows, columns };
@@ -164,11 +116,11 @@ namespace Components
         /// <param name="list">The list to be shuffled</param>
         private void shuffleInPlace(int[] list)
         {
-            for(int i = list.Length - 1; i > 0; i--)
+            for (int i = list.Length - 1; i > 0; i--)
             {
                 //  Find source index.
                 int j = UnityEngine.Random.Range(0, i + 1);
-                
+
                 //  Swap.
                 int tmp = list[i];
                 list[i] = list[j];
