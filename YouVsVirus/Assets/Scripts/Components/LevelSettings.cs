@@ -21,6 +21,11 @@ public class LevelSettings : MonoBehaviour
     public int NumberInitiallyExposed = 1;
 
     /// <summary>
+    /// Number of initially exposed NPCs.
+    /// </summary>
+    public int NumberInitiallyInfectious = 0;
+
+    /// <summary>
     /// The social distancing factor for the level
     /// </summary>
     public float SocialDistancingFactor = 50f;
