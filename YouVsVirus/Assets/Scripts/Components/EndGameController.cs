@@ -7,8 +7,6 @@ public class EndGameController : MonoBehaviour
 {
     private float startTime = 0f;
 
-    private float minGameTime = 20f;
-
     /// <summary>
     /// Maximum number of seconds after which the game ends. 
     /// Zero means the game runs indefinitely, until another end condition is met.
@@ -93,9 +91,6 @@ public class EndGameController : MonoBehaviour
     {
         //  Do nothing before initialization has not been completed
         if (!initComplete) return;
-
-        // Do nothing before minimum time has passed
-        if (Time.time < minGameTime) return;
 
         //  The game is already ending, so just do nothing and wait.
         if (endConditionMet) return;
