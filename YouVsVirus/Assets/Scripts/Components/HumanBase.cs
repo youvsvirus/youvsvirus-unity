@@ -13,13 +13,15 @@ namespace Components
     {
 
         /// <summary>
-        /// This human's rigidbody component.
+        /// This human's id.
         /// </summary>
+        public int myID;
+
         protected Rigidbody2D myRigidbody = null;
 
 
         // The statistics object that counts the number of infected humans
-        private LevelStats levelStats;
+        public LevelStats levelStats;
 
         /// <summary>
         /// This human's infection stages
@@ -115,7 +117,7 @@ namespace Components
                     }
                 case DEAD:
                     {
-                        levelStats.aHumanDied();
+                        levelStats.aHumanDied(myID);
                         break;
                     }
                 case RECOVERED:
