@@ -31,7 +31,11 @@ public class SEIR : MonoBehaviour
 	/// <summary>
 	/// # of recovered (or dead)
 	/// </summary>
-	public float R; 
+	public float R;
+	/// <summary>
+	/// # max values during infection spread
+	/// </summary>
+	public float max_E, max_I, max_R;
 
 	/// <summary>
 	/// Stuff set in the main menu.
@@ -75,6 +79,7 @@ public class SEIR : MonoBehaviour
 		rho = 1 - levelSettings.SocialDistancingFactor / 100 + 0.5f;
 		t_incubation = 5.2f;
 		t_infectious = 2f;
+		max_E = max_I = max_R = 0.0f;
 	}
 
 	// frame independent update for physics calculations
@@ -108,7 +113,16 @@ public class SEIR : MonoBehaviour
 		E = E + delta_t * dEdt;
 		I = I + delta_t * dIdt;
 		R = R + delta_t * dRdt;
-		
+
+		// get the max of the infection spread
+		if (E > max_E)
+			max_E = E;
+		if (I > max_I)
+			max_I = I;
+		if (R > max_R)
+			max_R = R;
+
+
 		//if (Time.frameCount % 100 == 0)
 		//{
 		//	print(Time.fixedTime);

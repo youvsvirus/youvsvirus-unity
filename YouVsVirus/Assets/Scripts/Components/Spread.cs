@@ -14,6 +14,7 @@ namespace Components
         /// </summary>
         private LevelSettings levelSettings;
 
+
         /// <summary>
         /// Our list of humans
         /// </summary>
@@ -32,6 +33,12 @@ namespace Components
         private int sum_e, sum_i, sum_r;
 
         /// <summary>
+        /// Difference between our sum of E,I,R
+        /// and the last max the SEIR model predicted
+        /// </summary>
+        private int diff_E, diff_I, diff_R;
+
+        /// <summary>
         /// our list of still well humans
         /// will be sorted depending on contacts
         /// with infectious
@@ -46,6 +53,11 @@ namespace Components
         /// list of infected, sorted by time of infection
         /// </summary>
         public List<int> inf;
+
+        /// <summary>
+        /// list of recovered, sorted by time of recovery
+        /// </summary>
+        public List<int> rec;
 
         /// <summary>
         /// number of npcs + player
@@ -101,10 +113,12 @@ namespace Components
             SortAndCountHumans();
 
             // get difference between current number of exposed, infected and recovered
-            // compared to SEIR model predicitons
-            int diff_E = (int)Math.Round(seir.E) - sum_e;
-            int diff_I = (int)Math.Round(seir.I) - sum_i;
-            int diff_R = (int)Math.Round(seir.R) - sum_r;
+            // compared to SEIR model predictions
+            // if the maximum infectious spread has been reached, the SEIR values go down
+            // at that point we let the infection spread on its own (this is why we take the max)
+             diff_E = ((int)Math.Round(seir.max_E) - sum_e);
+             diff_I = ((int)Math.Round(seir.max_I) - sum_i);
+             diff_R = ((int)Math.Round(seir.max_R) - sum_r);
 
             // if there are too less exposed humans
             if (diff_E > 0)
@@ -128,47 +142,51 @@ namespace Components
                 }
             }
 
+
             // it too less are infected
-            if (diff_I > 0)
+            // iterate up to diffI or the end of list exp.Count:
+            // only those can become infecitous who have been exposed first
+            for (int i = 0; i < Math.Min(diff_I, exp.Count); i++)
             {
-                // iterate up to diffI or the end of list exp.Count:
-                // only those can become infecitous who have been exposed first
-                for (int i = 0; i < Math.Min(diff_I, exp.Count); i++)
-                {
-                    // the incubation time might be a normal distribution
-                    float rand_incubation_time = NextGaussian(seir.t_incubation, Mathf.Sqrt(seir.t_incubation - 0.2f));
-                    // only if the incubation time is over, the human gets infectious
-                    if (Time.fixedTime - humans.all[exp[i]].t_incubation > rand_incubation_time)
-                    {
-                        // infect the previously and longest exposed humans, again exp[i] stores myID
-                        humans.all[exp[i]].SetCondition(NPC.INFECTIOUS);
-                        // add human to list of infected, 
-                        // again the order in this list tells us who has been infected first 
-                        // and should recover first later on
-                        inf.Add(exp[i]);
-                        // remove from list of exposed
-                        exp.RemoveAt(i);
-                    }
+                // the incubation time might be a normal distribution
+                float rand_incubation_time = seir.t_incubation; // NextGaussian(seir.t_incubation, Mathf.Sqrt(seir.t_incubation - 0.2f));
+                // only if the incubation time is over, the human gets infectious
+                if (Time.fixedTime - humans.all[exp[i]].t_incubation > rand_incubation_time)
+                {              
+                    // infect the previously and longest exposed humans, again exp[i] stores myID
+                    humans.all[exp[i]].SetCondition(NPC.INFECTIOUS);
+                    // add human to list of infected, 
+                    // again the order in this list tells us who has been infected first 
+                    // and should recover first later on
+                    inf.Add(exp[i]);
                 }
             }
+            // remove infectious from list of exposed
+            foreach (int item in inf) { exp.Remove(item); }
+
             // eventually all exposed are allowed to recover / must die
             for (int i = 0; i < Math.Min(diff_R, inf.Count); i++)
             {
                 // gaussian distribution around mean infectious time
                 // this is the time in which the human is infecitous
-                float rand_inf = NextGaussian(seir.t_infectious, Mathf.Sqrt(seir.t_infectious - 0.2f));
-                // only if we have been infectious long enough
+                float rand_inf = seir.t_infectious; // NextGaussian(seir.t_infectious, Mathf.Sqrt(seir.t_infectious - 0.2f));
+                                                    // only if we have been infectious long enough
                 if (Time.fixedTime - humans.all[inf[i]].t_infectious > seir.t_infectious)
                 {
                     // 2% chance of death or else recovery
                     if (UnityEngine.Random.value < 0.02f)
+                    {
                         humans.all[inf[i]].SetCondition(NPC.DEAD);
+                    }
                     else
                         humans.all[inf[i]].SetCondition(NPC.RECOVERED);
-                    //remove from infectious list
-                    inf.RemoveAt(i);
+                    // add to list of recovered, which we only use to remove from inf
+                    rec.Add(inf[i]);
                 }
             }
+            //remove from infectious list
+            foreach (int item in rec) { inf.Remove(item); }
+
             // ckear the list of susceptibles
             // keep all other lists
             susceptible.Clear();
@@ -181,7 +199,7 @@ namespace Components
         private void SortAndCountHumans()
         {
             sum_e = sum_i = sum_r = 0;
-            for (int i = 0; i < numHumans; i++)
+            for (int i = 0; i < humans.all.Count; i++)
             {
                 // list of susceptibles
                 if (humans.all[i].GetCondition() == NPC.WELL)
