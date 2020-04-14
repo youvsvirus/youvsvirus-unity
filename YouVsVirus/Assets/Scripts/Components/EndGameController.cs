@@ -89,8 +89,14 @@ public class EndGameController : MonoBehaviour
 
     void Update()
     {
+
         //  Do nothing before initialization has not been completed
         if (!initComplete) return;
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            EndGame();
+        }
 
         //  The game is already ending, so just do nothing and wait.
         if (endConditionMet) return;
@@ -129,6 +135,5 @@ public class EndGameController : MonoBehaviour
     private bool CheckEndCondition()
     {
         return playerDied || activeInfections == 0;
-
     }
 }

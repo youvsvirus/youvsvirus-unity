@@ -86,7 +86,6 @@ namespace Components
             {
                 NPCs[i].SetInitialCondition(NPC.EXPOSED);
             }
-            GameObject.Find("EndGameController").GetComponent<EndGameController>().InitComplete();
         }
 
 

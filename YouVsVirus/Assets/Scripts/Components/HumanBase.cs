@@ -161,6 +161,7 @@ namespace Components
             // _initialCondition may have been modified by base classes
             // this becomes _mycondition during Start()
             SetCondition(_initialCondition);
+            GameObject.Find("EndGameController").GetComponent<EndGameController>().InitComplete();
         }
 
 
