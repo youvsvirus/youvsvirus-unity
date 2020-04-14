@@ -25,21 +25,10 @@ public class EndGameController : MonoBehaviour
     //  Has an end condition been met?
     private bool endConditionMet = false;
 
-    private bool initComplete = false;
-
     public void Start()
     {
         // Remember the starting time to check for the timeout end condition
         startTime = Time.time;
-    }
-
-    /// <summary>
-    /// Notify the end game controller that level initialization has been completed.
-    /// Otherwise, it might end the game before it has begun.
-    /// </summary>
-    public void InitComplete()
-    {
-        initComplete = true;
     }
 
     /// <summary>
@@ -74,7 +63,7 @@ public class EndGameController : MonoBehaviour
     /// <summary>
     /// Notify the end game controller that an NPC has been exposed
     /// </summary>
-    public void NotifyNPCExposed()
+    public void NotifyHumanExposed()
     {
         activeInfections++;
     }
@@ -82,16 +71,13 @@ public class EndGameController : MonoBehaviour
     /// <summary>
     /// Notify the end game controller that an NPC has either recovered or died.
     /// </summary>
-    public void NotifyNPCRemoved()
+    public void NotifyHumanRemoved()
     {
         activeInfections--;
     }
 
     void Update()
     {
-
-        //  Do nothing before initialization has not been completed
-        if (!initComplete) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
