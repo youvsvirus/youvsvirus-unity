@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8900475433866948931}
   - component: {fileID: 8900475433866948930}
   - component: {fileID: 7271644411175272605}
-  - component: {fileID: 2379060102389004291}
   - component: {fileID: 1801475588465177927}
   m_Layer: 0
   m_Name: DefaultNPC
@@ -97,13 +96,13 @@ CircleCollider2D:
   m_GameObject: {fileID: 8900475433866948943}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 8c98871d03e5e7c41a929e8bd67ee53a, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.55
+  m_Radius: 2.56
 --- !u!50 &8900475433866948931
 Rigidbody2D:
   serializedVersion: 4
@@ -137,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2a997f20f561e42940449bcd2c9702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myID: 0
+  levelStats: {fileID: 0}
   MinVelocity: 1
   MaxVelocity: 3
   AccelerationFactor: 0.5
@@ -152,22 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa021da745fb98843b1f110e6b40b098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &2379060102389004291
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8900475433866948943}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: f8437a7049c31874d9b01620ef87b887, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 2.56
 --- !u!114 &1801475588465177927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,9 +175,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8900475434363221175}
   - component: {fileID: 8900475434363221174}
-  - component: {fileID: 8900475434363221173}
+  - component: {fileID: 8432342499317769593}
   m_Layer: 8
-  m_Name: InfectionTrigger
+  m_Name: TriggerZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,7 +213,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
---- !u!114 &8900475434363221173
+--- !u!114 &8432342499317769593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,7 +222,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8900475434363221168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04aaa0707f970cb4e8124016f573e04b, type: 3}
+  m_Script: {fileID: 11500000, guid: 7aa8f16d04c2b78f2818d9c1e6e22c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InfectionRadius: 4
