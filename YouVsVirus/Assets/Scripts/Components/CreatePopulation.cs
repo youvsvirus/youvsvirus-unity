@@ -39,8 +39,8 @@ namespace Components
             NPCs = new List<NPC>(30);
         }
 
-        // Start is called before the first frame update
-        void Start()
+        // Awake is called the moment this component is created
+        void Awake()
         {
             levelSettings = LevelSettings.GetActiveLevelSettings();
 
@@ -90,7 +90,6 @@ namespace Components
             {
                 NPCs[i].SetInitialCondition(NPC.EXPOSED);
             }
-            GameObject.Find("EndGameController").GetComponent<EndGameController>().InitComplete();
         }
 
 
@@ -155,7 +154,7 @@ namespace Components
         private int[] ChooseUnique(int N, int from, int to)
         {
             int count = to - from;
-            if (to - from < count) throw new ArgumentException("N was larger than the range! ");
+            if (count < N) throw new ArgumentException("N was larger than the range! ");
 
             int[] indices = Enumerable.Range(from, count).ToArray();
             shuffleInPlace(indices);

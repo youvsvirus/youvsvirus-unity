@@ -68,7 +68,7 @@ namespace Components
 			WellSprite = Resources.Load<Sprite>("SmileyPictures/player_healthy");
 			ExposedSprite = Resources.Load<Sprite>("SmileyPictures/player_exposed");
 			InfectiousSprite = Resources.Load<Sprite>("SmileyPictures/player_infectious");
-			RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recovered");
+			RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recoveredhat");
 			DeadSprite = Resources.Load<Sprite>("SmileyPictures/player_dead");
 		}
 
