@@ -99,7 +99,7 @@ namespace Components
                     }
                 case DEAD:
                     {
-                        levelStats.aHumanDied(myID);                        //  Removes this human's Rigidbody from the physics simulation, 
+                        //  Removes this human's Rigidbody from the physics simulation, 
                         //  which disables movement and collision detection.
                         myRigidbody.simulated = false;
 
@@ -112,7 +112,7 @@ namespace Components
                         GetComponent<SpriteRenderer>().sortingLayerName = "Dead";
 
                         egc.NotifyHumanRemoved();
-                        levelStats.aHumanDied();
+                        levelStats.aHumanDied(myID);
                         break;
                     }
                 case RECOVERED:

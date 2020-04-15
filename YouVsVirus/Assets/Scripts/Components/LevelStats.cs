@@ -74,16 +74,18 @@ public class LevelStats : MonoBehaviour
     /// Initialize with initial number of NPCs and initial number
     /// of infected.
     /// </summary>
-    public void Init(int InitialNumberOfNPCs, int NumberOfInitiallyInfected)
+    public void Init(int InitialNumberOfNPCs)
     {
         // Set initial numbers of NPCs and infected humans
         NumberOfNPCs = InitialNumberOfNPCs;
+        // init empty list
+        if (KilledNPCs == null)
+            KilledNPCs = new List<int>(0);
+        // init empty list
+        if (NPCsInfectedByPlayer == null)
+            NPCsInfectedByPlayer = new List<int>(0);
         // Mark this instance as initialized
         isInit = true;
-        // init empty list
-        KilledNPCs = new List<int>(0);
-        // init empty list
-        NPCsInfectedByPlayer = new List<int>(0);
     }
 
     /// <summary>
@@ -229,11 +231,17 @@ public class LevelStats : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //  Make sure this object survives the scene change
         //  We will need it in the end screen to evaluate the stats
         DontDestroyOnLoad(gameObject);
+
+        if (isInit == false)
+        {
+            LevelSettings LevelSettings = LevelSettings.GetActiveLevelSettings();
+            Init(LevelSettings.NumberOfNPCs);
+        }   
     }
 
     /// <summary>
