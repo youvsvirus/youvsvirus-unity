@@ -53,23 +53,6 @@ namespace Components
             }
         }
 
-        public override void SetCondition(int condition)
-        {
-            base.SetCondition(condition);
-
-            EndGameController egc = GameObject.Find("EndGameController").GetComponent<EndGameController>();
-
-            if (condition == EXPOSED)
-            {
-                egc.NotifyNPCExposed();
-            }
-
-            if(condition == DEAD || condition == RECOVERED)
-            {
-                egc.NotifyNPCRemoved();
-            }
-        }
-
         /// <summary>
         /// Sprite images corresponding to infections states of npc
         /// </summary>

@@ -39,8 +39,8 @@ namespace Components
             NPCs = new List<NPC>(30);
         }
 
-        // Start is called before the first frame update
-        void Start()
+        // Awake is called the moment this component is created
+        void Awake()
         {
             levelSettings = LevelSettings.GetActiveLevelSettings();
 
@@ -71,13 +71,17 @@ namespace Components
             Player = Instantiate(   playerPrefab.GetComponent<Player>(), 
                                     GetCoordinatesInGrid(indices[0], columns, cellRadius, origin), 
                                     Quaternion.identity);
+            // give the player a unique id
+            Player.myID = levelSettings.NumberOfNPCs;
 
             //  Place the NPCs in the grid
-            for(int i = 1; i <= levelSettings.NumberOfNPCs; i++)
+            for (int i = 1; i <= levelSettings.NumberOfNPCs; i++)
             {
                 NPCs.Add(Instantiate(   npcPrefab.GetComponent<NPC>(),
                                         GetCoordinatesInGrid(indices[i], columns, cellRadius, origin),
-                                        Quaternion.identity));   
+                                        Quaternion.identity));
+                // give all npcs a unique id
+                NPCs[i-1].myID = i - 1;
             }
 
             //  Infect a few of them.
@@ -86,7 +90,6 @@ namespace Components
             {
                 NPCs[i].SetInitialCondition(NPC.EXPOSED);
             }
-            GameObject.Find("EndGameController").GetComponent<EndGameController>().InitComplete();
         }
 
 
@@ -151,7 +154,7 @@ namespace Components
         private int[] ChooseUnique(int N, int from, int to)
         {
             int count = to - from;
-            if (to - from < count) throw new ArgumentException("N was larger than the range! ");
+            if (count < N) throw new ArgumentException("N was larger than the range! ");
 
             int[] indices = Enumerable.Range(from, count).ToArray();
             shuffleInPlace(indices);
