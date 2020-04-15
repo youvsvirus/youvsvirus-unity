@@ -237,6 +237,8 @@ public class LevelStats : MonoBehaviour
         //  We will need it in the end screen to evaluate the stats
         DontDestroyOnLoad(gameObject);
 
+        // normally we initialize by the start-button-script from main menu
+        // if this is no the case, we do the initialization here
         if (isInit == false)
         {
             LevelSettings LevelSettings = LevelSettings.GetActiveLevelSettings();
