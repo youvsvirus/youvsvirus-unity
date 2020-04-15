@@ -26,26 +26,42 @@ namespace Components
             
             HumanBase otherHuman = other.GetComponentInParent<HumanBase>();
 
-            //  If a human came into infection radius, try to infect it.
+            
             if (otherHuman != null)
             {
                 HumanBase myHuman = GetComponentInParent<HumanBase>();
                 float dist = Vector3.Distance(myHuman.transform.position, otherHuman.transform.position);
-                if (dist < InfectionRadius) if (otherHuman.IsInfectious())
+                if (dist < InfectionRadius)
                 {
-                    // if I am the player and infected an NPC
-                    // this NPC is previously well
-                    // I give notice to the level stats
-                    if (myHuman.tag == "Player" && otherHuman.IsSusceptible())
-                    {
-                        // this also adds other human to the list of infected
-                        // to count if other human dies later on
-                        myHuman.levelStats.PlayerInfectedNPC(otherHuman.myID);
-                  
+                    if (myHuman.LevelSettings.InfectionModel == "SEIR")
+                    {   // if the other human is infectious this counts as a contact
+                        if (otherHuman.IsInfectious())
+                            myHuman.num_contacts++;
+
+                        if (myHuman.IsInfectious() && myHuman.tag == "Player" && otherHuman.IsSusceptible())
+                        {
+                            // this also adds other human to the list of infected
+                            // to count if other human dies later on
+                            myHuman.levelStats.PlayerInfectedNPC(otherHuman.myID);
+
+                        }
                     }
-                    otherHuman.Infect();
-                    myHuman.num_contacts++; 
-                    //otherHuman.Infect();     
+                    else // other infection model
+                    {
+                        //  If a human came into infection radius, try to infect it.
+                        if (myHuman.IsInfectious())
+                        {
+                            otherHuman.Infect();
+
+                            if (myHuman.tag == "Player" && otherHuman.IsSusceptible())
+                            {
+                                // this also adds other human to the list of infected
+                                // to count if other human dies later on
+                                myHuman.levelStats.PlayerInfectedNPC(otherHuman.myID);
+
+                            }
+                        }
+                    }
                 }
             }
         }

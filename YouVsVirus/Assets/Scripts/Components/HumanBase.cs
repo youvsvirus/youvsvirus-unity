@@ -11,12 +11,6 @@ namespace Components
     /// </summary>
     public abstract class HumanBase : MonoBehaviour
     {
-
-        /// <summary>
-        /// This human's id.
-        /// </summary>
-        public int myID;
-
         protected Rigidbody2D myRigidbody = null;
 
 
@@ -95,6 +89,11 @@ namespace Components
         }
 
         /// <summary>
+        /// Get params of main menu
+        /// </summary>
+        public LevelSettings LevelSettings;
+
+        /// <summary>
         /// Set stage of infection and update smiley's image
         /// </summary>
         public virtual void SetCondition(int condition)
@@ -108,7 +107,8 @@ namespace Components
                 case EXPOSED:
                     {
                         egc.NotifyHumanExposed();
-                        GetComponent<AbstractInfection>().Expose();
+                        if(LevelSettings.InfectionModel != "SEIR")
+                            GetComponent<AbstractInfection>().Expose();
                         levelStats.aHumanGotExposed();
                         t_incubation = Time.fixedTime;
                         break;
@@ -170,6 +170,7 @@ namespace Components
         /// </summary>
         public virtual void Start()
         {
+            LevelSettings = LevelSettings.GetActiveLevelSettings();
             // initial infection values
             t_incubation = float.MaxValue;
             t_infectious = float.MaxValue;
@@ -190,7 +191,7 @@ namespace Components
 
 
         /// <summary>
-        /// Infects this human if it is susceptible.
+        /// Infects this human if it is susceptible. Not used for SEIR.
         /// </summary>
         /// <returns>True if this human became EXPOSED, false otherwise.</returns>
         public bool Infect()

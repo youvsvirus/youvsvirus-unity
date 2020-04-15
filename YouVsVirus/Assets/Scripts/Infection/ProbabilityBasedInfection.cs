@@ -32,10 +32,12 @@ namespace Infection
 
         public override void Update()
         {
-            //if (infectionControl.IsNewDay())
-            //{
-            //    UpdateCondition();
-            //}
+           
+                //if (infectionControl.IsNewDay())
+                //{
+                //    UpdateCondition();
+                //}
+            
         }
 
         /// <summary>
