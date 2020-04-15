@@ -78,33 +78,15 @@ namespace Components
         public virtual void SetCondition(int condition)
         {
             _mycondition = condition;
-
-            if(_mycondition == DEAD)
-            {
-                //  Removes this human's Rigidbody from the physics simulation, 
-                //  which disables movement and collision detection.
-                myRigidbody.simulated = false;
-
-                //  Set the simulated velocity to zero.
-                myRigidbody.velocity = Vector3.zero;
-
-                //  Put this human's sprite on the 'Dead' sorting layer.
-                //  This layer is below the others, causing Dead humans to be rendered
-                //  below the living.
-                GetComponent<SpriteRenderer>().sortingLayerName = "Dead";
-            }
-
-            if(_mycondition == EXPOSED)
-            {
-                //  Notify our infection model that we've been exposed
-                GetComponent<AbstractInfection>().Expose();
-            }
+            EndGameController egc = GameObject.Find("EndGameController").GetComponent<EndGameController>();
 
             // Update the stats
             switch (condition)
             {
                 case EXPOSED:
                     {
+                        egc.NotifyHumanExposed();
+                        GetComponent<AbstractInfection>().Expose();
                         levelStats.aHumanGotExposed();
                         break;
                     }
@@ -115,11 +97,25 @@ namespace Components
                     }
                 case DEAD:
                     {
+                        //  Removes this human's Rigidbody from the physics simulation, 
+                        //  which disables movement and collision detection.
+                        myRigidbody.simulated = false;
+
+                        //  Set the simulated velocity to zero.
+                        myRigidbody.velocity = Vector3.zero;
+
+                        //  Put this human's sprite on the 'Dead' sorting layer.
+                        //  This layer is below the others, causing Dead humans to be rendered
+                        //  below the living.
+                        GetComponent<SpriteRenderer>().sortingLayerName = "Dead";
+
+                        egc.NotifyHumanRemoved();
                         levelStats.aHumanDied();
                         break;
                     }
                 case RECOVERED:
                     {
+                        egc.NotifyHumanRemoved();
                         levelStats.aHumanRecovered();
                         break;
                     }
