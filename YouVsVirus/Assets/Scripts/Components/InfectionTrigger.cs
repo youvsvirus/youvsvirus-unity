@@ -30,23 +30,30 @@ namespace Components
             if (otherHuman != null)
             {
                 HumanBase myHuman = GetComponentInParent<HumanBase>();
-                if (myHuman.IsInfectious())
-                {
-                    // if I am the player and infected an NPC
-                    // this NPC is previously well
-                    // I give notice to the level stats
-                    if (myHuman.tag == "Player" && otherHuman.IsSusceptible())
+                if(myHuman.IsInfectious()){
+
+                    // check if myHuman is infectious and if they are in my infection radius
+                    float dist = Vector3.Distance(myHuman.transform.position, otherHuman.transform.position);
+                    float r = 2f * InfectionRadius * transform.parent.localScale.x;
+                    if (dist < r)
                     {
-                        // this also adds other human to the list of infected
-                        // to count if other human dies later on
-                        myHuman.levelStats.PlayerInfectedNPC(otherHuman.myID);
-                  
+                        // if I am the player and infected an NPC
+                        // this NPC is previously well
+                        // I give notice to the level stats
+                        if (myHuman.tag == "Player" && otherHuman.IsSusceptible())
+                        {
+                            // this also adds other human to the list of infected
+                            // to count if other human dies later on
+                            myHuman.levelStats.PlayerInfectedNPC(otherHuman.myID);
+                        }
+                        
+                        otherHuman.Infect();     
                     }
-                    otherHuman.Infect();
                 }
             }
         }
 
+      
         public void SetInfectionRadius(float r)
         {
             InfectionRadius = r;
