@@ -14,6 +14,7 @@ namespace Components
 		/// </summary>
 		public float speedMultiplier = 5.0f;
 
+
 		/// <summary>
 		/// Start is called before the first frame update
 		/// </summary>

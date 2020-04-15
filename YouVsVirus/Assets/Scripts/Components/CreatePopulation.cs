@@ -71,13 +71,17 @@ namespace Components
             Player = Instantiate(   playerPrefab.GetComponent<Player>(), 
                                     GetCoordinatesInGrid(indices[0], columns, cellRadius, origin), 
                                     Quaternion.identity);
+            // give the player a unique id
+            Player.myID = levelSettings.NumberOfNPCs;
 
             //  Place the NPCs in the grid
-            for(int i = 1; i <= levelSettings.NumberOfNPCs; i++)
+            for (int i = 1; i <= levelSettings.NumberOfNPCs; i++)
             {
                 NPCs.Add(Instantiate(   npcPrefab.GetComponent<NPC>(),
                                         GetCoordinatesInGrid(indices[i], columns, cellRadius, origin),
-                                        Quaternion.identity));   
+                                        Quaternion.identity));
+                // give all npcs a unique id
+                NPCs[i-1].myID = i - 1;
             }
 
             //  Infect a few of them.

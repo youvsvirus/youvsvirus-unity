@@ -33,7 +33,7 @@ public class StartButton : MonoBehaviour
         // This is necessary if we restart from a previous run.
         levelStats.Reset();
         // Initialize the level stats.
-        levelStats.Init(LevelSettings.NumberOfNPCs, LevelSettings.NumberInitiallyExposed);
+        levelStats.Init(LevelSettings.NumberOfNPCs);
 
         // Load the Scene for level1
         UnityEngine.SceneManagement.SceneManager.LoadScene("YouVsVirus_Level1");
