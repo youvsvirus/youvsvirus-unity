@@ -11,7 +11,7 @@ namespace Components
         /// The radius around this human were it infects others.
         /// Edit this member only from the editor; when changing the radius from code, use SetInfectionRadius()!
         /// </summary>
-        public float InfectionRadius = 15;
+        public float InfectionRadius = 4;
 
         // Start is called before the first frame update
         void Start()
