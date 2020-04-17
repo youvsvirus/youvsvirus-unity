@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Components{
     public class ComfortZone : MonoBehaviour
     {
+        #region Unity-Editor exposed variables
 
         /// <summary>
         /// The minimum radius of this human's comfort zone.
@@ -28,10 +29,32 @@ namespace Components{
 
         public bool debug = false;
 
+        #endregion
+
+        #region Private Variables
+
         private HashSet<Collider2D> collidersInZone = new HashSet<Collider2D>();
         private NPC myNPC;
         private bool escapingEnabled = true;
 
+        #endregion
+
+        #region Public Events
+
+        public delegate void ComfortZoneChangeEventHandler(object sender, ComfortZoneChangeArgs args);
+        
+        public event ComfortZoneChangeEventHandler HumanEntered;
+        public event ComfortZoneChangeEventHandler HumanLeft;
+
+        private void OnHumanEntered(ComfortZoneChangeArgs args){
+            HumanEntered?.Invoke(this, args);
+        }
+
+        private void OnHumanLeft(ComfortZoneChangeArgs args){
+            HumanLeft?.Invoke(this, args);
+        }
+
+        #endregion
 
         #region Unity Lifecycle
         // Start is called before the first frame update
@@ -64,21 +87,28 @@ namespace Components{
         #region Unity Event Handlers
 
         void OnTriggerEnter2D(Collider2D other){
-            if(other.GetComponent<HumanBase>() != null){
+            HumanBase otherHuman = other.GetComponent<HumanBase>();
+            if(otherHuman != null){
                 collidersInZone.Add(other);
                 
                 if(escapingEnabled){
                     myNPC.CurrentBehaviour = NPC.COMFORT_ZONE_ESCAPE;
                 }
+
+                OnHumanEntered(new ComfortZoneChangeArgs(Time.fixedTime, this.myNPC, otherHuman));
             }
         }
 
         void OnTriggerExit2D(Collider2D other){
+            HumanBase otherHuman = other.GetComponent<HumanBase>();
+
             collidersInZone.Remove(other);
 
             if(collidersInZone.Count == 0 && escapingEnabled){
                 myNPC.CurrentBehaviour = NPC.RANDOM_MOVEMENT;
             }
+
+            OnHumanLeft(new ComfortZoneChangeArgs(Time.fixedTime, this.myNPC, otherHuman));
         }
 
         #endregion
@@ -215,6 +245,20 @@ namespace Components{
         }
 
         #endregion
+    }
+
+    public class ComfortZoneChangeArgs : EventArgs {
+
+        public float Timestamp { get; private set;}
+        public NPC ComfortZoneOwner { get; private set;}
+        public HumanBase Other { get; private set; }
+
+        public ComfortZoneChangeArgs(float timestamp, NPC owner, HumanBase other){
+            this.Timestamp = timestamp;
+            this.ComfortZoneOwner = owner;
+            this.Other = other;
+        }
+
     }
 
 }
