@@ -14,12 +14,12 @@ namespace Components{
         /// The human will try to move away from any other human entering this zone.
         /// Edit this member only from the editor; when changing the radius from code, use SetInfectionRadius()!
         /// </summary>
-        public float MinSocialDistancingRadius = 2.55f;
+        public float MinRadius = 2.55f;
 
         /// <summary>
         /// Maximum social distancing radius at 100% social distancing.
         /// </summary>
-        public float MaxSocialDistancingRadius = 10f;
+        public float MaxRadius = 7f;
         
         /// <summary>
         /// How strong is the urge to run away?
@@ -118,7 +118,7 @@ namespace Components{
         private void SetTriggerRadius(){
             CircleCollider2D trigger = GetComponent<CircleCollider2D>();
             
-            trigger.radius = Mathf.Lerp(MinSocialDistancingRadius, MaxSocialDistancingRadius, myNPC.MySocialDistancing);
+            trigger.radius = Mathf.Lerp(MinRadius, MaxRadius, myNPC.MySocialDistancing);
         }
 
         private void RunAway(){
@@ -249,8 +249,19 @@ namespace Components{
 
     public class ComfortZoneChangeArgs : EventArgs {
 
+        /// <summary>
+        /// The current time (in seconds) the moment this event occured.
+        /// </summary>
         public float Timestamp { get; private set;}
+
+        /// <summary>
+        /// The owner NPC of the comfort zone that changed.
+        /// </summary>
         public NPC ComfortZoneOwner { get; private set;}
+
+        /// <summary>
+        /// The NPC that entered or left the comfort zone.
+        /// </summary>
         public HumanBase Other { get; private set; }
 
         public ComfortZoneChangeArgs(float timestamp, NPC owner, HumanBase other){
