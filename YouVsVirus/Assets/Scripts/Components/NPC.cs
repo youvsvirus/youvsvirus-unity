@@ -18,7 +18,6 @@ namespace Components
         // Possible behaviour modes
         public const int RANDOM_MOVEMENT = 0;
         public const int STAY_AT_HOME = 1;
-        public const int COMFORT_ZONE_ESCAPE = 2;
 
         #endregion
 
@@ -53,6 +52,8 @@ namespace Components
         private bool randomTurnAllowed = true;
         private bool behaviourChangeAllowed = true;
 
+        private Vector2 comfortZoneImpulse = Vector2.zero;
+
         #endregion
 
 
@@ -80,9 +81,7 @@ namespace Components
             {
                 switch(CurrentBehaviour){
                     case RANDOM_MOVEMENT:{
-                        if(!MaybeGoHome()){
-                            RandomMovement();    
-                        }
+                        MaybeGoHome();
                         break;
                     }
 
@@ -93,6 +92,24 @@ namespace Components
                         }
                         break;
                     }
+
+                    default: break;
+                }
+
+            }
+        }
+
+        //  FixedUpdate is called at regular intervals
+        void FixedUpdate(){
+            if (CanMove())
+            {
+                switch(CurrentBehaviour){
+                    case RANDOM_MOVEMENT:{
+                        RandomMovement();    
+                        break;
+                    }
+
+                    //  No more cases atm.
 
                     default: break;
                 }
@@ -124,14 +141,8 @@ namespace Components
         /// Adds an impulse to alter this NPC's movement.
         /// </summary>
         /// <param name="dir">The impulse vector.</param>
-        public void AddEscapeImpulse(Vector2 dir){
-            Vector2 newVelocity = myRigidbody.velocity + dir;
-            if(newVelocity.sqrMagnitude > _targetVelocity){
-                newVelocity.Normalize();
-                newVelocity *= Mathf.Sqrt(_targetVelocity);
-            }
-
-            myRigidbody.velocity = newVelocity;
+        public void SetComfortZoneImpulse(Vector2 dir){
+            this.comfortZoneImpulse = dir;
         }
 
         #endregion
@@ -142,24 +153,51 @@ namespace Components
         /// Moves the NPC randomly.
         /// </summary>
         private void RandomMovement(){
-            float vel_norm = myRigidbody.velocity.sqrMagnitude;
-
-            //  If we're too slow, accelerate
-            if (vel_norm < _targetVelocity)
+            if(!MaybeAddComfortZoneImpulse())
             {
-                myRigidbody.velocity *= (1f + AccelerationFactor * Time.deltaTime);                    
+                //  If there was no Comfort Zone impulse, proceed as normal
+
+                float vel_norm = myRigidbody.velocity.sqrMagnitude;
+
+                //  If we're too slow, accelerate
+                if (vel_norm < _targetVelocity)
+                {
+                    myRigidbody.velocity *= (1f + AccelerationFactor * Time.deltaTime);                    
+                }
+
+                //  Maybe change our movement direction
+                if (randomTurnAllowed && UnityEngine.Random.value < 0.2f){
+                    // Random.onUnitSphere returns  a random point on the surface of a sphere with radius 1
+                    // so we do not change the velocity, just the direction
+                    myRigidbody.velocity = UnityEngine.Random.onUnitSphere;
+
+                    //  Disable random turns for 5 seconds
+                    randomTurnAllowed = false;
+                    HelperMethods.ExecuteDelayed(this, () => {randomTurnAllowed = true;}, 5f);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adds the comfort zone impulse to the NPC's movement, if there is any.
+        /// </summary>
+        /// <returns>True if there was an impulse, False otherwise.</returns>
+        private bool MaybeAddComfortZoneImpulse(){
+            if(comfortZoneImpulse != Vector2.zero){
+                //  If there is an impulse from the comfort zone, handle it
+
+                Vector2 newVelocity = myRigidbody.velocity + comfortZoneImpulse;
+                if(newVelocity.sqrMagnitude > _targetVelocity){
+                    newVelocity.Normalize();
+                    newVelocity *= Mathf.Sqrt(_targetVelocity);
+                }
+
+                myRigidbody.velocity = newVelocity;
+                comfortZoneImpulse = Vector2.zero;
+                return true;
             }
 
-            //  Maybe change our movement direction
-            if (randomTurnAllowed && UnityEngine.Random.value < 0.2f){
-                // Random.onUnitSphere returns  a random point on the surface of a sphere with radius 1
-                // so we do not change the velocity, just the direction
-                myRigidbody.velocity = UnityEngine.Random.onUnitSphere;
-
-                //  Disable random turns for 5 seconds
-                randomTurnAllowed = false;
-                HelperMethods.ExecuteDelayed(this, () => {randomTurnAllowed = true;}, 5f);
-            }
+            return false;
         }
 
         /// <summary>
@@ -179,7 +217,7 @@ namespace Components
                     myRigidbody.velocity = Vector2.zero;
 
                     //  Disable the comfort zone
-                    GetComponentInChildren<ComfortZone>().SetEscapingEnabled(false);
+                    GetComponentInChildren<ComfortZone>().Active = false;
                     
                     //  TODO: House
                     //  GetComponentInChildren<PortableHouse>().BuildHouse();
@@ -207,7 +245,7 @@ namespace Components
                     CurrentBehaviour = RANDOM_MOVEMENT;
 
                     //  Enable the comfort zone
-                    GetComponentInChildren<ComfortZone>().SetEscapingEnabled(true);
+                    GetComponentInChildren<ComfortZone>().Active = true;
                     
                     //  TODO: House
                     //  GetComponentInChildren<PortableHouse>().RemoveHouse();
@@ -221,10 +259,9 @@ namespace Components
         }
 
         /// <summary>
-        /// Disables movement mode changes for time seconds.
+        /// Disables movement mode changes for a few seconds.
         /// This does NOT affect escape behaviour triggered by the comfort zone.
         /// </summary>
-        /// <param name="time">How many seconds changes should be disabled.</param>
         private void DisableBehaviourChange(){
             behaviourChangeAllowed = false;
             float time = KeepBehaviourForSeconds + UnityEngine.Random.Range( - KeepBehaviourForSeconds/2f, KeepBehaviourForSeconds/2f );

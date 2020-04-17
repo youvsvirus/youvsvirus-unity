@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 
 namespace Components{
+
     public class ComfortZone : MonoBehaviour
     {
         #region Unity-Editor exposed variables
@@ -35,7 +36,23 @@ namespace Components{
 
         private HashSet<Collider2D> collidersInZone = new HashSet<Collider2D>();
         private NPC myNPC;
-        private bool escapingEnabled = true;
+        private CircleCollider2D myCollider;
+        private bool _active = true;
+        public bool Active{
+            get { return _active; }
+            set {
+                _active = value;
+                if(myCollider != null){
+                    myCollider.enabled = _active;
+                    
+                    /* 
+                    When the collider is disabled, OnTriggerExit is called for all nearby NPCs.
+                    Also, when it is enabled, OnTriggerEnter will be called.
+                    This way, we get all the desired behaviour.
+                     */
+                }
+            }
+        }
 
         #endregion
 
@@ -61,11 +78,12 @@ namespace Components{
         void Start()
         {
             myNPC = GetComponentInParent<NPC>();
+            myCollider = GetComponent<CircleCollider2D>();
             SetTriggerRadius();   
         }
 
         void FixedUpdate(){
-            if(escapingEnabled){
+            if(Active){
                 RunAway();
             }
         }
@@ -74,13 +92,7 @@ namespace Components{
 
         #region Public Methods
 
-        public void SetEscapingEnabled(bool val){
-            this.escapingEnabled = val;
-
-            if(escapingEnabled && collidersInZone.Count > 0){
-                myNPC.CurrentBehaviour = NPC.COMFORT_ZONE_ESCAPE;
-            }
-        }
+        //  None so far
 
         #endregion
 
@@ -90,9 +102,9 @@ namespace Components{
             HumanBase otherHuman = other.GetComponent<HumanBase>();
             if(otherHuman != null){
                 collidersInZone.Add(other);
-                
-                if(escapingEnabled){
-                    myNPC.CurrentBehaviour = NPC.COMFORT_ZONE_ESCAPE;
+
+                if(debug){
+                    Debug.LogFormat("[NPC #{0}] #{1} entered my comfort zone!", myNPC.myID, otherHuman.myID);
                 }
 
                 OnHumanEntered(new ComfortZoneChangeArgs(Time.fixedTime, this.myNPC, otherHuman));
@@ -102,13 +114,16 @@ namespace Components{
         void OnTriggerExit2D(Collider2D other){
             HumanBase otherHuman = other.GetComponent<HumanBase>();
 
-            collidersInZone.Remove(other);
+            if(otherHuman != null){
+                collidersInZone.Remove(other);
 
-            if(collidersInZone.Count == 0 && escapingEnabled){
-                myNPC.CurrentBehaviour = NPC.RANDOM_MOVEMENT;
+                if(debug){
+                    Debug.LogFormat("[NPC #{0}] #{1} left my comfort zone!", myNPC.myID, otherHuman.myID);
+                }
+
+                OnHumanLeft(new ComfortZoneChangeArgs(Time.fixedTime, this.myNPC, otherHuman));
             }
 
-            OnHumanLeft(new ComfortZoneChangeArgs(Time.fixedTime, this.myNPC, otherHuman));
         }
 
         #endregion
@@ -131,7 +146,7 @@ namespace Components{
                  return;
             }
 
-            myNPC.AddEscapeImpulse(Sensitivity * escapeDir);
+            myNPC.SetComfortZoneImpulse(Sensitivity * escapeDir);
             
         }
 

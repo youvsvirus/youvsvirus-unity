@@ -400,6 +400,11 @@ PrefabInstance:
       propertyPath: MySocialDistancing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8900475433866948930, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+        type: 3}
+      propertyPath: myID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8900475433866948940, guid: ab9d2a99c32f65a43a4c99a9379ce533,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -527,6 +532,11 @@ PrefabInstance:
     - target: {fileID: 8900475433866948930, guid: ab9d2a99c32f65a43a4c99a9379ce533,
         type: 3}
       propertyPath: MySocialDistancing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900475433866948930, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+        type: 3}
+      propertyPath: myID
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8900475433866948940, guid: ab9d2a99c32f65a43a4c99a9379ce533,
