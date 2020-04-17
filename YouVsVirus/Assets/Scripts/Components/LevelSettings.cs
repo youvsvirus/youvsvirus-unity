@@ -25,11 +25,27 @@ public class LevelSettings : MonoBehaviour
     /// </summary>
     public float SocialDistancingFactor = 50f;
 
+    /// <summary>
+    /// How much the social distancing factor is allowed to vary for individual NPCs
+    /// </summary>
+    public float SocialDistancingDeviation = 30f;
+
     // Start is called before the first frame update
     void Start()
     {
         //  Make sure this object survives the scene change
         DontDestroyOnLoad(gameObject);
+    }
+
+    /// <summary>
+    /// Returns a randomized value within [socialDistancing - deviation, socialDistancing + deviation]
+    /// as the SD factor for one individual NPC.
+    /// The value returned will be within [0,1], already divided by 100.
+    /// </summary>
+    /// <returns>One individual social distancing behaviour factor</returns>
+    public float GetIndividualSocialDistancing(){
+        float factor = SocialDistancingFactor + UnityEngine.Random.Range(-SocialDistancingDeviation, SocialDistancingDeviation);
+        return Mathf.Clamp01(factor / 100f);
     }
 
     //  The globally unique, single LevelSettings object.

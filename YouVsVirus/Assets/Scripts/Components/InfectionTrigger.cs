@@ -24,7 +24,7 @@ namespace Components
         {
             // Something entered the trigger zone!
             
-            HumanBase otherHuman = other.GetComponentInParent<HumanBase>();
+            HumanBase otherHuman = other.GetComponent<HumanBase>();
 
             //  If a human came into infection radius, try to infect it.
             if (otherHuman != null)

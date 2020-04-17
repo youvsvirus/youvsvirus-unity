@@ -47,7 +47,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 5
 --- !u!114 &4605106563819568608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +60,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa8f16d04c2b78f2818d9c1e6e22c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SocialDistancingRadius: 4
+  MinSocialDistancingRadius: 2.55
+  MaxSocialDistancingRadius: 6.5
+  Sensitivity: 0.35
+  debug: 0
 --- !u!1 &8900475433866948943
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,9 +202,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myID: 0
   levelStats: {fileID: 0}
-  MinVelocity: 1
+  MinVelocity: 0.5
   MaxVelocity: 3
-  AccelerationFactor: 0.5
+  AccelerationFactor: 2
+  MySocialDistancing: 0
+  CurrentBehaviour: 0
+  KeepBehaviourForSeconds: 5
 --- !u!114 &1801475588465177927
 MonoBehaviour:
   m_ObjectHideFlags: 0

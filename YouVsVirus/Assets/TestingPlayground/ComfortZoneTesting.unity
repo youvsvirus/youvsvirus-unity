@@ -221,6 +221,16 @@ PrefabInstance:
       propertyPath: SocialDistancingRadius
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4605106563819568608, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+        type: 3}
+      propertyPath: DebugLines
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605106563819568608, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+        type: 3}
+      propertyPath: debug
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6736846558120736172, guid: ab9d2a99c32f65a43a4c99a9379ce533,
         type: 3}
       propertyPath: m_Enabled
@@ -250,6 +260,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900475433866948930, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+        type: 3}
+      propertyPath: MySocialDistancing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8900475433866948940, guid: ab9d2a99c32f65a43a4c99a9379ce533,
         type: 3}
@@ -335,6 +350,21 @@ PrefabInstance:
       propertyPath: SocialDistancingRadius
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4605106563819568608, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+        type: 3}
+      propertyPath: DebugLines
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605106563819568608, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+        type: 3}
+      propertyPath: Sensitivity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605106563819568608, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+        type: 3}
+      propertyPath: debug
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6736846558120736172, guid: ab9d2a99c32f65a43a4c99a9379ce533,
         type: 3}
       propertyPath: m_Enabled
@@ -364,6 +394,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900475433866948930, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+        type: 3}
+      propertyPath: MySocialDistancing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8900475433866948940, guid: ab9d2a99c32f65a43a4c99a9379ce533,
         type: 3}
@@ -449,6 +484,16 @@ PrefabInstance:
       propertyPath: SocialDistancingRadius
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4605106563819568608, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+        type: 3}
+      propertyPath: DebugLines
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605106563819568608, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+        type: 3}
+      propertyPath: debug
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6736846558120736172, guid: ab9d2a99c32f65a43a4c99a9379ce533,
         type: 3}
       propertyPath: m_Enabled
@@ -478,6 +523,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900475433866948930, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+        type: 3}
+      propertyPath: MySocialDistancing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8900475433866948940, guid: ab9d2a99c32f65a43a4c99a9379ce533,
         type: 3}

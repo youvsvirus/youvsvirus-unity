@@ -8,45 +8,100 @@ namespace Components{
     {
 
         /// <summary>
-        /// The radius of this human's comfort zone.
+        /// The minimum radius of this human's comfort zone.
+        /// This will be the radius at 0% social distancing.
         /// The human will try to move away from any other human entering this zone.
         /// Edit this member only from the editor; when changing the radius from code, use SetInfectionRadius()!
         /// </summary>
-        public float SocialDistancingRadius = 15;
+        public float MinSocialDistancingRadius = 2.55f;
+
+        /// <summary>
+        /// Maximum social distancing radius at 100% social distancing.
+        /// </summary>
+        public float MaxSocialDistancingRadius = 10f;
+        
+        /// <summary>
+        /// How strong is the urge to run away?
+        /// Higher number -> quicker running.
+        /// </summary>
+        public float Sensitivity = 0.5f;
+
+        public bool debug = false;
 
         private HashSet<Collider2D> collidersInZone = new HashSet<Collider2D>();
+        private NPC myNPC;
+        private bool escapingEnabled = true;
 
-        public void SetSocialDistancingRadius(float r){
-            SocialDistancingRadius = r;
-            UpdateTriggerRadius();
-        }
 
-        private void UpdateTriggerRadius(){
-            CircleCollider2D trigger = GetComponent<CircleCollider2D>();
-            
-            if(trigger != null)
-            {
-                trigger.radius = SocialDistancingRadius;
-            }
-        }
-
+        #region Unity Lifecycle
         // Start is called before the first frame update
         void Start()
         {
-            UpdateTriggerRadius();   
+            myNPC = GetComponentInParent<NPC>();
+            SetTriggerRadius();   
         }
 
         void FixedUpdate(){
-            RunAway();
+            if(escapingEnabled){
+                RunAway();
+            }
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public void SetEscapingEnabled(bool val){
+            this.escapingEnabled = val;
+
+            if(escapingEnabled && collidersInZone.Count > 0){
+                myNPC.CurrentBehaviour = NPC.COMFORT_ZONE_ESCAPE;
+            }
+        }
+
+        #endregion
+
+        #region Unity Event Handlers
+
+        void OnTriggerEnter2D(Collider2D other){
+            if(other.GetComponent<HumanBase>() != null){
+                collidersInZone.Add(other);
+                
+                if(escapingEnabled){
+                    myNPC.CurrentBehaviour = NPC.COMFORT_ZONE_ESCAPE;
+                }
+            }
+        }
+
+        void OnTriggerExit2D(Collider2D other){
+            collidersInZone.Remove(other);
+
+            if(collidersInZone.Count == 0 && escapingEnabled){
+                myNPC.CurrentBehaviour = NPC.RANDOM_MOVEMENT;
+            }
+        }
+
+        #endregion
+
+        #region Private Methods 
+
+        private void SetTriggerRadius(){
+            CircleCollider2D trigger = GetComponent<CircleCollider2D>();
+            
+            trigger.radius = Mathf.Lerp(MinSocialDistancingRadius, MaxSocialDistancingRadius, myNPC.MySocialDistancing);
         }
 
         private void RunAway(){
             if(collidersInZone.Count == 0) return;
 
-            Vector3 escapeDir = GetEscapeDirectionByWeightedAverage();
+            Vector2 escapeDir = GetEscapeDirectionByWeightedAverage();
 
-            DrawDebugLines(escapeDir);
+            if(debug){
+                 DrawDebugLines(new Vector3(escapeDir.x, escapeDir.y, 0f));
+                 return;
+            }
 
+            myNPC.AddEscapeImpulse(Sensitivity * escapeDir);
             
         }
 
@@ -69,7 +124,7 @@ namespace Components{
         /// Runs in O(n log n) and doesn't take distances into account, so the other approach is better.
         /// </summary>
         /// <returns>Unit Vector: The direction of escape.</returns>
-        private Vector3 GetEscapeDirectionByCircleSectors(){
+        private Vector2 GetEscapeDirectionByCircleSectors(){
 
             throw new NotImplementedException();
 
@@ -106,7 +161,7 @@ namespace Components{
         /// Runs in O(N).
         /// </summary>
         /// <returns>Unit Vector: The direction of escape.</returns>
-        private Vector3 GetEscapeDirectionByWeightedAverage(){
+        private Vector2 GetEscapeDirectionByWeightedAverage(){
             float sumOfWeights = 0f;
             float avg = 0f;
             float avgShifted = 0f;
@@ -156,18 +211,10 @@ namespace Components{
 
             float escapeAngle = avg + Mathf.PI; //   Go in the opposite direction. Don't care for overflows here
 
-            return new Vector3(Mathf.Cos(escapeAngle), Mathf.Sin(escapeAngle), 0f);
+            return new Vector2(Mathf.Cos(escapeAngle), Mathf.Sin(escapeAngle));
         }
 
-        void OnTriggerEnter2D(Collider2D other){
-            if(other.GetComponent<HumanBase>() != null){
-                collidersInZone.Add(other);
-            }
-        }
-
-        void OnTriggerExit2D(Collider2D other){
-            collidersInZone.Remove(other);
-        }
+        #endregion
     }
 
 }

@@ -42,17 +42,6 @@ public class EndGameController : MonoBehaviour
     }
 
     /// <summary>
-    /// Coroutine that waits for delay seconds and then ends the game.
-    /// </summary>
-    /// <param name="delay">The delay before EndGame is called.</param>
-    private IEnumerator DelayedEndGame(float delay)
-    {
-        Debug.Log("Finishing up...");
-        yield return new WaitForSeconds(delay);
-        EndGame();
-    }
-
-    /// <summary>
     /// Notify the end game controller that the player has died.
     /// </summary>
     public void NotifyPlayerDied()
@@ -100,7 +89,7 @@ public class EndGameController : MonoBehaviour
 
             //  Starts the delayed endgame coroutine, which will wait for EndConditionMetDelay seconds
             //  and then call EndGame().
-            StartCoroutine(DelayedEndGame(EndConditionMetDelay));
+            HelperMethods.ExecuteDelayed(this, EndGame, EndConditionMetDelay);
         }
 
 

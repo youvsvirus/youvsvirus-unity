@@ -73,15 +73,18 @@ namespace Components
                                     Quaternion.identity);
             // give the player a unique id
             Player.myID = levelSettings.NumberOfNPCs;
+            NPC newNPC;
 
             //  Place the NPCs in the grid
             for (int i = 1; i <= levelSettings.NumberOfNPCs; i++)
             {
-                NPCs.Add(Instantiate(   npcPrefab.GetComponent<NPC>(),
+                newNPC = Instantiate(   npcPrefab.GetComponent<NPC>(),
                                         GetCoordinatesInGrid(indices[i], columns, cellRadius, origin),
-                                        Quaternion.identity));
+                                        Quaternion.identity);
                 // give all npcs a unique id
-                NPCs[i-1].myID = i - 1;
+                newNPC.myID = i - 1;
+                newNPC.MySocialDistancing = levelSettings.GetIndividualSocialDistancing();
+                NPCs.Add(newNPC);
             }
 
             //  Infect a few of them.
