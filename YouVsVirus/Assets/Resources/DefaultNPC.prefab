@@ -15,7 +15,9 @@ GameObject:
   - component: {fileID: 8900475433866948930}
   - component: {fileID: 7271644411175272605}
   - component: {fileID: 2379060102389004291}
-  - component: {fileID: 1801475588465177927}
+  - component: {fileID: 7263497063103234166}
+  - component: {fileID: 8812563065449830055}
+  - component: {fileID: 4532393770701414565}
   m_Layer: 0
   m_Name: DefaultNPC
   m_TagString: NPC
@@ -137,6 +139,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2a997f20f561e42940449bcd2c9702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myID: 0
+  levelStats: {fileID: 0}
+  t_personal_incubation: 3.4028235e+38
+  t_personal_infectious: 3.4028235e+38
+  t_start_incubation: 3.4028235e+38
+  t_start_infectious: 3.4028235e+38
   MinVelocity: 1
   MaxVelocity: 3
   AccelerationFactor: 0.5
@@ -168,7 +176,33 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.56
---- !u!114 &1801475588465177927
+--- !u!114 &7263497063103234166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8900475433866948943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b138f70a435c11b49a88985ce747e48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8812563065449830055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8900475433866948943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0201d24f67ae84896778a470469646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InfectionRate: 0.2
+  DeathRate: 0.02
+--- !u!114 &4532393770701414565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,6 +214,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3fe4065ace2fa42967794e10238f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InfectionRate: 0.2
+  DeathRate: 0.02
+  OutbreakRate: 0.01
+  RecoveryRate: 0.04
+  DayLength: 1
+  TimeToRecovery: 20
 --- !u!1 &8900475434363221168
 GameObject:
   m_ObjectHideFlags: 0

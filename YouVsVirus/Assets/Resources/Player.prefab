@@ -73,7 +73,9 @@ GameObject:
   - component: {fileID: 2318940163048237837}
   - component: {fileID: 2318940163048237834}
   - component: {fileID: 2318940163048237839}
-  - component: {fileID: 1017713336214978533}
+  - component: {fileID: -2954151157861591610}
+  - component: {fileID: 5192671204420940059}
+  - component: {fileID: 6629076741783272901}
   - component: {fileID: 2318940163048237838}
   m_Layer: 0
   m_Name: Player
@@ -180,8 +182,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d16d28abfceae4facf0e7150a2b2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myID: 0
+  levelStats: {fileID: 0}
+  t_personal_incubation: 3.4028235e+38
+  t_personal_infectious: 3.4028235e+38
+  t_start_incubation: 3.4028235e+38
+  t_start_infectious: 3.4028235e+38
   speedMultiplier: 2
---- !u!114 &1017713336214978533
+--- !u!114 &-2954151157861591610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2318940163048237835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b138f70a435c11b49a88985ce747e48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5192671204420940059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2318940163048237835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0201d24f67ae84896778a470469646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InfectionRate: 0.2
+  DeathRate: 0.02
+--- !u!114 &6629076741783272901
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,6 +227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3fe4065ace2fa42967794e10238f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InfectionRate: 0.2
+  DeathRate: 0.02
+  OutbreakRate: 0.01
+  RecoveryRate: 0.04
+  DayLength: 1
+  TimeToRecovery: 20
 --- !u!58 &2318940163048237838
 CircleCollider2D:
   m_ObjectHideFlags: 0

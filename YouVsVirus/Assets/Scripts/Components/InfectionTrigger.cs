@@ -34,8 +34,8 @@ namespace Components
 
                     // check if myHuman is infectious and if they are in my infection radius
                     float dist = Vector3.Distance(myHuman.transform.position, otherHuman.transform.position);
-                    float r = 2f * InfectionRadius * transform.parent.localScale.x;
-                    if (dist < r)
+                    //float r = 2f * InfectionRadius * transform.parent.localScale.x;
+                    if (dist < InfectionRadius)
                     {
                         // if I am the player and infected an NPC
                         // this NPC is previously well
@@ -47,7 +47,8 @@ namespace Components
                             myHuman.levelStats.PlayerInfectedNPC(otherHuman.myID);
                         }
                         
-                        otherHuman.Infect();     
+                        // myHuman tries to infect the other human
+                        otherHuman.Infect();                      
                     }
                 }
             }

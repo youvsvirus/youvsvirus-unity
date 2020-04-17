@@ -25,6 +25,11 @@ public class LevelSettings : MonoBehaviour
     /// </summary>
     public float SocialDistancingFactor = 50f;
 
+    /// <summary>
+    /// The infection model
+    /// </summary>
+    public string InfectionModel = "TimeDelay";
+
     // Start is called before the first frame update
     void Start()
     {

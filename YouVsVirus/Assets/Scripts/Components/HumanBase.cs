@@ -32,6 +32,27 @@ namespace Components
         public const int RECOVERED   = 3;
         public const int DEAD        = 4;
 
+        /// <summary>
+        /// Time that passes until I am infectious
+        /// </summary>
+        public float t_personal_incubation = float.MaxValue;
+
+        /// <summary>
+        /// Time that passes until I recover or die
+        /// </summary>
+        public float t_personal_infectious = float.MaxValue; 
+
+        /// <summary>
+        /// At this point int time I was exposed to the virus
+        /// </summary>
+        public float t_start_incubation = float.MaxValue;
+
+        /// <summary>
+        /// At this point int time I showed symptoms and was a clear danger to others
+        /// </summary>
+        public float t_start_infectious = float.MaxValue;
+
+        private InfectionManager infectionManager;
 
         /// <summary>
         /// This human's inital condition
@@ -87,14 +108,28 @@ namespace Components
             {
                 case EXPOSED:
                     {
-                        egc.NotifyHumanExposed();
-                        GetComponent<AbstractInfection>().Expose();
+                        // start my incubation timer (only used for TimeDelay model)
+                        t_start_incubation = Time.fixedTime;
+                        // get the duration of my illness  (only used for TimeDelay model)
+                        // starts the day counter of probability based infection model
+                        t_personal_incubation = infectionManager.GetIncubationTime();
+                        // notify level stats
                         levelStats.aHumanGotExposed();
+                        // notify end game controller
+                        egc.NotifyHumanExposed();
+
+                        // The infection-to - onset distribution is Gamma distributed with mean 5.1 days and coefficient of variation 0.86.
                         break;
                     }
                 case INFECTIOUS:
                     {
+                        // start my infection timer (only used for TimeDelay model)
+                        t_start_infectious = Time.fixedTime;
+                        // get the duration of my infectiousness, this value only used for TimeDelay model
+                        t_personal_infectious = infectionManager.GetInfectionTime();
+                        // notify level stats
                         levelStats.aHumanGotInfected();
+                       
                         break;
                     }
                 case DEAD:
@@ -143,11 +178,13 @@ namespace Components
         /// </summary>
         protected SpriteRenderer mySpriteRenderer;
 
+
         /// <summary>
         /// Start is called on the frame when a script is enabled just before any of the Update methods are called the first time.
         /// </summary>
         public virtual void Start()
         {
+            infectionManager = GetComponent<InfectionManager>();
             // Get the statistics object that counts the numbers of infected/dead etc players
             levelStats = LevelStats.GetActiveLevelStats();
             // We want to change smiley's images and do not want use GetComponent again
@@ -165,15 +202,9 @@ namespace Components
         /// <summary>
         /// Infects this human if it is susceptible.
         /// </summary>
-        /// <returns>True if this human became EXPOSED, false otherwise.</returns>
-        public bool Infect()
+        public void Infect()
         {
-            if (IsSusceptible())
-            {
-                SetCondition(EXPOSED);
-                return true;
-            }
-            return false;
+            infectionManager.Infect();
         }
 
         /// <summary>
@@ -182,7 +213,7 @@ namespace Components
         /// <returns>True if this human is infectious, false otherwise.</returns>
         public bool IsInfectious()
         {
-            return GetCondition() == EXPOSED || GetCondition() == INFECTIOUS;
+            return(infectionManager.IsInfectious());
         }
 
         /// <summary>
