@@ -142,8 +142,8 @@ namespace Components{
             Vector2 escapeDir = GetEscapeDirectionByWeightedAverage();
 
             if(debug){
-                 DrawDebugLines(new Vector3(escapeDir.x, escapeDir.y, 0f));
-                 return;
+                DrawDebugLines(new Vector3(escapeDir.x, escapeDir.y, 0f));
+                return;
             }
 
             myNPC.SetComfortZoneImpulse(Sensitivity * escapeDir);

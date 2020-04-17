@@ -209,7 +209,7 @@ namespace Components
                 //  Disable behaviour changes for a while
                 DisableBehaviourChange();
 
-                if(UnityEngine.Random.Range(0, 1.1f) < MySocialDistancing){
+                if(UnityEngine.Random.Range(-0.1f, 1.1f) < MySocialDistancing){
                     //  Yay! We're going home!
 
                     //  Update state and velocity
@@ -238,7 +238,7 @@ namespace Components
                 //  Disable behaviour changes for a while
                 DisableBehaviourChange();
 
-                if(UnityEngine.Random.Range(-0.1f, 1f) < 1f - MySocialDistancing){
+                if(UnityEngine.Random.Range(-0.1f, 1.1f) > MySocialDistancing){
                     //  Yay! Let's go outside!
 
                     //  Update state
