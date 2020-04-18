@@ -1,0 +1,130 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+using System;
+using System.Linq;
+
+namespace Components
+{
+    public class RandomGrid : MonoBehaviour
+    {
+        /// <summary>
+        /// a safety margin to ensure that all cells are large enough
+        /// </summary>
+        public float safetyMarginCellRadius = 0.2f;
+
+        /// <summary>
+        /// a list of random coords generated so that all prefab clones
+        /// are placed on a grid in safe distance from each other
+        /// </summary>
+        public List<Vector2> RandomCoords;
+
+
+        /// <summary>
+        /// compute a list of random coords generated so that all prefab clones
+        /// are placed on a grid in safe distance from each other
+        /// <param name="scale"> e.g. the player's scale needed for grid size </param>
+        /// <param name="infection_radius"> e.g. the player's infection radius for grid size </param>
+        /// <param name="npcNumber"> number of prefabs clones to be placed, player is +1 </param>
+        /// </summary>
+        public void GenerateRandomCoords(float scale, float infection_radius, int npcNumber)
+        {
+            //  Determine the size of a single cell
+            float cellRadius = GetCellRadius(scale, infection_radius);
+            float cellSidelength = 2f * cellRadius;
+
+            //  Determine the total size of the grid
+            int[] gridSize = GetGridSize(cellSidelength);
+            int rows = gridSize[0];
+            int columns = gridSize[1];
+            int cellCount = rows * columns;
+
+            //  Randomly select grid indices
+            int[] indices = ChooseUnique(npcNumber + 1, 0, cellCount);
+
+            Vector3 origin = -GameObject.Find("MapLimits").GetComponent<ViewportBoundMapLimit>().GetMapExtents();
+            for (int i = 0; i < npcNumber + 1; i++)
+            {
+                RandomCoords.Add(GetCoordinatesInGrid(indices[i], columns, cellRadius, origin));
+            }
+        }
+
+        /// <summary>
+        /// Compute the grid coordinates
+        /// </summary>
+        private Vector3 GetCoordinatesInGrid(int idx, int gridColumns, float cellRadius, Vector3 origin)
+        {
+            int row = idx / gridColumns;
+            int col = idx % gridColumns;
+
+            float x = (col + 1) * cellRadius;
+            float y = (row + 1) * cellRadius;
+
+            return origin + new Vector3(x, y, 0f);
+        }
+
+        /// <summary>
+        /// Calculates the radius of a single grid cell for placement on the map. The cell
+        /// radius is HALF it's sidelength.
+        /// </summary>
+        /// <returns>The cell radius.</returns>
+        private float GetCellRadius(float scale, float infection_radius)
+        {
+            //  Get the player's radius as the minimum cell size
+            float cellRadius = (1f + safetyMarginCellRadius) * (infection_radius * scale);
+            return cellRadius;
+        }
+
+        /// <summary>
+        /// Calclates the number of rows and columns of a grid of quadratic cells of given cell sidelength on the map.
+        /// </summary>
+        /// <param name="cellSidelength">The side length of a single cell</param>
+        /// <returns>An array of shape { rows, columns }</returns>
+        private int[] GetGridSize(float cellSidelength)
+        {
+            Vector3 mapExtents = 2f * GameObject.Find("MapLimits").GetComponent<ViewportBoundMapLimit>().GetMapExtents();
+
+            float mapWidth = 2f * mapExtents.x;
+            float mapHeight = 2f * mapExtents.y;
+
+            int columns = (int)(mapWidth / cellSidelength);
+            int rows = (int)(mapHeight / cellSidelength);
+
+            return new int[] { rows, columns };
+        }
+
+        /// <summary>
+        /// Randomly chooses N unique integer values from the range [from, to - 1].
+        /// </summary>
+        /// <param name="N">The desired number of values.</param>
+        /// <param name="from">The lower bound for the range to choose from. Inclusive.</param>
+        /// <param name="to">The upper bound for the range to choose from. Exclusive.</param>
+        /// <returns>Sequence of unique random integers from the given range.</returns>
+        private int[] ChooseUnique(int N, int from, int to)
+        {
+            int count = to - from;
+            if (count < N) throw new ArgumentException("N was larger than the range! ");
+
+            int[] indices = Enumerable.Range(from, count).ToArray();
+            shuffleInPlace(indices);
+            return indices.Take(N).ToArray();
+        }
+
+        /// <summary>
+        /// Shuffles a list of integers in-place using the Fisher-Yates permutation algorithm.
+        /// </summary>
+        /// <param name="list">The list to be shuffled</param>
+        private void shuffleInPlace(int[] list)
+        {
+            for (int i = list.Length - 1; i > 0; i--)
+            {
+                //  Find source index.
+                int j = UnityEngine.Random.Range(0, i + 1);
+
+                //  Swap.
+                int tmp = list[i];
+                list[i] = list[j];
+                list[j] = tmp;
+            }
+        }
+    }
+}
