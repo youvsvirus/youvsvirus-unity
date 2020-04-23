@@ -10,7 +10,7 @@ namespace Components
     {
         private float safetyMargin = 0.2f;
 
-
+        Camera MainCamera;
         /// <summary>
         /// Player prefab to be set in the editor.
         /// </summary>
@@ -43,7 +43,8 @@ namespace Components
         void Awake()
         {
             levelSettings = LevelSettings.GetActiveLevelSettings();
-
+            //This gets the Main Camera from the Scene
+            MainCamera = Camera.main;
             PlaceHumans();
         }
 
@@ -65,7 +66,7 @@ namespace Components
             //  Randomly select grid indices
             int[] indices = ChooseUnique(levelSettings.NumberOfNPCs + 1, 0, cellCount);
 
-            Vector3 origin = - GameObject.Find("ScreenEdgeColliders").GetComponent<ScreenEdgeColliders>().GetMapExtents();
+            Vector3 origin = -MainCamera.GetComponent<ScreenEdgeColliders>().GetMapExtents();
 
             //  Place the player
             Player = Instantiate(   playerPrefab.GetComponent<Player>(), 
@@ -133,7 +134,7 @@ namespace Components
         /// <returns>An array of shape { rows, columns }</returns>
         private int[] GetGridSize(float cellSidelength)
         {
-            Vector3 mapExtents = 2f * GameObject.Find("ScreenEdgeColliders").GetComponent<ScreenEdgeColliders>().GetMapExtents();
+            Vector3 mapExtents = 2f * MainCamera.GetComponent<ScreenEdgeColliders>().GetMapExtents();
 
             float mapWidth = 2f * mapExtents.x;
             float mapHeight = 2f * mapExtents.y;

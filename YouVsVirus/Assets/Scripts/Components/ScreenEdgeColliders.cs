@@ -10,8 +10,10 @@ public class ScreenEdgeColliders : MonoBehaviour
     /// </summary>
     public Camera MainCamera;
 
+    public Vector2 screenBounds;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         AddCollider();
     }
@@ -24,7 +26,9 @@ public class ScreenEdgeColliders : MonoBehaviour
         if (!MainCamera.orthographic) { Debug.LogError("Camera.main is not Orthographic, failed to create edge colliders"); return; }
 
         // transform screen dimenensions into world space
-        Vector2 screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
+       screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
+        print(screenBounds.x);
+            print(screenBounds.y);
         // get the screen edge points
         Vector2 bottomLeft = new Vector2(-screenBounds.x, -screenBounds.y);
         Vector2 topLeft = new Vector2(-screenBounds.x, screenBounds.y);
@@ -42,6 +46,6 @@ public class ScreenEdgeColliders : MonoBehaviour
 
     public Vector3 GetMapExtents()
     {
-        return MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
+        return screenBounds; // MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
     }
 }
