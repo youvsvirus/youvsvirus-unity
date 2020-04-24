@@ -581,7 +581,7 @@ GameObject:
   - component: {fileID: 1293853907}
   - component: {fileID: 1293853906}
   m_Layer: 0
-  m_Name: EndGameController
+  m_Name: EndLevelController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -596,7 +596,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1293853905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b72a0eaedd33ec748aab511c7154da0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ae52b6270c0ad148a94f5770b491669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   LevelTimeout: 0

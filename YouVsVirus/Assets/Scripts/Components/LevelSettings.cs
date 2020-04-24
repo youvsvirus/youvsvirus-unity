@@ -25,6 +25,8 @@ public class LevelSettings : MonoBehaviour
     /// </summary>
     public float SocialDistancingFactor = 50f;
 
+    public static EndLevelControllerBase ActiveEndLevelController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +64,12 @@ public class LevelSettings : MonoBehaviour
 
 
         return _singleton;
+    }
+
+
+    public static EndLevelControllerBase GetActiveEndLevelController()
+    {
+        return ActiveEndLevelController;
     }
 }
 

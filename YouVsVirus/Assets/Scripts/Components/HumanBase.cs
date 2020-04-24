@@ -80,7 +80,7 @@ namespace Components
         public virtual void SetCondition(int condition)
         {
             _mycondition = condition;
-            EndGameController egc = GameObject.Find("EndGameController").GetComponent<EndGameController>();
+            EndLevelControllerBase egc = LevelSettings.GetActiveEndLevelController();
 
             // Update the stats
             switch (condition)
