@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: 00ffe3be83ede3a42ac68a0cc5953f6e
+  - enabled: 1
+    path: Assets/Scenes/YouVsVirus_Level2.unity
+    guid: ff7f43c3ae86d964eb3ee08526f9aa70
+  - enabled: 1
+    path: Assets/Scenes/EndScreenLevel1.unity
+    guid: c17c6cec783f8154591a62e695e49656
   m_configObjects: {}
