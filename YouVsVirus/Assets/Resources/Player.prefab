@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2318940162396777239}
   - component: {fileID: 2318940162396777241}
   - component: {fileID: 2318940162396777238}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: InfectionTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,8 @@ GameObject:
   - component: {fileID: 2318940163048237839}
   - component: {fileID: 1017713336214978533}
   - component: {fileID: 2318940163048237838}
-  m_Layer: 0
+  - component: {fileID: 6403268151270354188}
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -180,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d16d28abfceae4facf0e7150a2b2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myID: 0
+  levelStats: {fileID: 0}
   speedMultiplier: 2
 --- !u!114 &1017713336214978533
 MonoBehaviour:
@@ -209,3 +212,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.56
+--- !u!114 &6403268151270354188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2318940163048237835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed3fe4065ace2fa42967794e10238f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

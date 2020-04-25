@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 namespace Components
 {
@@ -22,9 +23,17 @@ namespace Components
         public GameObject npcPrefab;
 
         /// <summary>
+        /// NPC prefab to be set in the editor.
+        /// </summary>
+        public GameObject friendPrefab;
+
+        /// <summary>
         /// The instantiated player object.
         /// </summary>
         public Player Player { get; private set; }
+
+        public Friend drunkFriend { get; private set; }
+        
 
         /// <summary>
 
@@ -34,6 +43,9 @@ namespace Components
 
         private LevelSettings levelSettings;
 
+        private int numNPCs;
+        //private SceneManager Scene;
+        private Scene scene;
         public CreatePopulation()
         {
             NPCs = new List<NPC>(30);
@@ -43,9 +55,21 @@ namespace Components
         void Awake()
         {
             levelSettings = LevelSettings.GetActiveLevelSettings();
-            //This gets the Main Camera from the Scene
-            MainCamera = Camera.main;
+
+          
+
+                //This gets the Main Camera from the Scene
+                MainCamera = Camera.main;
             PlaceHumans();
+
+        }
+
+        private void Start()
+        {
+
+
+
+            //Debug.Log("Active Scene is '" + scene.name + "'.");
         }
 
         /// <summary>
@@ -53,6 +77,14 @@ namespace Components
         /// </summary>
         private void PlaceHumans()
         {
+            scene = SceneManager.GetActiveScene();
+            numNPCs = levelSettings.NumberOfNPCs;
+            if (scene.name == "YouVsVirus_Level2")
+            {
+                print(numNPCs);
+
+                numNPCs = 110;
+            }
             //  Determine the size of a single cell
             float cellRadius = GetCellRadius();
             float cellSidelength = 2f * cellRadius;
@@ -68,26 +100,50 @@ namespace Components
 
             Vector3 origin = -MainCamera.GetComponent<ScreenEdgeColliders>().GetMapExtents();
 
+            Vector2 screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
+
+            Vector3 coords = (scene.name == "YouVsVirus_Level1") ? GetCoordinatesInGrid(indices[0], columns, cellRadius, origin) : new Vector3(screenBounds.x-0.2f,screenBounds.y-0.2f,0f);
+
+            if (friendPrefab.GetComponent<Friend>() == null)
+                print("cheese");
+
+            if (playerPrefab.GetComponent<Player>() == null)
+                print("cheese2");
+            //  if (scene.name == "YouVsVirus_Level2")
+            // {
+            drunkFriend = Instantiate(friendPrefab.GetComponent<Friend>(),
+                                        new Vector3(-screenBounds.x + 0.2f, -screenBounds.y + 0.2f, 0f),    
+                                        Quaternion.identity);
+           // }
+
             //  Place the player
             Player = Instantiate(   playerPrefab.GetComponent<Player>(), 
-                                    GetCoordinatesInGrid(indices[0], columns, cellRadius, origin), 
+                                    coords, 
                                     Quaternion.identity);
             // give the player a unique id
-            Player.myID = levelSettings.NumberOfNPCs;
-
+            Player.myID = numNPCs;
+  
+          
+            // place 100 NPCs on dancefloor
+           
             //  Place the NPCs in the grid
-            for (int i = 1; i <= levelSettings.NumberOfNPCs; i++)
+            for (int i = 1; i <= numNPCs; i++)
             {
+                coords = (scene.name == "YouVsVirus_Level1") ? GetCoordinatesInGrid(indices[i], columns, cellRadius, origin) : new Vector3(2.5f, 0f, 0f);
+
                 NPCs.Add(Instantiate(   npcPrefab.GetComponent<NPC>(),
-                                        GetCoordinatesInGrid(indices[i], columns, cellRadius, origin),
+                                        coords,
                                         Quaternion.identity));
                 // give all npcs a unique id
                 NPCs[i-1].myID = i - 1;
             }
 
-            //  Infect a few of them.
-            //  If (for some reason) NumberInitiallyExposed > NumberOfNPCs, just infect all of them.
-            for (int i = 0; i < Math.Min(levelSettings.NumberOfNPCs, levelSettings.NumberInitiallyExposed); i++)
+
+          //  }
+
+                //  Infect a few of them.
+                //  If (for some reason) NumberInitiallyExposed > NumberOfNPCs, just infect all of them.
+                for (int i = 0; i < Math.Min(levelSettings.NumberOfNPCs, levelSettings.NumberInitiallyExposed); i++)
             {
                 NPCs[i].SetInitialCondition(NPC.EXPOSED);
             }

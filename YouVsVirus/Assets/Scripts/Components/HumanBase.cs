@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Infection;
+using UnityEngine.SceneManagement;
 
 namespace Components
 {
@@ -131,7 +132,7 @@ namespace Components
         /// Images have to be set in the derived classes
         /// </summary>     
         protected Sprite WellSprite=null, ExposedSprite = null, InfectiousSprite = null, RecoveredSprite = null, DeadSprite = null;
-
+        private int num_inf = 1;
         /// <summary>
         /// Set images corresponding to stages of infection
         /// Have to be set in player and npc class
@@ -143,6 +144,7 @@ namespace Components
         /// </summary>
         protected SpriteRenderer mySpriteRenderer;
 
+        static float infProb = 0.0f;
         /// <summary>
         /// Start is called on the frame when a script is enabled just before any of the Update methods are called the first time.
         /// </summary>
@@ -161,17 +163,31 @@ namespace Components
             SetCondition(_initialCondition);
         }
 
-
         /// <summary>
         /// Infects this human if it is susceptible.
         /// </summary>
         /// <returns>True if this human became EXPOSED, false otherwise.</returns>
-        public bool Infect()
+        public bool Infect(string whichHuman)
         {
             if (IsSusceptible())
             {
-                SetCondition(EXPOSED);
+                Scene scene = SceneManager.GetActiveScene();
+                if(whichHuman == "Player")
+                {
+                    if (UnityEngine.Random.value < 0.1)
+                    {
+                        SetCondition(EXPOSED);
+                    }
+                }
+
+                if (UnityEngine.Random.value < num_inf*0.007)
+                {
+                    num_inf++;
+                    SetCondition(EXPOSED);
+                    
+                }
                 return true;
+      
             }
             return false;
         }

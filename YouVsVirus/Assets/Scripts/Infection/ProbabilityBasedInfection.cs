@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using Components;
 
 namespace Infection
 {
+
     public class ProbabilityBasedInfection : AbstractInfection
     {
+        //private SceneManager Scene;
+        private Scene scene;
         /// <summary>
         /// How long my human has been exposed to the virus
         /// </summary>
@@ -25,6 +28,7 @@ namespace Infection
         public override void Start()
         {
             base.Start();
+            scene = SceneManager.GetActiveScene();
             //  Find the infection control instance
             GameObject InfectionControl = GameObject.Find("InfectionControl");
             infectionControl = InfectionControl.GetComponent<InfectionControl>();
@@ -32,9 +36,12 @@ namespace Infection
 
         public override void Update()
         {
+            
             if (infectionControl.IsNewDay())
             {
-                UpdateCondition();
+                // nobody dies on the party
+                if(scene.name != "YouVsVirus_Level2")
+                    UpdateCondition();
             }
         }
 
