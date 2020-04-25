@@ -13,9 +13,21 @@ public class ScreenEdgeColliders : MonoBehaviour
     public Vector2 screenBounds;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         AddCollider();
+    }
+
+    private void Update()
+    {
+        // here we only check if the bounds of the screen have changed
+        // if yes, we compute the new collider points
+        Vector2 check = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
+        if(Mathf.Abs(check.x - screenBounds.x) > 1e-07 || Mathf.Abs(check.y - screenBounds.y) > 1e-07)
+        {
+            Debug.Log("Screen bounds changed, caculating new collider.");
+            AddCollider();
+        }   
     }
 
     void AddCollider()
@@ -27,8 +39,7 @@ public class ScreenEdgeColliders : MonoBehaviour
 
         // transform screen dimenensions into world space
        screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
-        print(screenBounds.x);
-            print(screenBounds.y);
+
         // get the screen edge points
         Vector2 bottomLeft = new Vector2(-screenBounds.x, -screenBounds.y);
         Vector2 topLeft = new Vector2(-screenBounds.x, screenBounds.y);
