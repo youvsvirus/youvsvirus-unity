@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// The settings for the next or active level. 
@@ -24,6 +25,11 @@ public class LevelSettings : MonoBehaviour
     /// The social distancing factor for the level
     /// </summary>
     public float SocialDistancingFactor = 50f;
+
+    /// <summary>
+    /// the current active scene
+    /// </summary>
+    private Scene scene;
 
     public static EndLevelControllerBase ActiveEndLevelController;
 
@@ -64,6 +70,10 @@ public class LevelSettings : MonoBehaviour
 
 
         return _singleton;
+    }
+    public static string GetActiveSceneName()
+    {
+        return(SceneManager.GetActiveScene().name);     
     }
 
 

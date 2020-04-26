@@ -712,12 +712,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 742637914}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e46ce8eeb52f04499399342787bc583, type: 3}
+  m_Script: {fileID: 11500000, guid: 553ddfd7e4cd8c1489f2ee796a5c676b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 2318940163048237835, guid: bf11b32d68aa29c4d9453c107b77daa5,
     type: 3}
   npcPrefab: {fileID: 8900475433866948943, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+    type: 3}
+  friendPrefab: {fileID: 8900475433866948943, guid: 648c98b015011364b88e3d72f4d437e4,
     type: 3}
 --- !u!4 &742637916
 Transform:
