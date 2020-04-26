@@ -13,6 +13,9 @@ namespace Components
     [ExecuteInEditMode]
     public class ExitSign : MonoBehaviour
     {
+        // we need to end the game if we hit the exit
+        public GameObject EndLevelController;
+        private EndLevelControllerLevel3 endlevel;
         /// <summary>
         /// reference to the main camera
         /// </summary>
@@ -30,6 +33,7 @@ namespace Components
         // Start is called before the first frame update
         void Start()
         {
+            endlevel = EndLevelController.GetComponent<EndLevelControllerLevel3>();
             PlaceExitSignAndAddCollider();
         }
         /// <summary>
@@ -83,6 +87,7 @@ namespace Components
             // Something entered the trigger zone!
 
                     print("WellDone");
+                    endlevel.EndLevel();
 
                 
 
