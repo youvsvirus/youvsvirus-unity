@@ -257,7 +257,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a7c69c132f11da64086a54febfb3052e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -828,11 +828,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347624cda3b1b2941b74a4e45a9738a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainCamera: {fileID: 519420031}
-  screenBounds: {x: 0, y: 0}
-  mySpriteRenderer: {fileID: 0}
-  otherHuman: {fileID: 0}
-  EdgeCollider: {fileID: 0}
 --- !u!68 &924041524
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -988,7 +983,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5c1ff4a7ce3fc4bb862e0da9696b94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fixedDeltaTime: 0
 --- !u!1 &1969608095
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,7 +994,7 @@ GameObject:
   - component: {fileID: 1969608097}
   - component: {fileID: 1969608096}
   m_Layer: 0
-  m_Name: map
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1100,10 +1094,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0453a1f7efc7184db7c4799e2f844e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 5
-  NumPoints: 32
-  EdgeCollider: {fileID: 2002429632}
-  CurrentRadius: 5
 --- !u!4 &2002429631
 Transform:
   m_ObjectHideFlags: 0
@@ -1198,7 +1188,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
