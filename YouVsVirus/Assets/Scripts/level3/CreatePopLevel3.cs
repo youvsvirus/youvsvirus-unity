@@ -53,7 +53,7 @@ namespace Components
         /// <summary>
         /// number of NPCs
         /// </summary>
-        private int numNPCs=100;
+        private int numNPCs=150;
 
         public CreatePopLevel3()
         {
@@ -108,6 +108,7 @@ namespace Components
             }
             //  Infect one.
             NPCs[33].SetInitialCondition(NPC.EXPOSED);
+            NPCs[81].SetInitialCondition(NPC.INFECTIOUS);
         }
     }
 }

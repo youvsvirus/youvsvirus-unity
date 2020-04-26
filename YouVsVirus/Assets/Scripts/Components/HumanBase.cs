@@ -32,6 +32,11 @@ namespace Components
         public const int RECOVERED   = 3;
         public const int DEAD        = 4;
 
+        /// <summary>
+        /// count number of infections for level 3
+        /// </summary>
+        private int num_inf = 1;
+
 
         /// <summary>
         /// This human's inital condition
@@ -165,16 +170,44 @@ namespace Components
         /// <summary>
         /// Infects this human if it is susceptible.
         /// </summary>
-        /// <returns>True if this human became EXPOSED, false otherwise.</returns>
-        public bool Infect()
+        public void Infect()
         {
-            if (IsSusceptible())
+            // the standard non-party case
+            if (LevelSettings.GetActiveSceneName() != "YouVsVirus_Level3")
             {
-                SetCondition(EXPOSED);
-                return true;
+                if (IsSusceptible())
+                {
+                    SetCondition(EXPOSED);
+                }
             }
-            return false;
+            else // the party case
+            {
+                if (IsSusceptible())
+                {
+                    if (this.tag == "Player")
+                        print("player infected");
+
+                    if (this.tag == "Friend")
+                        print("friend infected");
+                    // both friend and player have a 10% chance of getting exposed
+                    if (this.tag == "Player" || this.tag ==  "Friend")
+                    {
+                        if (UnityEngine.Random.value < 0.33)
+                        {
+                            SetCondition(EXPOSED);
+                        }
+                    }
+                    // rest of npcs have increasing chance of getting infected
+                    else if (UnityEngine.Random.value < num_inf * 0.01)
+                    {
+                        num_inf++;
+                        SetCondition(EXPOSED);
+
+                    }
+                }   
+            }
         }
+
 
         /// <summary>
         /// Checks if this human is infectious.
