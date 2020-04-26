@@ -85,13 +85,8 @@ namespace Components
         void OnTriggerEnter2D(Collider2D other)
         {
             // Something entered the trigger zone!
-
                     print("WellDone");
-                    endlevel.EndLevel();
-
-                
-
-            
+                    endlevel.EndLevel();                            
         }
     }
 }
