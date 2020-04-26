@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/YouVsVirus_Level3.unity
     guid: 6883f131ec1e3564bb7ad7ddb54eb8d9
+  - enabled: 1
+    path: Assets/Scenes/EndScreenLevel3_succ.unity
+    guid: cc193b554d6594b43913d51e2566f272
+  - enabled: 1
+    path: Assets/Scenes/EndScreenLevel3_fail.unity
+    guid: 834ac2d051797964a9109e0a32f59444
   m_configObjects: {}

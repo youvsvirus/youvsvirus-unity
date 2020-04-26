@@ -63,8 +63,9 @@ namespace Components
         // Awake is called the moment this component is created
         void Awake()
         {
-            // get active level settings
-            levelSettings = LevelSettings.GetActiveLevelSettings();
+            // get active level settings - the party scene always has 50% social distancing
+            LevelSettings.GetActiveLevelSettings().SocialDistancingFactor = 50;
+         
             // this gets the Main Camera from the Scene
             MainCamera = Camera.main;
             // place the humans

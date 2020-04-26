@@ -12,5 +12,13 @@ using UnityEngine;
 /// </summary>
 public class EndLevelControllerLevel3 : EndLevelControllerBase
 {
-
+    public void EndLevel(bool success)
+    {
+        if(success == true)
+            // Load end screen
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevel3_succ");
+       else
+            // Load end screen
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevel3_fail");
+    }
 }

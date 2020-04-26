@@ -184,15 +184,10 @@ namespace Components
             {
                 if (IsSusceptible())
                 {
-                    if (this.tag == "Player")
-                        print("player infected");
-
-                    if (this.tag == "Friend")
-                        print("friend infected");
                     // both friend and player have a 10% chance of getting exposed
                     if (this.tag == "Player" || this.tag ==  "Friend")
                     {
-                        if (UnityEngine.Random.value < 0.33)
+                        if (UnityEngine.Random.value < 0.2)
                         {
                             SetCondition(EXPOSED);
                         }

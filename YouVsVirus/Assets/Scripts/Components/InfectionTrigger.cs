@@ -37,7 +37,7 @@ namespace Components
                     float r = 2f * InfectionRadius * transform.parent.localScale.x;
                     float myWidth = myHuman.GetComponent<SpriteRenderer>().bounds.extents.x; //extents = size of width / 2
                     // maybe this is the right infection distance?
-                    if (dist < InfectionRadius * myWidth)
+                    if (dist < r)
                     {
                         // if I am the player and infected an NPC
                         // this NPC is previously well

@@ -29,6 +29,11 @@ namespace Components
         /// </summary>
         protected SpriteRenderer mySpriteRenderer;
 
+        /// <summary>
+        /// The friend that needs to exit the game
+        /// </summary>
+        private GameObject friend;
+
         EdgeCollider2D EdgeCollider;
         // Start is called before the first frame update
         void Start()
@@ -85,8 +90,11 @@ namespace Components
         void OnTriggerEnter2D(Collider2D other)
         {
             // Something entered the trigger zone!
-                    print("WellDone");
-                    endlevel.EndLevel();                            
+            // can only be player or friend
+            // if the player has not rescued their friend, he fails
+            // if the friend is infected we fail
+            friend = GameObject.FindGameObjectWithTag("Friend");            
+            endlevel.EndLevel(friend.GetComponent<Friend>().friendFound == true && friend.GetComponent<Friend>().GetCondition() == 0);                            
         }
     }
 }
