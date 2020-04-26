@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Load level 3
+/// Load fourth level
 /// </summary>
-public class Level2_2ContinueButton : MonoBehaviour
+public class Level3_RetryButton : MonoBehaviour
 {
     public void Continue()
     {
-        // Continue Button has been pressed load level 3
+        // Retry button has been pressed, reload level 3
         UnityEngine.SceneManagement.SceneManager.LoadScene("YouVsVirus_Level3");
     }
 }
