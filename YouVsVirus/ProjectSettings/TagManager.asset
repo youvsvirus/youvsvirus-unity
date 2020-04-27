@@ -55,3 +55,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: End Screen
+    uniqueID: 1471964501
+    locked: 0

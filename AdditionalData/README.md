@@ -13,5 +13,4 @@ If you create a new folder, please add a README with a corresponding list in tha
 |Data                   |	Associated to	         |  Note       |
 |-----------------------|-----------------------:|------------:|
 |ExampleFile1.bla       | Assets/Sprites/Ui.meta | This item does not exist. This row serves as an example entry. |
-|                       |                        |             |
-|                       |                        |             |
+|pfeil.svg              | Assets/Resources/SmileyPictures/pfeil.png | Vector graphic for the arrow used in the end screen. |                       |                        |             |
