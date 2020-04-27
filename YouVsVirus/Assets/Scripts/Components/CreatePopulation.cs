@@ -10,7 +10,7 @@ namespace Components
     {
         private float safetyMargin = 0.2f;
 
-
+        Camera MainCamera;
         /// <summary>
         /// Player prefab to be set in the editor.
         /// </summary>
@@ -33,6 +33,10 @@ namespace Components
         public List<NPC> NPCs { get; private set; }
 
         private LevelSettings levelSettings;
+        /// <summary>
+        /// the screen dimensions
+        /// </summary>
+        private Vector3 screenBounds;
 
         public CreatePopulation()
         {
@@ -43,7 +47,10 @@ namespace Components
         void Awake()
         {
             levelSettings = LevelSettings.GetActiveLevelSettings();
-
+            //This gets the Main Camera from the Scene
+            MainCamera = Camera.main;
+            // transform screen dimenensions into world space
+            screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
             PlaceHumans();
         }
 
@@ -65,7 +72,7 @@ namespace Components
             //  Randomly select grid indices
             int[] indices = ChooseUnique(levelSettings.NumberOfNPCs + 1, 0, cellCount);
 
-            Vector3 origin = - GameObject.Find("MapLimits").GetComponent<ViewportBoundMapLimit>().GetMapExtents();
+            Vector3 origin = -screenBounds;
 
             //  Place the player
             Player = Instantiate(   playerPrefab.GetComponent<Player>(), 
@@ -133,7 +140,7 @@ namespace Components
         /// <returns>An array of shape { rows, columns }</returns>
         private int[] GetGridSize(float cellSidelength)
         {
-            Vector3 mapExtents = 2f * GameObject.Find("MapLimits").GetComponent<ViewportBoundMapLimit>().GetMapExtents();
+            Vector3 mapExtents = 2f * screenBounds;
 
             float mapWidth = 2f * mapExtents.x;
             float mapHeight = 2f * mapExtents.y;
