@@ -29,7 +29,7 @@ namespace Components
 
 			if(condition == DEAD)
 			{
-				GameObject.Find("EndGameController").GetComponent<EndGameController>().NotifyPlayerDied();
+				LevelSettings.GetActiveEndLevelController().NotifyPlayerDied();
 			}
 		}
 
