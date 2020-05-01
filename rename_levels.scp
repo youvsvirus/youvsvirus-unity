@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# Primitive script to grep all files for the strings
+# evel1/evel2/evel3 and replace with
+# evelgethom/evelsupermarket/eveldisc
+#
+# We need to be careful to exclude this script from
+# the replacing.
+
+
+#
+# Match all string within the files and 
+# change them.
+#
+
+# Rename level1 to level_gethome
+for file in `grep evel1 ./* -nrl`
+do
+ if [ $file != $0 ]
+ then
+   sed $file -e 's/evel1/evelgethome/g' -i
+ fi
+done
+
+# Rename level2 to level_supermarket
+for file in `grep evel2 ./* -nrl`
+do
+ if [ $file != $0 ]
+ then
+   sed $file -e 's/evel2/evelsupermarket/g' -i
+ fi
+done
+
+# Rename level3 to leveldisco
+for file in `grep evel3 ./* -nrl`
+do
+ if [ $file != $0 ]
+ then
+   sed $file -e 's/evel3/eveldisco/g' -i
+ fi
+done
+
+#
+# Match all file names with level1/2/3 in it
+# and rename the files.
+#
+
+# Level1
+for file in `find . -name "*evel1*"`
+do
+  new_name=`echo $file | sed -e 's/evel1/evelgethome/g'`
+  git mv $file $new_name
+done
+
+# Level2
+for file in `find . -name "*evel2*"`
+do
+  new_name=`echo $file | sed -e 's/evel2/evelsupermarket/g'`
+  git mv $file $new_name
+done
+
+# Level3
+for file in `find . -name "*evel3*"`
+do
+  new_name=`echo $file | sed -e 's/evel3/eveldisco/g'`
+  git mv $file $new_name
+done
