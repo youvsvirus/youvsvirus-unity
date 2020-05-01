@@ -15,19 +15,30 @@ public class CameraResolution : MonoBehaviour
     #endregion
     private EdgeCollider2D edge;
     #region metody
+    private float eps = 1e-06f;
+
+    private bool AlmostEqual(float x, float y)
+    {
+        if (Mathf.Abs(x - y) < eps)
+            return true;
+        else
+            return false;
+    }
 
     #region rescale camera
     private void RescaleCamera()
     {
 
-        if (Screen.width == ScreenSizeX && Screen.height == ScreenSizeY) return;
 
+        if (AlmostEqual(Screen.width,ScreenSizeX) && AlmostEqual(Screen.height, ScreenSizeY)) return;
+        print(Screen.width);
+        print(Screen.height);
         float targetaspect = 16.0f / 9.0f;
         float windowaspect = (float)Screen.width / (float)Screen.height;
         float scaleheight = windowaspect / targetaspect;
         Camera camera = GetComponent<Camera>();
 
-        if (scaleheight < 1.0f)
+        if (scaleheight <= 1.0f)
         {
             Rect rect = camera.rect;
 
@@ -35,14 +46,23 @@ public class CameraResolution : MonoBehaviour
             rect.height = scaleheight;
             rect.x = 0;
             rect.y = (1.0f - scaleheight) / 2.0f;
+            //    Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(Screen.width, targetaspect*Screen.width, camera.transform.position.z));
 
             camera.rect = rect;
-            Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(rect.x, rect.y, camera.transform.position.z));
+            print(camera.pixelRect);
+            print(camera.rect.yMin);
+            print(camera.rect.yMax);
+            //print(camera.ScreenToWorldPoint(new Vector3(camera.scaledPixelWidth, camera.scaledPixelHeight, camera.transform.position.z))));
+            //     float cameraHeight = Camera.main.orthographicSize * 2;
+            //Vector2 cameraSize = new Vector2(Camera.main.aspect * cameraHeight, cameraHeight);
+            Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(camera.pixelRect.width, camera.pixelRect.height+camera.pixelRect.y, camera.transform.position.z));
+           // Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(1f,1f/targetaspect, camera.transform.position.z));
+            //    Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height/scaleheight, camera.transform.position.z));
 
-
+            AddCollider(screenBounds.x,screenBounds.y);
             print(screenBounds.x);
             print(screenBounds.y);
-
+    
         }
         else // add pillarbox
         {
@@ -56,10 +76,9 @@ public class CameraResolution : MonoBehaviour
             rect.y = 0;
 
             camera.rect = rect;
-            Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(rect.x, rect.y, camera.transform.position.z));
- 
-            print(screenBounds.x);
-            print(screenBounds.y);
+            Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, camera.transform.position.z));
+          //  AddCollider(screenBounds.x, screenBounds.y);
+            print("other");
         }
 
         ScreenSizeX = Screen.width;
@@ -70,8 +89,11 @@ public class CameraResolution : MonoBehaviour
         Camera camera = GetComponent<Camera>();
 
         // transform screen dimenensions into world space
-        Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, camera.transform.position.z));
-
+        print(Screen.height / 9f * 16f);
+           print(Screen.height);
+        // Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(1109, Screen.height, camera.transform.position.z));
+        Vector2 screenBounds = new Vector2(Screen.width, Screen.height);
+           
         // get the screen edge points
         Vector2 bottomLeft = new Vector2(-screenBounds.x, -screenBounds.y);
         Vector2 topLeft = new Vector2(-screenBounds.x, screenBounds.y);
@@ -125,8 +147,10 @@ public class CameraResolution : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        print(Screen.width);
+        print(Screen.height);
         RescaleCamera();
-        AddCollider();
+      //  AddCollider();
     }
 
     // Update is called once per frame
