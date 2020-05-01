@@ -6,7 +6,7 @@ using UnityEngine;
 /// At the moment: Go back to main menu
 /// In the future: Load fourth level 
 /// </summary>
-public class Level3_succ_ContinueButton : MonoBehaviour
+public class Leveldisco_succ_ContinueButton : MonoBehaviour
 {
     public void Continue()
     {

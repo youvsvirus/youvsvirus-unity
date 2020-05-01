@@ -5,11 +5,11 @@ using UnityEngine;
 /// <summary>
 /// Load level 3
 /// </summary>
-public class Level2_2ContinueButton : MonoBehaviour
+public class Levelsupermarket_2ContinueButton : MonoBehaviour
 {
     public void Continue()
     {
         // Continue Button has been pressed load level 3
-        UnityEngine.SceneManagement.SceneManager.LoadScene("YouVsVirus_Level3");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("YouVsVirus_Leveldisco");
     }
 }

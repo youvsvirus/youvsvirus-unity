@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace Components
 {
-    public class CreatePopLevel3 : MonoBehaviour
+    public class CreatePopLeveldisco : MonoBehaviour
     {
         /// <summary>
         /// the main Camera
@@ -55,7 +55,7 @@ namespace Components
         /// </summary>
         private int numNPCs=150;
 
-        public CreatePopLevel3()
+        public CreatePopLeveldisco()
         {
             NPCs = new List<NPC>(numNPCs);
         }

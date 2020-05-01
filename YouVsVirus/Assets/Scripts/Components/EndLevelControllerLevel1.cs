@@ -9,15 +9,15 @@ using UnityEngine;
 /// Level 1 just ends everybody was infected
 /// and when it ends call level 2.
 /// </summary>
-public class EndLevelControllerLevel1 : EndLevelControllerBase
+public class EndLevelControllerLevelgethome : EndLevelControllerBase
 {
     /// <summary>
     /// Triggers the end of the level.
-    /// Level1 calls levels
+    /// Levelgethome calls levels
     /// </summary>
     public override void EndLevel()
     {
         // Load the End Scene of the game
-        UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevel1");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevelgethome");
     }
 }
