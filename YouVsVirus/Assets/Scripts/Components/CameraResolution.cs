@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 /// Makes it so that we always have the same screen on which we play independent of resolution
 /// Places the colliders accordingly
 /// </summary>
+[ExecuteInEditMode]
 public class CameraResolution : MonoBehaviour
 {
     // saves our screen size to see if it changes later on
@@ -15,6 +17,8 @@ public class CameraResolution : MonoBehaviour
     // the edge collider that marks the boundary of the screen 
     private EdgeCollider2D edge;
 
+    // the bounds of our screen in world space
+    private Vector2 screenBounds = new Vector2(0,0);
 
     /// <summary>
     /// Checks two floats for equality up  to eps
@@ -68,7 +72,7 @@ public class CameraResolution : MonoBehaviour
        
             // the camera.pixelRect is like the camera.rect but uses pixel coordinates
             // which we need to place the edge colliders correctly
-            Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(camera.pixelRect.width, camera.pixelRect.height+camera.pixelRect.y, camera.transform.position.z));         
+            screenBounds = camera.ScreenToWorldPoint(new Vector3(camera.pixelRect.width, camera.pixelRect.height+camera.pixelRect.y, camera.transform.position.z));         
             AddCollider(screenBounds.x,screenBounds.y);
         }
         else // add pillarbox: black bars are placed on the sides of the screen, in most of our cases not used probably 
@@ -82,7 +86,7 @@ public class CameraResolution : MonoBehaviour
             rect.y = 0;
             camera.rect = rect;
             // add colliders
-            Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(camera.pixelRect.width+camera.pixelRect.x, camera.pixelRect.height, camera.transform.position.z));
+            screenBounds = camera.ScreenToWorldPoint(new Vector3(camera.pixelRect.width+camera.pixelRect.x, camera.pixelRect.height, camera.transform.position.z));
             AddCollider(screenBounds.x, screenBounds.y);
         }
         // save current screen size for later comparison
@@ -112,23 +116,26 @@ public class CameraResolution : MonoBehaviour
         edge.points = colliderPoints.ToArray();
     }
 
-
-
-    void PreCull()
+    /// <summary>
+    /// Get the current extents of our screen bounds
+    /// </summary>
+    /// <returns></returns>
+    public Vector2 GetMapExtents()
     {
-        if (Application.isEditor) return;
-        Rect wp = Camera.main.rect;
-        Rect nr = new Rect(0, 0, 1, 1);
-
-        Camera.main.rect = nr;
-        GL.Clear(true, true, Color.black);
-
-        Camera.main.rect = wp;
-
+        if ( (screenBounds.x != 0) && (screenBounds.y != 0))
+        {
+            return screenBounds;
+        }
+        else
+        {
+            Debug.LogError("Screen Bounds not set yet.");
+            return new Vector2(0,0);
+        }
+     
     }
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         // rescale camera and add collider
         RescaleCamera();

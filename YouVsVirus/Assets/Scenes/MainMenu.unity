@@ -561,7 +561,7 @@ Canvas:
   m_GameObject: {fileID: 227567998}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_Camera: {fileID: 1673985773}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -581,8 +581,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 227567998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 0.015873017, y: 0.015873017, z: 0.015873017}
   m_Children:
   - {fileID: 61596771}
   - {fileID: 1321834570}
@@ -597,8 +597,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 1120, y: 629.99994}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &242264589
 GameObject:
   m_ObjectHideFlags: 0
@@ -1946,9 +1946,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00023442507
+    x: 0.00044605136
     y: 0
-    width: 0.99953115
+    width: 0.9991079
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -1993,7 +1993,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1673985771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 264936df738e6764bba7aa3397587e4b, type: 3}
+  m_Script: {fileID: 11500000, guid: c185e8cc213d1044da94fdd86e6a3245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1913238491
