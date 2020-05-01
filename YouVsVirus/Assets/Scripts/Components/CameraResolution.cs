@@ -2,22 +2,28 @@
 using System.Collections.Generic;
 
 /// <summary>
-/// Skrypt odpowiada za usatwienie rozdzielczosci kemerze
+/// Adds boundaries to the game if the camera resolution changes
+/// Makes it so that we always have the same screen on which we play independent of resolution
+/// Places the colliders accordingly
 /// </summary>
-[ExecuteInEditMode]
 public class CameraResolution : MonoBehaviour
 {
-
-
-    #region Pola
+    // saves our screen size to see if it changes later on
     private int ScreenSizeX = 0;
     private int ScreenSizeY = 0;
-    #endregion
-    private EdgeCollider2D edge;
-    #region metody
-    private float eps = 1e-06f;
 
-    private bool AlmostEqual(float x, float y)
+    // the edge collider that marks the boundary of the screen 
+    private EdgeCollider2D edge;
+
+
+    /// <summary>
+    /// Checks two floats for equality up  to eps
+    /// </summary>
+    /// <param name="x">  float one to compare                   </param>
+    /// <param name="y">  float two to compare                   </param>
+    /// <param name="eps">how much we need the floats to be equal</param>
+    /// <returns></returns>
+    private bool AlmostEqual(float x, float y, float eps)
     {
         if (Mathf.Abs(x - y) < eps)
             return true;
@@ -25,92 +31,72 @@ public class CameraResolution : MonoBehaviour
             return false;
     }
 
-    #region rescale camera
+    /// <summary>
+    /// Rescales the camera once at the beginning and when the resolution changes
+    /// </summary>
     private void RescaleCamera()
     {
+        // if our screen did not change there is nothing to be done
+        // this is called once always due to  ScreenSizeX = ScreenSizeY = 0 at the beginning
+        if (AlmostEqual(Screen.width,ScreenSizeX,1e-06f) && AlmostEqual(Screen.height, ScreenSizeY,1e-06f)) return;
 
-
-        if (AlmostEqual(Screen.width,ScreenSizeX) && AlmostEqual(Screen.height, ScreenSizeY)) return;
-        print(Screen.width);
-        print(Screen.height);
+        // our target aspect ratio 16:9
         float targetaspect = 16.0f / 9.0f;
+        // our current real aspect ratio
         float windowaspect = (float)Screen.width / (float)Screen.height;
+        // if scaleheight < 0 the height of the screen has to be adapted
+        // if scaleheight > 0 the width of the screen has to be adapted
         float scaleheight = windowaspect / targetaspect;
+        // this script is attached to the main camera
         Camera camera = GetComponent<Camera>();
-
-        if (scaleheight <= 1.0f)
+        // place boundaries on top and bottom of screen
+        if (scaleheight <= 1.0f) // add letterbox: black bars are placed on top and bottom of the screen. 
         {
+            // A 2D Rectangle defined by X and Y position, width and height
+            // Where on the screen the camera is rendered in normalized coordinates
             Rect rect = camera.rect;
-
+            // nothing to be changed for the width
             rect.width = 1.0f;
+            // height becomes scale height
             rect.height = scaleheight;
+            // the camera origin x remains 0
             rect.x = 0;
+            // but we move the camera upwards which creates the black border, the letterbox
             rect.y = (1.0f - scaleheight) / 2.0f;
-            //    Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(Screen.width, targetaspect*Screen.width, camera.transform.position.z));
-
+            // tell our camera that's what she looks like
             camera.rect = rect;
-            print(camera.pixelRect);
-            print(camera.rect.yMin);
-            print(camera.rect.yMax);
-            //print(camera.ScreenToWorldPoint(new Vector3(camera.scaledPixelWidth, camera.scaledPixelHeight, camera.transform.position.z))));
-            //     float cameraHeight = Camera.main.orthographicSize * 2;
-            //Vector2 cameraSize = new Vector2(Camera.main.aspect * cameraHeight, cameraHeight);
-            Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(camera.pixelRect.width, camera.pixelRect.height+camera.pixelRect.y, camera.transform.position.z));
-           // Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(1f,1f/targetaspect, camera.transform.position.z));
-            //    Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height/scaleheight, camera.transform.position.z));
-
+       
+            // the camera.pixelRect is like the camera.rect but uses pixel coordinates
+            // which we need to place the edge colliders correctly
+            Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(camera.pixelRect.width, camera.pixelRect.height+camera.pixelRect.y, camera.transform.position.z));         
             AddCollider(screenBounds.x,screenBounds.y);
-            print(screenBounds.x);
-            print(screenBounds.y);
-    
         }
-        else // add pillarbox
+        else // add pillarbox: black bars are placed on the sides of the screen, in most of our cases not used probably 
         {
+            // documentation is similar to above, only now we adjust the width and not the height
             float scalewidth = 1.0f / scaleheight;
-
             Rect rect = camera.rect;
-
             rect.width = scalewidth;
             rect.height = 1.0f;
             rect.x = (1.0f - scalewidth) / 2.0f;
             rect.y = 0;
-
             camera.rect = rect;
-            Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, camera.transform.position.z));
-          //  AddCollider(screenBounds.x, screenBounds.y);
-            print("other");
+            // add colliders
+            Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(camera.pixelRect.width+camera.pixelRect.x, camera.pixelRect.height, camera.transform.position.z));
+            AddCollider(screenBounds.x, screenBounds.y);
         }
-
+        // save current screen size for later comparison
         ScreenSizeX = Screen.width;
         ScreenSizeY = Screen.height;
     }
-    void AddCollider()
-    {
-        Camera camera = GetComponent<Camera>();
 
-        // transform screen dimenensions into world space
-        print(Screen.height / 9f * 16f);
-           print(Screen.height);
-        // Vector2 screenBounds = camera.ScreenToWorldPoint(new Vector3(1109, Screen.height, camera.transform.position.z));
-        Vector2 screenBounds = new Vector2(Screen.width, Screen.height);
-           
-        // get the screen edge points
-        Vector2 bottomLeft = new Vector2(-screenBounds.x, -screenBounds.y);
-        Vector2 topLeft = new Vector2(-screenBounds.x, screenBounds.y);
-        Vector2 topRight = new Vector2(screenBounds.x, screenBounds.y);
-        Vector2 bottomRight = new Vector2(screenBounds.x, -screenBounds.y);
-
-        // add or use existing EdgeCollider2D
-        edge = GetComponent<EdgeCollider2D>() == null ? gameObject.AddComponent<EdgeCollider2D>() : GetComponent<EdgeCollider2D>();
-
-        // our list of edge points
-        List<Vector2> colliderPoints = new List<Vector2> { bottomLeft, topLeft, topRight, bottomRight, bottomLeft };
-        //set the points defining multiple continuous edges of the collider.
-        edge.points = colliderPoints.ToArray();
-    }
+    /// <summary>
+    /// attach collider to edges of screen
+    /// </summary>
+    /// <param name="x"> the screen width in world space </param>
+    /// <param name="y"> the screen heigth in world space</param>
     void AddCollider(float x, float y)
     {
-   
         // get the screen edge points
         Vector2 bottomLeft = new Vector2(-x, -y);
         Vector2 topLeft = new Vector2(-x, y);
@@ -125,13 +111,10 @@ public class CameraResolution : MonoBehaviour
         //set the points defining multiple continuous edges of the collider.
         edge.points = colliderPoints.ToArray();
     }
-    #endregion
 
-    #endregion
 
-    #region metody unity
 
-    void OnPreCull()
+    void PreCull()
     {
         if (Application.isEditor) return;
         Rect wp = Camera.main.rect;
@@ -147,16 +130,14 @@ public class CameraResolution : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        print(Screen.width);
-        print(Screen.height);
+        // rescale camera and add collider
         RescaleCamera();
-      //  AddCollider();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // if screen size changes: rescale camera and add collider
         RescaleCamera();
     }
-    #endregion
 }
