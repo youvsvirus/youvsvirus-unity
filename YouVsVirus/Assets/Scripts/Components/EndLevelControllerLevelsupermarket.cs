@@ -10,7 +10,7 @@ using UnityEngine;
 /// when finished calls the end screen so
 /// we keep all settings from the base class.
 /// </summary>
-public class EndLevelControllerLevel2 : EndLevelControllerBase
+public class EndLevelControllerLevelsupermarket : EndLevelControllerBase
 {
     /// <summary>
     /// Triggers the end of the level.
@@ -18,6 +18,6 @@ public class EndLevelControllerLevel2 : EndLevelControllerBase
     public override void EndLevel()
     {
         // Load end screen
-        UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevel2");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevelsupermarket");
     }
 }

@@ -10,15 +10,15 @@ using UnityEngine;
 /// get infected and ends positive when both reach the
 /// exit sign.
 /// </summary>
-public class EndLevelControllerLevel3 : EndLevelControllerBase
+public class EndLevelControllerLeveldisco : EndLevelControllerBase
 {
     public void EndLevel(bool success)
     {
         if(success == true)
             // Load end screen
-            UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevel3_succ");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLeveldisco_succ");
        else
             // Load end screen
-            UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevel3_fail");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLeveldisco_fail");
     }
 }

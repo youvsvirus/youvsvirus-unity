@@ -173,7 +173,7 @@ namespace Components
         public void Infect()
         {
             // the standard non-party case
-            if (LevelSettings.GetActiveSceneName() != "YouVsVirus_Level3")
+            if (LevelSettings.GetActiveSceneName() != "YouVsVirus_Leveldisco")
             {
                 if (IsSusceptible())
                 {

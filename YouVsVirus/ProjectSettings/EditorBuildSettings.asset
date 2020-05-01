@@ -9,33 +9,33 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: a98e3222e608e524690d9999cc243393
   - enabled: 1
-    path: Assets/Scenes/YouVsVirus_Level1.unity
+    path: Assets/Scenes/YouVsVirus_Levelgethome.unity
     guid: cbd250d7089e79c409e7a75903196f93
   - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: 00ffe3be83ede3a42ac68a0cc5953f6e
   - enabled: 1
-    path: Assets/Scenes/YouVsVirus_Level2.unity
+    path: Assets/Scenes/YouVsVirus_Levelsupermarket.unity
     guid: ff7f43c3ae86d964eb3ee08526f9aa70
   - enabled: 1
-    path: Assets/Scenes/EndScreenLevel1.unity
+    path: Assets/Scenes/EndScreenLevelgethome.unity
     guid: c17c6cec783f8154591a62e695e49656
   - enabled: 1
-    path: Assets/Scenes/EndScreenLevel2.unity
+    path: Assets/Scenes/EndScreenLevelsupermarket.unity
     guid: 2b462fdfffe3459488b2dccddf28a520
   - enabled: 1
-    path: Assets/Scenes/EndScreenLevel2_1.unity
+    path: Assets/Scenes/EndScreenLevelsupermarket_1.unity
     guid: e4d3adc168e27f1418f5bbc623a30d4f
   - enabled: 1
-    path: Assets/Scenes/EndScreenLevel2_2.unity
+    path: Assets/Scenes/EndScreenLevelsupermarket_2.unity
     guid: 3067c6d83b88f9d43a72e2e68ae1c3fb
   - enabled: 1
-    path: Assets/Scenes/YouVsVirus_Level3.unity
+    path: Assets/Scenes/YouVsVirus_Leveldisco.unity
     guid: 6883f131ec1e3564bb7ad7ddb54eb8d9
   - enabled: 1
-    path: Assets/Scenes/EndScreenLevel3_succ.unity
+    path: Assets/Scenes/EndScreenLeveldisco_succ.unity
     guid: cc193b554d6594b43913d51e2566f272
   - enabled: 1
-    path: Assets/Scenes/EndScreenLevel3_fail.unity
+    path: Assets/Scenes/EndScreenLeveldisco_fail.unity
     guid: 834ac2d051797964a9109e0a32f59444
   m_configObjects: {}

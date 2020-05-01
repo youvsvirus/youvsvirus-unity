@@ -1337,7 +1337,7 @@ GameObject:
   - component: {fileID: 1895023304}
   - component: {fileID: 1895023303}
   m_Layer: 5
-  m_Name: 'Text: EndOfLevel1'
+  m_Name: 'Text: EndOfLevelgethome'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

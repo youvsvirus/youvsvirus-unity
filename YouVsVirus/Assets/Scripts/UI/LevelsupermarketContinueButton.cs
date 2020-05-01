@@ -5,11 +5,11 @@ using UnityEngine;
 /// <summary>
 /// Load next end screen
 /// </summary>
-public class Level2ContinueButton : MonoBehaviour
+public class LevelsupermarketContinueButton : MonoBehaviour
 {
     public void Continue()
     {
         // Continue Button has been pressed load next end screen
-        UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevel2_1");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevelsupermarket_1");
     }
 }

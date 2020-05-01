@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level1EndGameController : MonoBehaviour
+public class LevelgethomeEndGameController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

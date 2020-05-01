@@ -82,7 +82,7 @@ namespace Components
                 // increase velocity later on
                 increase_vel = true;
                 // we have a 20% chance of changing our direction or we are at a dancefloor (or drunk) :-)
-                if (UnityEngine.Random.value < 0.2f ||   (LevelSettings.GetActiveSceneName() == "YouVsVirus_Level3"))
+                if (UnityEngine.Random.value < 0.2f ||   (LevelSettings.GetActiveSceneName() == "YouVsVirus_Leveldisco"))
                     // Random.onUnitSphere returns  a random point on the surface of a sphere with radius 1
                     // so we do not change the velocity, just the direction
                     myRigidbody.velocity = UnityEngine.Random.onUnitSphere;                             
