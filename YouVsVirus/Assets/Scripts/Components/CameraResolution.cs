@@ -53,10 +53,10 @@ public class CameraResolution : MonoBehaviour
             rect.y = (1.0f - scaleheight) / 2.0f;
             // tell our camera that's what she looks like
             camera.rect = rect;
-       
+
             // the camera.pixelRect is like the camera.rect but uses pixel coordinates
             // which we need to place the edge colliders correctly
-            screenBounds = camera.ScreenToWorldPoint(new Vector3(camera.pixelRect.width, camera.pixelRect.height+camera.pixelRect.y, camera.transform.position.z));         
+            screenBounds = camera.ScreenToWorldPoint(new Vector3(camera.scaledPixelWidth, camera.scaledPixelHeight + camera.pixelRect.y, camera.transform.position.z));         
             AddCollider(screenBounds.x,screenBounds.y);
         }
         else // add pillarbox: black bars are placed on the sides of the screen, in most of our cases not used probably 
@@ -70,7 +70,7 @@ public class CameraResolution : MonoBehaviour
             rect.y = 0;
             camera.rect = rect;
             // add colliders
-            screenBounds = camera.ScreenToWorldPoint(new Vector3(camera.pixelRect.width+camera.pixelRect.x, camera.pixelRect.height, camera.transform.position.z));
+            screenBounds = camera.ScreenToWorldPoint(new Vector3(camera.scaledPixelWidth + camera.pixelRect.x, camera.scaledPixelHeight, camera.transform.position.z));
             AddCollider(screenBounds.x, screenBounds.y);
         }
         // save current screen size for later comparison
