@@ -80,7 +80,7 @@ namespace Components
         {
      
             // get the current screen bounds
-            Vector2 screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
+            Vector2 screenBounds = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
             // place player near top right edge of the screen
             Vector3 coords = new Vector3(screenBounds.x - 0.2f, screenBounds.y - 0.2f, 0f);
             //  Place the player
@@ -98,18 +98,32 @@ namespace Components
             // give the friend a unique id
             Player.myID = numNPCs+1;
 
-            // place 100 NPCs on dancefloor (contained by cirlce edge collider)
+            // get the dancefloor that we want to place the npcs on
+            CircleEdgeCollider2D dancefloor = GetComponentInChildren<CircleEdgeCollider2D>();
+            // get its origin
+            Vector2 origin = dancefloor.transform.position;
+            // the radius where the npcs are allowed to spawn is adjusted with a safety factor so that the npcs always spawn within
+            // the dancefloor even when they get placed near its edge
+            float radius = dancefloor.Radius-0.38f*dancefloor.Radius;
+            // place NPCs randomly on dancefloor (contained by cirlce edge collider)
             for (int i = 1; i <= numNPCs; i++)
             {
-                NPCs.Add(Instantiate(npcPrefab.GetComponent<NPC>(),
-                                         new Vector3(2.5f, 0f, 0f),
+                // Sets the position to be somewhere inside a circle
+                // with radius of and center of dancefloor. Note that
+                // assigning a Vector2 to a Vector3 is fine - it will
+                // just set the X and Y values.          
+                Vector2 position = UnityEngine.Random.insideUnitCircle * radius;
+                position += origin;
+                              NPCs.Add(Instantiate(npcPrefab.GetComponent<NPC>(),
+                                        position,
                                         Quaternion.identity));
                 // give all npcs a unique id
                 NPCs[i - 1].myID = i - 1;
             }
-            //  Infect one.
+            //  Infect three.
             NPCs[33].SetInitialCondition(NPC.EXPOSED);
             NPCs[81].SetInitialCondition(NPC.INFECTIOUS);
+            NPCs[66].SetInitialCondition(NPC.EXPOSED);
         }
     }
 }

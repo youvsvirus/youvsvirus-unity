@@ -34,6 +34,12 @@ namespace Components
         /// </summary>
         private GameObject friend;
 
+        /// <summary>
+        /// The player that needs to exit the game
+        /// </summary>
+        private GameObject player;
+
+
         EdgeCollider2D EdgeCollider;
         // Start is called before the first frame update
         void Start()
@@ -47,8 +53,8 @@ namespace Components
         /// </summary>
         private void PlaceExitSignAndAddCollider()
         {
-            // compute screen bounds
-            screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
+            // get screen bounds
+            screenBounds = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
             // reference to exit sign's sprite renderer
             mySpriteRenderer = GetComponent<SpriteRenderer>();
             // width of exit sign
@@ -79,8 +85,8 @@ namespace Components
         {
             // here we only check if the bounds of the screen have changed
             // if yes, we compute the new collider points
-            Vector2 check = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
-            if (Mathf.Abs(check.x - screenBounds.x) > 1e-07 || Mathf.Abs(check.y - screenBounds.y) > 1e-07)
+            Vector2 check = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
+            if (!Mathf.Approximately(check.x,screenBounds.x) || !Mathf.Approximately(check.y, screenBounds.y))
             {
                 Debug.Log("Screen bounds changed, caculating new collider and position of exit.");
                 PlaceExitSignAndAddCollider();
@@ -93,8 +99,10 @@ namespace Components
             // can only be player or friend
             // if the player has not rescued their friend, he fails
             // if the friend is infected we fail
-            friend = GameObject.FindGameObjectWithTag("Friend");            
-            endlevel.EndLevel(friend.GetComponent<Friend>().friendFound == true && friend.GetComponent<Friend>().GetCondition() == 0);                            
+            // if the player is inected we fail
+            friend = GameObject.FindGameObjectWithTag("Friend");
+            player = GameObject.FindGameObjectWithTag("Player");
+            endlevel.EndLevel(friend.GetComponent<Friend>().friendFound == true && friend.GetComponent<Friend>().GetCondition() == 0 && player.GetComponent<Player>().GetCondition() == 0);                            
         }
     }
 }

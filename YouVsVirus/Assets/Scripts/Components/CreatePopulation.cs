@@ -36,7 +36,7 @@ namespace Components
         /// <summary>
         /// the screen dimensions
         /// </summary>
-        private Vector3 screenBounds;
+        private Vector2 screenBounds;
 
         public CreatePopulation()
         {
@@ -50,7 +50,7 @@ namespace Components
             //This gets the Main Camera from the Scene
             MainCamera = Camera.main;
             // transform screen dimenensions into world space
-            screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
+            screenBounds = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
             PlaceHumans();
         }
 
@@ -72,7 +72,7 @@ namespace Components
             //  Randomly select grid indices
             int[] indices = ChooseUnique(levelSettings.NumberOfNPCs + 1, 0, cellCount);
 
-            Vector3 origin = -screenBounds;
+            Vector2 origin = -screenBounds;
 
             //  Place the player
             Player = Instantiate(   playerPrefab.GetComponent<Player>(), 
@@ -103,7 +103,7 @@ namespace Components
         /// <summary>
         ///     Compute the grid coordinates
         /// </summary>
-        private Vector3 GetCoordinatesInGrid(int idx, int gridColumns, float cellRadius, Vector3 origin)
+        private Vector2 GetCoordinatesInGrid(int idx, int gridColumns, float cellRadius, Vector2 origin)
         {
             int row = idx / gridColumns;
             int col = idx % gridColumns;
@@ -111,7 +111,7 @@ namespace Components
             float x = (col + 1) * cellRadius;
             float y = (row + 1) * cellRadius;
 
-            return origin + new Vector3(x, y, 0f);
+            return origin + new Vector2(x, y);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Components
         /// <returns>An array of shape { rows, columns }</returns>
         private int[] GetGridSize(float cellSidelength)
         {
-            Vector3 mapExtents = 2f * screenBounds;
+            Vector2 mapExtents = 2f * screenBounds;
 
             float mapWidth = 2f * mapExtents.x;
             float mapHeight = 2f * mapExtents.y;
