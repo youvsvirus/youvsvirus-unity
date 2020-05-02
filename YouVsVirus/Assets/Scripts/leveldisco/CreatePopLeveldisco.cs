@@ -102,11 +102,9 @@ namespace Components
             CircleEdgeCollider2D dancefloor = GetComponentInChildren<CircleEdgeCollider2D>();
             // get its origin
             Vector2 origin = dancefloor.transform.position;
-            // get the halfsize of the npc to make sure that its origin is within the dance floor
-            float npc_size = npcPrefab.GetComponent<SpriteRenderer>().bounds.extents.x; //extents = size of width / 2
-            // the radius where the npcs are allowed to spawn is adjusted with a safety factor and the npc size so that the npcs always spawn within
+            // the radius where the npcs are allowed to spawn is adjusted with a safety factor so that the npcs always spawn within
             // the dancefloor even when they get placed near its edge
-            float radius = dancefloor.Radius-1.2f*npc_size;
+            float radius = dancefloor.Radius-0.38f*dancefloor.Radius;
             // place NPCs randomly on dancefloor (contained by cirlce edge collider)
             for (int i = 1; i <= numNPCs; i++)
             {
@@ -122,9 +120,10 @@ namespace Components
                 // give all npcs a unique id
                 NPCs[i - 1].myID = i - 1;
             }
-            //  Infect one.
+            //  Infect three.
             NPCs[33].SetInitialCondition(NPC.EXPOSED);
             NPCs[81].SetInitialCondition(NPC.INFECTIOUS);
+            NPCs[66].SetInitialCondition(NPC.EXPOSED);
         }
     }
 }
