@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Friend
   - NPC
   layers:
   - Default
@@ -15,9 +16,9 @@ TagManager:
   - 
   - 
   - Infection
-  - 
-  - 
-  - 
+  - Dancefloor
+  - NPC
+  - Player
   - 
   - 
   - 

@@ -54,9 +54,4 @@ public class ScreenEdgeColliders : MonoBehaviour
         //set the points defining multiple continuous edges of the collider.
          edge.points = colliderPoints.ToArray();
     }
-
-    public Vector3 GetMapExtents()
-    {
-        return screenBounds; // MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
-    }
 }
