@@ -165,11 +165,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.874203, y: -5.0076056}
-  - {x: -8.874203, y: 5.0076056}
-  - {x: 8.874203, y: 5.0076056}
-  - {x: 8.874203, y: -5.0076056}
-  - {x: -8.874203, y: -5.0076056}
+  - {x: -8.8821335, y: -5.0041666}
+  - {x: -8.8821335, y: 5.0041666}
+  - {x: 8.8821335, y: 5.0041666}
+  - {x: 8.8821335, y: -5.0041666}
+  - {x: -8.8821335, y: -5.0041666}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -189,10 +189,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00044605136
-    y: 0
-    width: 0.9991079
-    height: 1
+    x: 0
+    y: 0.049553573
+    width: 1
+    height: 0.90089285
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -390,7 +390,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1739294901}
   - component: {fileID: 1739294900}
-  - component: {fileID: 1739294899}
   m_Layer: 0
   m_Name: BackgroundCamera
   m_TagString: Untagged
@@ -398,14 +397,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1739294899
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1739294898}
-  m_Enabled: 1
 --- !u!20 &1739294900
 Camera:
   m_ObjectHideFlags: 0
