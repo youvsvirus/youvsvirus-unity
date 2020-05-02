@@ -47,8 +47,8 @@ namespace Components
         /// </summary>
         private void PlaceExitSignAndAddCollider()
         {
-            // compute screen bounds
-            screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
+            // get screen bounds
+            screenBounds = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
             // reference to exit sign's sprite renderer
             mySpriteRenderer = GetComponent<SpriteRenderer>();
             // width of exit sign
