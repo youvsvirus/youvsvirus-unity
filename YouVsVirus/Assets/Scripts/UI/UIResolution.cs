@@ -2,19 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// In all static scenes that do not need colliders
+/// attach this script to the main camera
+/// In the Canvas, set the Render mode to "World Space"
+/// And as Event Camera choose "Main Camera"
+/// this way our menus like all other scenes will always be 
+/// scaled to fit into the current resolution wihout cutting anything off.
+/// </summary>
+[ExecuteInEditMode]
 public class UIResolution : MonoBehaviour
 {
+    // saves our screen size to see if it changes later on
+    private int ScreenSizeX = 0;
+    private int ScreenSizeY = 0;
+
+    // the edge collider that marks the boundary of the screen 
+    private EdgeCollider2D edge;
+
+    // the bounds of our screen in world space
+    private Vector2 screenBounds = new Vector2(0, 0);
+
     /// <summary>
-    /// In all static scenes that do not need colliders
-    /// attach this script to the main camera
-    /// In the Canvas, set the Render mode to "World Space"
-    /// And as Event Camera choose "Main Camera"
-    /// this way our menus like all other scenes will always be 
-    /// scaled to fit into the current resolution wihout cutting anything off.
+    /// Rescales the camera once at the beginning and when the resolution changes
     /// </summary>
-    [ExecuteInEditMode]
-    void Start()
+    private void RescaleCamera()
     {
+        // if our screen did not change there is nothing to be done
+        // this is called once always due to  ScreenSizeX = ScreenSizeY = 0 at the beginning
+        if ((Screen.width == ScreenSizeX) && (Screen.height == ScreenSizeY)) return;
         // our target aspect ratio 16:9
         float targetaspect = 16.0f / 9.0f;
         // our current real aspect ratio
@@ -52,6 +68,22 @@ public class UIResolution : MonoBehaviour
             rect.y = 0;
             camera.rect = rect;
         }
+        // save current screen size for later comparison
+        ScreenSizeX = Screen.width;
+        ScreenSizeY = Screen.height;
+    }
 
+    // Use this for initialization
+    void Awake()
+    {
+        // rescale camera and add collider
+        RescaleCamera();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // if screen size changes: rescale camera
+        RescaleCamera();
     }
 }
