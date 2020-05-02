@@ -21,29 +21,13 @@ public class CameraResolution : MonoBehaviour
     private Vector2 screenBounds = new Vector2(0,0);
 
     /// <summary>
-    /// Checks two floats for equality up  to eps
-    /// </summary>
-    /// <param name="x">  float one to compare                   </param>
-    /// <param name="y">  float two to compare                   </param>
-    /// <param name="eps">how much we need the floats to be equal</param>
-    /// <returns></returns>
-    private bool AlmostEqual(float x, float y, float eps)
-    {
-        if (Mathf.Abs(x - y) < eps)
-            return true;
-        else
-            return false;
-    }
-
-    /// <summary>
     /// Rescales the camera once at the beginning and when the resolution changes
     /// </summary>
     private void RescaleCamera()
     {
         // if our screen did not change there is nothing to be done
         // this is called once always due to  ScreenSizeX = ScreenSizeY = 0 at the beginning
-        if (AlmostEqual(Screen.width,ScreenSizeX,1e-06f) && AlmostEqual(Screen.height, ScreenSizeY,1e-06f)) return;
-
+        if ((Screen.width == ScreenSizeX) && (Screen.height == ScreenSizeY)) return;
         // our target aspect ratio 16:9
         float targetaspect = 16.0f / 9.0f;
         // our current real aspect ratio

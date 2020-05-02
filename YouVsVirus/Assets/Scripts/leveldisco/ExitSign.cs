@@ -79,8 +79,8 @@ namespace Components
         {
             // here we only check if the bounds of the screen have changed
             // if yes, we compute the new collider points
-            Vector2 check = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
-            if (Mathf.Abs(check.x - screenBounds.x) > 1e-07 || Mathf.Abs(check.y - screenBounds.y) > 1e-07)
+            Vector2 check = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
+            if (Mathf.Approximately(check.x,screenBounds.x))
             {
                 Debug.Log("Screen bounds changed, caculating new collider and position of exit.");
                 PlaceExitSignAndAddCollider();
