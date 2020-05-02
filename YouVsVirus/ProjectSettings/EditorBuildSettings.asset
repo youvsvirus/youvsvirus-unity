@@ -18,6 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/YouVsVirus_Levelsupermarket.unity
     guid: ff7f43c3ae86d964eb3ee08526f9aa70
   - enabled: 1
+    path: Assets/Scenes/YouVsVirus_Levelcollectmasks.unity
+    guid: abb8b2cb0675081409b4ec60e49b237a
+  - enabled: 1
+    path: Assets/Scenes/EndScreenLevelcollectmasks.unity
+    guid: cc22b6d4347f05b46a480a402e78f1cb
+  - enabled: 1
     path: Assets/Scenes/EndScreenLevelgethome.unity
     guid: c17c6cec783f8154591a62e695e49656
   - enabled: 1
@@ -27,11 +33,14 @@ EditorBuildSettings:
     path: Assets/Scenes/EndScreenLevelsupermarket_1.unity
     guid: e4d3adc168e27f1418f5bbc623a30d4f
   - enabled: 1
-    path: Assets/Scenes/EndScreenLevelsupermarket_2.unity
+    path: Assets/Scenes/StartscreenLevelcollectmasks.unity
     guid: 3067c6d83b88f9d43a72e2e68ae1c3fb
   - enabled: 1
     path: Assets/Scenes/YouVsVirus_Leveldisco.unity
     guid: 6883f131ec1e3564bb7ad7ddb54eb8d9
+  - enabled: 1
+    path: Assets/Scenes/EndScreenLevelsupermarket_2.unity
+    guid: 3832572e18debcc4c8b05f2177f6495a
   - enabled: 1
     path: Assets/Scenes/EndScreenLeveldisco_succ.unity
     guid: cc193b554d6594b43913d51e2566f272
