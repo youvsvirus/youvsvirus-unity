@@ -80,7 +80,7 @@ namespace Components
             // here we only check if the bounds of the screen have changed
             // if yes, we compute the new collider points
             Vector2 check = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
-            if (Mathf.Approximately(check.x,screenBounds.x))
+            if (!Mathf.Approximately(check.x,screenBounds.x) || !Mathf.Approximately(check.y, screenBounds.y))
             {
                 Debug.Log("Screen bounds changed, caculating new collider and position of exit.");
                 PlaceExitSignAndAddCollider();
