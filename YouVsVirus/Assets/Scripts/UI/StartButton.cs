@@ -36,6 +36,6 @@ public class StartButton : MonoBehaviour
         levelStats.Init(LevelSettings.NumberOfNPCs);
 
         // Load the Scene for levelgethome
-        UnityEngine.SceneManagement.SceneManager.LoadScene("YouVsVirus_Levelgethome");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("YouVsVirus_Sandbox");
     }
 }

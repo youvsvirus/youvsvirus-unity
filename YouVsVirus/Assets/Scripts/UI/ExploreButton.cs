@@ -14,6 +14,6 @@ public class ExploreButton : MonoBehaviour
     {
         // Play Now Button has been pressed, here you can initialize your game 
         // Load the Sandbox Menu
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SandboxMenu");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainSandbox");
     }
 }
