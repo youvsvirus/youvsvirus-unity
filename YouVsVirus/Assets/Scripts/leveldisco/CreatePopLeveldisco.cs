@@ -80,7 +80,7 @@ namespace Components
         {
      
             // get the current screen bounds
-            Vector2 screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
+            Vector2 screenBounds = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
             // place player near top right edge of the screen
             Vector3 coords = new Vector3(screenBounds.x - 0.2f, screenBounds.y - 0.2f, 0f);
             //  Place the player
