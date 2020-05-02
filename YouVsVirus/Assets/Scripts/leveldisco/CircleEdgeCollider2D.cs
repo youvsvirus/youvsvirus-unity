@@ -33,7 +33,7 @@ namespace Components
         /// <summary>
         /// Start this instance.
         /// </summary>
-        void Start()
+        void Awake()
         {
             EdgeCollider = GetComponent<EdgeCollider2D>();
             CreateCircle();

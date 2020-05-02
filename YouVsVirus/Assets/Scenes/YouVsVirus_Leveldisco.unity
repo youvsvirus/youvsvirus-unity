@@ -489,11 +489,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.8821335, y: -5.0041666}
-  - {x: -8.8821335, y: 5.0041666}
-  - {x: 8.8821335, y: 5.0041666}
-  - {x: 8.8821335, y: -5.0041666}
-  - {x: -8.8821335, y: -5.0041666}
+  - {x: -8.874203, y: -5}
+  - {x: -8.874203, y: 5}
+  - {x: 8.874203, y: 5}
+  - {x: 8.874203, y: -5}
+  - {x: -8.874203, y: -5}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -513,10 +513,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.049553573
-    width: 1
-    height: 0.90089285
+    x: 0.00044605136
+    y: 0
+    width: 0.9991079
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -704,7 +704,7 @@ Transform:
   - {fileID: 394411203}
   - {fileID: 652075269}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &742637914
 GameObject:
@@ -751,7 +751,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2002429631}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -832,11 +833,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924041520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.9221334, y: -4.5136666, z: 0}
+  m_LocalPosition: {x: 7.9142027, y: -4.5095, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &924041523
 MonoBehaviour:
@@ -1036,7 +1037,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1969608095
 GameObject:
@@ -1158,12 +1159,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002429629}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.5, y: 0, z: -3778.2344}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 742637916}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!68 &2002429632
 EdgeCollider2D:
