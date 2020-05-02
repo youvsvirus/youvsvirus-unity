@@ -34,6 +34,12 @@ namespace Components
         /// </summary>
         private GameObject friend;
 
+        /// <summary>
+        /// The player that needs to exit the game
+        /// </summary>
+        private GameObject player;
+
+
         EdgeCollider2D EdgeCollider;
         // Start is called before the first frame update
         void Start()
@@ -93,8 +99,10 @@ namespace Components
             // can only be player or friend
             // if the player has not rescued their friend, he fails
             // if the friend is infected we fail
-            friend = GameObject.FindGameObjectWithTag("Friend");            
-            endlevel.EndLevel(friend.GetComponent<Friend>().friendFound == true && friend.GetComponent<Friend>().GetCondition() == 0);                            
+            // if the player is inected we fail
+            friend = GameObject.FindGameObjectWithTag("Friend");
+            player = GameObject.FindGameObjectWithTag("Player");
+            endlevel.EndLevel(friend.GetComponent<Friend>().friendFound == true && friend.GetComponent<Friend>().GetCondition() == 0 && player.GetComponent<Player>().GetCondition() == 0);                            
         }
     }
 }
