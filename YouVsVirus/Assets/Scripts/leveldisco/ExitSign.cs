@@ -47,8 +47,8 @@ namespace Components
         /// </summary>
         private void PlaceExitSignAndAddCollider()
         {
-            // compute screen bounds
-            screenBounds = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
+            // get screen bounds
+            screenBounds = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
             // reference to exit sign's sprite renderer
             mySpriteRenderer = GetComponent<SpriteRenderer>();
             // width of exit sign
@@ -79,8 +79,8 @@ namespace Components
         {
             // here we only check if the bounds of the screen have changed
             // if yes, we compute the new collider points
-            Vector2 check = MainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, MainCamera.transform.position.z));
-            if (Mathf.Abs(check.x - screenBounds.x) > 1e-07 || Mathf.Abs(check.y - screenBounds.y) > 1e-07)
+            Vector2 check = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
+            if (!Mathf.Approximately(check.x,screenBounds.x) || !Mathf.Approximately(check.y, screenBounds.y))
             {
                 Debug.Log("Screen bounds changed, caculating new collider and position of exit.");
                 PlaceExitSignAndAddCollider();
