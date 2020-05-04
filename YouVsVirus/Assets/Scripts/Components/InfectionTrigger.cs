@@ -42,10 +42,11 @@ namespace Components
                         // if I am the player and infected an NPC
                         // this NPC is previously well
                         // I give notice to the level stats
-                        if (myHuman.tag == "Player" && otherHuman.IsSusceptible())
+                        if ((myHuman.tag == "Player" || myHuman.wasInfectedByPlayer == true) && otherHuman.IsSusceptible())
                         {
                             // this also adds other human to the list of infected
                             // to count if other human dies later on
+                            otherHuman.wasInfectedByPlayer = true;
                             myHuman.levelStats.PlayerInfectedNPC(otherHuman.myID);
                         }
                         

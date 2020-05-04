@@ -33,6 +33,12 @@ namespace Components
         public const int DEAD        = 4;
 
         /// <summary>
+        /// tell us if this human was infected
+        /// by the player for the statistic
+        /// </summary>
+        public bool wasInfectedByPlayer = false;
+
+        /// <summary>
         /// count number of infections for level 3
         /// </summary>
         private int num_inf = 1;
