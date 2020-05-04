@@ -15,9 +15,16 @@ public class EndLevelControllerLevelgethome : EndLevelControllerBase
     /// Triggers the end of the level.
     /// Levelgethome calls levels
     /// </summary>
-    public override void EndLevel()
+    public void EndLevel(bool success)
     {
-        // Load the End Scene of the game
-        UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevelgethome");
+        if (success)
+        {
+            // Load the End Scene of the game
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevelgethome");
+        }
+        else
+        {
+            UnityEngine.Debug.Log("You failed");
+        }
     }
 }
