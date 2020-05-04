@@ -19,4 +19,13 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
         // Load end screen
         UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevelcollectmasks");
     }
+    
+
+    // Override CheckEndCondition.
+    // Level never ends, only when timer runs out.
+    // (we currenly use this for debugging)
+    protected override bool CheckEndCondition ()
+    {
+        return false;
+    }
 }

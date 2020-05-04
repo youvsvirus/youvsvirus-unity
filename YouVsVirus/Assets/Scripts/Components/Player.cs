@@ -89,7 +89,12 @@ namespace Components
 		public void addMasks(int numMasks = 1)
 		{
 			collectedMasks += numMasks;
-			Debug.Log ("Player has now " + collectedMasks + " masks.");
+			Debug.Log ("Player has now " + getNumMasks() + " masks.");
+		}
+
+		public int getNumMasks ()
+		{
+			return collectedMasks;
 		}
 	}
 }
