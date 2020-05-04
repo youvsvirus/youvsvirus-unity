@@ -14,6 +14,11 @@ namespace Components
 		/// </summary>
 		public float speedMultiplier = 5.0f;
 
+		
+		/// <summary>
+		/// How many masks the player has collected
+		/// </summary>
+		protected int collectedMasks = 0;
 
 		/// <summary>
 		/// Start is called before the first frame update
@@ -75,6 +80,16 @@ namespace Components
 		void OnTriggerEnter (Collider other)
 		{
 			Debug.Log ("TriggerEvent");
+		}
+
+		/// <summary>
+		/// Add a number of masks to the count of collected masks.
+		/// Per default one mask is added.
+		/// </summary>
+		public void addMasks(int numMasks = 1)
+		{
+			collectedMasks += numMasks;
+			Debug.Log ("Player has now " + collectedMasks + " masks.");
 		}
 	}
 }

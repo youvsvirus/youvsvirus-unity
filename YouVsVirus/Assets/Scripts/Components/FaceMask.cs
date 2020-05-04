@@ -30,7 +30,8 @@ namespace Components
             Debug.Log ("Collision detected.");
             if (other.gameObject.tag == "Player") {
                 Debug.Log ("Player touched mask");
-                PlaceMaskRandomly();  
+                PlaceMaskRandomly();
+                other.GetComponent<Player>().addMasks();  
             }
         }
 
