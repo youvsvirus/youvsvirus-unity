@@ -72,5 +72,9 @@ namespace Components
 			DeadSprite = Resources.Load<Sprite>("SmileyPictures/player_dead");
 		}
 
+		void OnTriggerEnter (Collider other)
+		{
+			Debug.Log ("TriggerEvent");
+		}
 	}
 }
