@@ -1773,7 +1773,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 192147328}
-        m_MethodName: CampaignGame
+        m_MethodName: StartCampaign
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

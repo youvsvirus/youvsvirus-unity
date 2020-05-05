@@ -18,20 +18,27 @@ public class EndLevelControllerLevelgethome : EndLevelControllerBase
     public GameObject CanvasFail;
     public GameObject CanvasSucc;
 
+    /// <summary>
+    /// Button: Retry current scene
+    /// </summary>
     public void Retry()
     {
-        // Retry current scene
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
 
+    /// <summary>
+    /// Button: Go back to main menu
+    /// </summary>
     public void MainMenu()
     {
-        // Restart Button has been pressed, we go back to the main menu
         SceneManager.LoadScene("MainMenu");
     }
 
 
+    /// <summary>
+    /// Button: Continue to next level
+    /// </summary>
     public void Continue()
     {
         // Restart Button has been pressed, we go back to the main menu

@@ -26,6 +26,7 @@ public class PlayerHouse : MonoBehaviour
         // hide player in house
         playerRend = PlayerInside.GetComponent<SpriteRenderer>();
         playerRend.sortingLayerName = "Background";
+        playerRend.sortingOrder = 0;
         // activate end level controller
         endlevel = LevelSettings.GetActiveEndLevelController().GetComponent<EndLevelControllerLevelgethome>();
 
