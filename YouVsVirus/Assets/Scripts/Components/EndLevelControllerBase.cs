@@ -21,7 +21,7 @@ public class EndLevelControllerBase : MonoBehaviour
     public float EndConditionMetDelay = 3f;
 
     protected bool playerDied = false;
-    protected bool playerExposed = false;
+    public bool playerExposed = false;
     protected int activeInfections = 0;
 
     //  Has an end condition been met?

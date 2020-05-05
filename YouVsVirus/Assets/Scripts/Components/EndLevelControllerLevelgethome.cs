@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using Components;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// The end level controller for level 1.
@@ -16,6 +17,26 @@ public class EndLevelControllerLevelgethome : EndLevelControllerBase
 
     public GameObject CanvasFail;
     public GameObject CanvasSucc;
+
+    public void Retry()
+    {
+        // Retry current scene
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
+    }
+
+    public void MainMenu()
+    {
+        // Restart Button has been pressed, we go back to the main menu
+        SceneManager.LoadScene("MainMenu");
+    }
+
+
+    public void Continue()
+    {
+        // Restart Button has been pressed, we go back to the main menu
+        SceneManager.LoadScene("StartScreenLevelsupermarket");
+    }
 
     public GameObject CreateHumans;
     /// <summary>
@@ -33,8 +54,7 @@ public class EndLevelControllerLevelgethome : EndLevelControllerBase
 
     public override void EndLevel()
     {
-        // Load the End Scene of the game
-        UnityEngine.SceneManagement.SceneManager.LoadScene("StartScreenLevelsupermarket");
+        //..
     }
 
     private void Update()
@@ -50,11 +70,18 @@ public class EndLevelControllerLevelgethome : EndLevelControllerBase
         // if the player is at home and well we win
         if(playerHome && !playerExposed)
         {
-            CanvasSucc.SetActive(true);
             // all NPCs show true infection statuts
             CreateHumans.GetComponent<CreatePopLevelgethome>().CummulativeSpriteUpdate();
-            CanvasFail.SetActive(true);
+            CanvasSucc.SetActive(true);
         }
             
+    }
+    /// <summary>
+    /// deactive both canvases before level starts
+    /// </summary>
+    void Awake()
+    {
+        CanvasFail.SetActive(false);
+        CanvasSucc.SetActive(false);
     }
 }

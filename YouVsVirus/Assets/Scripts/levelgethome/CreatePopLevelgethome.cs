@@ -19,7 +19,6 @@ namespace Components
         /// Player prefab to be set in the editor.
         /// </summary>
         public GameObject playerPrefab;
-        public GameObject Canvas;
         /// <summary>
         /// NPC prefab to be set in the editor.
         /// </summary>
@@ -78,7 +77,6 @@ namespace Components
             // this gets the Main Camera from the Scene
             MainCamera = Camera.main;    
             screenBounds = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
-            Canvas.SetActive(false);
             // place the humans
             PlaceHumans();
         }
