@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using Components;
 
 /// <summary>
 /// The end level controller for level 1.
@@ -11,20 +12,49 @@ using UnityEngine;
 /// </summary>
 public class EndLevelControllerLevelgethome : EndLevelControllerBase
 {
+    protected bool playerHome = false;
+
+    public GameObject CanvasFail;
+    public GameObject CanvasSucc;
+
+    public GameObject CreateHumans;
     /// <summary>
     /// Triggers the end of the level.
     /// Levelgethome calls levels
     /// </summary>
-    public void EndLevel(bool success)
+    /// 
+    /// <summary>
+    /// Notify the end level controller that the player is home
+    /// </summary>
+    public void NotifyPlayerAtHome()
     {
-        if (success)
+        playerHome = true;
+    }
+
+    public override void EndLevel()
+    {
+        // Load the End Scene of the game
+        UnityEngine.SceneManagement.SceneManager.LoadScene("StartScreenLevelsupermarket");
+    }
+
+    private void Update()
+    {
+        // if the player is exposed we fail
+        if (playerExposed)
         {
-            // Load the End Scene of the game
-            UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevelgethome");
+            // all NPCs show true infection statuts
+            CreateHumans.GetComponent<CreatePopLevelgethome>().CummulativeSpriteUpdate();
+            CanvasFail.SetActive(true);
         }
-        else
+
+        // if the player is at home and well we win
+        if(playerHome && !playerExposed)
         {
-            UnityEngine.Debug.Log("You failed");
+            CanvasSucc.SetActive(true);
+            // all NPCs show true infection statuts
+            CreateHumans.GetComponent<CreatePopLevelgethome>().CummulativeSpriteUpdate();
+            CanvasFail.SetActive(true);
         }
+            
     }
 }

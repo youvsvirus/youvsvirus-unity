@@ -21,6 +21,7 @@ public class EndLevelControllerBase : MonoBehaviour
     public float EndConditionMetDelay = 3f;
 
     protected bool playerDied = false;
+    protected bool playerExposed = false;
     protected int activeInfections = 0;
 
     //  Has an end condition been met?
@@ -62,6 +63,15 @@ public class EndLevelControllerBase : MonoBehaviour
         yield return new WaitForSeconds(delay);
         EndLevel();
     }
+
+    /// <summary>
+    /// Notify the end level controller that the player has been exposed.
+    /// </summary>
+    public void NotifyPlayerExposed()
+    {
+        playerExposed = true;
+    }
+
 
     /// <summary>
     /// Notify the end level controller that the player has died.

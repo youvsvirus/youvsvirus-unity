@@ -19,7 +19,7 @@ namespace Components
         /// Player prefab to be set in the editor.
         /// </summary>
         public GameObject playerPrefab;
-
+        public GameObject Canvas;
         /// <summary>
         /// NPC prefab to be set in the editor.
         /// </summary>
@@ -54,19 +54,31 @@ namespace Components
 
         public CreatePopLevelgethome()
         {
-            NPCs = new List<NPC>(100);
+            NPCs = new List<NPC>(42);
         }
+
+        /// <summary>
+        /// In this level all NCPs do no sprite update within the game
+        /// since we do not want the user to know if they are healthy or not.
+        /// Only when the game end, we want them all to show their true color.
+        /// </summary>
+        public void CummulativeSpriteUpdate()
+        {
+            for (int i = 0; i < NPCs.Count; i++)
+                NPCs[i].UpdateSpriteImage();
+        }
+
 
         // Awake is called the moment this component is created
         void Awake()
         {
             // get active level settings - the get home scene always has 50% social distancing
             LevelSettings.GetActiveLevelSettings().SocialDistancingFactor = 18;
-            LevelSettings.GetActiveLevelSettings().NumberOfNPCs = 50;
+            LevelSettings.GetActiveLevelSettings().NumberOfNPCs = 42;
             // this gets the Main Camera from the Scene
             MainCamera = Camera.main;    
             screenBounds = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
-   
+            Canvas.SetActive(false);
             // place the humans
             PlaceHumans();
         }
@@ -111,11 +123,9 @@ namespace Components
             }
 
             //  Infect one
-            for (int i = 0; i < 1; i++)
-            {
-                NPCs[i].SetInitialCondition(NPC.EXPOSED);
-            }
-            NPCs[33].SetInitialCondition(NPC.INFECTIOUS);
+            //NPCs[0].SetInitialCondition(NPC.INFECTIOUS);
+            // one with symptoms
+            NPCs[33].SetInitialCondition(NPC.EXPOSED);
         }
 
 
