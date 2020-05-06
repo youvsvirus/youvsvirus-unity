@@ -35,7 +35,17 @@ public class  InfectionControl : MonoBehaviour
     /// </summary>
     public float DayLength = 1f;
 
+
     private float lastDayTick = 0;
+
+    private void Start()
+    {
+        // in the get home scene time passes 100 times slower
+        if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelgethome")
+        {
+            DayLength = 100f;
+        }
+    }
 
     /// <summary>
     ///  Runs after all other update calls, ensuring that lastDayTick gets updated AFTER all humans have called IsNewDay().

@@ -27,6 +27,10 @@ namespace Components
 		{
 			base.SetCondition(condition);
 
+			if(condition == EXPOSED)
+			{
+				LevelSettings.GetActiveEndLevelController().NotifyPlayerExposed();
+			}
 			if(condition == DEAD)
 			{
 				LevelSettings.GetActiveEndLevelController().NotifyPlayerDied();
