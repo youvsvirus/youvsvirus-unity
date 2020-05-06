@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEngine;
+﻿using UnityEngine;
 using Components;
 using UnityEngine.SceneManagement;
 
@@ -18,22 +14,6 @@ public class EndLevelControllerLevelgethome : EndLevelControllerBase
     public GameObject CanvasFail;
     public GameObject CanvasSucc;
 
-    /// <summary>
-    /// Button: Retry current scene
-    /// </summary>
-    public void Retry()
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
-    }
-
-    /// <summary>
-    /// Button: Go back to main menu
-    /// </summary>
-    public void MainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
 
 
     /// <summary>
