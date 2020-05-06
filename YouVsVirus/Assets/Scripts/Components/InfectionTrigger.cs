@@ -35,6 +35,8 @@ namespace Components
                     // check if myHuman is infectious and if they are in my infection radius
                     float dist = Vector3.Distance(myHuman.transform.position, otherHuman.transform.position);
                     float r = 2f * InfectionRadius * transform.parent.localScale.x;
+                    float myWidth = myHuman.GetComponent<SpriteRenderer>().bounds.extents.x; //extents = size of width / 2
+                    // maybe this is the right infection distance?
                     if (dist < r)
                     {
                         // if I am the player and infected an NPC

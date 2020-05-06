@@ -32,6 +32,11 @@ namespace Components
         public const int RECOVERED   = 3;
         public const int DEAD        = 4;
 
+        /// <summary>
+        /// count number of infections for level 3
+        /// </summary>
+        private int num_inf = 1;
+
 
         /// <summary>
         /// This human's inital condition
@@ -80,7 +85,7 @@ namespace Components
         public virtual void SetCondition(int condition)
         {
             _mycondition = condition;
-            EndGameController egc = GameObject.Find("EndGameController").GetComponent<EndGameController>();
+            EndLevelControllerBase egc = LevelSettings.GetActiveEndLevelController();
 
             // Update the stats
             switch (condition)
@@ -123,8 +128,12 @@ namespace Components
                     }
             }
 
-            // Update the sprite image
-            UpdateSpriteImage();
+            // in Levelgethome we want all the smileys to stay the same except for the player
+            if(LevelSettings.GetActiveSceneName() != "YouVsVirus_Levelgethome" || this.tag == "Player" )
+            {
+                // Update the sprite image
+                UpdateSpriteImage();
+            }
         }
         /// <summary>
         /// The Sprites corresponding to the images for the different conditions
@@ -165,16 +174,39 @@ namespace Components
         /// <summary>
         /// Infects this human if it is susceptible.
         /// </summary>
-        /// <returns>True if this human became EXPOSED, false otherwise.</returns>
-        public bool Infect()
+        public void Infect()
         {
-            if (IsSusceptible())
+            // the standard non-party case
+            if (LevelSettings.GetActiveSceneName() != "YouVsVirus_Leveldisco")
             {
-                SetCondition(EXPOSED);
-                return true;
+                if (IsSusceptible())
+                {
+                    SetCondition(EXPOSED);
+                }
             }
-            return false;
+            else // the party case
+            {
+                if (IsSusceptible())
+                {
+                    // both friend and player have a 10% chance of getting exposed
+                    if (this.tag == "Player" || this.tag ==  "Friend")
+                    {
+                        if (UnityEngine.Random.value < 0.2)
+                        {
+                            SetCondition(EXPOSED);
+                        }
+                    }
+                    // rest of npcs have increasing chance of getting infected
+                    else if (UnityEngine.Random.value < num_inf * 0.02)
+                    {
+                        num_inf++;
+                        SetCondition(EXPOSED);
+
+                    }
+                }   
+            }
         }
+
 
         /// <summary>
         /// Checks if this human is infectious.

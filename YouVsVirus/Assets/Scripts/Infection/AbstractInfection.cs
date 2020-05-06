@@ -18,7 +18,8 @@ namespace Infection
         /// My Human. Is set once in Start() and can be accessed by derived classes.
         /// </summary>
         protected HumanBase myHuman { get; private set; }
-        
+
+
         public virtual void Start()
         {
             myHuman = GetComponent<HumanBase>();

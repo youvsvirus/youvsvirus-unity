@@ -13,10 +13,37 @@ namespace Components
         public float safetyMarginCellRadius = 0.2f;
 
         /// <summary>
+        /// to place the NPCs more in the middle of the screen
+        /// we can shrink the bounds
+        /// e.g. when we want the player to spawn at the edge of the screen
+        /// and the NPCs not to get him directly
+        /// </summary>
+        public void shrinkScreenBounds(float factor)
+        {
+            screenBounds = screenBounds * factor;
+        }
+
+        /// <summary>
         /// a list of random coords generated so that all prefab clones
         /// are placed on a grid in safe distance from each other
         /// </summary>
         public List<Vector2> RandomCoords;
+
+        /// <summary>
+        /// the screen dimensions
+        /// </summary>
+        public Vector2 screenBounds;
+
+
+        Camera MainCamera;
+
+        private void Start()
+        {
+            // this gets the Main Camera from the Scene
+            MainCamera = Camera.main;
+            // set screen bounds
+            screenBounds = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
+        }
 
 
         /// <summary>
@@ -41,7 +68,7 @@ namespace Components
             //  Randomly select grid indices
             int[] indices = ChooseUnique(npcNumber + 1, 0, cellCount);
 
-            Vector3 origin = -GameObject.Find("MapLimits").GetComponent<ViewportBoundMapLimit>().GetMapExtents();
+            Vector2 origin = -screenBounds;
             for (int i = 0; i < npcNumber + 1; i++)
             {
                 RandomCoords.Add(GetCoordinatesInGrid(indices[i], columns, cellRadius, origin));
@@ -51,7 +78,7 @@ namespace Components
         /// <summary>
         /// Compute the grid coordinates
         /// </summary>
-        private Vector3 GetCoordinatesInGrid(int idx, int gridColumns, float cellRadius, Vector3 origin)
+        private Vector2 GetCoordinatesInGrid(int idx, int gridColumns, float cellRadius, Vector2 origin)
         {
             int row = idx / gridColumns;
             int col = idx % gridColumns;
@@ -59,7 +86,7 @@ namespace Components
             float x = (col + 1) * cellRadius;
             float y = (row + 1) * cellRadius;
 
-            return origin + new Vector3(x, y, 0f);
+            return origin + new Vector2(x, y);
         }
 
         /// <summary>
@@ -81,7 +108,7 @@ namespace Components
         /// <returns>An array of shape { rows, columns }</returns>
         private int[] GetGridSize(float cellSidelength)
         {
-            Vector3 mapExtents = 2f * GameObject.Find("MapLimits").GetComponent<ViewportBoundMapLimit>().GetMapExtents();
+            Vector2 mapExtents = 2f * screenBounds; ;
 
             float mapWidth = 2f * mapExtents.x;
             float mapHeight = 2f * mapExtents.y;
