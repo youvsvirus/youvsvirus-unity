@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Load first level
 /// </summary>
-public class LevelgethomeContinueButton : MonoBehaviour
+public class ContinueToLevelgethomeButton : MonoBehaviour
 {
     public void Continue()
     {
