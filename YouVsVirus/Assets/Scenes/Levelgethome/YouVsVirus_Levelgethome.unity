@@ -1958,17 +1958,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae52b6270c0ad148a94f5770b491669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTime: 0
-  LevelTimeout: 0
-  EndConditionMetDelay: 3
-  playerDied: 0
-  playerExposed: 0
-  activeInfections: 0
-  endConditionMet: 0
-  playerHome: 0
-  CanvasFail: {fileID: 2046121199}
-  CanvasSucc: {fileID: 236133598}
-  CreateHumans: {fileID: 742637914}
 --- !u!4 &1293853907
 Transform:
   m_ObjectHideFlags: 0
