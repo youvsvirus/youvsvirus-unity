@@ -40,6 +40,8 @@ namespace Components
 
         private RandomGrid randomGridForHumans;
 
+        public nonSpawnableSpace nonSpawnable;
+
 
         // Start is called before the first frame update
         void Start()
@@ -57,7 +59,7 @@ namespace Components
             // and the number of humans that we want to place
             randomGridForHumans.GenerateRandomCoords(playerPrefab.transform.localScale.x,
                                                             playerPrefab.GetComponentInChildren<InfectionTrigger>().InfectionRadius,
-                                                            npcNumber);
+                                                            npcNumber, nonSpawnable.GetComponent<nonSpawnableSpace>());
             // place humans on the grid
             CreateHumans();
         }
