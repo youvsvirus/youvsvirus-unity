@@ -20,8 +20,8 @@ TagManager:
   - Dancefloor
   - NPC
   - Player
-  - Mask
-  - CollidesWithNPCButNotPlayer
+  - CollideswithNPCbutnotPlayer
+  - Collectables
   - 
   - 
   - 
@@ -48,7 +48,7 @@ TagManager:
     uniqueID: 2062951519
     locked: 0
   - name: Collectables
-    uniqueID: 132984267
+    uniqueID: 3906036087
     locked: 0
   - name: Living
     uniqueID: 2061542899
