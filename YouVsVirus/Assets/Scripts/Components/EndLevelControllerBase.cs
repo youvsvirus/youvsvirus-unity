@@ -36,7 +36,7 @@ public class EndLevelControllerBase : MonoBehaviour
         LevelSettings.ActiveEndLevelController = this;
     }
 
-    public void Start()
+    public virtual void Start()
     {
         // Remember the starting time to check for the timeout end condition
         startTime = Time.time;
@@ -85,6 +85,21 @@ public class EndLevelControllerBase : MonoBehaviour
     public void NotifyHumanRemoved()
     {
         activeInfections--;
+    } 
+
+    /// <summary>
+    /// Derived class can use this function if they need information from
+    /// outside with an integer. We usually get a reference to the active
+    /// EndLevelController via LevelSettings.GetActiveEndLevelController()
+    /// which we cannot cast into a derived class EndLevelController and this cannot
+    /// call any functions that are not defined in the base class (or maybe i am just too stupid to do so).
+    /// Thus, if we want a function in a derived class that shall be called from a 
+    /// point where we access the endlevercontroller via the levelSettings, we have no choice
+    /// but to add the function here to the base class.
+    /// </summary>
+    public virtual void NotifyInt (int data)
+    {
+        // This function intentionally left blank
     }
 
     void Update()

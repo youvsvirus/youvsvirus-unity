@@ -270,6 +270,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218665201}
   m_CullTransparentMesh: 0
+--- !u!1 &300573462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 300573463}
+  m_Layer: 0
+  m_Name: Hospital
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &300573463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300573462}
+  m_LocalRotation: {x: 0.00087269006, y: 0.0033161587, z: -0.0000028939955, w: 0.99999416}
+  m_LocalPosition: {x: 2.78, y: -0.035306238, z: -341.27374}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 901488222}
+  - {fileID: 1676207408}
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0.1, y: 0.38, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,11 +346,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888889, y: -5.0030794}
-  - {x: -8.888889, y: 5.0030794}
-  - {x: 8.888889, y: 5.0030794}
-  - {x: 8.888889, y: -5.0030794}
-  - {x: -8.888889, y: -5.0030794}
+  - {x: -8.889803, y: -5}
+  - {x: -8.889803, y: 5}
+  - {x: 8.889803, y: 5}
+  - {x: 8.889803, y: -5}
+  - {x: -8.889803, y: -5}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -338,10 +370,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.0003078878
-    width: 1
-    height: 0.9993842
+    x: 0.000051379204
+    y: 0
+    width: 0.99989724
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -652,6 +684,86 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &901488221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 901488222}
+  - component: {fileID: 901488223}
+  - component: {fileID: 901488224}
+  m_Layer: 13
+  m_Name: HospitalForNPCsToCollideWith
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &901488222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901488221}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.283, y: 0.283, z: 0.283}
+  m_Children: []
+  m_Father: {fileID: 300573463}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &901488223
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901488221}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!68 &901488224
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901488221}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 8, y: -2.21}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -2.983144, y: -3.181756}
+  - {x: -3.0243053, y: -0.2754434}
+  - {x: -1.5892478, y: -0.21100067}
+  - {x: -1.6125134, y: 2.3763168}
+  - {x: 0.1753632, y: 2.4074695}
+  - {x: 0.4373726, y: 3.1166666}
+  - {x: 1.0926412, y: 3.1057918}
+  - {x: 1.2091057, y: 2.2728226}
+  - {x: 2.9901853, y: 2.3394728}
+  - {x: 3.01137, y: -3.2231925}
+  - {x: -3.0527723, y: -3.186779}
 --- !u!1 &934205702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,8 +1133,9 @@ GameObject:
   - component: {fileID: 1676207408}
   - component: {fileID: 1676207407}
   - component: {fileID: 1676207406}
+  - component: {fileID: 1676207409}
   m_Layer: 0
-  m_Name: hospital_cartoon
+  m_Name: hospital_cartoon_and_mask_collection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1038,14 +1151,23 @@ EdgeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -3.045, y: 0}
-  - {x: 3.045, y: 0}
+  - {x: -2.983144, y: -3.181756}
+  - {x: -3.0243053, y: -0.2754434}
+  - {x: -1.5892478, y: -0.21100067}
+  - {x: -1.6125134, y: 2.3763168}
+  - {x: 0.1753632, y: 2.4074695}
+  - {x: 0.4373726, y: 3.1166666}
+  - {x: 1.0926412, y: 3.1057918}
+  - {x: 1.2091057, y: 2.2728226}
+  - {x: 2.9901853, y: 2.3394728}
+  - {x: 3.01137, y: -3.2231925}
+  - {x: -3.0527723, y: -3.186779}
 --- !u!212 &1676207407
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1103,13 +1225,25 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1676207405}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.98, y: -0.59, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 341.27374}
   m_LocalScale: {x: 0.283, y: 0.283, z: 0.283}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 300573463}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1676207409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676207405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c653a5155b3c64983715ec1cf82a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1845307404 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2318940163048237836, guid: f8e0c3f44ea2506429f87854f0dafd78,
@@ -1170,7 +1304,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1083008139
-  m_SortingLayer: -4
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e6c80e7cff6cb87498205bc868b2b964, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
