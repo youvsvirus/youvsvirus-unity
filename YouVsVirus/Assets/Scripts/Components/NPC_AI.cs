@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
+
+
 
 namespace Components
 {
@@ -27,11 +24,18 @@ namespace Components
         /// </summary>
         public float AccelerationFactor = 0.5f;
 
+        public Vector2 point1;
+        public Vector2 point2;
+        
+     //   public void Set
+
 
         // Start is called before the first frame update
         public override void Start()
         {
             base.Start(); // call base class
+           // point1 = new Vector2(0, 0);
+           // point2 = new Vector2(0, 0);
 
             //set an initial velocity for our npc in a random direction
             //myRigidbody.velocity = UnityEngine.Random.onUnitSphere*UnityEngine.Random.Range(MinVelocity,MaxVelocity);
@@ -51,8 +55,12 @@ namespace Components
             {
               //  RandomMovement();
             }
-        }
 
+        }
+        private void Update()
+        {
+            print(point1);
+        }
         /// <summary>
         /// Sprite images corresponding to infections states of npc
         /// </summary>
@@ -64,6 +72,27 @@ namespace Components
             RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recovered");
             DeadSprite = Resources.Load<Sprite>("SmileyPictures/npc_dead");
         }
-                
+
+        /// <summary>
+        /// Check if someone knocks on our door
+        /// </summary>
+        /// <param name="other"> the other collider which can only be the player </param>
+        //void OnCollisionEnter2D(Collider2D other)
+        //{
+        //    // we need to end the game only if player hits exit
+        //    // normally only the player will be able to get here
+        //    // so this is just a safety measure
+        //    // the collider attached to the infection trigger is hit first
+        //    // hence we have to get its "parent" the player
+        //    if (other.gameObject.GetComponentInParent<NPC_AI>() != null)
+        //    {
+        //        float otherx = gameObject.GetComponentInParent<NPC_AI>().point1.x;
+        //        float othery = gameObject.GetComponentInParent<NPC_AI>().point1.y;
+
+        //        point1.y = (othery - point1.y) / 2f;
+        //        point2.y = -point1.y;
+        //    }
+        //}
+
     }
 }

@@ -54,6 +54,20 @@ namespace Components
                     }
                 }
             }
+
+            if (other.gameObject.GetComponentInParent<NPC_AI>() != null)
+            {
+                NPC_AI myNPC = GetComponentInParent<NPC_AI>();
+                if (myNPC != null)
+                {
+
+                    float otherx = gameObject.GetComponentInParent<NPC_AI>().point1.x;
+                    float othery = gameObject.GetComponentInParent<NPC_AI>().point1.y;
+
+                    myNPC.point1.y = (othery - myNPC.point1.y) / 2f;
+                    myNPC.point2.y = -myNPC.point1.y;
+                }
+            }
         }
 
       
