@@ -26,6 +26,7 @@ public class DestinedAI : MonoBehaviour
         ai = GetComponent<IAstarAI>();
         point1 = GetComponent<NPC_AI>().point1;
         point2 = GetComponent<NPC_AI>().point2;
+        GetComponent<NPC_AI>().currentDest = point1;
         bounds = cam.GetComponent<CameraResolution>().GetMapExtents();
  
     }
@@ -59,13 +60,16 @@ public class DestinedAI : MonoBehaviour
                 ai.destination = point1;
                 ai.SearchPath();
                 Point1Reached = true;
-                
+                GetComponent<NPC_AI>().currentDest = point2;
+
+
             }
             else
             {
                 ai.destination = point2;
                 ai.SearchPath();
                 Point1Reached = false;
+                GetComponent<NPC_AI>().currentDest = point1;
             }
         }
     }

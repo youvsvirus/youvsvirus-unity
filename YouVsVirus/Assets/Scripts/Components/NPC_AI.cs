@@ -26,8 +26,9 @@ namespace Components
 
         public Vector2 point1;
         public Vector2 point2;
-        
-     //   public void Set
+        public Vector2 currentDest;
+
+        //   public void Set
 
 
         // Start is called before the first frame update

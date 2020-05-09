@@ -158,7 +158,7 @@ namespace Components
                     NPC_AIs[i].gameObject.layer = LayerMask.NameToLayer("NPC_AI");
             }
 
-       //     GameObject.Find("BridgeColliders").SetActive(false);
+            GameObject.Find("BridgeColliders").SetActive(false);
         }
 
         /// <summary>

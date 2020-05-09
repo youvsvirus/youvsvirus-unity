@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Components
 {
@@ -12,7 +10,8 @@ namespace Components
         /// Edit this member only from the editor; when changing the radius from code, use SetInfectionRadius()!
         /// </summary>
         public float InfectionRadius = 15;
-
+        private Vector2 p;
+        private Vector2 q;
         // Start is called before the first frame update
         void Start()
         {
@@ -60,17 +59,32 @@ namespace Components
                 NPC_AI myNPC = GetComponentInParent<NPC_AI>();
                 if (myNPC != null)
                 {
+                    p = other.gameObject.GetComponentInParent<NPC_AI>().currentDest;
+                    q = myNPC.currentDest;
+        
+                    myNPC.currentDest.y = (p.y - q.y) / 2f;
+                    other.gameObject.GetComponentInParent<NPC_AI>().currentDest.y = -q.y;
+                }
+            }
+        }
+        void OnTriggerExit(Collider2D other)
+        {
+            if (other.gameObject.GetComponentInParent<NPC_AI>() != null)
+            {
+                NPC_AI myNPC = GetComponentInParent<NPC_AI>();
+                if (myNPC != null)
+                {
+                    p = other.gameObject.GetComponentInParent<NPC_AI>().currentDest;
+                    q = myNPC.currentDest;
 
-                    float otherx = gameObject.GetComponentInParent<NPC_AI>().point1.x;
-                    float othery = gameObject.GetComponentInParent<NPC_AI>().point1.y;
-
-                    myNPC.point1.y = (othery - myNPC.point1.y) / 2f;
-                    myNPC.point2.y = -myNPC.point1.y;
+                    myNPC.currentDest = q;
+                    other.gameObject.GetComponentInParent<NPC_AI>().currentDest = p;
                 }
             }
         }
 
-      
+
+
         public void SetInfectionRadius(float r)
         {
             InfectionRadius = r;
