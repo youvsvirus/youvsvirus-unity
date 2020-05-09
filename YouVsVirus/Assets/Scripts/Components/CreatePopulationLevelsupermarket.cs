@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Components
 {
-    public class CreatePopulation : MonoBehaviour
+    public class CreatePopulationLevelsupermarket : MonoBehaviour
     {
         private float safetyMargin = 0.2f;
 
@@ -32,26 +32,34 @@ namespace Components
         /// </summary>
         public List<NPC> NPCs { get; private set; }
 
+        public List<NPC_AI> NPC_AIs { get; private set; }
+
         private LevelSettings levelSettings;
         /// <summary>
         /// the screen dimensions
         /// </summary>
         private Vector2 screenBounds;
 
-        public CreatePopulation()
+        private int numNPCs = 20;
+        private int numNPC_AIs = 8;
+        private int allHumans = 0;
+
+        public CreatePopulationLevelsupermarket()
         {
             NPCs = new List<NPC>(30);
+            NPC_AIs = new List<NPC_AI>(8);
         }
 
         // Awake is called the moment this component is created
-        void Awake()
+        void Start()
         {
             levelSettings = LevelSettings.GetActiveLevelSettings();
-            LevelSettings.GetActiveLevelSettings().NumberOfNPCs = 25;
+            LevelSettings.GetActiveLevelSettings().NumberOfNPCs = numNPCs;
             //This gets the Main Camera from the Scene
             MainCamera = Camera.main;
             // transform screen dimenensions into world space
             screenBounds = MainCamera.GetComponent<CameraResolution>().GetMapExtents();
+            allHumans = 1 + numNPCs + numNPC_AIs;
             PlaceHumans();
         }
 
@@ -71,7 +79,7 @@ namespace Components
             int cellCount = rows * columns;
 
             //  Randomly select grid indices
-            int[] indices = ChooseUnique(levelSettings.NumberOfNPCs + 1, 0, cellCount);
+            int[] indices = ChooseUnique(allHumans + 1, 0, cellCount);
 
             Vector2 origin = -screenBounds;
 
@@ -98,6 +106,18 @@ namespace Components
             {
                 NPCs[i].SetInitialCondition(NPC.EXPOSED);
             }
+
+
+            //  Place the NPC_AIs in the grid
+            for (int i = 0; i < numNPC_AIs; i++)
+            {
+                NPC_AIs.Add(Instantiate(npcPrefab.GetComponent<NPC_AI>(),
+                                        GetCoordinatesInGrid(indices[i], columns, cellRadius, origin),
+                                        Quaternion.identity));
+                // give all npcs a unique id
+                NPC_AIs[i].myID = numNPCs + 1 + i;
+            }
+            NPC_AIs[0].SetInitialCondition(NPC.EXPOSED);
         }
 
 

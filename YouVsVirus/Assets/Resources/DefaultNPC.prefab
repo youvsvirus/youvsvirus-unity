@@ -137,6 +137,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2a997f20f561e42940449bcd2c9702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myID: 0
+  levelStats: {fileID: 0}
+  wasInfectedByPlayer: 0
   MinVelocity: 1
   MaxVelocity: 3
   AccelerationFactor: 0.5

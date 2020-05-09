@@ -10,7 +10,7 @@ namespace Components
     /// <summary>
     /// Our NPCs
     /// </summary>
-    public class NPC : HumanBase
+    public class NPC_AI : HumanBase
     {
         /// <summary>
         /// the minimum velocity we allow for the npcs
@@ -34,7 +34,7 @@ namespace Components
             base.Start(); // call base class
 
             //set an initial velocity for our npc in a random direction
-            myRigidbody.velocity = UnityEngine.Random.onUnitSphere*UnityEngine.Random.Range(MinVelocity,MaxVelocity);
+            //myRigidbody.velocity = UnityEngine.Random.onUnitSphere*UnityEngine.Random.Range(MinVelocity,MaxVelocity);
         }
         /// <summary>
 		/// FixedUpdate: FixedUpdate is often called more frequently than Update. 
@@ -49,7 +49,7 @@ namespace Components
         {
             if (CanMove())
             {
-                RandomMovement();
+              //  RandomMovement();
             }
         }
 
@@ -64,45 +64,6 @@ namespace Components
             RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recovered");
             DeadSprite = Resources.Load<Sprite>("SmileyPictures/npc_dead");
         }
-        /// <summary>
-        /// NPC random movement
-        /// if the velocity decreases the npc has some chance of changing their direction
-        /// then the velocity is gradually increased
-        /// </summary>
-        public void RandomMovement()
-        { 
-            // checks if we need to increase the velocity
-            bool increase_vel = false;
-            // the velocity norm to check how fast we are going
-            float vel_norm = myRigidbody.velocity.sqrMagnitude;
-            
-            // if we are getting too slow
-            if (vel_norm < MinVelocity)
-            {
-                // increase velocity later on
-                increase_vel = true;
-                // we have a 20% chance of changing our direction or we are at a dancefloor (or drunk) :-)
-                if (UnityEngine.Random.value < 0.2f ||   (LevelSettings.GetActiveSceneName() == "YouVsVirus_Leveldisco"))
-                    // Random.onUnitSphere returns  a random point on the surface of a sphere with radius 1
-                    // so we do not change the velocity, just the direction
-                    myRigidbody.velocity = UnityEngine.Random.onUnitSphere;                             
-            }
-
-            //  Stop! This is too fast!
-            if (vel_norm > MaxVelocity)
-            {
-                vel_norm = MaxVelocity;
-                increase_vel = false;
-            }
-
-            // we are slow at the moment but do not want to become too fast
-            if (vel_norm < MaxVelocity && increase_vel == true)
-            {
-                // increase the velocity in every call to this function
-                myRigidbody.velocity *= (1f + AccelerationFactor);                    
-            } 
-            
-
-        }             
+                
     }
 }
