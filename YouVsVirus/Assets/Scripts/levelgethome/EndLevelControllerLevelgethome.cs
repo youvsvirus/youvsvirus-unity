@@ -9,36 +9,13 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class EndLevelControllerLevelgethome : EndLevelControllerBase
 {
-    protected bool playerHome = false;
-
     public GameObject CanvasFail;
     public GameObject CanvasSucc;
-
-
-
-    /// <summary>
-    /// Button: Continue to next level
-    /// </summary>
-    public void Continue()
-    {
-        // Restart Button has been pressed, we go back to the main menu
-        SceneManager.LoadScene("StartScreenLevelsupermarket");
-    }
-
     public GameObject CreateHumans;
     /// <summary>
     /// Triggers the end of the level.
     /// Levelgethome calls levels
     /// </summary>
-    /// 
-    /// <summary>
-    /// Notify the end level controller that the player is home
-    /// </summary>
-    public void NotifyPlayerAtHome()
-    {
-        playerHome = true;
-    }
-
     public override void EndLevel()
     {
         //..

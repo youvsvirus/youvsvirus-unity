@@ -40,8 +40,8 @@ public class  InfectionControl : MonoBehaviour
 
     private void Start()
     {
-        // in the get home scene time passes 100 times slower
-        if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelgethome")
+        // in the get home or supermarket scene time passes 100 times slower
+        if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelgethome" || LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelsupermarket")
         {
             DayLength = 100f;
         }

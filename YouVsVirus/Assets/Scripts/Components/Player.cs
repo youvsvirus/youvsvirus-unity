@@ -14,6 +14,18 @@ namespace Components
 		/// </summary>
 		public float speedMultiplier = 5.0f;
 
+		/// <summary>
+		/// The player always has to go to both supermarkets and the first
+		/// one is always out of toilet paper. With this bool we check if
+		/// he already hit one of the supermarkets.
+		/// </summary>
+		public bool wentToFirstSupermarket = false;
+
+		/// <summary>
+		/// Did the player get the toilet paper?
+		/// </summary>
+		public bool hasToiletpaper = false;
+
 
 		/// <summary>
 		/// Start is called before the first frame update

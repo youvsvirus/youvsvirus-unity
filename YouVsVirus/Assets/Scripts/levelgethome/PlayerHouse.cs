@@ -12,9 +12,7 @@ public class PlayerHouse : MonoBehaviour
     /// <summary>
     /// end level if player gets home
     /// </summary>
-    public GameObject EndLevelController;
-    private EndLevelControllerLevelgethome endlevel;
-
+    private EndLevelControllerBase endlevel;
     /// <summary>
     /// Sprite Renderer of player in house
     /// </summary>
@@ -27,8 +25,8 @@ public class PlayerHouse : MonoBehaviour
         playerRend = PlayerInside.GetComponent<SpriteRenderer>();
         playerRend.sortingLayerName = "Background";
         playerRend.sortingOrder = 0;
+        endlevel = LevelSettings.GetActiveEndLevelController();
         // activate end level controller
-        endlevel = LevelSettings.GetActiveEndLevelController().GetComponent<EndLevelControllerLevelgethome>();
 
     }
 
@@ -47,10 +45,20 @@ public class PlayerHouse : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<HumanBase>().tag == "Player")
             {
-                 //activate player in house, deactivate player, end game
-                 StartCoroutine(SetPlayerInHouse(other.gameObject.GetComponentInParent<HumanBase>().gameObject));
-                    
-                                        
+                // in this level we only have to get home
+                if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelgethome")
+                {
+                    //activate player in house, deactivate player, end game
+                    StartCoroutine(SetPlayerInHouse(other.gameObject.GetComponentInParent<HumanBase>().gameObject));
+                }
+                // in this level we have to get home and get toilet paper
+                else if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelsupermarket" && other.gameObject.GetComponentInParent<Player>().hasToiletpaper)
+                {
+                    //activate player in house, deactivate player, end game
+                    StartCoroutine(SetPlayerInHouse(other.gameObject.GetComponentInParent<HumanBase>().gameObject));
+                    // make the toilet paper stop blinking
+                  //  GameObject.Find("ToiletpaperPlayer").GetComponent<SpriteBlink>().startBlinking = false;
+                }
             }
         }
     }
