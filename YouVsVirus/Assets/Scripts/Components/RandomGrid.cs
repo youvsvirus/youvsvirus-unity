@@ -84,6 +84,7 @@ namespace Components
             const int maxAttempts = 50;
             while (notAllAreSpawnable && countAttempt < maxAttempts) 
             {
+                Debug.Log ("Attempting to spawn humans. Attemp #" + countAttempt);
                 //  Randomly select grid indices
                 indices = ChooseUnique(npcNumber + 1, 0, cellCount);
 
@@ -97,6 +98,7 @@ namespace Components
                         notAllAreSpawnable = true;
                     }
                 }
+                countAttempt++;
             }
             for (int i = 0; i < npcNumber + 1; i++)
             {
