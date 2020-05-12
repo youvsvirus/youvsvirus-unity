@@ -14,6 +14,11 @@ namespace Components
         /// mask prefab to be set in the editor.
         /// </summary>
         public GameObject maskPrefab;
+        
+        /// <summary>
+        /// places on the map where no mask should spawn
+        /// </summary>
+        public GameObject nonSpawnableSpace;
 
         private FaceMask mask;
 
@@ -51,8 +56,14 @@ namespace Components
             float bufferZoneX = screenBounds[0]/10;
             float bufferZoneY = screenBounds[1]/10;
 
-            origin[0] = UnityEngine.Random.Range (-screenBounds[0] + bufferZoneX, screenBounds[0] - bufferZoneX);
-            origin[1] = UnityEngine.Random.Range (-screenBounds[1] + bufferZoneY, screenBounds[1] - bufferZoneY);
+            // Create random coordinates and check if we can spawn a masks there.
+            // If not, we recreate.
+            //do
+             {
+                origin[0] = UnityEngine.Random.Range (-screenBounds[0] + bufferZoneX, screenBounds[0] - bufferZoneX);
+                origin[1] = UnityEngine.Random.Range (-screenBounds[1] + bufferZoneY, screenBounds[1] - bufferZoneY);
+            }
+            // while (false && !nonSpawnableSpace.GetComponent<nonSpawnableSpace>().coordinatesAreSpawnable2D (origin));
 
             Debug.Log ("Placing mask at " + origin);
             //  Place the mask
