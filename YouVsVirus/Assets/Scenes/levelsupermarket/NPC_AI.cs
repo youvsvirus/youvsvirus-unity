@@ -55,7 +55,18 @@ namespace Components
             // Update the destination of the AI if
             // the AI is not already calculating a path and
             // the ai has reached the end of the path or it has no path at all
-            if (!ai.pathPending && (ai.reachedEndOfPath || !ai.hasPath))
+            //if(Vector2.SqrMagnitude(ai.velocity) < 0.3f)
+            //{
+            //    ai.destination = nextDest;
+            //    ai.SearchPath();
+            //    print(myID);
+            //    // swap current and next destination
+            //    Vector2 tempDest = currentDest;
+            //    currentDest = nextDest;
+            //    nextDest = tempDest;
+            //}
+
+            if (!ai.pathPending && (ai.reachedEndOfPath || !ai.hasPath) || (Vector2.SqrMagnitude(ai.velocity) < 0.01f && Time.frameCount%100 ==0))
             {
                 ai.destination = currentDest;
                 ai.SearchPath();

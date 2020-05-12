@@ -102,9 +102,9 @@ namespace Components
             CreateHumans();
             // where am I
 
-            // patrol supermarket and Willy-Brandt-Platz
-            NPC_AIs[0].currentDest = new Vector2(9, -3f);
-            NPC_AIs[0].nextDest = new Vector2(7f, 2f);
+            // patrol supermarket and near Willy-Brandt-Platz
+            NPC_AIs[0].currentDest = new Vector2(5.37f, -3.44f);
+            NPC_AIs[0].nextDest = new Vector2(8f, 4.4f);
 
             // patrol Severinsbrücke
             NPC_AIs[1].currentDest = new Vector2(-3.11f, -3.85f);
