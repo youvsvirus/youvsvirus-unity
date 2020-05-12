@@ -11,6 +11,11 @@ using UnityEngine;
 /// </summary>
 public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
 {
+    public GameObject CanvasFail;
+    public GameObject CanvasSucc;
+
+    public GameObject CreateHumans;
+
     /// <summary>
     /// The number of masks that the player needs to collect
     /// to complete the level.
@@ -59,5 +64,33 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
     protected override bool CheckEndCondition ()
     {
         return allMaskscollected;
+    }
+
+    private void Update()
+    {
+        // if the player is exposed we fail
+        if (playerExposed)
+        {
+            // all NPCs show true infection statuts
+            CreateHumans.GetComponent<Components.CreatePopLevelgethome>().CummulativeSpriteUpdate();
+            CanvasFail.SetActive(true);
+        }
+
+        // if the player is at home and well we win
+        if(CheckEndCondition () && !playerExposed)
+        {
+            // all NPCs show true infection statuts
+            CreateHumans.GetComponent<Components.CreatePopLevelgethome>().CummulativeSpriteUpdate();
+            CanvasSucc.SetActive(true);
+        }
+            
+    }
+    /// <summary>
+    /// deactive both canvases before level starts
+    /// </summary>
+    void Awake()
+    {
+        CanvasFail.SetActive(false);
+        CanvasSucc.SetActive(false);
     }
 }

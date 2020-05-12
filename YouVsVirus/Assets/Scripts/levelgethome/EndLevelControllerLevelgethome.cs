@@ -14,6 +14,7 @@ public class EndLevelControllerLevelgethome : EndLevelControllerBase
     public GameObject CanvasFail;
     public GameObject CanvasSucc;
 
+    public GameObject CreateHumans;
 
 
     /// <summary>
@@ -25,7 +26,6 @@ public class EndLevelControllerLevelgethome : EndLevelControllerBase
         SceneManager.LoadScene("StartScreenLevelsupermarket");
     }
 
-    public GameObject CreateHumans;
     /// <summary>
     /// Triggers the end of the level.
     /// Levelgethome calls levels

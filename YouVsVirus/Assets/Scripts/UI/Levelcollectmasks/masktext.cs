@@ -17,7 +17,9 @@ public class masktext : MonoBehaviour
     {
         // Get a reference to the text component.
         m_TextComponent = GetComponent<TMP_Text>();
-        // Get a reference to the player
+        // Try to get a reference to the player
+        // This may fail if the player is not alive yet.
+        // Thus, we will check again during update.
         GetPlayer();
         // Set the text
         SetText();
