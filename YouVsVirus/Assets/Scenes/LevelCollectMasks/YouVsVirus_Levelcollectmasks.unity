@@ -1541,6 +1541,7 @@ MonoBehaviour:
   npcPrefab: {fileID: 8900475433866948943, guid: ab9d2a99c32f65a43a4c99a9379ce533,
     type: 3}
   nonSpawnableSpaceObj: {fileID: 968884779}
+  npcNumber: 30
 --- !u!4 &742637916
 Transform:
   m_ObjectHideFlags: 0
@@ -2355,7 +2356,7 @@ GameObject:
   - component: {fileID: 1293853907}
   - component: {fileID: 1293853906}
   m_Layer: 0
-  m_Name: EndGameController
+  m_Name: EndLevelController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2373,8 +2374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212d2ad140b43ec41ac51e5353079206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelTimeout: 200
-  EndConditionMetDelay: 3
+  LevelTimeout: 0
+  EndConditionMetDelay: 0.5
   playerExposed: 0
   CanvasFail: {fileID: 147468431}
   CanvasSucc: {fileID: 1196154525}

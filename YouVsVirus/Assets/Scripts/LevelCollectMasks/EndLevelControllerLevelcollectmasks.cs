@@ -20,7 +20,7 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
     /// The number of masks that the player needs to collect
     /// to complete the level.
     /// </summary>
-    private const int numberOfMasksNeeded = 3;
+    private const int numberOfMasksNeeded = 8;
 
     /// <summary>
     /// Will get set to true if all masks where collected.
@@ -33,8 +33,6 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
     public override void Start()
     {
         base.Start();
-        // After we have collected all masks, wait 0.5 seconds before ending.
-        EndConditionMetDelay = 0.5f;
     }
 
     /// <summary>

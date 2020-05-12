@@ -1361,6 +1361,7 @@ MonoBehaviour:
   npcPrefab: {fileID: 8900475433866948943, guid: ab9d2a99c32f65a43a4c99a9379ce533,
     type: 3}
   nonSpawnableSpaceObj: {fileID: 702865890}
+  npcNumber: 42
 --- !u!4 &742637916
 Transform:
   m_ObjectHideFlags: 0
