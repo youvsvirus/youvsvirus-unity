@@ -94,12 +94,8 @@ namespace Components
             // place player near top left edge of the screen (using the not shrunk screen bounds)
             Vector2 coords;
             
-            // Create random coordinates and check whether they are spawnable
-            do
-            {
-                coords = new Vector2(-randomGridForHumans.screenBounds.x / 0.8f + 0.2f, randomGridForHumans.screenBounds.y / 0.8f - 0.2f);
-            }
-            while (!nonSpawnableSpaceClass.coordinatesAreSpawnable2D(coords));
+            // Create human in upper left corner
+            coords = new Vector2(-randomGridForHumans.screenBounds.x / 0.8f + 0.2f, randomGridForHumans.screenBounds.y / 0.8f - 0.2f);
 
             Vector3 coords3D = new Vector3 (coords[0], coords[1], 0);
             //  Place the player
