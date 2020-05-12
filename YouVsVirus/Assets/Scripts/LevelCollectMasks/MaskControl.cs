@@ -15,7 +15,7 @@ namespace Components
         /// </summary>
         public GameObject maskPrefab;
 
-        public FaceMask mask;
+        private FaceMask mask;
 
         private LevelSettings levelSettings;
 
