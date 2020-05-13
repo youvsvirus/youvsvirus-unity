@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // The nonSpawnableSpace class serves the purpose to
-// defines regions on the map that are non-spawnable.
+// define regions on the map that are non-spawnable.
 // Attach cirlceColliders to the game object that define
 // space where nothing should spawn.
 // If you then call the function coordinatesAreSpawnable2D with
