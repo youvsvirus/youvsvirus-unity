@@ -25,6 +25,14 @@ public class nonSpawnableSpace : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Given a 2D vector of coordinates, check whether the coordinates
+    /// are within the nonSpawnable space defined by the associated
+    /// circle colliders.
+    /// </summary>
+    /// <returns> True if the coordinates are outside of the nonSpawnable space.
+    /// False otherwise.
+    /// </returns>
     public bool coordinatesAreSpawnable2D (Vector2 coord2D)
     {
         CircleCollider2D[] colliders2D;
