@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ToiletPaperRotate : MonoBehaviour
 {
-    // Update is called once per frame
+    // Update is called once per frame, makes toilet paper rotate
     void Update()
     {
         Vector3 rotateVec = new Vector3(0, 45, 0);

@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles the distribution of toilet paper
+/// The appearance of notifications for the player
+/// The counter for the number of rolls
+/// </summary>
 public class Supermarket : MonoBehaviour
 {
     /// <summary>
@@ -28,24 +33,24 @@ public class Supermarket : MonoBehaviour
     /// <summary>
     /// Check if someone knocks on the supermarket door
     /// </summary>
-    /// <param name="other"> the other collider which can only be the player </param>
+    /// <param name="other"> the other collider</param>
     void OnTriggerEnter2D(Collider2D other)
     {
         // the player hits the supermarket
         // the collider attached to the infection trigger is hit first
-        // hence we have to get its "parent" the player
+        // hence we have to get its "parent" and check if this is the player
         if (other.gameObject.GetComponentInParent<HumanBase>() != null)
         {
             if (other.gameObject.GetComponentInParent<HumanBase>().tag == "Player")
             {
-                //activate player in house, deactivate player, end game
+                //activate player in supermarket
                 StartCoroutine(PlayerInSupermarket(other.gameObject.GetComponentInParent<Player>()));
             }
         }
     }
 
     /// <summary>
-    /// Checks if the player get the toilet paper, i.e.
+    /// Checks if the player gets the toilet paper, i.e.
     /// if he went to both supermarkets. Displays explanations
     /// when supermarket is out of toilet paper. 
     /// </summary>

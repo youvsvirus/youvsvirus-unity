@@ -17,12 +17,6 @@ public class EndLevelControllerLevelsupermarket : EndLevelControllerBase
     /// Triggers the end of the level.
     /// Levelgethome calls levels
     /// </summary>
-
-    public override void EndLevel()
-    {
-        //..
-    }
-
     private void Update()
     {
         // if the player is exposed we fail

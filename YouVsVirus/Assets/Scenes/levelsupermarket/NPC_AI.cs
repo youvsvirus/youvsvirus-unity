@@ -5,7 +5,8 @@ using Pathfinding;
 namespace Components
 {
     /// <summary>
-    /// Our NPCs
+    /// Our NPC_AIs which do not move randomly but follow a path
+    /// Velocity is set in editor
     /// </summary>
     public class NPC_AI : HumanBase
     {
@@ -15,17 +16,12 @@ namespace Components
         IAstarAI ai;
 
         /// <summary>
-        /// The factor by which the velocity increases each se
-        /// </summary>
-        public float AccelerationFactor = 0.5f;
-
-        /// <summary>
-        /// The NPCs current destination, set by create humans
+        /// The NPCs current destination, set by CreateHumans
         /// </summary>
         public Vector2 currentDest;
 
         /// <summary>
-        /// The NPCs next destination, , set by create humans
+        /// The NPCs next destination, set by CreateHumans
         /// </summary>
         public Vector2 nextDest;
 
