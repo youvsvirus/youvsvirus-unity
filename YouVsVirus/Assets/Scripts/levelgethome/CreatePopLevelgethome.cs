@@ -65,7 +65,7 @@ namespace Components
             LevelSettings.GetActiveLevelSettings().SocialDistancingFactor = 18;
             LevelSettings.GetActiveLevelSettings().NumberOfNPCs = npcNumber;
             // We do not show the infection status in this level
-            LevelSettings.GetActiveLevelSettings().ShowInfectinoStatus = false;
+            LevelSettings.GetActiveLevelSettings().ShowInfectionStatus = false;
             // this gets the Main Camera from the Scene
             // the grid cell has to be as large as the player's infection radius
             randomGridForHumans = GameObject.Find("RandomGrid").GetComponent<RandomGrid>();
