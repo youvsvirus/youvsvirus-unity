@@ -32,6 +32,11 @@ public class LevelSettings : MonoBehaviour
     public bool ShowInfectionStatus = true;
 
     /// <summary>
+    /// The length of a simulated day in seconds.
+    /// </summary>
+    public float DayLength = 1f;
+
+    /// <summary>
     /// the current active scene
     /// </summary>
     private Scene scene;

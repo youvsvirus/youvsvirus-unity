@@ -66,6 +66,8 @@ namespace Components
             LevelSettings.GetActiveLevelSettings().NumberOfNPCs = npcNumber;
             // We do not show the infection status in this level
             LevelSettings.GetActiveLevelSettings().ShowInfectionStatus = false;
+            // Set the DayLength for this level
+            LevelSettings.GetActiveLevelSettings().DayLength = 100;
             // this gets the Main Camera from the Scene
             // the grid cell has to be as large as the player's infection radius
             randomGridForHumans = GameObject.Find("RandomGrid").GetComponent<RandomGrid>();
