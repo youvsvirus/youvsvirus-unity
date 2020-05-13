@@ -27,6 +27,11 @@ public class LevelSettings : MonoBehaviour
     public float SocialDistancingFactor = 50f;
 
     /// <summary>
+    /// Do we show the infection status of the smileys in this level or not.
+    /// </summary>
+    public bool ShowInfectinoStatus = true;
+
+    /// <summary>
     /// the current active scene
     /// </summary>
     private Scene scene;
