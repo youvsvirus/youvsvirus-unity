@@ -135,7 +135,7 @@ namespace Components
             }
 
             // in Levelgethome we want all the smileys to stay the same except for the player
-            if(LevelSettings.GetActiveLevelSettings().ShowInfectinoStatus == true || this.tag == "Player" )
+            if(LevelSettings.GetActiveLevelSettings().ShowInfectionStatus == true || this.tag == "Player" )
             {
                 // Update the sprite image
                 UpdateSpriteImage();
