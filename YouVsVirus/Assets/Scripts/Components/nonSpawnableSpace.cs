@@ -13,17 +13,6 @@ namespace Components
 {
 public class nonSpawnableSpace : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     /// <summary>
     /// Given a 2D vector of coordinates, check whether the coordinates
