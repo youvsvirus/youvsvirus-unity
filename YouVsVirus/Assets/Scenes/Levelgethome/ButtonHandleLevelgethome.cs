@@ -10,7 +10,7 @@ public class ButtonHandleLevelgethome : ButtonHandleBase
     /// </summary>
     public void Continue()
     {
-        // Restart Button has been pressed, we go back to the main menu
+        // Continue Button has been pressed, load next scene
         SceneManager.LoadScene("StartScreenLevelsupermarket");
     }
 }

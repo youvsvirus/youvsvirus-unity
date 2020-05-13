@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using TMPro;
 
 namespace Components
 {
@@ -73,6 +74,8 @@ namespace Components
         {
             for (int i = 0; i < NPCs.Count; i++)
                 NPCs[i].UpdateSpriteImage();
+            for (int i = 0; i < NPC_AIs.Count; i++)
+                NPC_AIs[i].UpdateSpriteImage();
         }
 
         // Awake is called the moment this component is created

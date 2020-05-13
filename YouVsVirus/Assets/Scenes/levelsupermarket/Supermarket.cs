@@ -16,14 +16,13 @@ public class Supermarket : MonoBehaviour
     public GameObject Toiletpaper;
 
     /// <summary>
-    /// the toilet paper above the player's house
+    /// the toilet paper counter
     /// </summary>
-    public GameObject ToiletpaperPlayer;
+    public GameObject NumberOfRolls;
 
     private void Start()
     {
         CanvasSupermarket.SetActive(false);
-        ToiletpaperPlayer.SetActive(false);
     }
 
     /// <summary>
@@ -60,9 +59,9 @@ public class Supermarket : MonoBehaviour
             // wait a little to let the paper disappear
             yield return new WaitForSeconds(0.3f);
             Toiletpaper.SetActive(false);
-            // Start blinking toilet paper above player's house
-            ToiletpaperPlayer.SetActive(true);
-            ToiletpaperPlayer.GetComponent<SpriteBlink>().startBlinking = true;
+            // player has toilet paper
+            NumberOfRolls.GetComponent<TMPro.TMP_Text>().text = "1";
+
         }
         else
         {
