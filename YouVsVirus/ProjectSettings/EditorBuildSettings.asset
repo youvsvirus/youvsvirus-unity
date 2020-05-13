@@ -36,10 +36,10 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelCollectMasks/StartscreenLevelcollectmasks.unity
     guid: cc22b6d4347f05b46a480a402e78f1cb
   - enabled: 1
-    path: Assets/Scenes/EndScreenLevelsupermarket_2.unity
+    path: Assets/Scenes/LevelCollectMasks/StartscreenLevelcollectmasks.unity
     guid: 3067c6d83b88f9d43a72e2e68ae1c3fb
   - enabled: 1
-    path: Assets/Scenes/EndScreenLevelsupermarket_2.unity
+    path: Assets/Scenes/LevelCollectMasks/StartscreenLevelcollectmasks.unity
     guid: 3067c6d83b88f9d43a72e2e68ae1c3fb
   - enabled: 1
     path: Assets/Scenes/YouVsVirus_Leveldisco.unity
