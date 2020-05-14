@@ -44,7 +44,7 @@ namespace Components
 
         public CreatePopLevelgethome()
         {
-            NPCs = new List<NPC>(42);
+            NPCs = new List<NPC>(npcNumber);
         }
 
         /// <summary>
@@ -64,6 +64,10 @@ namespace Components
             // get active level settings - the get home scene always has 50% social distancing
             LevelSettings.GetActiveLevelSettings().SocialDistancingFactor = 18;
             LevelSettings.GetActiveLevelSettings().NumberOfNPCs = npcNumber;
+            // We do not show the infection status in this level
+            LevelSettings.GetActiveLevelSettings().ShowInfectionStatus = false;
+            // Set the DayLength for this level
+            LevelSettings.GetActiveLevelSettings().DayLength = 100;
             // this gets the Main Camera from the Scene
             // the grid cell has to be as large as the player's infection radius
             randomGridForHumans = GameObject.Find("RandomGrid").GetComponent<RandomGrid>();

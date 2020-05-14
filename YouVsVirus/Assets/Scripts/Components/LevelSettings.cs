@@ -27,6 +27,16 @@ public class LevelSettings : MonoBehaviour
     public float SocialDistancingFactor = 50f;
 
     /// <summary>
+    /// Do we show the infection status of the smileys in this level or not.
+    /// </summary>
+    public bool ShowInfectionStatus = true;
+
+    /// <summary>
+    /// The length of a simulated day in seconds.
+    /// </summary>
+    public float DayLength = 1f;
+
+    /// <summary>
     /// the current active scene
     /// </summary>
     private Scene scene;
@@ -82,4 +92,3 @@ public class LevelSettings : MonoBehaviour
         return ActiveEndLevelController;
     }
 }
-
