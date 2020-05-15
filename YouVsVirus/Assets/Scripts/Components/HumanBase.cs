@@ -134,10 +134,8 @@ namespace Components
                     }
             }
 
-            // in Levelgethome and Levelgethome we want all the smileys to stay the same except for the player
-            if(!(LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelgethome" || 
-               LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelsupermarket") || 
-               this.tag == "Player" )
+            // we want all the smileys to stay the same except for the player
+            if(LevelSettings.GetActiveLevelSettings().ShowInfectionStatus == true || this.tag == "Player" )
             {
                 // Update the sprite image
                 UpdateSpriteImage();
