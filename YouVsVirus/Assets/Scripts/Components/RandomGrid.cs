@@ -77,6 +77,7 @@ namespace Components
         /// <summary>
         /// compute a list of random coords generated so that all prefab clones
         /// are placed on a grid in safe distance from each other
+        /// including space where NPCs are not allowed to spawn
         /// <param name="scale"> e.g. the player's scale needed for grid size </param>
         /// <param name="infection_radius"> e.g. the player's infection radius for grid size </param>
         /// <param name="npcNumber"> number of prefabs clones to be placed, player is +1 </param>

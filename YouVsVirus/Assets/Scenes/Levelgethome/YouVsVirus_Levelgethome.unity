@@ -963,11 +963,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.889803, y: -5}
-  - {x: -8.889803, y: 5}
-  - {x: 8.889803, y: 5}
-  - {x: 8.889803, y: -5}
-  - {x: -8.889803, y: -5}
+  - {x: -8.888889, y: -5}
+  - {x: -8.888889, y: 5}
+  - {x: 8.888889, y: 5}
+  - {x: 8.888889, y: -5}
+  - {x: -8.888889, y: -5}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -987,9 +987,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.000051379204
+    x: 0
     y: 0
-    width: 0.99989724
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
