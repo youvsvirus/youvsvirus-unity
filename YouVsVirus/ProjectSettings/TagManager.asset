@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Friend
   - NPC
+  - Mask
   layers:
   - Default
   - TransparentFX
@@ -19,9 +20,9 @@ TagManager:
   - Dancefloor
   - NPC
   - Player
-  - 
-  - 
-  - 
+  - CollideswithNPCbutnotPlayer
+  - Collectables
+  - DoesntCollideWithAnything
   - 
   - 
   - 
@@ -45,6 +46,9 @@ TagManager:
     locked: 0
   - name: Dead
     uniqueID: 2062951519
+    locked: 0
+  - name: Collectables
+    uniqueID: 3906036087
     locked: 0
   - name: Living
     uniqueID: 2061542899
