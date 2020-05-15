@@ -59,7 +59,7 @@ namespace Components
             // and the number of humans that we want to place
             randomGridForHumans.GenerateRandomCoords(playerPrefab.transform.localScale.x,
                                                             playerPrefab.GetComponentInChildren<InfectionTrigger>().InfectionRadius,
-                                                            npcNumber, nonSpawnable.GetComponent<nonSpawnableSpace>());
+                                                            npcNumber);
             // place humans on the grid
             CreateHumans();
         }
