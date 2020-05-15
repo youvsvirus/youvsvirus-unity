@@ -52,8 +52,9 @@ namespace Components
         /// <param name="scale"> e.g. the player's scale needed for grid size </param>
         /// <param name="infection_radius"> e.g. the player's infection radius for grid size </param>
         /// <param name="npcNumber"> number of prefabs clones to be placed, player is +1 </param>
+        /// <param name="nonSpawnable"> space in which no NPC should spawn </param>
         /// </summary>
-        public void GenerateRandomCoords(float scale, float infection_radius, int npcNumber)
+        public void GenerateRandomCoords(float scale, float infection_radius, int npcNumber, nonSpawnableSpace nonSpawnable)
         {
             //  Determine the size of a single cell
             float cellRadius = GetCellRadius(scale, infection_radius);
@@ -64,11 +65,41 @@ namespace Components
             int rows = gridSize[0];
             int columns = gridSize[1];
             int cellCount = rows * columns;
-
-            //  Randomly select grid indices
-            int[] indices = ChooseUnique(npcNumber + 1, 0, cellCount);
+            bool notAllAreSpawnable = true;
 
             Vector2 origin = -screenBounds;
+
+            // Create random coordinates until all are in spawnable space
+            // This way it is really ineffective, because we create all coords and
+            // then check if they are spawnable and if not create all again.
+            // However, we should take the isSpawnable check into ChooseUnique
+            // and i currently do not know how to do this.
+            //
+            // Since this may crash the program, either because it just
+            // takes too long, or because the spawnable space is just too small to
+            // spawn all smileys, we give up after 50 attempts and just use
+            // the last configuration. Even though some may now live in unspawnable space.
+            int[] indices = null;
+            int countAttempt = 0;
+            const int maxAttempts = 50;
+            while (notAllAreSpawnable && countAttempt < maxAttempts) 
+            {
+                Debug.Log ("Attempting to spawn humans. Attemp #" + countAttempt);
+                //  Randomly select grid indices
+                indices = ChooseUnique(npcNumber + 1, 0, cellCount);
+
+                notAllAreSpawnable = false;
+                for (int i = 0; i < npcNumber + 1; i++)
+                {
+                    if (!nonSpawnable.coordinatesAreSpawnable2D(GetCoordinatesInGrid(indices[i], columns, cellRadius, origin)))
+                    {
+                        // This NPC is non-spawnable. Set notAllAreSpawnable to true and exit the for loop (by setting i = npcNumber, (i dont like break))
+                        i = npcNumber;
+                        notAllAreSpawnable = true;
+                    }
+                }
+                countAttempt++;
+            }
             for (int i = 0; i < npcNumber + 1; i++)
             {
                 RandomCoords.Add(GetCoordinatesInGrid(indices[i], columns, cellRadius, origin));

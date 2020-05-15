@@ -37,6 +37,10 @@ namespace Components
 
         private RandomGrid randomGridForHumans;
 
+        public GameObject nonSpawnableSpaceObj;
+
+        private nonSpawnableSpace nonSpawnableSpaceClass;
+
         /// <summary>
         /// Number of instantiated NPCs.
         /// </summary>
@@ -61,6 +65,8 @@ namespace Components
 
         void Start()
         {
+            // Get reference to the nonSpanableSpace class
+            nonSpawnableSpaceClass = nonSpawnableSpaceObj.GetComponent<nonSpawnableSpace>();
             // get active level settings - the get home scene always has 50% social distancing
             LevelSettings.GetActiveLevelSettings().SocialDistancingFactor = 18;
             LevelSettings.GetActiveLevelSettings().NumberOfNPCs = npcNumber;
@@ -79,7 +85,7 @@ namespace Components
             // and the number of humans that we want to place
             randomGridForHumans.GenerateRandomCoords(playerPrefab.transform.localScale.x,
                                                             playerPrefab.GetComponentInChildren<InfectionTrigger>().InfectionRadius,
-                                                            npcNumber);
+                                                            npcNumber, nonSpawnableSpaceClass);
             // place humans on grid
             CreateHumans();
         }
@@ -90,10 +96,15 @@ namespace Components
         private void CreateHumans()
         {
             // place player near top left edge of the screen (using the not shrunk screen bounds)
-            Vector3 coords = new Vector3(-randomGridForHumans.screenBounds.x / 0.8f + 0.2f, randomGridForHumans.screenBounds.y / 0.8f - 0.2f, 0f);
+            Vector2 coords;
+            
+            // Create human in upper left corner
+            coords = new Vector2(-randomGridForHumans.screenBounds.x / 0.8f + 0.2f, randomGridForHumans.screenBounds.y / 0.8f - 0.2f);
+
+            Vector3 coords3D = new Vector3 (coords[0], coords[1], 0);
             //  Place the player
             Player = Instantiate(playerPrefab.GetComponent<Player>(),
-                                 coords,
+                                 coords3D,
                                  Quaternion.identity);
             // give the player a unique id
             Player.myID = npcNumber;
