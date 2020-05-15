@@ -24,15 +24,10 @@ public class Supermarket : MonoBehaviour
     /// the toilet paper counter
     /// </summary>
     public GameObject NumberOfRolls;
-
-    // the audio source
-    AudioSource m_MyAudioSource;
- 
-    
+   
     private void Start()
     {
         CanvasSupermarket.SetActive(false);
-        m_MyAudioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -66,7 +61,6 @@ public class Supermarket : MonoBehaviour
         {
             // player gets toilet paper
             p.hasToiletpaper = true;
-            m_MyAudioSource.Play();
             // wait a little to let the paper disappear
             yield return new WaitForSeconds(0.3f);
             Toiletpaper.SetActive(false);
