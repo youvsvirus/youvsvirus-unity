@@ -65,7 +65,10 @@ namespace Components
         {
             // get active level settings - the party scene always has 50% social distancing
             LevelSettings.GetActiveLevelSettings().SocialDistancingFactor = 50;
-         
+            // need this in every level
+            LevelSettings.GetActiveLevelSettings().ShowInfectionStatus = true;
+            LevelSettings.GetActiveLevelSettings().DayLength = 100f;
+
             // this gets the Main Camera from the Scene
             MainCamera = Camera.main;
             // place the humans
