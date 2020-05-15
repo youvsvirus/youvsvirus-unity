@@ -44,6 +44,18 @@ namespace Components
         public List<NPC_AI> NPC_AIs { get; private set; }
 
         /// <summary>
+        /// the player's house
+        /// needed for getting the player out of the house
+        /// </summary>
+        public GameObject PlayerHouse;
+
+        /// <summary>
+        /// The text instructions to start
+        /// the game
+        /// </summary>
+        public GameObject PressSpace;
+
+        /// <summary>
         /// our level settings
         /// </summary>
         private LevelSettings levelSettings;
@@ -79,6 +91,8 @@ namespace Components
         // Awake is called the moment this component is created
         void Start()
         {
+            // player is in the house at the beginning
+            PlayerHouse.GetComponent<PlayerHouse>().ShowPlayer();
             NPCs = new List<NPC>(npcNumber);
             NPC_AIs = new List<NPC_AI>(npcAINumber);
 
@@ -86,6 +100,9 @@ namespace Components
             LevelSettings.GetActiveLevelSettings().SocialDistancingFactor = 18;
             // our NPC number
             LevelSettings.GetActiveLevelSettings().NumberOfNPCs = npcNumber + npcAINumber;
+            // time-scale is slow and infection status is not shown during game
+            LevelSettings.GetActiveLevelSettings().DayLength = 100f;
+            LevelSettings.GetActiveLevelSettings().ShowInfectionStatus = false;
             // the grid cell has to be as large as the player's infection radius
             randomGridForHumans = GameObject.Find("RandomGrid").GetComponent<RandomGrid>();
             // generate the random coordinates for humans which depend on the scale of the player (who is largest),
@@ -104,6 +121,18 @@ namespace Components
             SetPathsforNPC_AIs();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                // player is no longer shown in the house
+                PlayerHouse.GetComponent<PlayerHouse>().UnshowPlayer();
+                // can start to play
+                Player.gameObject.SetActive(true);
+                PressSpace.gameObject.SetActive(false);
+            }
+        }
+
         /// <summary>
         /// Places the player and all NPCs on the map
         /// </summary>
@@ -117,6 +146,7 @@ namespace Components
                                  Quaternion.identity);
             // give the player a unique id
             Player.myID = 0;
+            Player.gameObject.SetActive(false);
 
             //  Place the NPCs in the grid
             for (int i = 0; i < npcNumber; i++)

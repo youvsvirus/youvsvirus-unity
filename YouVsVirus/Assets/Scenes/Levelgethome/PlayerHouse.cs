@@ -23,8 +23,7 @@ public class PlayerHouse : MonoBehaviour
     {
         // hide player in house
         playerRend = PlayerInside.GetComponent<SpriteRenderer>();
-        playerRend.sortingLayerName = "Background";
-        playerRend.sortingOrder = 0;
+        UnshowPlayer();
         endlevel = LevelSettings.GetActiveEndLevelController();
         // activate end level controller
 
@@ -56,11 +55,22 @@ public class PlayerHouse : MonoBehaviour
                 {
                     //activate player in house, deactivate player, end game
                     StartCoroutine(SetPlayerInHouse(other.gameObject.GetComponentInParent<HumanBase>().gameObject));
-                    // make the toilet paper stop blinking
-                  //  GameObject.Find("ToiletpaperPlayer").GetComponent<SpriteBlink>().startBlinking = false;
+   
                 }
             }
         }
+    }
+
+    public void ShowPlayer()
+    {
+        playerRend.sortingLayerName = "Default";
+        playerRend.sortingOrder = 0;
+    }
+
+    public void UnshowPlayer()
+    {
+        playerRend.sortingLayerName = "Background";
+        playerRend.sortingOrder = 0;
     }
 
     /// <summary>
@@ -69,7 +79,7 @@ public class PlayerHouse : MonoBehaviour
     /// Notifies end level controller
     /// All with a little bit of time delay to make it look good
     /// </summary>
-     private IEnumerator SetPlayerInHouse(GameObject p)
+    private IEnumerator SetPlayerInHouse(GameObject p)
     {
         // takes a little while for the player to get inside and disappear
         yield return new WaitForSeconds(0.3f);
@@ -77,7 +87,7 @@ public class PlayerHouse : MonoBehaviour
         // takes some more time until the player looks outside the window
         yield return new WaitForSeconds(1f);
         playerRend.sprite = endlevel.playerExposed ? Resources.Load<Sprite>("SmileyPictures/player_exposed") : Resources.Load<Sprite>("SmileyPictures/player_healthy");
-        playerRend.sortingLayerName = "Default";
+        ShowPlayer();
         // a little bit later we notify the end level controller that the player is home
         yield return new WaitForSeconds(0.5f);
         endlevel.NotifyPlayerAtHome();

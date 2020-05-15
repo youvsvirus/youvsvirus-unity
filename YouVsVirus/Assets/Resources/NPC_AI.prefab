@@ -142,13 +142,6 @@ MonoBehaviour:
   myID: 0
   levelStats: {fileID: 0}
   wasInfectedByPlayer: 0
-  MinVelocity: 1
-  curVelocity: {x: 0, y: 0}
-  desVelocity: {x: 0, y: 0}
-  MaxVelocity: 1
-  AccelerationFactor: 0.5
-  point1: {x: 0, y: 0}
-  point2: {x: 0, y: 0}
   currentDest: {x: 0, y: 0}
   nextDest: {x: 0, y: 0}
 --- !u!114 &7271644411175272605

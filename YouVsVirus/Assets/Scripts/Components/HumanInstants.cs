@@ -48,6 +48,10 @@ namespace Components
         {
             // get number of NPCs from main menu
             levelSettings = LevelSettings.GetActiveLevelSettings();
+            // need this in every level
+            levelSettings.ShowInfectionStatus = true;
+            levelSettings.DayLength = 1f;
+
             npcNumber = levelSettings.NumberOfNPCs;
             // create our list of NPCs
             NPCs = new List<NPC>(npcNumber);
@@ -59,7 +63,7 @@ namespace Components
             // and the number of humans that we want to place
             randomGridForHumans.GenerateRandomCoords(playerPrefab.transform.localScale.x,
                                                             playerPrefab.GetComponentInChildren<InfectionTrigger>().InfectionRadius,
-                                                            npcNumber, nonSpawnable.GetComponent<nonSpawnableSpace>());
+                                                            npcNumber);
             // place humans on the grid
             CreateHumans();
         }

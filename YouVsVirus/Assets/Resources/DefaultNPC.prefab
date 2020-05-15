@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7271644411175272605}
   - component: {fileID: 2379060102389004291}
   - component: {fileID: 1801475588465177927}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: DefaultNPC
   m_TagString: NPC
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 8900475434363221175}
   - component: {fileID: 8900475434363221174}
   - component: {fileID: 8900475434363221173}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: InfectionTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

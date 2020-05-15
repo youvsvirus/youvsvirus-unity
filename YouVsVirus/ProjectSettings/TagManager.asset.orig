@@ -20,12 +20,18 @@ TagManager:
   - Dancefloor
   - NPC
   - Player
-  - withNPCnotPlayer
-  - Collectables
-  - WithNothing
-  - withNPCnotNPC_AI
+<<<<<<< HEAD
+  - Obstacle
   - NPC_AI
-  - WithAnything
+  - Bridge
+=======
+  - CollideswithNPCbutnotPlayer
+  - Collectables
+  - DoesntCollideWithAnything
+>>>>>>> johannes/#103-nonspawnablespace
+  - 
+  - 
+  - 
   - 
   - 
   - 
