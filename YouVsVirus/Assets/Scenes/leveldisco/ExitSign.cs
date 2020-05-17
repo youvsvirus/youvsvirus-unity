@@ -102,7 +102,34 @@ namespace Components
             // if the player is inected we fail
             friend = GameObject.FindGameObjectWithTag("Friend");
             player = GameObject.FindGameObjectWithTag("Player");
-            endlevel.EndLevel(friend.GetComponent<Friend>().friendFound == true && friend.GetComponent<Friend>().GetCondition() == 0 && player.GetComponent<Player>().GetCondition() == 0);                            
+            // everything is well and the game can end
+            if (friend.GetComponent<Friend>().friendFound == true && friend.GetComponent<Friend>().GetCondition() == 0 && !endlevel.playerExposed)
+            {
+                // as special treat stop music
+                GameObject.Find("AudioSource").GetComponent<AudioSource>().Stop();
+                endlevel.NotifyPlayerAtHome();
+                player.SetActive(false);
+                friend.SetActive(false);
+            }
+            // player goes home without friend and is healthy
+            else if (friend.GetComponent<Friend>().friendFound == false && !endlevel.playerExposed)
+            {
+                endlevel.PlayerExitHealthyWithoutFriend();
+                player.SetActive(false);
+            }
+            // player goes home without friend and is sick 
+            else if (friend.GetComponent<Friend>().friendFound == false && endlevel.playerExposed)
+            {
+                endlevel.PlayerExitSickWithoutFriend();
+                player.SetActive(false);
+            }
+            // player goes home with friend but he or friend is exposed
+            else if (friend.GetComponent<Friend>().friendFound == true || endlevel.playerExposed)
+            {
+                endlevel.PlayerOrFriendExitSick();
+                player.SetActive(false);
+                friend.SetActive(false);
+            }
         }
     }
 }

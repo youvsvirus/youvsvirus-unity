@@ -17,8 +17,6 @@ public class EndLevelControllerBase : MonoBehaviour
     /// </summary>
     public GameObject CanvasSucc = null;
 
-    public GameObject NPCPrefab;
-
     protected float startTime = 0f;
 
     /// <summary>
