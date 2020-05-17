@@ -466,7 +466,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8489df1b855cf3f468a5b0a7d30b17b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EndLevelController: {fileID: 1293853905}
   PlayerInside: {fileID: 2129108441}
 --- !u!1 &168650349
 GameObject:
@@ -963,11 +962,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888889, y: -5}
-  - {x: -8.888889, y: 5}
-  - {x: 8.888889, y: 5}
-  - {x: 8.888889, y: -5}
-  - {x: -8.888889, y: -5}
+  - {x: -8.888887, y: -5}
+  - {x: -8.888887, y: 5}
+  - {x: 8.888887, y: 5}
+  - {x: 8.888887, y: -5}
+  - {x: -8.888887, y: -5}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -987,9 +986,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.00020959973
     y: 0
-    width: 1
+    width: 0.9995808
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -1607,7 +1606,6 @@ MonoBehaviour:
   IncubationTime: 20
   RecoveryRate: 0.1
   DeathRate: 0.02
-  DayLength: 1
 --- !u!4 &934205704
 Transform:
   m_ObjectHideFlags: 0
@@ -2037,11 +2035,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9465a36d45b26d44d85090146c1b28e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanvasFail: {fileID: 2046121199}
+  CanvasSucc: {fileID: 236133598}
+  NPCPrefab: {fileID: 8900475433866948943, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+    type: 3}
   LevelTimeout: 0
   EndConditionMetDelay: 3
   playerExposed: 0
-  CanvasFail: {fileID: 2046121199}
-  CanvasSucc: {fileID: 236133598}
   CreateHumans: {fileID: 742637914}
 --- !u!1 &1342456105
 GameObject:
