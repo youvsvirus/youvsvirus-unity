@@ -69,6 +69,34 @@ public class PlayerHouse : MonoBehaviour
     }
 
     /// <summary>
+    /// On exiting the player house collider, we have to stop all coroutines
+    /// Otherwise the user could simply press "space" to get the player in the house
+    /// without being near it. We simply stop all coroutines here.
+    /// </summary>
+    /// <param name="other">the player</param>
+    void OnTriggerExit2D(Collider2D other)
+    {
+        // the player is not in the house, i.e. he has left
+        if (!isPlayerInside)
+        {
+            // normally only the player will be able to get here
+            // so this is just a safety measure
+            // the collider attached to the infection trigger is hit first
+            // hence we have to get its "parent" the player
+            if (other.gameObject.GetComponentInParent<HumanBase>() != null)
+            {
+                if (other.gameObject.GetComponentInParent<HumanBase>().tag == "Player")
+                {
+                    // A MonoBehaviour can execute zero or more coroutines. 
+                    // StopAllCoroutines is used to stop both coroutines used here.
+                    // No arguments are needed because all coroutines on a script are stopped.
+                    StopAllCoroutines();                    
+                }
+            }
+        }
+    }
+
+    /// <summary>
     /// waits till space-key is pressed to set player out of house
     /// </summary>
     /// <param name="p"> the player game object</param>
@@ -110,6 +138,7 @@ public class PlayerHouse : MonoBehaviour
         playerRend.sprite = endlevel.playerExposed ? Resources.Load<Sprite>("SmileyPictures/player_exposed") : Resources.Load<Sprite>("SmileyPictures/player_healthy");
         playerRend.sortingLayerName = "Default";
         isPlayerInside = true;
+        Debug.Log("End of Coroutine");
         // maybe the player wants to get out again
         StartCoroutine(SetPlayerOutOfHouse(p));
 
