@@ -10,6 +10,6 @@ public class Levelsupermarket_1ContinueButton : MonoBehaviour
     public void Continue()
     {
         // Continue Button has been pressed, load next end screen
-        UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevelsupermarket_2");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("StartScreenLeveldisco_2");
     }
 }
