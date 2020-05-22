@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine;
 
 namespace Components
 {
@@ -13,11 +7,12 @@ namespace Components
     /// </summary>
     public class Friend : NPC
     {
-
         /// <summary>
         /// Has the player found us or not?
         /// </summary>
         public bool friendFound = false;
+
+        public GameObject CanvasFail;
 
         /// <summary>
         /// Transform that we have to follow (the player)
@@ -50,6 +45,10 @@ namespace Components
             {
                 // otherwise we follow the player
                 FollowPlayer();
+            }
+            if (GetCondition() != WELL)
+            {
+                LevelSettings.GetActiveEndLevelController().GetComponent<EndLevelControllerLeveldisco>().NotifyFriendExposed();
             }
         }
         /// <summary>

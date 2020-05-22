@@ -9,43 +9,19 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class EndLevelControllerLevelgethome : EndLevelControllerBase
 {
-    public GameObject CanvasFail;
-    public GameObject CanvasSucc;
     public GameObject CreateHumans;
-    /// <summary>
-    /// Triggers the end of the level.
-    /// Levelgethome calls levels
-    /// </summary>
-    public override void EndLevel()
-    {
-        //..
-    }
 
-    private void Update()
-    {
-        // if the player is exposed we fail
-        if (playerExposed)
-        {
-            // all NPCs show true infection statuts
-            CreateHumans.GetComponent<CreatePopLevelgethome>().CummulativeSpriteUpdate();
-            CanvasFail.SetActive(true);
-        }
-
-        // if the player is at home and well we win
-        if(playerHome && !playerExposed)
-        {
-            // all NPCs show true infection statuts
-            CreateHumans.GetComponent<CreatePopLevelgethome>().CummulativeSpriteUpdate();
-            CanvasSucc.SetActive(true);
-        }
-            
-    }
     /// <summary>
-    /// deactive both canvases before level starts
+    /// In infection status is not shown all NCPs do no sprite update within the game
+    /// since we do not want the user to know if they are healthy or not.
+    /// Only when the game ends, we want them all to show their true color.
+    /// *FIXME*: This is another function that does not really belong to the CreateHumans
+    /// game object. But handling it in another way requires a lot more reconstruction than
+    /// we want to do at the moment.
     /// </summary>
-    void Awake()
+    protected override void CummulativeSpriteUpdate()
     {
-        CanvasFail.SetActive(false);
-        CanvasSucc.SetActive(false);
+        // all NPCs show true infection statuts
+        CreateHumans.GetComponent<CreatePopLevelgethome>().CummulativeSpriteUpdate();
     }
 }
