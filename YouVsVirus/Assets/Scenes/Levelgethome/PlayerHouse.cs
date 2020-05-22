@@ -59,11 +59,8 @@ public class PlayerHouse : MonoBehaviour
             {
                 // the player is not inside
                 if (!isPlayerInside)
-                {
-                    //activate player in house, deactivate player and maybe end game or call the routine that lets the player get out
-                    StartCoroutine(SetPlayerInHouse(other.gameObject.GetComponentInParent<HumanBase>().gameObject));
-                                    // in this level we only have to get home
-                    if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelgethome")
+                {                   
+                    if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelgethome" || LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelcollectmasks")
                     {
                         //activate player in house, deactivate player, end game
                         StartCoroutine(SetPlayerInHouse(other.gameObject.GetComponentInParent<HumanBase>().gameObject));
