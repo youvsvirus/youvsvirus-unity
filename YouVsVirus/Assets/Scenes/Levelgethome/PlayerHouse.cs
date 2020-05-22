@@ -126,9 +126,9 @@ public class PlayerHouse : MonoBehaviour
         {
             yield return null;
         } while (!Input.GetKeyDown(KeyCode.Space));
-        
-        // get player out of house again and let sprite image fade to the background
-        //playerRend.sortingLayerName = "Background";
+
+        // get player out of house again
+        UnshowPlayer();
         p.SetActive(true);
         isPlayerInside = false;
     }
