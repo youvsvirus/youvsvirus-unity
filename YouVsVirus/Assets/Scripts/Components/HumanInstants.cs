@@ -48,7 +48,7 @@ namespace Components
         {
             // get number of NPCs from main menu
             levelSettings = LevelSettings.GetActiveLevelSettings();
-            // need this in every level
+            // in every level these should get a value, otherwise the value from previous level is adopted
             levelSettings.ShowInfectionStatus = true;
             levelSettings.DayLength = 1f;
 
