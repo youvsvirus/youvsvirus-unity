@@ -63,8 +63,7 @@ public class PlayerHouse : MonoBehaviour
 
     public void ShowPlayer()
     {
-        playerRend.sortingLayerName = "Default";
-        playerRend.sortingOrder = 0;
+        playerRend.enabled = true;
     }
 
     public void UnshowPlayer()
