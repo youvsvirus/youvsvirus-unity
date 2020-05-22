@@ -29,7 +29,12 @@ public class LevelSettings : MonoBehaviour
     /// <summary>
     /// Do we show the infection status of the smileys in this level or not.
     /// </summary>
-    public bool ShowInfectinoStatus = true;
+    public bool ShowInfectionStatus = true;
+
+    /// <summary>
+    /// The length of a simulated day in seconds.
+    /// </summary>
+    public float DayLength = 1f;
 
     /// <summary>
     /// the current active scene
@@ -87,4 +92,3 @@ public class LevelSettings : MonoBehaviour
         return ActiveEndLevelController;
     }
 }
-

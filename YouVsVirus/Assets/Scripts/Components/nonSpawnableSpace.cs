@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // The nonSpawnableSpace class serves the purpose to
-// defines regions on the map that are non-spawnable.
+// define regions on the map that are non-spawnable.
 // Attach cirlceColliders to the game object that define
 // space where nothing should spawn.
 // If you then call the function coordinatesAreSpawnable2D with
@@ -13,18 +13,15 @@ namespace Components
 {
 public class nonSpawnableSpace : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// Given a 2D vector of coordinates, check whether the coordinates
+    /// are within the nonSpawnable space defined by the associated
+    /// circle colliders.
+    /// </summary>
+    /// <returns> True if the coordinates are outside of the nonSpawnable space.
+    /// False otherwise.
+    /// </returns>
     public bool coordinatesAreSpawnable2D (Vector2 coord2D)
     {
         CircleCollider2D[] colliders2D;

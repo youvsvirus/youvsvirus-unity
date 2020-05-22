@@ -20,12 +20,12 @@ TagManager:
   - Dancefloor
   - NPC
   - Player
-  - CollideswithNPCbutnotPlayer
+  - withNPCnotPlayer
   - Collectables
-  - DoesntCollideWithAnything
-  - 
-  - 
-  - 
+  - WithNothing
+  - withNPCnotNPC_AI
+  - NPC_AI
+  - WithAnything
   - 
   - 
   - 
@@ -61,4 +61,7 @@ TagManager:
     locked: 0
   - name: End Screen
     uniqueID: 1471964501
+    locked: 0
+  - name: New Layer
+    uniqueID: 4267963991
     locked: 0

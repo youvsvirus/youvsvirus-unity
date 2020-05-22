@@ -2,10 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TMPro.EditorUtilities;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class EndLevelControllerBase : MonoBehaviour
 {
+    /// <summary>
+    /// fails screen in campaign
+    /// </summary>
+    public GameObject CanvasFail = null;
+    /// <summary>
+    /// success screen in campaign
+    /// </summary>
+    public GameObject CanvasSucc = null;
+
     protected float startTime = 0f;
 
     /// <summary>
@@ -23,6 +34,7 @@ public class EndLevelControllerBase : MonoBehaviour
     protected bool playerDied = false;
     public bool playerExposed = false;
     protected int activeInfections = 0;
+    protected bool playerHome = false;
 
     //  Has an end condition been met?
     protected bool endConditionMet = false;
@@ -37,7 +49,18 @@ public class EndLevelControllerBase : MonoBehaviour
         LevelSettings.ActiveEndLevelController = this;
     }
 
-    public virtual void Start()
+    /// <summary>
+    /// if available deactivate both canvases before level starts
+    /// </summary>
+    public void Awake()
+    {
+        if(CanvasFail != null)
+            CanvasFail.SetActive(false);
+        if (CanvasSucc != null)
+            CanvasSucc.SetActive(false);
+    }
+
+    public void Start()
     {
         // Remember the starting time to check for the timeout end condition
         startTime = Time.time;
@@ -62,6 +85,14 @@ public class EndLevelControllerBase : MonoBehaviour
         UnityEngine.Debug.Log("Finishing up...");
         yield return new WaitForSeconds(delay);
         EndLevel();
+    }
+
+    /// <summary>
+    /// Notify the end level controller that the player is home
+    /// </summary>
+    public void NotifyPlayerAtHome()
+    {
+        playerHome = true;
     }
 
     /// <summary>
@@ -112,8 +143,44 @@ public class EndLevelControllerBase : MonoBehaviour
         // This function intentionally left blank
     }
 
+    protected virtual void CummulativeSpriteUpdate()
+    {
+        // sometimes we do no need this, the other end level controlllers have to implement this if needed
+    }
+
+    protected void EndGamePlayerExposed()
+    {
+        // if the player is exposed we fail
+        if (CanvasFail != null && playerExposed)
+        {
+            // all NPCs show true infection statuts
+            if (LevelSettings.GetActiveLevelSettings().ShowInfectionStatus == false)
+            {
+                CummulativeSpriteUpdate();
+            }
+            CanvasFail.SetActive(true);
+        }
+    }
+
+    protected void EndGamePlayerAtHome()
+    {
+        // if the player is at home and well we win
+        if (CanvasSucc != null && playerHome && !playerExposed)
+        {
+            // all NPCs show true infection statuts
+            CummulativeSpriteUpdate();
+            CanvasSucc.SetActive(true);
+        }
+    }
+
     void Update()
     {
+        // if the player is exposed we fail
+        EndGamePlayerExposed();
+
+        // if the player is at home and well we win
+        EndGamePlayerAtHome();
+
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {

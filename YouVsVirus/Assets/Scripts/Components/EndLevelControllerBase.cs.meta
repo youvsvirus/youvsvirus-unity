@@ -3,7 +3,11 @@ guid: b72a0eaedd33ec748aab511c7154da0d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - CanvasFail: {instanceID: 0}
+  - CanvasSucc: {instanceID: 0}
+  - NPCPrefab: {fileID: 8900475433866948943, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

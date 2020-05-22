@@ -33,7 +33,7 @@ namespace Components
         {
             base.Start(); // call base class
 
-            // set an initial velocity for our npc in a random direction
+            //set an initial velocity for our npc in a random direction
             myRigidbody.velocity = UnityEngine.Random.onUnitSphere*UnityEngine.Random.Range(MinVelocity,MaxVelocity);
         }
         /// <summary>
