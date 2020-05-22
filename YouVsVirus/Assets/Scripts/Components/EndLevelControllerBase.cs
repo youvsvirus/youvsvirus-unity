@@ -23,6 +23,7 @@ public class EndLevelControllerBase : MonoBehaviour
     protected bool playerDied = false;
     public bool playerExposed = false;
     protected int activeInfections = 0;
+    protected bool playerHome = false;
 
     //  Has an end condition been met?
     protected bool endConditionMet = false;
@@ -62,6 +63,14 @@ public class EndLevelControllerBase : MonoBehaviour
         UnityEngine.Debug.Log("Finishing up...");
         yield return new WaitForSeconds(delay);
         EndLevel();
+    }
+
+    /// <summary>
+    /// Notify the end level controller that the player is home
+    /// </summary>
+    public void NotifyPlayerAtHome()
+    {
+        playerHome = true;
     }
 
     /// <summary>

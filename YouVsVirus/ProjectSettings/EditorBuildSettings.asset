@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/main/MainMenu.unity
     guid: a98e3222e608e524690d9999cc243393
   - enabled: 1
     path: Assets/Scenes/Levelgethome/YouVsVirus_Levelgethome.unity
     guid: cbd250d7089e79c409e7a75903196f93
   - enabled: 1
-    path: Assets/Scenes/EndScreen.unity
+    path: Assets/Scenes/main/EndScreen.unity
     guid: 00ffe3be83ede3a42ac68a0cc5953f6e
   - enabled: 1
-    path: Assets/Scenes/YouVsVirus_Levelsupermarket.unity
+    path: Assets/Scenes/levelsupermarket/YouVsVirus_Levelsupermarket.unity
     guid: ff7f43c3ae86d964eb3ee08526f9aa70
   - enabled: 0
     path: Assets/Scenes/EndScreenLevelgethome.unity
@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/EndScreenLevelsupermarket.unity
     guid: 2b462fdfffe3459488b2dccddf28a520
   - enabled: 1
-    path: Assets/Scenes/EndScreenLevelsupermarket_1.unity
+    path: Assets/Scenes/leveldisco/EndScreenLevelsupermarket_1.unity
     guid: e4d3adc168e27f1418f5bbc623a30d4f
   - enabled: 1
     path: Assets/Scenes/LevelCollectMasks/EndScreenLevelcollectmasks.unity
@@ -33,16 +33,16 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelCollectMasks/YouVsVirus_Levelcollectmasks.unity
     guid: abb8b2cb0675081409b4ec60e49b237a
   - enabled: 1
-    path: Assets/Scenes/EndScreenLevelsupermarket_2.unity
+    path: Assets/Scenes/leveldisco/EndScreenLevelsupermarket_2.unity
     guid: 3067c6d83b88f9d43a72e2e68ae1c3fb
   - enabled: 1
-    path: Assets/Scenes/YouVsVirus_Leveldisco.unity
+    path: Assets/Scenes/leveldisco/YouVsVirus_Leveldisco.unity
     guid: 6883f131ec1e3564bb7ad7ddb54eb8d9
   - enabled: 1
-    path: Assets/Scenes/EndScreenLeveldisco_succ.unity
+    path: Assets/Scenes/leveldisco/EndScreenLeveldisco_succ.unity
     guid: cc193b554d6594b43913d51e2566f272
   - enabled: 1
-    path: Assets/Scenes/EndScreenLeveldisco_fail.unity
+    path: Assets/Scenes/leveldisco/EndScreenLeveldisco_fail.unity
     guid: 834ac2d051797964a9109e0a32f59444
   - enabled: 1
     path: Assets/Scenes/Sandbox/YouVsVirus_Sandbox.unity
@@ -54,7 +54,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Sandbox/EndScreenSandbox.unity
     guid: f166d5edfa387ad42bf5d68a23d6f955
   - enabled: 1
-    path: Assets/Scenes/Levelgethome/StartScreenLevelsupermarket.unity
+    path: Assets/Scenes/levelsupermarket/StartScreenLevelsupermarket.unity
     guid: d5d7754592060be489e28db9b5d88f16
   - enabled: 1
     path: Assets/Scenes/Levelgethome/StartScreenLevelgethome.unity

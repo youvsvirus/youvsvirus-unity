@@ -1607,6 +1607,7 @@ MonoBehaviour:
   IncubationTime: 20
   RecoveryRate: 0.1
   DeathRate: 0.02
+  DayLength: 1
 --- !u!4 &934205704
 Transform:
   m_ObjectHideFlags: 0

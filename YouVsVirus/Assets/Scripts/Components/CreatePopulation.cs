@@ -47,6 +47,7 @@ namespace Components
         void Awake()
         {
             levelSettings = LevelSettings.GetActiveLevelSettings();
+            LevelSettings.GetActiveLevelSettings().NumberOfNPCs = 25;
             //This gets the Main Camera from the Scene
             MainCamera = Camera.main;
             // transform screen dimenensions into world space

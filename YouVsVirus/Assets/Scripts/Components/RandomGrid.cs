@@ -98,6 +98,7 @@ namespace Components
 
             Vector2 origin = -screenBounds;
 
+
             // Create random coordinates until all are in spawnable space
             // This way it is really ineffective, because we create all coords and
             // then check if they are spawnable and if not create all again.
