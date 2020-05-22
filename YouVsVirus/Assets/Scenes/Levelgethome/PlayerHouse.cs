@@ -131,7 +131,7 @@ public class PlayerHouse : MonoBehaviour
         } while (!Input.GetKeyDown(KeyCode.Space));
         
         // get player out of house again and let sprite image fade to the background
-        playerRend.sortingLayerName = "Background";
+        //playerRend.sortingLayerName = "Background";
         p.SetActive(true);
         isPlayerInside = false;
     }
@@ -147,25 +147,37 @@ public class PlayerHouse : MonoBehaviour
     /// <returns></returns>
     private IEnumerator SetPlayerInHouse(GameObject p)
     {
-        do
+        if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelcollectmasks")
         {
-            yield return null;
-        } while (!Input.GetKeyDown(KeyCode.Space));
+            do
+            {
+                yield return null;
+            } while (!Input.GetKeyDown(KeyCode.Space));
+        }
         // takes a little while for the player to get inside and disappear
         yield return new WaitForSeconds(0.3f);
         p.SetActive(false);
         // takes some more time until the player looks outside the window
         yield return new WaitForSeconds(1f);
+        ShowPlayer();
         playerRend.sprite = endlevel.playerExposed ? Resources.Load<Sprite>("SmileyPictures/player_exposed") : Resources.Load<Sprite>("SmileyPictures/player_healthy");
-        playerRend.sortingLayerName = "Default";
-        isPlayerInside = true;
+
+        
+        //playerRend.sortingLayerName = "Default";
+        //isPlayerInside = true;
         Debug.Log("End of Coroutine");
         // maybe the player wants to get out again
-        StartCoroutine(SetPlayerOutOfHouse(p));
+        if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelcollectmasks")
+        {
+            StartCoroutine(SetPlayerOutOfHouse(p));
+        }
+        else
+        {
 
-        // a little bit later we notify the end level controller that the player is home
-        // yield return new WaitForSeconds(0.5f);
-        //FIXME: has to be implemented in endlevel controller base
-        //endlevel.NotifyPlayerAtHome();
+            // a little bit later we notify the end level controller that the player is home
+            yield return new WaitForSeconds(0.5f);
+            //FIXME: has to be implemented in endlevel controller base
+            endlevel.NotifyPlayerAtHome();
+        }
     }
 }
