@@ -11,9 +11,6 @@ using UnityEngine;
 /// </summary>
 public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
 {
-    public GameObject CanvasFail;
-    public GameObject CanvasSucc;
-
     public GameObject CreateHumans;
 
     /// <summary>
@@ -26,14 +23,6 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
     /// Will get set to true if all masks where collected.
     /// </summary>
     private bool allMaskscollected = false;
-
-    /// <summary>
-    /// Setup this end level controller
-    /// </summary>
-    public override void Start()
-    {
-        base.Start();
-    }
 
     /// <summary>
     /// Tell the controller how many masks we currently have.
@@ -82,13 +71,5 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
             CanvasSucc.SetActive(true);
         }
             
-    }
-    /// <summary>
-    /// deactive both canvases before level starts
-    /// </summary>
-    void Awake()
-    {
-        CanvasFail.SetActive(false);
-        CanvasSucc.SetActive(false);
     }
 }
