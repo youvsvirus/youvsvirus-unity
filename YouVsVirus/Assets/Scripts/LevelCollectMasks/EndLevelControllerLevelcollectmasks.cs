@@ -17,7 +17,7 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
     /// The number of masks that the player needs to collect
     /// to complete the level.
     /// </summary>
-    private const int numberOfMasksNeeded = 8;
+    private const int numberOfMasksNeeded = 1;
 
     /// <summary>
     /// Will get set to true if all masks where collected.
@@ -26,7 +26,8 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
 
     /// <summary>
     /// Tell the controller how many masks we currently have.
-    /// If the number is enought, allMaskscollected will be set true.
+    /// If the number is enough, allMaskscollected will be set true.
+    /// This function is called when the player enters the hospital.
     /// </summary>
     public override void NotifyInt (int numMasks)
     {
@@ -46,28 +47,40 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
         UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevelcollectmasks");
     }
 
+    /// <summary>
     // Override CheckEndCondition.
-    // The level ends if all masks have been collected
+    // The level ends if all masks have been collected and we are not infected
+    /// </summary>
+    /// <return> True if and only if this level is won </return>
     protected override bool CheckEndCondition ()
     {
-        return allMaskscollected;
+        return allMaskscollected && !playerExposed;
+    }
+
+    /// <summary>
+    /// Returns true when this level is lost.
+    /// This is the case if we did not collect all masks and are exposed.
+    /// </summary>
+    /// <return> True if and only if this level is lost </return>
+    private bool CheckLevelLost ()
+    {
+        return !allMaskscollected && playerExposed;
     }
 
     private void Update()
     {
-        // if the player is exposed we fail
-        if (playerExposed)
+        // Check whether we lost and display lost screen
+        if (CheckLevelLost())
         {
             // all NPCs show true infection statuts
-            CreateHumans.GetComponent<Components.CreatePopLevelgethome>().CummulativeSpriteUpdate();
+            CreateHumans.GetComponent<Components.CreatePopLevelcollectmasks>().CummulativeSpriteUpdate();
             CanvasFail.SetActive(true);
         }
-
-        // if the player is at home and well we win
-        if(CheckEndCondition () && !playerExposed)
+        // if the player has collect all masks and is not infected we win
+        else if(CheckEndCondition ())
         {
             // all NPCs show true infection statuts
-            CreateHumans.GetComponent<Components.CreatePopLevelgethome>().CummulativeSpriteUpdate();
+            CreateHumans.GetComponent<Components.CreatePopLevelcollectmasks>().CummulativeSpriteUpdate();
             CanvasSucc.SetActive(true);
         }
             
