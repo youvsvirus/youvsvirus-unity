@@ -93,7 +93,18 @@ public class EndLevelControllerBase : MonoBehaviour
     public void NotifyPlayerAtHome()
     {
         playerHome = true;
+        UnityEngine.Debug.Log("NotifyPlayerAtHome called.");
     }
+    
+    /// <summary>
+    /// Notify the end level controller that the player left its home
+    /// </summary>
+    public void NotifyPlayerLeftHome()
+    {
+        playerHome = false;
+        UnityEngine.Debug.Log("NotifyPlayerLeftHome called.");
+    }
+
 
     /// <summary>
     /// Notify the end level controller that the player has been exposed.

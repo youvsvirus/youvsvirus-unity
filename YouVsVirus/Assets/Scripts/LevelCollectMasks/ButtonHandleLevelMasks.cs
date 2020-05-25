@@ -1,10 +1,17 @@
-﻿using UnityEngine.SceneManagement;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using UnityEngine.SceneManagement;
+using UnityEngine;
 
 /// <summary>
 /// Handle button scripts in current level
 /// </summary>
 public class ButtonHandleLevelMasks : ButtonHandleBase
 {
+    public GameObject CanvaslAllCollectedGetHome;
+
     /// <summary>
     /// Button: Continue to next level
     /// </summary>
@@ -12,5 +19,11 @@ public class ButtonHandleLevelMasks : ButtonHandleBase
     {
         // Continue to the disco level
         SceneManager.LoadScene("YouVsVirus_Leveldisco");
+    }
+
+    public void UnshowCanvasAllCollectedGetHomeAndContinue()
+    {
+        CanvaslAllCollectedGetHome.SetActive(false);
+        PauseGame.Unpause();
     }
 }
