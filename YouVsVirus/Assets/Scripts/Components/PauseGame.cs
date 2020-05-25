@@ -8,12 +8,12 @@ public class PauseGame : MonoBehaviour
     // While the game is paused, we store the
     // previous time scale value here, so that
     // we can restore it when the game is unpaused.
-    private float bufferedTimeScale;
+    private static float bufferedTimeScale;
 
     /// <summary>
     /// Pauses the game. All time dependent behavior will stop.
     /// </summary>
-    public void Pause()
+    public static void Pause()
     {
         if (Time.timeScale != 0) {
             // Store current time scale
@@ -27,7 +27,7 @@ public class PauseGame : MonoBehaviour
     /// Unpauses the game. 
     /// The game will return to its previous speed.
     /// </summary>
-    public void Unpause()
+    public static void Unpause()
     {
         // Restore buffered time scale
         Time.timeScale = bufferedTimeScale;
@@ -38,7 +38,7 @@ public class PauseGame : MonoBehaviour
     /// Experimental and currently not in use.
     /// <param name='newSpeed'> The new game speed to set </param>
     /// </summary>
-    public void ChangeSpeed (float newSpeed)
+    public static void ChangeSpeed (float newSpeed)
     {
         bufferedTimeScale = newSpeed;
         Time.timeScale = newSpeed;
