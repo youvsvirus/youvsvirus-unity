@@ -29,6 +29,16 @@ public class PlayerHouse : MonoBehaviour
     /// </summary>
     private bool isPlayerInside = false;
 
+    /// <summary>
+    /// We have a SetPlayerOutOfHouse and SetPlayerInHouse function that
+    /// are both used as coroutines. In this variable we keep track of the currently
+    /// running one.
+    /// </summary>
+    private string ActiveCoroutine = "";
+
+    private bool inHouseRuns = false;
+    private bool outHouseRuns = false;
+
     private void Start()
     {
         // hide player in house
@@ -63,13 +73,15 @@ public class PlayerHouse : MonoBehaviour
                     if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelgethome" || LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelcollectmasks")
                     {
                         //activate player in house, deactivate player, end game
-                        StartCoroutine(SetPlayerInHouse(other.gameObject.GetComponentInParent<HumanBase>().gameObject));
+                        ActiveCoroutine = "SetPlayerInHouse";
+                        StartCoroutine (SetPlayerInHouse(other.gameObject.GetComponentInParent<HumanBase>().gameObject));
                     }
                     // in this level we have to get home and get toilet paper
                     else if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelsupermarket" && other.gameObject.GetComponentInParent<Player>().hasToiletpaper)
                     {
                         //activate player in house, deactivate player, end game
-                        StartCoroutine(SetPlayerInHouse(other.gameObject.GetComponentInParent<HumanBase>().gameObject));
+                        ActiveCoroutine = "SetPlayerInHouse";
+                        StartCoroutine (SetPlayerInHouse(other.gameObject.GetComponentInParent<HumanBase>().gameObject));
                     }
                 }                                              
             }
@@ -121,6 +133,16 @@ public class PlayerHouse : MonoBehaviour
     /// <returns></returns>
     private IEnumerator SetPlayerOutOfHouse(GameObject p)
     {
+        // Check if other coroutine is running and terminate it.
+        // This is to prevent SetPlayerInHouse and SetPlayerOutOfHouse
+        // from running simultaeously.
+        Debug.Log ("Starting coroutine OutHouse");
+        if (outHouseRuns || inHouseRuns) {
+            // This coroutine already runs in another instance, we terminate.
+            // Or the SetPlayerInHouse coroutine still runs, we terminate.
+            yield break;
+        }
+        outHouseRuns = true;
         // do nothing until key is pressed
         do
         {
@@ -131,6 +153,9 @@ public class PlayerHouse : MonoBehaviour
         UnshowPlayer();
         p.SetActive(true);
         isPlayerInside = false;
+        // Notify the endlevel controller that we left the home
+        endlevel.NotifyPlayerLeftHome();
+        outHouseRuns = false;
     }
 
     /// <summary>
@@ -144,6 +169,17 @@ public class PlayerHouse : MonoBehaviour
     /// <returns></returns>
     private IEnumerator SetPlayerInHouse(GameObject p)
     {
+        Debug.Log ("Starting coroutine InHouse");
+        if (inHouseRuns || outHouseRuns) {
+            // This coroutine already runs in another instance, we terminate.
+            // Or the SetPlayerOutOfHouse coroutine still runs, we terminate.
+            yield break;
+        }
+        inHouseRuns = true;
+
+        // Give the sysyem some time to wait and stop the other coroutines
+        // before asking for space key input
+        yield return new WaitForSeconds(0.05f);
         if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelcollectmasks")
         {
             do
@@ -162,19 +198,20 @@ public class PlayerHouse : MonoBehaviour
         
         //playerRend.sortingLayerName = "Default";
         //isPlayerInside = true;
-        Debug.Log("End of Coroutine");
+
+        // a little bit later we notify the end level controller that the player is home
+        yield return new WaitForSeconds(0.5f);
+        //FIXME: has to be implemented in endlevel controller base
+        endlevel.NotifyPlayerAtHome();
+
+        inHouseRuns = false;
         // maybe the player wants to get out again
+        // TODO: This if condition should be dependend on a variable of the levelsettings,
+        //       not the name of a scene. If we rename scene and forget to edit this line, it will break.
         if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelcollectmasks")
         {
             StartCoroutine(SetPlayerOutOfHouse(p));
         }
-        else
-        {
-
-            // a little bit later we notify the end level controller that the player is home
-            yield return new WaitForSeconds(0.5f);
-            //FIXME: has to be implemented in endlevel controller base
-            endlevel.NotifyPlayerAtHome();
-        }
+        Debug.Log("End of Coroutine");
     }
 }
