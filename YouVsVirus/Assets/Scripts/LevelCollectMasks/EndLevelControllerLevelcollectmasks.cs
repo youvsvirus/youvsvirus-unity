@@ -13,6 +13,8 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
 {
     public GameObject CreateHumans;
 
+    public GameObject CanvasAllCollectedGetHome;
+
     /// <summary>
     /// The number of masks that the player needs to collect
     /// to complete the level.
