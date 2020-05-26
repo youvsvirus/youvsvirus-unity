@@ -30,7 +30,14 @@ namespace Components
             if (otherHuman != null)
             {
                 HumanBase myHuman = GetComponentInParent<HumanBase>();
-                if(myHuman.IsInfectious()){
+
+                if (myHuman.tag == "DemoNPC" && otherHuman.tag == "Player")
+                {
+                    otherHuman.GetComponentInParent<Player>().infectedByPropaganda = true;
+                }
+
+
+                if (myHuman.IsInfectious()){
 
                     // check if myHuman is infectious and if they are in my infection radius
                     float dist = Vector3.Distance(myHuman.transform.position, otherHuman.transform.position);
@@ -48,8 +55,9 @@ namespace Components
                             // to count if other human dies later on
                             otherHuman.wasInfectedByPlayer = true;
                             myHuman.levelStats.PlayerInfectedNPC(otherHuman.myID);
+
                         }
-                        
+          
                         otherHuman.Infect();     
                     }
                 }

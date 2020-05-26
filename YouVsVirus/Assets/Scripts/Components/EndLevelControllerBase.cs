@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class EndLevelControllerBase : MonoBehaviour
@@ -24,6 +25,7 @@ public class EndLevelControllerBase : MonoBehaviour
     public bool playerExposed = false;
     protected int activeInfections = 0;
     protected bool playerHome = false;
+    protected bool playerInfectedByPropaganda = false;
 
     //  Has an end condition been met?
     protected bool endConditionMet = false;
@@ -81,6 +83,10 @@ public class EndLevelControllerBase : MonoBehaviour
         playerExposed = true;
     }
 
+    public void NotifyPlayerInfectedByPropaganda()
+    {
+        playerInfectedByPropaganda = true;
+    }
 
     /// <summary>
     /// Notify the end level controller that the player has died.

@@ -44,7 +44,7 @@ namespace Components
         /// <summary>
         /// Number of instantiated NPCs.
         /// </summary>
-        private int npcNumber = 42;
+        private int npcNumber = 70;
 
         public CreatePopLevelgethome()
         {

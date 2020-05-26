@@ -16,7 +16,7 @@ namespace Components
         /// the minimum velocity we allow for the npcs
         /// </summary>
         public float MinVelocity = 1.0f;
-
+        public float curPos;
         /// <summary>
         /// the maximum velocity we allow for the npcs
         /// </summary>
@@ -49,8 +49,30 @@ namespace Components
         {
             if (CanMove())
             {
-                RandomMovement();
+                
+                    if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Leveldemo")
+                    {
+                        myRigidbody.velocity = new Vector2(-0.5f, UnityEngine.Random.Range(-1.0f, 1.0f));
+
+                    }
+                    else
+                    {
+                        RandomMovement();
+                    }
             }
+        }
+
+        private void Update()
+        {
+
+            if (Mathf.Approximately(transform.position.x, curPos))
+                myRigidbody.velocity = new Vector2(-0.5f, 2f);
+
+            Vector2 bounds = Camera.main.GetComponent<CameraResolution>().GetMapExtents();
+            if (transform.position.x < -bounds.x)
+                transform.position = new Vector2(bounds.x, transform.position.y);
+            curPos = transform.position.x;
+
         }
 
         /// <summary>

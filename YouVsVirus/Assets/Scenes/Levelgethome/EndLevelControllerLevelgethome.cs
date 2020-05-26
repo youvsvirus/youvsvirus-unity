@@ -38,8 +38,9 @@ public class EndLevelControllerLevelgethome : EndLevelControllerBase
             CreateHumans.GetComponent<CreatePopLevelgethome>().CummulativeSpriteUpdate();
             CanvasSucc.SetActive(true);
         }
-            
+
     }
+
     /// <summary>
     /// deactive both canvases before level starts
     /// </summary>

@@ -26,6 +26,10 @@ namespace Components
 		/// </summary>
 		public bool hasToiletpaper = false;
 
+		/// <summary>
+		/// Is the player infected by Propaganda?
+		/// </summary>
+		public bool infectedByPropaganda = false;
 
 		/// <summary>
 		/// Start is called before the first frame update
@@ -64,6 +68,10 @@ namespace Components
 			if (CanMove())
 			{
 				ProcessMovementInput();
+			}
+			if (infectedByPropaganda)
+			{
+				LevelSettings.GetActiveEndLevelController().NotifyPlayerInfectedByPropaganda();
 			}
 		}
 
