@@ -467,6 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerInside: {fileID: 2129108441}
+  EnterAndExitAtWill: 1
 --- !u!1 &168650349
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,18 +23,18 @@ public class PlayerHouse : MonoBehaviour
     /// </summary>
     public GameObject PlayerInside;
     SpriteRenderer playerRend;
+
+    /// <summary>
+    /// If set to true, the player can enter and exit the house
+    /// with space whenever he likes.
+    /// </summary>
+    public bool EnterAndExitAtWill = true;
+
     
     /// <summary>
     /// Checks if the player is in the house
     /// </summary>
     private bool isPlayerInside = false;
-
-    /// <summary>
-    /// We have a SetPlayerOutOfHouse and SetPlayerInHouse function that
-    /// are both used as coroutines. In this variable we keep track of the currently
-    /// running one.
-    /// </summary>
-    private string ActiveCoroutine = "";
 
     private bool inHouseRuns = false;
     private bool outHouseRuns = false;
@@ -67,20 +67,20 @@ public class PlayerHouse : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<HumanBase>().tag == "Player")
             {
+                Debug.Log ("Trigger Enter");
                 // the player is not inside
                 if (!isPlayerInside)
                 {                   
                     if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelgethome" || LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelcollectmasks")
                     {
+                        Debug.Log ("Trigger Enter Starting coroutine OutHouse");
                         //activate player in house, deactivate player, end game
-                        ActiveCoroutine = "SetPlayerInHouse";
                         StartCoroutine (SetPlayerInHouse(other.gameObject.GetComponentInParent<HumanBase>().gameObject));
                     }
                     // in this level we have to get home and get toilet paper
                     else if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelsupermarket" && other.gameObject.GetComponentInParent<Player>().hasToiletpaper)
                     {
                         //activate player in house, deactivate player, end game
-                        ActiveCoroutine = "SetPlayerInHouse";
                         StartCoroutine (SetPlayerInHouse(other.gameObject.GetComponentInParent<HumanBase>().gameObject));
                     }
                 }                                              
@@ -156,6 +156,14 @@ public class PlayerHouse : MonoBehaviour
         // Notify the endlevel controller that we left the home
         endlevel.NotifyPlayerLeftHome();
         outHouseRuns = false;
+
+        // Enable the player to enter again, if desired
+        if (EnterAndExitAtWill)
+        {
+            // If still running, stop coroutine Set in house to avoid infinite loop
+            StopCoroutine (SetPlayerInHouse(p));
+            StartCoroutine(SetPlayerInHouse(p));
+        }
     }
 
     /// <summary>
@@ -180,7 +188,7 @@ public class PlayerHouse : MonoBehaviour
         // Give the sysyem some time to wait and stop the other coroutines
         // before asking for space key input
         yield return new WaitForSeconds(0.05f);
-        if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelcollectmasks")
+        if (EnterAndExitAtWill)
         {
             do
             {
@@ -197,7 +205,7 @@ public class PlayerHouse : MonoBehaviour
 
         
         //playerRend.sortingLayerName = "Default";
-        //isPlayerInside = true;
+        isPlayerInside = true;
 
         // a little bit later we notify the end level controller that the player is home
         yield return new WaitForSeconds(0.5f);
@@ -206,10 +214,10 @@ public class PlayerHouse : MonoBehaviour
 
         inHouseRuns = false;
         // maybe the player wants to get out again
-        // TODO: This if condition should be dependend on a variable of the levelsettings,
-        //       not the name of a scene. If we rename scene and forget to edit this line, it will break.
-        if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelcollectmasks")
+        if (EnterAndExitAtWill)
         {
+            // If still running, stop coroutine Set out house to avoid infinite loop
+            StopCoroutine (SetPlayerOutOfHouse(p));
             StartCoroutine(SetPlayerOutOfHouse(p));
         }
         Debug.Log("End of Coroutine");

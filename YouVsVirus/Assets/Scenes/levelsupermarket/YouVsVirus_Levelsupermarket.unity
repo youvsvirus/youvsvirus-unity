@@ -2023,6 +2023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerInside: {fileID: 1559688225}
+  EnterAndExitAtWill: 0
 --- !u!212 &650329864
 SpriteRenderer:
   m_ObjectHideFlags: 0
