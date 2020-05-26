@@ -44,9 +44,8 @@ public class PlayerHouse : MonoBehaviour
         // hide player in house
         playerRend = PlayerInside.GetComponent<SpriteRenderer>();
         UnshowPlayer();
-        endlevel = LevelSettings.GetActiveEndLevelController();
         // activate end level controller
-        endlevel = LevelSettings.GetActiveEndLevelController().GetComponent<EndLevelControllerBase>();
+        endlevel = LevelSettings.GetActiveEndLevelController();
     }
 
 
