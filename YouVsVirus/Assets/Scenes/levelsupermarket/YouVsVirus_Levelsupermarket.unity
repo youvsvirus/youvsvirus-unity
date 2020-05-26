@@ -1509,11 +1509,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888887, y: -5}
-  - {x: -8.888887, y: 5}
-  - {x: 8.888887, y: 5}
-  - {x: 8.888887, y: -5}
-  - {x: -8.888887, y: -5}
+  - {x: -8.888889, y: -5.0015697}
+  - {x: -8.888889, y: 5.0015697}
+  - {x: 8.888889, y: 5.0015697}
+  - {x: 8.888889, y: -5.0015697}
+  - {x: -8.888889, y: -5.0015697}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1533,10 +1533,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00020959973
-    y: 0
-    width: 0.9995808
-    height: 1
+    x: 0
+    y: 0.00015702844
+    width: 1
+    height: 0.99968594
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -3393,11 +3393,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0fe851c0396b74fba3521d5fda40ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanvasFail: {fileID: 356522770}
+  CanvasSucc: {fileID: 1481595197}
   LevelTimeout: 0
   EndConditionMetDelay: 3
   playerExposed: 0
-  CanvasFail: {fileID: 356522770}
-  CanvasSucc: {fileID: 1481595197}
   CreateHumans: {fileID: 742637914}
 --- !u!4 &1293853907
 Transform:
