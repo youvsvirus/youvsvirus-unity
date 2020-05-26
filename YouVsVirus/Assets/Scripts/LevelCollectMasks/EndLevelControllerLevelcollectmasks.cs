@@ -19,7 +19,7 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
     /// The number of masks that the player needs to collect
     /// to complete the level.
     /// </summary>
-    private const int numberOfMasksNeeded = 0;
+    private const int numberOfMasksNeeded = 8;
 
     /// <summary>
     /// Will get set to true if all masks were collected.
