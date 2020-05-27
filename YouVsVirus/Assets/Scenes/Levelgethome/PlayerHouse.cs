@@ -72,7 +72,7 @@ public class PlayerHouse : MonoBehaviour
                 {                   
                     if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelgethome" || LevelSettings.GetActiveSceneName() == "YouVsVirus_Levelcollectmasks")
                     {
-                        Debug.Log ("Trigger Enter Starting coroutine OutHouse");
+                        Debug.Log ("Trigger Enter Starting coroutine SetPlayerInHouse");
                         //activate player in house, deactivate player, end game
                         StartCoroutine (SetPlayerInHouse(other.gameObject.GetComponentInParent<HumanBase>().gameObject));
                     }
