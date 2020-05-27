@@ -132,16 +132,16 @@ public class PlayerHouse : MonoBehaviour
     /// <returns></returns>
     private IEnumerator SetPlayerOutOfHouse(GameObject p)
     {
-        // Check if other coroutine is running and terminate it.
-        // This is to prevent SetPlayerInHouse and SetPlayerOutOfHouse
-        // from running simultaeously.
+        //// Check if other coroutine is running and terminate it.
+        //// This is to prevent SetPlayerInHouse and SetPlayerOutOfHouse
+        //// from running simultaeously.
         Debug.Log ("Starting coroutine OutHouse");
-        if (outHouseRuns || inHouseRuns) {
-            // This coroutine already runs in another instance, we terminate.
-            // Or the SetPlayerInHouse coroutine still runs, we terminate.
-            yield break;
-        }
-        outHouseRuns = true;
+        //if (outHouseRuns || inHouseRuns) {
+        //    // This coroutine already runs in another instance, we terminate.
+        //    // Or the SetPlayerInHouse coroutine still runs, we terminate.
+        //    yield break;
+        //}
+        //outHouseRuns = true;
         // do nothing until key is pressed
         do
         {
@@ -156,13 +156,15 @@ public class PlayerHouse : MonoBehaviour
         endlevel.NotifyPlayerLeftHome();
         outHouseRuns = false;
 
-        // Enable the player to enter again, if desired
-        if (EnterAndExitAtWill)
-        {
-            // If still running, stop coroutine Set in house to avoid infinite loop
-            StopCoroutine (SetPlayerInHouse(p));
-            StartCoroutine(SetPlayerInHouse(p));
-        }
+       
+
+        //// Enable the player to enter again, if desired
+        //if (EnterAndExitAtWill)
+        //{
+        //    // If still running, stop coroutine Set in house to avoid infinite loop
+        //    StopCoroutine (SetPlayerInHouse(p));
+        //    StartCoroutine(SetPlayerInHouse(p));
+        //}
     }
 
     /// <summary>
@@ -177,16 +179,16 @@ public class PlayerHouse : MonoBehaviour
     private IEnumerator SetPlayerInHouse(GameObject p)
     {
         Debug.Log ("Starting coroutine InHouse");
-        if (inHouseRuns || outHouseRuns) {
-            // This coroutine already runs in another instance, we terminate.
-            // Or the SetPlayerOutOfHouse coroutine still runs, we terminate.
-            yield break;
-        }
-        inHouseRuns = true;
+        //if (inHouseRuns || outHouseRuns) {
+        //    // This coroutine already runs in another instance, we terminate.
+        //    // Or the SetPlayerOutOfHouse coroutine still runs, we terminate.
+        //    yield break;
+        //}
+        //inHouseRuns = true;
 
         // Give the sysyem some time to wait and stop the other coroutines
         // before asking for space key input
-        yield return new WaitForSeconds(0.05f);
+        //yield return new WaitForSeconds(0.05f);
         if (EnterAndExitAtWill)
         {
             do
@@ -212,13 +214,15 @@ public class PlayerHouse : MonoBehaviour
         endlevel.NotifyPlayerAtHome();
 
         inHouseRuns = false;
+
+        yield return StartCoroutine(SetPlayerOutOfHouse(p));
         // maybe the player wants to get out again
-        if (EnterAndExitAtWill)
-        {
-            // If still running, stop coroutine Set out house to avoid infinite loop
-            StopCoroutine (SetPlayerOutOfHouse(p));
-            StartCoroutine(SetPlayerOutOfHouse(p));
-        }
+        //if (EnterAndExitAtWill)
+        //{
+        //    // If still running, stop coroutine Set out house to avoid infinite loop
+        //    StopCoroutine (SetPlayerOutOfHouse(p));
+        //    StartCoroutine(SetPlayerOutOfHouse(p));
+        //}
         Debug.Log("End of Coroutine");
     }
 }
