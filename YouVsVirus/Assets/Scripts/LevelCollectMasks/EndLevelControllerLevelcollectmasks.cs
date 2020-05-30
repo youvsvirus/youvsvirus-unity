@@ -87,6 +87,16 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
         return !onWayHome && allMaskscollected && !playerExposed;
     }
 
+    /// <summary>
+    /// Query whether the player is allowed to enter its home.
+    /// In this level, the player is always allowed inside.
+    /// </summary>
+    /// <return> True. </return>
+    public override bool isPlayerAllowedHome()
+    {
+        return true;
+    }
+
     private void Update()
     {
         // Check whether we lost and display lost screen

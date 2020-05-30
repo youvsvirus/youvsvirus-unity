@@ -47,7 +47,7 @@ namespace Components
         /// the player's house
         /// needed for getting the player out of the house
         /// </summary>
-        public GameObject PlayerHouse;
+        public GameObject playerHouse;
 
         /// <summary>
         /// The text instructions to start
@@ -81,7 +81,7 @@ namespace Components
         void Start()
         {
             // player is in the house at the beginning
-            PlayerHouse.GetComponent<PlayerHouse>().ShowPlayer();
+            playerHouse.GetComponent<PlayerHouse>().ShowPlayer();
             // Get reference to the nonSpanableSpace class
             nonSpawnableSpaceClass = nonSpawnableSpaceObj.GetComponent<nonSpawnableSpace>();
             // get active level settings - the get home scene always has 50% social distancing
@@ -121,6 +121,13 @@ namespace Components
             Player.myID = 0;
             // Set player status to inactive. Will get avtivated when we leave the house
             Player.gameObject.SetActive(false);
+            PlayerHouse playerHouseScript = playerHouse.GetComponent<PlayerHouse>();
+
+            // Set the player inside the house
+            playerHouseScript.NotifyPlayerIsClose (true);
+            playerHouseScript.NotifyPlayerInside (true);
+            // Set the player var of the house
+            playerHouseScript.setPlayer (Player.gameObject);
 
             //  Place the NPCs in the grid
             for (int i = 1; i <= npcNumber; i++)
@@ -138,14 +145,14 @@ namespace Components
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                // player is no longer shown in the house
-                PlayerHouse.GetComponent<PlayerHouse>().UnshowPlayer();
-                // can start to play
-                Player.gameObject.SetActive(true);
-                PressSpace.gameObject.SetActive(false);
-            }
+           // if (Input.GetKeyDown(KeyCode.Space))
+           // {
+            //    // player is no longer shown in the house
+            //    playerHouse.GetComponent<playerHouse>().UnshowPlayer();
+            //    // can start to play
+           //    Player.gameObject.SetActive(true);
+           //     PressSpace.gameObject.SetActive(false);
+           // }
         }
     }
 }

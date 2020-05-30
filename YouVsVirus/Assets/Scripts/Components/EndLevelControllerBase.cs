@@ -77,6 +77,15 @@ public class EndLevelControllerBase : MonoBehaviour
     }
 
     /// <summary>
+    /// Query whether the player is allowed to enter its home.
+    /// </summary>
+    /// <return> True if and only if the player is allowed to enter its home. </return>
+    public virtual bool isPlayerAllowedHome()
+    {
+        return false;
+    }
+
+    /// <summary>
     /// Coroutine that waits for delay seconds and then ends the level.
     /// </summary>
     /// <param name="delay">The delay before EndLevel is called.</param>
