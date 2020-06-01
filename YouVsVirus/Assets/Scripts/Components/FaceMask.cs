@@ -11,6 +11,11 @@ namespace Components
         Camera MainCamera;
 
         /// <summary>
+        /// places on the map where no mask should spawn
+        /// </summary>
+        public GameObject nonSpawnableSpace;
+
+        /// <summary>
         /// the screen dimensions
         /// </summary>
         private Vector2 screenBounds;
@@ -40,22 +45,29 @@ namespace Components
         /// </summary>
         private void PlaceMaskRandomly()
         {
+            Vector2 origin = -screenBounds;
             float bufferZoneX = screenBounds[0]/10;
             float bufferZoneY = screenBounds[1]/10;
-            float distanceAway = 1;
-            Vector2 newPos = -screenBounds;
-            Vector2 oldPos = new Vector2(transform.position.x, transform.position.y);
 
             do
             {
-                newPos[0] = UnityEngine.Random.Range (-screenBounds[0] + bufferZoneX, screenBounds[0] - bufferZoneX);
-                newPos[1] = UnityEngine.Random.Range (-screenBounds[1] + bufferZoneY, screenBounds[1] - bufferZoneY);
+                origin[0] = UnityEngine.Random.Range (-screenBounds[0] + bufferZoneX, screenBounds[0] - bufferZoneX);
+                origin[1] = UnityEngine.Random.Range (-screenBounds[1] + bufferZoneY, screenBounds[1] - bufferZoneY);
             }
-            while ((newPos - oldPos).magnitude < distanceAway);
+            while (!nonSpawnableSpace.GetComponent<nonSpawnableSpace>().coordinatesAreSpawnable2D (origin));
 
-            Debug.Log ("Placing mask at " + newPos);
+            Debug.Log ("Placing mask at " + origin);
             //  Place the mask
-            transform.position = newPos;
+            transform.position = origin;
+        }
+
+        static float timePassed = 0;
+        void Update ()
+        {
+            if (Time.time - timePassed > 1) {
+                PlaceMaskRandomly();
+                timePassed = Time.time;
+            }
         }
     }
 }

@@ -58,12 +58,12 @@ namespace Components
 
             // Create random coordinates and check if we can spawn a masks there.
             // If not, we recreate.
-            //do
+            do
              {
                 origin[0] = UnityEngine.Random.Range (-screenBounds[0] + bufferZoneX, screenBounds[0] - bufferZoneX);
                 origin[1] = UnityEngine.Random.Range (-screenBounds[1] + bufferZoneY, screenBounds[1] - bufferZoneY);
             }
-            // while (false && !nonSpawnableSpace.GetComponent<nonSpawnableSpace>().coordinatesAreSpawnable2D (origin));
+            while (!nonSpawnableSpace.GetComponent<nonSpawnableSpace>().coordinatesAreSpawnable2D (origin));
 
             Debug.Log ("Placing mask at " + origin);
             //  Place the mask
