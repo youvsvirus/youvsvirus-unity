@@ -123,7 +123,7 @@ public class EndLevelControllerBase : MonoBehaviour
         }
     }
 
-    void Update()
+    public virtual void Update()
     {
         // if the player is exposed we fail
         EndGamePlayerExposed();

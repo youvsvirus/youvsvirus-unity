@@ -47,8 +47,10 @@ public class EndLevelControllerSandbox : EndLevelControllerBase
     }
 
 
-    void Update()
+    public override void Update()
     {
+        // call base class update first
+        base.Update();
         //  The level is already ending, so just do nothing and wait.
         if (endConditionMet) return;
 
