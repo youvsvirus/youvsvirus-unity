@@ -30,7 +30,7 @@ public class playerIsCloseToHouse : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<HumanBase>().tag == "Player")     
             {
-                 Debug.Log("Player enter");
+                 Debug.Log("Player is close to house");
                  // Tell the house that the player is now close to it
                  playerHouse.GetComponent<PlayerHouse>().NotifyPlayerIsClose (true);
             }
@@ -52,7 +52,7 @@ public class playerIsCloseToHouse : MonoBehaviour
             {
                 if (other.gameObject.GetComponentInParent<HumanBase>().tag == "Player")     
                 {
-                    Debug.Log("Player exit");
+                    Debug.Log("Player is not close to house anymore");
                     // Tell the house that the player is now away from it
                     playerHouse.GetComponent<PlayerHouse>().NotifyPlayerIsClose (false);
                 }
