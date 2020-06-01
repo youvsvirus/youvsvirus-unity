@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/leveldisco/StartScreenLeveldisco_1.unity
     guid: e4d3adc168e27f1418f5bbc623a30d4f
   - enabled: 1
+    path: Assets/Scenes/leveldisco/StartScreenLeveldisco_2.unity
+    guid: 3832572e18debcc4c8b05f2177f6495a
+  - enabled: 1
     path: Assets/Scenes/LevelCollectMasks/EndScreenLevelcollectmasks.unity
     guid: cc22b6d4347f05b46a480a402e78f1cb
   - enabled: 1
