@@ -60,14 +60,5 @@ namespace Components
             //  Place the mask
             transform.position = origin;
         }
-
-        static float timePassed = 0;
-        void Update ()
-        {
-            if (Time.time - timePassed > 1) {
-                PlaceMaskRandomly();
-                timePassed = Time.time;
-            }
-        }
     }
 }
