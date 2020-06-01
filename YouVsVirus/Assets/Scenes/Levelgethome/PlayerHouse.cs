@@ -35,12 +35,29 @@ public class PlayerHouse : MonoBehaviour
     /// Checks if the player is in the house
     /// </summary>
     private bool isPlayerInside = false;
+    
+    /// <summary>
+    /// Whether or not the player starts the level inside.
+    /// This is only needed for the space bar press routine
+    /// to get the player out of the house the first time.
+    /// The position and that the player is not active still
+    /// needs to be set in the createHumans class.
+    /// </summary>
+    public bool playerStartsInside = false;
+
+    
+    /// <summary>
+    /// If the player starts inside you can attach a canvas here
+    /// that gets deactivated as soon as the player exits the home.
+    /// </summary>
+    public GameObject PressSpace = null;
 
     private GameObject player;
 
     private bool aCoroutineRuns = false;
 
     private bool playerIsClose = false;
+
 
     // Time variable used to perform update only every x seconds.
     // We store here the last time that update was executed.
@@ -50,15 +67,22 @@ public class PlayerHouse : MonoBehaviour
     // performed.
     private float timeBetweenUpdates = 0.1f;
 
+    // The position at which the player will appear
+    // when he exitst the house.
+    private Vector3 playerAppearPosition;
+
     private void Start()
     {
-        // hide player in house
-        playerRend = PlayerInside.GetComponent<SpriteRenderer>();
-        UnshowPlayer();
         // activate end level controller
         endlevel = LevelSettings.GetActiveEndLevelController();
         // Get player (this may return null if the player is inactive)
         player = GameObject.FindGameObjectWithTag("Player");
+        // Get player renderer
+        playerRend = PlayerInside.GetComponent<SpriteRenderer>();
+        // Per default, we do not show the player in the window
+        UnshowPlayer ();
+        // Initialize the player spawn position
+        playerAppearPosition = gameObject.transform.position + new Vector3(0, -0.5f, 0);
 
         // Set this point in time as the last execution time of update.
         // This means, update is first performed at time Time.time + timeBetweenUpdates
@@ -73,9 +97,16 @@ public class PlayerHouse : MonoBehaviour
 
     
     // Tell the house whether the player is inside or not
-    public void NotifyPlayerInside (bool IsInide)
+    // and set the player inside.
+    public void NotifyPlayerInside (bool IsInsideFlag)
     {
-        isPlayerInside = IsInide;
+        // TODO: Set the player actually inside
+        isPlayerInside = IsInsideFlag;
+        if (IsInsideFlag) {
+            // hide player in house
+            playerRend.sprite = endlevel.playerExposed ? Resources.Load<Sprite>("SmileyPictures/player_exposed") : Resources.Load<Sprite>("SmileyPictures/player_healthy");
+            ShowPlayer();
+        }
     }
 
     /// <summary> Query whether the player is currently inside </summary>
@@ -119,13 +150,24 @@ public class PlayerHouse : MonoBehaviour
         Debug.Log ("Starting coroutine OutHouse");
         aCoroutineRuns = true;
 
+        // If still active, deactivate the PressSpace Canvas
+        if (PressSpace != null)
+        {
+            PressSpace.gameObject.SetActive(false);
+        }
+
         // get player out of house again
         UnshowPlayer();
         player.SetActive(true);
+        player.transform.position = playerAppearPosition;
         isPlayerInside = false;
         // Notify the endlevel controller that we left the home
         endlevel.NotifyPlayerLeftHome();
        
+        // If the player started inside, this is now over
+        // and we need to set playerStartsInside to false.
+        playerStartsInside = false;
+
         aCoroutineRuns = false;
 
         yield return 0;
@@ -152,7 +194,6 @@ public class PlayerHouse : MonoBehaviour
         ShowPlayer();
         playerRend.sprite = endlevel.playerExposed ? Resources.Load<Sprite>("SmileyPictures/player_exposed") : Resources.Load<Sprite>("SmileyPictures/player_healthy");
 
-        
         //playerRend.sortingLayerName = "Default";
         isPlayerInside = true;
 
@@ -177,7 +218,8 @@ public class PlayerHouse : MonoBehaviour
         // TODO: Only do this every 0.1 secs or so to increase performance
         if (Time.time - lastTime >= timeBetweenUpdates)
         {
-            Debug.Log("House: inside " + isPlayerInside + " close " + playerIsClose + " crruns " + aCoroutineRuns);
+            Debug.Log("House: inside " + isPlayerInside + " close " + playerIsClose + " crruns " + aCoroutineRuns + " allowed Home: " + endlevel.isPlayerAllowedHome(player)
+                      + " at will: " + EnterAndExitAtWill);
             lastTime = Time.time;
         }
         if (player == null) {
@@ -188,14 +230,16 @@ public class PlayerHouse : MonoBehaviour
         }
         if (playerIsClose) {
             // Only do smth if the player is close
-            if (isPlayerInside) {
+            if (isPlayerInside && (EnterAndExitAtWill || playerStartsInside)) {
+                Debug.Log ("We may exit");
             // We are inside, check space to get outside
                 if (Input.GetKeyDown(KeyCode.Space) && !aCoroutineRuns) { 
                     aCoroutineRuns = true;
                     StartCoroutine(SetPlayerOutOfHouse());
                 }
             }
-            else if (endlevel.isPlayerAllowedHome()) {
+            else if (endlevel.isPlayerAllowedHome(player)) {
+                Debug.Log ("We may enter");
                 // We are not inside, but are allowed to enter
                 if (!EnterAndExitAtWill || Input.GetKeyDown(KeyCode.Space) && !aCoroutineRuns) {
                     if (!aCoroutineRuns) {
