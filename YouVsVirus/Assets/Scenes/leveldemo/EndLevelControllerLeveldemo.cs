@@ -11,8 +11,8 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
 {
     public GameObject CanvasFail;
     public GameObject CanvasSucc;
-    public GameObject CreateHumans;
     public GameObject CanvasProp;
+    public GameObject CreateHumans;
 
     private void Update()
     {
@@ -21,6 +21,7 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
         {
             // all NPCs show true infection statuts
             CreateHumans.GetComponent<CreatePopLeveldemo>().CummulativeSpriteUpdate();
+            CanvasProp.SetActive(false);
             CanvasFail.SetActive(true);
         }
 
@@ -32,7 +33,7 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
             CanvasSucc.SetActive(true);
         }
 
-        if(playerInfectedByPropaganda)
+        if(playerInfectedByPropaganda && !playerExposed)
         {
             CreateHumans.GetComponent<CreatePopLeveldemo>().CummulativeSpriteUpdate();
             CanvasProp.SetActive(true);
@@ -40,11 +41,12 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
             
     }
     /// <summary>
-    /// deactive both canvases before level starts
+    /// deactive all canvases before level starts
     /// </summary>
-    void Awake()
+    private void Awake()
     {
         CanvasFail.SetActive(false);
         CanvasSucc.SetActive(false);
+        CanvasProp.SetActive(false);
     }
 }

@@ -124,9 +124,7 @@ namespace Components
                     float sby = randomGridForHumans.screenBounds.y;
                     float posy = NPCs[i - 1].transform.position.y;
                     if (Mathf.Abs(NPCs[i - 1].transform.position.y) > 0.33 * sby)
-                        posy = UnityEngine.Random.Range(-sby * 0.5f, sby * 0.33f);
-                    //float posy = NPCs[i - 1].transform.position.y > 0.33 * sby ? UnityEngine.Random.Range(-sby, sby * 0.33f) : NPCs[i - 1].transform.position.y;
-                    //    NPCs[i - 1].transform.position = new Vector2(NPCs[i - 1].transform.position.x + 2 * randomGridForHumans.screenBounds.x, posy);
+                        posy = UnityEngine.Random.Range(-sby * 0.5f, sby * 0.45f);
                     NPCs[i - 1].transform.position = new Vector2(NPCs[i - 1].transform.position.x, posy);
                     NPCs[i - 1].MinVelocity = 1.0f;
                     NPCs[i - 1].MaxVelocity = 2.0f;

@@ -11,6 +11,6 @@ public class ButtonHandleLeveldemo : ButtonHandleBase
     public void Continue()
     {
         // Continue Button has been pressed, load next scene
-        SceneManager.LoadScene("StartScreenLevelsupermarket");
+        SceneManager.LoadScene("MainMenu");
     }
 }

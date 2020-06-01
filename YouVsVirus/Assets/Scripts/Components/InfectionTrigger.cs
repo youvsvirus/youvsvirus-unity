@@ -31,10 +31,22 @@ namespace Components
             {
                 HumanBase myHuman = GetComponentInParent<HumanBase>();
 
-                if (myHuman.tag == "DemoNPC" && otherHuman.tag == "Player")
+                // the player is infected by propaganda not neccessarily by the virus, only those with a sign are dangerous
+                if (otherHuman.tag == "Player" && myHuman.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled == true)
                 {
-                    otherHuman.GetComponentInParent<Player>().infectedByPropaganda = true;
+                    float dist = Vector3.Distance(myHuman.transform.position, otherHuman.transform.position);
+                    float r = 2f * InfectionRadius * transform.parent.localScale.x;
+                    float myWidth = myHuman.GetComponent<SpriteRenderer>().bounds.extents.x; //extents = size of width / 2
+                    // maybe this is the right infection distance?
+                    if (dist < r)
+                    {
+                        Player player = otherHuman.GetComponentInParent<Player>();
+                        player.infectedByPropaganda = true;
+                        player.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+                        player.transform.GetChild(2).GetComponent<SpriteRenderer>().enabled = true;
+                    }
                 }
+
 
 
                 if (myHuman.IsInfectious()){
@@ -59,6 +71,8 @@ namespace Components
                         }
           
                         otherHuman.Infect();     
+
+                    
                     }
                 }
             }
