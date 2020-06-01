@@ -3392,11 +3392,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0fe851c0396b74fba3521d5fda40ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelTimeout: 0
-  EndConditionMetDelay: 3
-  playerExposed: 0
   CanvasFail: {fileID: 356522770}
   CanvasSucc: {fileID: 1481595197}
+  playerExposed: 0
+  PressSpaceCanv: {fileID: 1494719116}
+  failText: {fileID: 724270155}
   CreateHumans: {fileID: 742637914}
 --- !u!4 &1293853907
 Transform:

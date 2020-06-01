@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using TMPro.EditorUtilities;
-using UnityEditor.Animations;
+﻿using System.Collections;
 using UnityEngine;
 
 public class EndLevelControllerBase : MonoBehaviour
@@ -17,27 +12,11 @@ public class EndLevelControllerBase : MonoBehaviour
     /// </summary>
     public GameObject CanvasSucc = null;
 
-    protected float startTime = 0f;
-
-    /// <summary>
-    /// Maximum number of seconds after which the level ends. 
-    /// Zero means the level runs indefinitely, until another end condition is met.
-    /// </summary>
-    public float LevelTimeout = 0f;
-
-    /// <summary>
-    /// Number of seconds of delay from the time an non-timeout end condition is met
-    /// until the level terminates.
-    /// </summary>
-    public float EndConditionMetDelay = 3f;
-
     protected bool playerDied = false;
     public bool playerExposed = false;
     protected int activeInfections = 0;
     protected bool playerHome = false;
 
-    //  Has an end condition been met?
-    protected bool endConditionMet = false;
 
     /// <summary>
     /// Constructor, sets this Controller as the active end level controller
@@ -60,11 +39,7 @@ public class EndLevelControllerBase : MonoBehaviour
             CanvasSucc.SetActive(false);
     }
 
-    public void Start()
-    {
-        // Remember the starting time to check for the timeout end condition
-        startTime = Time.time;
-    }
+
 
     /// <summary>
     /// Triggers the end of the level.
@@ -73,19 +48,9 @@ public class EndLevelControllerBase : MonoBehaviour
     public virtual void EndLevel()
     {
         // Load the End Scene of the game
-        UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreen");
+        Debug.LogError("EndLevel() function of end level controller base called");
     }
 
-    /// <summary>
-    /// Coroutine that waits for delay seconds and then ends the level.
-    /// </summary>
-    /// <param name="delay">The delay before EndLevel is called.</param>
-    protected IEnumerator DelayedEndLevel(float delay)
-    {
-        UnityEngine.Debug.Log("Finishing up...");
-        yield return new WaitForSeconds(delay);
-        EndLevel();
-    }
 
     /// <summary>
     /// Notify the end level controller that the player is home
@@ -167,47 +132,12 @@ public class EndLevelControllerBase : MonoBehaviour
         EndGamePlayerAtHome();
 
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // if the user wants the game to end
+        // we show the stats screen if we are in the sandbox
+        // or the fail screen in the campaign mode
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            EndLevel();
+                EndLevel();
         }
-
-        //  The level is already ending, so just do nothing and wait.
-        if (endConditionMet) return;
-
-        //  If the level timeout has been reached, finish the level
-        if (LevelTimeoutReached())
-        {
-            EndLevel();
-        }
-
-        //  If an end condition has been met this frame, end the level after a given delay.
-        if (CheckEndCondition())
-        {
-            endConditionMet = true;
-
-            //  Starts the delayed EndLevel coroutine, which will wait for EndConditionMetDelay seconds
-            //  and then call EndLevel().
-            StartCoroutine(DelayedEndLevel(EndConditionMetDelay));
-        }
-
-
-    }
-
-    /// <summary>
-    /// Checks if the level timeout has been reached.
-    /// </summary>
-    /// <returns></returns>
-    protected bool LevelTimeoutReached()
-    {
-        return LevelTimeout > 0f && Time.time - startTime > LevelTimeout;
-    }
-
-    /// <summary>
-    /// Checks if any end condition has been met.
-    /// </summary> 
-    protected virtual bool CheckEndCondition()
-    {
-        return playerDied || activeInfections == 0;
-    }
+    }    
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using Components;
+using TMPro;
 
 /// <summary>
 /// The end level controller for level 2.
@@ -10,6 +11,17 @@ using Components;
 /// </summary>
 public class EndLevelControllerLevelsupermarket : EndLevelControllerBase
 {
+    public GameObject PressSpaceCanv;
+    public TMP_Text failText = null; //  or make public and drag
+    public override void EndLevel()
+    {
+        // disable press space begin canvas first
+        // otherwise this will disturb the button control
+        // of CanvasFail
+        PressSpaceCanv.SetActive(false);
+        CanvasFail.SetActive(true);
+        failText.text = "You pressed the exit key.";
+    }
 
     public GameObject CreateHumans;
 
