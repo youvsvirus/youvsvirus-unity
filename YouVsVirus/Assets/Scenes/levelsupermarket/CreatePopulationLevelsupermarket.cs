@@ -50,12 +50,6 @@ namespace Components
         public GameObject PlayerHouse;
 
         /// <summary>
-        /// The text instructions to start
-        /// the game
-        /// </summary>
-        public GameObject PressSpace;
-
-        /// <summary>
         /// our level settings
         /// </summary>
         private LevelSettings levelSettings;
@@ -129,7 +123,6 @@ namespace Components
                 PlayerHouse.GetComponent<PlayerHouse>().UnshowPlayer();
                 // can start to play
                 Player.gameObject.SetActive(true);
-                PressSpace.gameObject.SetActive(false);
             }
         }
 
@@ -146,7 +139,17 @@ namespace Components
                                  Quaternion.identity);
             // give the player a unique id
             Player.myID = 0;
+            // Set player status to inactive. Will get avtivated when we leave the house
             Player.gameObject.SetActive(false);
+            
+            PlayerHouse playerHouseScript = PlayerHouse.GetComponent<PlayerHouse>();
+
+            // Set the player inside the house
+            playerHouseScript.NotifyPlayerIsClose (true);
+            playerHouseScript.NotifyPlayerInside (true);
+            // Set the player var of the house
+            playerHouseScript.setPlayer (Player.gameObject);
+
 
             //  Place the NPCs in the grid
             for (int i = 0; i < npcNumber; i++)

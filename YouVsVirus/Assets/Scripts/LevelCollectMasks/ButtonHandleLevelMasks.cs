@@ -18,7 +18,7 @@ public class ButtonHandleLevelMasks : ButtonHandleBase
     public void Continue()
     {
         // Continue to the disco level
-        SceneManager.LoadScene("YouVsVirus_Leveldisco");
+        SceneManager.LoadScene("StartScreenLeveldisco_1");
     }
 
     public void UnshowCanvasAllCollectedGetHomeAndContinue()

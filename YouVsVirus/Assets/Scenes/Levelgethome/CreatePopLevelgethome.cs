@@ -42,6 +42,13 @@ namespace Components
         public GameObject nonSpawnableSpaceObj;
 
         private nonSpawnableSpace nonSpawnableSpaceClass;
+        
+        /// <summary>
+        /// the player's house
+        /// needed for getting the player inside the house
+        /// </summary>
+        public GameObject playerHouse;
+
 
         /// <summary>
         /// Number of instantiated NPCs.
@@ -102,6 +109,17 @@ namespace Components
             Player = Instantiate(playerPrefab.GetComponent<Player>(),
                                  coords3D,
                                  Quaternion.identity);
+            // Activate player. Otherwise it does not show (i done really know why. Probably has smth todo with the house)
+            Player.gameObject.SetActive(true);
+
+            PlayerHouse playerHouseScript = playerHouse.GetComponent<PlayerHouse>();
+            // Set the player var of the house
+            playerHouseScript.setPlayer (Player.gameObject);
+            // The player is not close and not at home
+            // NOTE: Setting these explicitely is not really necessary, since they are already set for the house.
+            playerHouseScript.NotifyPlayerIsClose (false);
+            playerHouseScript.NotifyPlayerInside (false);
+
             // give the player a unique id
             Player.myID = npcNumber;
 

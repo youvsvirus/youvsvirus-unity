@@ -80,7 +80,7 @@ public class EndLevelControllerBase : MonoBehaviour
     /// Query whether the player is allowed to enter its home.
     /// </summary>
     /// <return> True if and only if the player is allowed to enter its home. </return>
-    public virtual bool isPlayerAllowedHome()
+    public virtual bool isPlayerAllowedHome(GameObject player)
     {
         return false;
     }

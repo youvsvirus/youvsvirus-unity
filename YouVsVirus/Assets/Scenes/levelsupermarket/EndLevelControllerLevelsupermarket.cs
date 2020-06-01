@@ -33,9 +33,9 @@ public class EndLevelControllerLevelsupermarket : EndLevelControllerBase
     /// In this level, the player is allowed to enter when he has its toilet paper.
     /// </summary>
     /// <return> True if and only if the player has the toilet paper </return>
-    public override bool isPlayerAllowedHome()
+    public override bool isPlayerAllowedHome(GameObject player)
     {
-        return GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().hasToiletpaper;
+        return player.GetComponent<Player>().hasToiletpaper;
     }
 
     // TODO: Why does this endlevelcontroller not know about the toilet paper? Having the toilet paper is a crucial condition for ending the game successfully.

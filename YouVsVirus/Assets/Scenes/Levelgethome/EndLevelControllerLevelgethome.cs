@@ -30,7 +30,7 @@ public class EndLevelControllerLevelgethome : EndLevelControllerBase
     /// In this level, the player is always allowed inside.
     /// </summary>
     /// <return> True. </return>
-    public override bool isPlayerAllowedHome()
+    public override bool isPlayerAllowedHome(GameObject player)
     {
         return true;
     }
