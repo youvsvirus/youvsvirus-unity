@@ -2013,7 +2013,7 @@ MonoBehaviour:
   nonSpawnableSpaceObj: {fileID: 968884779}
   playerHouse: {fileID: 1184938591}
   PressSpace: {fileID: 0}
-  npcNumber: 3
+  npcNumber: 30
 --- !u!4 &742637916
 Transform:
   m_ObjectHideFlags: 0
