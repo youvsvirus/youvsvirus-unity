@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Components
 {
     /// The mask class does nothing, except being
-    /// a class that we can associate the mask sprit to.
+    /// a class that we can associate the mask sprite to.
     public class FaceMask : MonoBehaviour
     {
         Camera MainCamera;
