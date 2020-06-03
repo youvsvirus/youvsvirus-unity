@@ -100,7 +100,6 @@ public class PlayerHouse : MonoBehaviour
     // and set the player inside.
     public void NotifyPlayerInside (bool IsInsideFlag)
     {
-        // TODO: Set the player actually inside
         isPlayerInside = IsInsideFlag;
         if (IsInsideFlag) {
             // hide player in house
