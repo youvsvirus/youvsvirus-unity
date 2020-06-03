@@ -131,7 +131,7 @@ public class PlayerHouse : MonoBehaviour
     /// Set the internal player object.
     /// This should be called from the object that
     /// instantiates the player. 
-    /// Reaon: Sometimes the player object
+    /// Reason: Sometimes the player object
     /// is not active but the house needs to activate it.
     /// But we cannot find unactive objects with GameObject.find
     /// </summary>
