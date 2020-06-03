@@ -224,7 +224,7 @@ public class PlayerHouse : MonoBehaviour
         }
         if (player == null) {
             // Do nothing is we do not have a reference of the player.
-            // This reference can be set withe the setPlayer function,
+            // This reference can be set with the setPlayer function,
             // or the player object was found in the Start routine.
             return;
         }
@@ -254,4 +254,3 @@ public class PlayerHouse : MonoBehaviour
         }
     }
 }
-
