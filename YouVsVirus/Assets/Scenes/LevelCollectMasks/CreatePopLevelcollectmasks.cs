@@ -143,16 +143,5 @@ namespace Components
             NPCs[Mathf.RoundToInt(npcNumber/2f)].SetInitialCondition(NPC.EXPOSED);
         }
 
-        void Update()
-        {
-           // if (Input.GetKeyDown(KeyCode.Space))
-           // {
-            //    // player is no longer shown in the house
-            //    playerHouse.GetComponent<playerHouse>().UnshowPlayer();
-            //    // can start to play
-           //    Player.gameObject.SetActive(true);
-           //     PressSpace.gameObject.SetActive(false);
-           // }
-        }
     }
 }
