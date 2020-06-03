@@ -132,7 +132,7 @@ public class PlayerHouse : MonoBehaviour
     /// This should be called from the object that
     /// instantiates the player. 
     /// Reaon: Sometimes the player object
-    /// is not active but the house needs to avtivate it.
+    /// is not active but the house needs to activate it.
     /// But we cannot find unactive objects with GameObject.find
     /// </summary>
     public void setPlayer (GameObject setPlayer)
