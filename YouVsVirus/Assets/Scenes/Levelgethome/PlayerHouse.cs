@@ -215,7 +215,6 @@ public class PlayerHouse : MonoBehaviour
 
     void Update ()
     {
-        // TODO: Only do this every 0.1 secs or so to increase performance
         if (Time.time - lastTime >= timeBetweenUpdates)
         {
             Debug.Log("House: inside " + isPlayerInside + " close " + playerIsClose + " crruns " + aCoroutineRuns + " allowed Home: " + endlevel.isPlayerAllowedHome(player)
