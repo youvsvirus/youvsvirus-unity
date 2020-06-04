@@ -21,6 +21,13 @@ public class ButtonHandleLevelMasks : ButtonHandleBase
         SceneManager.LoadScene("StartScreenLeveldisco_1");
     }
 
+    /// <summary>
+    /// The CanvaslAllCollectedGetHome canvas shows up when the
+    /// player has all masks and gets to the hospital.
+    /// The game is paused.
+    /// This function is called upon pressing space.
+    /// It will  deactivate the canvas and unpause the game.
+    /// </summary>
     public void UnshowCanvasAllCollectedGetHomeAndContinue()
     {
         CanvaslAllCollectedGetHome.SetActive(false);
