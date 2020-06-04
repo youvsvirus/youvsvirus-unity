@@ -93,11 +93,6 @@ namespace Components
 			DeadSprite = Resources.Load<Sprite>("SmileyPictures/player_dead");
 		}
 
-		void OnTriggerEnter (Collider other)
-		{
-			Debug.Log ("TriggerEvent");
-		}
-
 		/// <summary>
 		/// Add a number of masks to the count of collected masks.
 		/// Per default one mask is added.
