@@ -81,7 +81,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2318940163048237836
 Transform:
   m_ObjectHideFlags: 0
@@ -133,8 +133,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1294889155
-  m_SortingLayer: -1
+  m_SortingLayerID: 2061542899
+  m_SortingLayer: -2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b8de51bde92cf5f4e8f43ae7219e540c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -182,7 +182,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myID: 0
   levelStats: {fileID: 0}
+  wasInfectedByPlayer: 0
   speedMultiplier: 2
+  wentToFirstSupermarket: 0
+  hasToiletpaper: 0
 --- !u!114 &1017713336214978533
 MonoBehaviour:
   m_ObjectHideFlags: 0

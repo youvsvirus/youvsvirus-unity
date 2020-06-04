@@ -77,6 +77,8 @@ namespace Components
             Player = Instantiate(playerPrefab.GetComponent<Player>(),
                                     randomGridForHumans.RandomCoords[0],
                                     Quaternion.identity);
+            // Activate the player object
+            Player.gameObject.SetActive(true);
 
             //  Place the NPCs on coordinates 1 .. numNPCs+1
             for (int i = 1; i <= levelSettings.NumberOfNPCs; i++)

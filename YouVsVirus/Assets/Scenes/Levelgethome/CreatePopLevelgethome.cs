@@ -23,6 +23,8 @@ namespace Components
         /// </summary>
         public Player Player { get; private set; }
 
+        public Vector2 PlayerSpawnCoordinates;
+
         /// <summary>
         /// All instantiated NPCs. This is a dynamic list, it can be extended during runtime.
         /// In this level we want 100
@@ -40,11 +42,18 @@ namespace Components
         public GameObject nonSpawnableSpaceObj;
 
         private nonSpawnableSpace nonSpawnableSpaceClass;
+        
+        /// <summary>
+        /// the player's house
+        /// needed for getting the player inside the house
+        /// </summary>
+        public GameObject playerHouse;
+
 
         /// <summary>
         /// Number of instantiated NPCs.
         /// </summary>
-        private int npcNumber = 42;
+        public int npcNumber = 42;
 
         public CreatePopLevelgethome()
         {
@@ -95,17 +104,22 @@ namespace Components
         /// </summary>
         private void CreateHumans()
         {
-            // place player near top left edge of the screen (using the not shrunk screen bounds)
-            Vector2 coords;
-            
-            // Create human in upper left corner
-            coords = new Vector2(-randomGridForHumans.screenBounds.x / 0.8f + 0.2f, randomGridForHumans.screenBounds.y / 0.8f - 0.2f);
-
-            Vector3 coords3D = new Vector3 (coords[0], coords[1], 0);
+            Vector3 coords3D = new Vector3 (PlayerSpawnCoordinates[0], PlayerSpawnCoordinates[1], 0);
             //  Place the player
             Player = Instantiate(playerPrefab.GetComponent<Player>(),
                                  coords3D,
                                  Quaternion.identity);
+            // Activate player. Otherwise it does not show (i done really know why. Probably has smth todo with the house)
+            Player.gameObject.SetActive(true);
+
+            PlayerHouse playerHouseScript = playerHouse.GetComponent<PlayerHouse>();
+            // Set the player var of the house
+            playerHouseScript.setPlayer (Player.gameObject);
+            // The player is not close and not at home
+            // NOTE: Setting these explicitely is not really necessary, since they are already set for the house.
+            playerHouseScript.NotifyPlayerIsClose (false);
+            playerHouseScript.NotifyPlayerInside (false);
+
             // give the player a unique id
             Player.myID = npcNumber;
 

@@ -77,6 +77,15 @@ public class EndLevelControllerBase : MonoBehaviour
     }
 
     /// <summary>
+    /// Query whether the player is allowed to enter its home.
+    /// </summary>
+    /// <return> True if and only if the player is allowed to enter its home. </return>
+    public virtual bool isPlayerAllowedHome(GameObject player)
+    {
+        return false;
+    }
+
+    /// <summary>
     /// Coroutine that waits for delay seconds and then ends the level.
     /// </summary>
     /// <param name="delay">The delay before EndLevel is called.</param>
@@ -93,7 +102,18 @@ public class EndLevelControllerBase : MonoBehaviour
     public void NotifyPlayerAtHome()
     {
         playerHome = true;
+        UnityEngine.Debug.Log("NotifyPlayerAtHome called.");
     }
+    
+    /// <summary>
+    /// Notify the end level controller that the player left its home
+    /// </summary>
+    public void NotifyPlayerLeftHome()
+    {
+        playerHome = false;
+        UnityEngine.Debug.Log("NotifyPlayerLeftHome called.");
+    }
+
 
     /// <summary>
     /// Notify the end level controller that the player has been exposed.
@@ -126,6 +146,21 @@ public class EndLevelControllerBase : MonoBehaviour
     public void NotifyHumanRemoved()
     {
         activeInfections--;
+    } 
+
+    /// <summary>
+    /// Derived class can use this function if they need information from
+    /// outside with an integer. We usually get a reference to the active
+    /// EndLevelController via LevelSettings.GetActiveEndLevelController()
+    /// which we cannot cast into a derived class EndLevelController and this cannot
+    /// call any functions that are not defined in the base class (or maybe i am just too stupid to do so).
+    /// Thus, if we want a function in a derived class that shall be called from a 
+    /// point where we access the endlevercontroller via the levelSettings, we have no choice
+    /// but to add the function here to the base class.
+    /// </summary>
+    public virtual void NotifyInt (int data)
+    {
+        // This function intentionally left blank
     }
 
     protected virtual void CummulativeSpriteUpdate()

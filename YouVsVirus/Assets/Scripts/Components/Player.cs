@@ -15,6 +15,11 @@ namespace Components
 		public float speedMultiplier = 5.0f;
 
 		/// <summary>
+		/// How many masks the player has collected
+		/// </summary>
+		protected int collectedMasks = 0;
+
+		/// <summary>
 		/// The player always has to go to both supermarkets and the first
 		/// one is always out of toilet paper. With this bool we check if
 		/// he already hit one of the supermarkets.
@@ -88,5 +93,19 @@ namespace Components
 			DeadSprite = Resources.Load<Sprite>("SmileyPictures/player_dead");
 		}
 
+		/// <summary>
+		/// Add a number of masks to the count of collected masks.
+		/// Per default one mask is added.
+		/// </summary>
+		public void addMasks(int numMasks = 1)
+		{
+			collectedMasks += numMasks;
+			Debug.Log ("Player has now " + getNumMasks() + " masks.");
+		}
+
+		public int getNumMasks ()
+		{
+			return collectedMasks;
+		}
 	}
 }
