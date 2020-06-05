@@ -12,6 +12,6 @@ public class ButtonHandleLeveldemo : ButtonHandleBase
     {
         PauseGame.Unpause();
         // Continue Button has been pressed, load next scene
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("EndCampaign");
     }
 }
