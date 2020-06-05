@@ -26,10 +26,6 @@ public class EndLevelControllerSandbox : EndLevelControllerBase
     /// </summary>
     public float EndConditionMetDelay = 3f;
 
-
-    //  Has an end condition been met?
-    protected bool endConditionMet = false;
-
     public void Start()
     {
         // Remember the starting time to check for the timeout end condition
@@ -67,18 +63,22 @@ public class EndLevelControllerSandbox : EndLevelControllerBase
         // call base class update first
         base.Update();
         //  The level is already ending, so just do nothing and wait.
-        if (endConditionMet) return;
+        if (levelHasFinished) return;
 
         //  If the level timeout has been reached, finish the level
         if (LevelTimeoutReached())
         {
+            levelHasFinished = true;
+            UnityEngine.Debug.Log ("ELC SB: LevelTimeoutReached");
             EndLevel();
         }
 
         //  If an end condition has been met this frame, end the level after a given delay.
-        if (CheckEndCondition())
+        if (!levelHasFinished && CheckEndCondition())
         {
-            endConditionMet = true;
+            UnityEngine.Debug.Log ("ELC SB: CheckEndCondition");
+            UnityEngine.Debug.Log ("ELC SB: CheckEndCondition. PD: " + playerDied + " activeI: " + activeInfections);
+            levelHasFinished = true;
 
             //  Starts the delayed EndLevel coroutine, which will wait for EndConditionMetDelay seconds
             //  and then call EndLevel().
