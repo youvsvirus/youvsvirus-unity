@@ -180,9 +180,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00010499358
+    x: 0
     y: 0
-    width: 0.99979
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -234,11 +234,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888577, y: -5}
-  - {x: -8.888577, y: 5}
-  - {x: 8.888577, y: 5}
-  - {x: 8.888577, y: -5}
-  - {x: -8.888577, y: -5}
+  - {x: -8.888889, y: -5}
+  - {x: -8.888889, y: 5}
+  - {x: 8.888889, y: 5}
+  - {x: 8.888889, y: -5}
+  - {x: -8.888889, y: -5}
 --- !u!1 &742637914
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,9 +412,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanvasFail: {fileID: 0}
   CanvasSucc: {fileID: 0}
+  PressSpaceCanv: {fileID: 0}
+  testMode: 1
+  playerExposed: 0
   LevelTimeout: 0
   EndConditionMetDelay: 3
-  playerExposed: 0
 --- !u!4 &1293853907
 Transform:
   m_ObjectHideFlags: 0

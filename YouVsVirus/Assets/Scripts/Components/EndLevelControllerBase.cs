@@ -17,6 +17,12 @@ public class EndLevelControllerBase : MonoBehaviour
     /// </summary>
     public GameObject PressSpaceCanv = null;
 
+    /// <summary>
+    /// Set this to true for testing.
+    /// Enables that pressing 'c' finishes the level.
+    /// </summary>
+    public bool testMode = false;
+
     protected bool playerDied = false;
     public bool playerExposed = false;
     protected int activeInfections = 0;
@@ -209,11 +215,12 @@ public class EndLevelControllerBase : MonoBehaviour
             ExitKeyPressed();
             levelHasFinished = true;
         }
-        // TESTING ONLY TEST ONLY TEST ONLY
+        
+        // TESTING ONLY
         // if the user wants the game to end
         // we show the stats screen if we are in the sandbox
         // or the fail screen in the campaign mode
-        if (!levelHasFinished && Input.GetKeyDown(KeyCode.C))
+        if (testMode && !levelHasFinished && Input.GetKeyDown(KeyCode.C))
         {
             EndLevelWithSuccess();
             levelHasFinished = true;

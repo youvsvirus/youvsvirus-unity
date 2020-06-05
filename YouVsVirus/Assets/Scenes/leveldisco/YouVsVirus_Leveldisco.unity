@@ -973,11 +973,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888577, y: -5}
-  - {x: -8.888577, y: 5}
-  - {x: 8.888577, y: 5}
-  - {x: 8.888577, y: -5}
-  - {x: -8.888577, y: -5}
+  - {x: -8.888889, y: -5}
+  - {x: -8.888889, y: 5}
+  - {x: 8.888889, y: 5}
+  - {x: 8.888889, y: -5}
+  - {x: -8.888889, y: -5}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -997,9 +997,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00010499358
+    x: 0
     y: 0
-    width: 0.99979
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -1773,7 +1773,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924041520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.9285774, y: -4.5095, z: 0}
+  m_LocalPosition: {x: 7.9288893, y: -4.5095, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2243,8 +2243,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanvasFail: {fileID: 488762195}
   CanvasSucc: {fileID: 211081271}
-  LevelTimeout: 0
-  EndConditionMetDelay: 3
+  PressSpaceCanv: {fileID: 0}
+  testMode: 1
   playerExposed: 0
   failText: {fileID: 1275687903}
 --- !u!4 &1293853907
