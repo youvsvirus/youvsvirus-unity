@@ -39,6 +39,11 @@ public class EndLevelControllerSandbox : EndLevelControllerBase
     {
         // Load the End Scene of the game
         UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenSandbox");
+        // Stop running coroutines. This prevents the DelayedEndLevel from keeping on
+        // running even if the level is over.
+        // This was a bug that sometimes caused the next level to finish early bc the
+        // the end routine was running.
+        StopAllCoroutines();
     }
 
     /// <summary>
