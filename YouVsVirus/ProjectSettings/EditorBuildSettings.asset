@@ -62,4 +62,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/leveldemo/StartScreenLeveldemo.unity
     guid: f3f06e3123865564b8a7eb3f7b059fc3
+  - enabled: 1
+    path: Assets/Scenes/main/EndCampaign.unity
+    guid: aee175ab528084d41bc90d8cc4703d7f
   m_configObjects: {}
