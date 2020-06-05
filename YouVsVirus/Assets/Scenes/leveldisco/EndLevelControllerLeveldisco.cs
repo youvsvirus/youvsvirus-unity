@@ -28,7 +28,7 @@ public class EndLevelControllerLeveldisco : EndLevelControllerBase
     public void PlayerExitHealthyWithoutFriend()
     {
         CanvasFail.SetActive(true);
-        failText.text = "You got home safely but Jeff is still at the party.";
+        failText.text = "You got home safely but Sandra is still at the party.";
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public class EndLevelControllerLeveldisco : EndLevelControllerBase
     public void PlayerExitSickWithoutFriend()
     {
         CanvasFail.SetActive(true);
-        failText.text = "You were exposed to the virus and Jeff is still at the party.";
+        failText.text = "You were exposed to the virus and Sandra is still at the party.";
     }
 
 

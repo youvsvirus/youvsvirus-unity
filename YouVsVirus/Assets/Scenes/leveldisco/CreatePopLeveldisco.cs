@@ -129,6 +129,7 @@ namespace Components
             NPCs[33].SetInitialCondition(NPC.EXPOSED);
             NPCs[81].SetInitialCondition(NPC.INFECTIOUS);
             NPCs[66].SetInitialCondition(NPC.EXPOSED);
+            NPCs[2].SetInitialCondition(NPC.EXPOSED);
         }
     }
 }

@@ -863,7 +863,7 @@ GameObject:
   - component: {fileID: 1392078350}
   - component: {fileID: 1392078349}
   m_Layer: 5
-  m_Name: Jeff
+  m_Name: Sandra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -885,7 +885,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -96, y: -138.9}
+  m_AnchoredPosition: {x: -82, y: -156}
   m_SizeDelta: {x: 82.92, y: 82.92}
   m_Pivot: {x: 0.49999994, y: 0.5}
 --- !u!114 &1392078349
@@ -1162,9 +1162,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.00031727552
     width: 1
-    height: 1
+    height: 0.99936545
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1494,9 +1494,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'OMG, I am at this party (so cool music btw). I took this picture of Jeff.
-    He is completly wasted!!! Ha, ha! No longer: Stay at home! But: How will I ever
-    get back at home! Funny, yes? What a douche.'
+  m_text: 'OMG, I am at this party (so cool music btw). I took this picture of Sandra.
+    She is completly wasted!!! Ha, ha! No longer: Stay at home! But: How will I ever
+    get back at home! Funny, yes? What a douche-baguette.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -1541,7 +1541,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 201
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1565,12 +1565,12 @@ MonoBehaviour:
   m_margin: {x: 61.579323, y: 0, z: -25.756996, w: -186.5607}
   m_textInfo:
     textComponent: {fileID: 2111233486}
-    characterCount: 198
+    characterCount: 210
     spriteCount: 0
     spaceCount: 40
     wordCount: 41
     linkCount: 0
-    lineCount: 11
+    lineCount: 12
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
