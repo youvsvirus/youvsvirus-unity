@@ -12,39 +12,29 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
     public GameObject CanvasProp;
     public GameObject CreateHumans;
 
-    private void Update()
+    public void Awake()
     {
-        // if the player is exposed we fail
-        if (playerExposed)
-        {
-            // all NPCs show true infection statuts
-            CreateHumans.GetComponent<CreatePopLeveldemo>().CummulativeSpriteUpdate();
-            CanvasProp.SetActive(false);
-            CanvasFail.SetActive(true);
-        }
+        base.Awake();
+        CanvasProp.SetActive(false);
+    }
+    public void Update()
+    {
+        base.Update();
 
-        // if the player is at home and well we win
-        if(playerHome && !playerExposed)
-        {
-            // all NPCs show true infection statuts
-            CreateHumans.GetComponent<CreatePopLeveldemo>().CummulativeSpriteUpdate();
-            CanvasSucc.SetActive(true);
-        }
-
+        // additonally we can fail this level if we are infected by propaganda smileys
         if(playerInfectedByPropaganda && !playerExposed)
         {
             CreateHumans.GetComponent<CreatePopLeveldemo>().CummulativeSpriteUpdate();
             CanvasProp.SetActive(true);
-        }
-            
+        }            
     }
     /// <summary>
-    /// deactive all canvases before level starts
+    /// Query whether the player is allowed to enter its home.
+    /// In this level, the player is always allowed inside.
     /// </summary>
-    private void Awake()
+    /// <return> True. </return>
+    public override bool isPlayerAllowedHome(GameObject player)
     {
-        CanvasFail.SetActive(false);
-        CanvasSucc.SetActive(false);
-        CanvasProp.SetActive(false);
+        return true;
     }
 }

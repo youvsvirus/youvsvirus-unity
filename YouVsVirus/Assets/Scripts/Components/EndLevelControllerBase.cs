@@ -176,6 +176,9 @@ public class EndLevelControllerBase : MonoBehaviour
 
     protected void EndGamePlayerExposed()
     {
+        UnityEngine.Debug.Log("Player Eposed");
+        UnityEngine.Debug.Log(CanvasFail);
+
         // if the player is exposed we fail
         if (CanvasFail != null && playerExposed)
         {
@@ -191,7 +194,7 @@ public class EndLevelControllerBase : MonoBehaviour
     protected void EndGamePlayerAtHome()
     {
         // if the player is at home and well we win
-        if (CanvasSucc != null && playerHome && !playerExposed)
+        if (CanvasSucc != null && playerHome && !playerExposed && !playerInfectedByPropaganda)
         {
             // all NPCs show true infection statuts
             CummulativeSpriteUpdate();
@@ -199,7 +202,7 @@ public class EndLevelControllerBase : MonoBehaviour
         }
     }
 
-    void Update()
+    protected void Update()
     {
         // if the player is exposed we fail
         EndGamePlayerExposed();

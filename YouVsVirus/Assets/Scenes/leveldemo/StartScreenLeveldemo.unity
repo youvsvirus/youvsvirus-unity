@@ -147,7 +147,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 61596769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7faae4b934a8afd4aaf5db9db23858ef, type: 3}
+  m_Script: {fileID: 11500000, guid: f7161be48d86aef44965ab57c4ba5854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &61596771
@@ -1258,9 +1258,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00020959973
+    x: 0.00010499358
     y: 0
-    width: 0.9995808
+    width: 0.99979
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
