@@ -35,6 +35,7 @@ public class EndLevelControllerBase : MonoBehaviour
     public bool playerExposed = false;
     protected int activeInfections = 0;
     protected bool playerHome = false;
+    protected bool playerInfectedByPropaganda = false;
 
     //  Has an end condition been met?
     protected bool endConditionMet = false;
@@ -94,6 +95,11 @@ public class EndLevelControllerBase : MonoBehaviour
         UnityEngine.Debug.Log("Finishing up...");
         yield return new WaitForSeconds(delay);
         EndLevel();
+    }
+
+    public void NotifyPlayerInfectedByPropaganda()
+    {
+        playerInfectedByPropaganda = true;
     }
 
     /// <summary>

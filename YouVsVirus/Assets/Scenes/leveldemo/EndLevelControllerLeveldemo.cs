@@ -1,0 +1,50 @@
+﻿using UnityEngine;
+using Components;
+using UnityEngine.SceneManagement;
+
+/// <summary>
+/// The end level controller for level 1.
+/// Level 1 just ends everybody was infected
+/// and when it ends call level 2.
+/// </summary>
+public class EndLevelControllerLeveldemo : EndLevelControllerBase
+{
+    public GameObject CanvasProp;
+    public GameObject CreateHumans;
+
+    private void Update()
+    {
+        // if the player is exposed we fail
+        if (playerExposed)
+        {
+            // all NPCs show true infection statuts
+            CreateHumans.GetComponent<CreatePopLeveldemo>().CummulativeSpriteUpdate();
+            CanvasProp.SetActive(false);
+            CanvasFail.SetActive(true);
+        }
+
+        // if the player is at home and well we win
+        if(playerHome && !playerExposed)
+        {
+            // all NPCs show true infection statuts
+            CreateHumans.GetComponent<CreatePopLeveldemo>().CummulativeSpriteUpdate();
+            CanvasSucc.SetActive(true);
+        }
+
+        if(playerInfectedByPropaganda && !playerExposed)
+        {
+            CreateHumans.GetComponent<CreatePopLeveldemo>().CummulativeSpriteUpdate();
+            CanvasProp.SetActive(true);
+        }
+            
+    }
+    /// <summary>
+    /// deactive all canvases before level starts
+    /// </summary>
+    private void Awake()
+    {
+        CanvasFail.SetActive(false);
+        CanvasSucc.SetActive(false);
+        CanvasProp.SetActive(false);
+    }
+}

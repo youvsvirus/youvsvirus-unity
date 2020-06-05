@@ -31,6 +31,11 @@ namespace Components
 		/// </summary>
 		public bool hasToiletpaper = false;
 
+		/// <summary>
+		/// Did the player get infected by conspiracy theories?
+		/// </summary>
+		public bool infectedByPropaganda = false;
+
 
 		/// <summary>
 		/// Start is called before the first frame update
