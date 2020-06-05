@@ -11,31 +11,6 @@ using TMPro;
 /// </summary>
 public class EndLevelControllerLevelsupermarket : EndLevelControllerBase
 {
-    public GameObject PressSpaceCanv;
-    public TMP_Text failText = null; //  or make public and drag
-    public override void EndLevel()
-    {
-        // disable press space begin canvas first
-        // otherwise this will disturb the button control
-        // of CanvasFail
-        PressSpaceCanv.SetActive(false);
-        CanvasFail.SetActive(true);
-        failText.text = "You pressed the exit key.";
-    }
-
-    protected override void EndLevelWithSuccess()
-    {
-        // in campaign mode show success screen
-        if (CanvasSucc != null)
-        {
-            // disable press space begin canvas first
-            // otherwise this will disturb the button control
-            // of CanvasFail
-            PressSpaceCanv.SetActive(false);
-            CanvasSucc.SetActive(true);
-        }
-    }
-
     public GameObject CreateHumans;
 
     /// <summary>

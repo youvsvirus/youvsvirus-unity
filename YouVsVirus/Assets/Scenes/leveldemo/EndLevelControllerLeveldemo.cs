@@ -42,11 +42,4 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
     {
         return true;
     }
-
-    public TMP_Text failText = null; //  or make public and drag
-    public override void EndLevel()
-    {
-        CanvasFail.SetActive(true);
-        failText.text = "You pressed the exit key.";
-    }
 }

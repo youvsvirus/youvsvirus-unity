@@ -12,8 +12,6 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
 
     public GameObject CanvasAllCollectedGetHome;
 
-    public GameObject PressSpaceCanv;
-
     /// <summary>
     /// The number of masks that the player needs to collect
     /// to complete the level.
@@ -30,30 +28,6 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
     /// is now on its way home.
     /// </summary>
     private bool onWayHome = false;
-
-    public TMP_Text failText = null; //  or make public and drag
-    protected override void EndLevelWithSuccess()
-    {
-        // in campaign mode show success screen
-        if (CanvasSucc != null)
-        {
-            // disable press space begin canvas first
-            // otherwise this will disturb the button control
-            // of CanvasFail
-            PressSpaceCanv.SetActive(false);
-            CanvasSucc.SetActive(true);
-        }
-    }
-
-    public override void EndLevel()
-    {
-        // disable press space begin canvas first
-        // otherwise this will disturb the button control
-        // of CanvasFail
-        PressSpaceCanv.SetActive(false);
-        CanvasFail.SetActive(true);
-        failText.text = "You pressed the exit key.";
-    }
 
     /// <summary>
     /// Tell the controller how many masks we currently have.

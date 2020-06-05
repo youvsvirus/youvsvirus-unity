@@ -17,6 +17,7 @@ public class ButtonHandleLevelMasks : ButtonHandleBase
     /// </summary>
     public void Continue()
     {
+        PauseGame.Unpause();
         // Continue to the disco level
         SceneManager.LoadScene("StartScreenLeveldisco_1");
     }

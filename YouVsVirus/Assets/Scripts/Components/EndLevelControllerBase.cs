@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using TMPro;
 using UnityEngine;
 
 public class EndLevelControllerBase : MonoBehaviour
@@ -11,6 +11,11 @@ public class EndLevelControllerBase : MonoBehaviour
     /// success screen in campaign
     /// </summary>
     public GameObject CanvasSucc = null;
+
+    /// <summary>
+    /// press space canv in some levels
+    /// </summary>
+    public GameObject PressSpaceCanv = null;
 
     protected bool playerDied = false;
     public bool playerExposed = false;
@@ -39,15 +44,6 @@ public class EndLevelControllerBase : MonoBehaviour
             CanvasSucc.SetActive(false);
     }
 
-
-    /// <summary>
-    /// Triggers the end of the level.
-    /// Must be called in derived classes
-    /// </summary>
-    public virtual void EndLevel()
-    {
-        UnityEngine.Debug.LogError("EndLevel() function of end level controller base called");
-    }
 
     /// <summary>
     /// Query whether the player is allowed to enter its home.
@@ -133,8 +129,13 @@ public class EndLevelControllerBase : MonoBehaviour
     protected virtual void CummulativeSpriteUpdate()
     {
         // sometimes we do no need this, the other end level controlllers have to implement this if needed
+        // this is not nice and should be done differently in the future
     }
 
+    /// <summary>
+    /// Calls the fail screen if the player is exposed
+    /// </summary>
+    /// <returns></returns>
     protected bool EndGamePlayerExposed()
     {
         // if the player is exposed we fail
@@ -151,11 +152,19 @@ public class EndLevelControllerBase : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// This condition can be implemented indidually by the levels
+    /// It will be checked to see if the player succeeded
+    /// </summary>
+    /// <returns></returns>
     protected virtual bool LevelDependentEndGameConditionFulfilled()
     {
         return true;
     }
-
+    /// <summary>
+    /// Only if the player is at home, if the player is healthy and if
+    /// some other level-dependent conditions are fulfilled we succeed
+    /// </summary>
     protected void EndGamePlayerAtHome()
     {
         // if the player is at home and well we win
@@ -180,7 +189,7 @@ public class EndLevelControllerBase : MonoBehaviour
         // or the fail screen in the campaign mode
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            EndLevel();
+            ExitKeyPressed();
         }
         // TESTING ONLY TEST ONLY TEST ONLY
         // if the user wants the game to end
@@ -197,10 +206,38 @@ public class EndLevelControllerBase : MonoBehaviour
         // in campaign mode show success screen
         if (CanvasSucc != null)
         {
+            // disable press space begin canvas first
+            // otherwise this will disturb the button control
+            // of CanvasFail
+            if (PressSpaceCanv != null)
+                PressSpaceCanv.SetActive(false);
+
             CanvasSucc.SetActive(true);
+            PauseGame.Pause();
         }
-        else // in sandbox end level
-            EndLevel();
+    }
+
+    /// <summary>
+    /// The exit key is pressed
+    /// The behaviour in all campaign scenes is similar
+    /// Canvas Fail appears with exit-key text
+    /// In Sandbox the end screen is called
+    /// </summary>
+    protected virtual void ExitKeyPressed()
+    {
+        // in campaign mode show fail screen
+        if (CanvasFail != null)
+        {
+            // disable press space begin canvas first
+            // otherwise this will disturb the button control
+            // of CanvasFail
+            if(PressSpaceCanv != null)
+                PressSpaceCanv.SetActive(false);
+
+            CanvasFail.SetActive(true);
+            CanvasFail.GetComponentInChildren<TMP_Text>().text= "You pressed the exit key.";
+            PauseGame.Pause();
+        }
     }
 }
 

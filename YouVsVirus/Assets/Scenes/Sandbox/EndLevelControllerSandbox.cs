@@ -38,12 +38,27 @@ public class EndLevelControllerSandbox : EndLevelControllerBase
 
     /// <summary>
     /// Triggers the end of the level.
-    /// Levelgethome calls levels
     /// </summary>
-    public override void EndLevel()
+    private void EndLevel()
     {
         // Load the End Scene of the game
         UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenSandbox");
+    }
+
+    /// <summary>
+    /// The exit key is pressed, go to end screen
+    /// </summary>
+    protected override void ExitKeyPressed()
+    {
+        EndLevel();
+    }
+
+    /// <summary>
+    /// The continue key is pressed, go to end screen
+    /// </summary>
+    protected override void EndLevelWithSuccess()
+    {
+        EndLevel();
     }
 
 

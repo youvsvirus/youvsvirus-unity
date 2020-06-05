@@ -11,6 +11,7 @@ public class ButtonHandleBase : MonoBehaviour
     /// </summary>
     public void Retry()
     {
+        PauseGame.Unpause();
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
@@ -20,6 +21,7 @@ public class ButtonHandleBase : MonoBehaviour
     /// </summary>
     public void MainMenu()
     {
+        PauseGame.Unpause();
         SceneManager.LoadScene("MainMenu");
     }
 

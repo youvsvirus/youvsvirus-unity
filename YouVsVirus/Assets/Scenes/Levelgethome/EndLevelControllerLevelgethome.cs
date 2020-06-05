@@ -10,12 +10,6 @@ using TMPro;
 /// </summary>
 public class EndLevelControllerLevelgethome : EndLevelControllerBase
 {
-    public TMP_Text failText = null; //  or make public and drag
-    public override void EndLevel()
-    {   
-        CanvasFail.SetActive(true);
-        failText.text = "You pressed the exit key.";
-    }
     public GameObject CreateHumans;
 
     /// <summary>
