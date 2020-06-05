@@ -114,7 +114,7 @@ public class LevelStats : MonoBehaviour
     public void aHumanGotExposed()
     {
         NumberExposed++;
-        debugPrint("a human got exposed. Total exposed: " + GetExposed());
+     //   debugPrint("a human got exposed. Total exposed: " + GetExposed());
     }
 
     /// <summary>

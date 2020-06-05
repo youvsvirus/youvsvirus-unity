@@ -14,7 +14,7 @@ public class LevelSettings : MonoBehaviour
     /// <summary>
     /// The Number of NPCs to be spawned in the level
     /// </summary>
-    public int NumberOfNPCs = 50;
+    public int NumberOfNPCs = 100;
 
     /// <summary>
     /// Number of initially exposed NPCs.

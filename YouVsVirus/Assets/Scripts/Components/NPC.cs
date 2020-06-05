@@ -27,6 +27,11 @@ namespace Components
         /// </summary>
         public float AccelerationFactor = 0.5f;
 
+        /// <summary>
+        /// the current x-coordinate of NPC needed for leveldemo
+        /// </summary>
+        private float curPosX;
+
 
         // Start is called before the first frame update
         public override void Start()
@@ -49,8 +54,22 @@ namespace Components
         {
             if (CanMove())
             {
-                RandomMovement();
+                // in the demo level the NPCs move from right to left
+                if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Leveldemo")
+                {
+                    myRigidbody.velocity = new Vector2(-0.5f, UnityEngine.Random.Range(-1.0f, 1.0f));
+                }
+                else
+                {
+                    RandomMovement();
+                }
             }
+        }
+
+        void Update()
+        {
+            if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Leveldemo")
+                ReenterScreenFromRight();    
         }
 
         /// <summary>
@@ -100,9 +119,23 @@ namespace Components
             {
                 // increase the velocity in every call to this function
                 myRigidbody.velocity *= (1f + AccelerationFactor);                    
-            } 
-            
+            }             
+        }
 
-        }             
+        /// <summary>
+        /// In the demo level the npcs that leave the screen
+        /// on the left, reenter it on the right
+        /// </summary>
+        private void ReenterScreenFromRight()
+        {
+            // get the bounds of the screen
+            Vector2 bounds = Camera.main.GetComponent<CameraResolution>().GetMapExtents();
+            // if I left the screen on the left
+            if (transform.position.x < -bounds.x)
+            {
+                // I enter again on the right
+                transform.position = new Vector2(bounds.x, transform.position.y);
+            }
+        }
     }
 }

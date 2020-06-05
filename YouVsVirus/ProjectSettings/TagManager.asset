@@ -7,6 +7,7 @@ TagManager:
   - Friend
   - NPC
   - Mask
+  - IsCloseCollider
   layers:
   - Default
   - TransparentFX
@@ -26,8 +27,8 @@ TagManager:
   - withNPCnotNPC_AI
   - NPC_AI
   - WithAnything
-  - 
-  - 
+  - ScreenEdge
+  - NPCDemo
   - 
   - 
   - 

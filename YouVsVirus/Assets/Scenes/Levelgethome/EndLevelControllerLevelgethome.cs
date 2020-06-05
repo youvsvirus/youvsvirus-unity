@@ -31,4 +31,14 @@ public class EndLevelControllerLevelgethome : EndLevelControllerBase
         // all NPCs show true infection statuts
         CreateHumans.GetComponent<CreatePopLevelgethome>().CummulativeSpriteUpdate();
     }
+
+    /// <summary>
+    /// Query whether the player is allowed to enter its home.
+    /// In this level, the player is always allowed inside.
+    /// </summary>
+    /// <return> True. </return>
+    public override bool isPlayerAllowedHome(GameObject player)
+    {
+        return true;
+    }
 }

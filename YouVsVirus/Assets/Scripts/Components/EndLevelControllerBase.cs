@@ -16,7 +16,7 @@ public class EndLevelControllerBase : MonoBehaviour
     public bool playerExposed = false;
     protected int activeInfections = 0;
     protected bool playerHome = false;
-
+    protected bool playerInfectedByPropaganda = false;
 
     /// <summary>
     /// Constructor, sets this Controller as the active end level controller
@@ -31,26 +31,37 @@ public class EndLevelControllerBase : MonoBehaviour
     /// <summary>
     /// if available deactivate both canvases before level starts
     /// </summary>
-    public void Awake()
+    protected virtual void Awake()
     {
-        if(CanvasFail != null)
+        if (CanvasFail != null)
             CanvasFail.SetActive(false);
         if (CanvasSucc != null)
             CanvasSucc.SetActive(false);
     }
 
 
-
     /// <summary>
     /// Triggers the end of the level.
-    /// The base version calls the end screen of the game
+    /// Must be called in derived classes
     /// </summary>
     public virtual void EndLevel()
     {
-        // Load the End Scene of the game
-        Debug.LogError("EndLevel() function of end level controller base called");
+        UnityEngine.Debug.LogError("EndLevel() function of end level controller base called");
     }
 
+    /// <summary>
+    /// Query whether the player is allowed to enter its home.
+    /// </summary>
+    /// <return> True if and only if the player is allowed to enter its home. </return>
+    public virtual bool isPlayerAllowedHome(GameObject player)
+    {
+        return false;
+    }
+
+    public void NotifyPlayerInfectedByPropaganda()
+    {
+        playerInfectedByPropaganda = true;
+    }
 
     /// <summary>
     /// Notify the end level controller that the player is home
@@ -58,7 +69,18 @@ public class EndLevelControllerBase : MonoBehaviour
     public void NotifyPlayerAtHome()
     {
         playerHome = true;
+        UnityEngine.Debug.Log("NotifyPlayerAtHome called.");
     }
+    
+    /// <summary>
+    /// Notify the end level controller that the player left its home
+    /// </summary>
+    public void NotifyPlayerLeftHome()
+    {
+        playerHome = false;
+        UnityEngine.Debug.Log("NotifyPlayerLeftHome called.");
+    }
+
 
     /// <summary>
     /// Notify the end level controller that the player has been exposed.
@@ -91,6 +113,21 @@ public class EndLevelControllerBase : MonoBehaviour
     public void NotifyHumanRemoved()
     {
         activeInfections--;
+    } 
+
+    /// <summary>
+    /// Derived class can use this function if they need information from
+    /// outside with an integer. We usually get a reference to the active
+    /// EndLevelController via LevelSettings.GetActiveEndLevelController()
+    /// which we cannot cast into a derived class EndLevelController and this cannot
+    /// call any functions that are not defined in the base class (or maybe i am just too stupid to do so).
+    /// Thus, if we want a function in a derived class that shall be called from a 
+    /// point where we access the endlevercontroller via the levelSettings, we have no choice
+    /// but to add the function here to the base class.
+    /// </summary>
+    public virtual void NotifyInt (int data)
+    {
+        // This function intentionally left blank
     }
 
     protected virtual void CummulativeSpriteUpdate()
@@ -98,7 +135,7 @@ public class EndLevelControllerBase : MonoBehaviour
         // sometimes we do no need this, the other end level controlllers have to implement this if needed
     }
 
-    protected void EndGamePlayerExposed()
+    protected bool EndGamePlayerExposed()
     {
         // if the player is exposed we fail
         if (CanvasFail != null && playerExposed)
@@ -109,13 +146,20 @@ public class EndLevelControllerBase : MonoBehaviour
                 CummulativeSpriteUpdate();
             }
             CanvasFail.SetActive(true);
+            return true;
         }
+        return false;
+    }
+
+    protected virtual bool LevelDependentEndGameConditionFulfilled()
+    {
+        return true;
     }
 
     protected void EndGamePlayerAtHome()
     {
         // if the player is at home and well we win
-        if (CanvasSucc != null && playerHome && !playerExposed)
+        if (CanvasSucc != null && playerHome && !playerExposed && LevelDependentEndGameConditionFulfilled())
         {
             // all NPCs show true infection statuts
             CummulativeSpriteUpdate();
@@ -123,7 +167,7 @@ public class EndLevelControllerBase : MonoBehaviour
         }
     }
 
-    public virtual void Update()
+    protected virtual void Update()
     {
         // if the player is exposed we fail
         EndGamePlayerExposed();
@@ -131,13 +175,32 @@ public class EndLevelControllerBase : MonoBehaviour
         // if the player is at home and well we win
         EndGamePlayerAtHome();
 
-
         // if the user wants the game to end
         // we show the stats screen if we are in the sandbox
         // or the fail screen in the campaign mode
         if (Input.GetKeyDown(KeyCode.Q))
         {
-                EndLevel();
+            EndLevel();
         }
-    }    
+        // TESTING ONLY TEST ONLY TEST ONLY
+        // if the user wants the game to end
+        // we show the stats screen if we are in the sandbox
+        // or the fail screen in the campaign mode
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            EndLevelWithSuccess();
+        }
+    }
+
+    protected virtual void EndLevelWithSuccess()
+    {
+        // in campaign mode show success screen
+        if (CanvasSucc != null)
+        {
+            CanvasSucc.SetActive(true);
+        }
+        else // in sandbox end level
+            EndLevel();
+    }
 }
+

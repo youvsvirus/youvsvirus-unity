@@ -23,6 +23,19 @@ public class EndLevelControllerLevelsupermarket : EndLevelControllerBase
         failText.text = "You pressed the exit key.";
     }
 
+    protected override void EndLevelWithSuccess()
+    {
+        // in campaign mode show success screen
+        if (CanvasSucc != null)
+        {
+            // disable press space begin canvas first
+            // otherwise this will disturb the button control
+            // of CanvasFail
+            PressSpaceCanv.SetActive(false);
+            CanvasSucc.SetActive(true);
+        }
+    }
+
     public GameObject CreateHumans;
 
     /// <summary>
@@ -38,4 +51,17 @@ public class EndLevelControllerLevelsupermarket : EndLevelControllerBase
         // all NPCs show true infection statuts
         CreateHumans.GetComponent<CreatePopulationLevelsupermarket>().CummulativeSpriteUpdate();
     }
+
+    
+    /// <summary>
+    /// Query whether the player is allowed to enter its home.
+    /// In this level, the player is allowed to enter when he has its toilet paper.
+    /// </summary>
+    /// <return> True if and only if the player has the toilet paper </return>
+    public override bool isPlayerAllowedHome(GameObject player)
+    {
+        return player.GetComponent<Player>().hasToiletpaper;
+    }
+
+    // TODO: Why does this endlevelcontroller not know about the toilet paper? Having the toilet paper is a crucial condition for ending the game successfully.
 }

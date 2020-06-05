@@ -1397,11 +1397,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888577, y: -5}
-  - {x: -8.888577, y: 5}
-  - {x: 8.888577, y: 5}
-  - {x: 8.888577, y: -5}
-  - {x: -8.888577, y: -5}
+  - {x: -8.892965, y: -5.003171}
+  - {x: -8.892965, y: 5.003171}
+  - {x: 8.892965, y: 5.003171}
+  - {x: 8.892965, y: -5.003171}
+  - {x: -8.892965, y: -5.003171}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1421,10 +1421,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00010499358
-    y: 0
-    width: 0.99979
-    height: 1
+    x: 0
+    y: 0.00031727552
+    width: 1
+    height: 0.99936545
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -2959,11 +2959,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanvasFail: {fileID: 147468431}
   CanvasSucc: {fileID: 1196154525}
-  LevelTimeout: 0
-  EndConditionMetDelay: 0.5
   playerExposed: 0
   CreateHumans: {fileID: 742637914}
   CanvasAllCollectedGetHome: {fileID: 465938875}
+  PressSpaceCanv: {fileID: 1975869804}
+  failText: {fileID: 120040613}
 --- !u!4 &1293853907
 Transform:
   m_ObjectHideFlags: 0
@@ -4268,9 +4268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0abbb5e5a28c2f4fa537ed3413bdc69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maskPrefab: {fileID: 2318940163048237835, guid: f8e0c3f44ea2506429f87854f0dafd78,
-    type: 3}
-  nonSpawnableSpace: {fileID: 968884779}
 --- !u!224 &2008804994
 RectTransform:
   m_ObjectHideFlags: 0

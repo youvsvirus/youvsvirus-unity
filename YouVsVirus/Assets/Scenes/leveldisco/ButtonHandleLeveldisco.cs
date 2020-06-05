@@ -11,6 +11,6 @@ public class ButtonHandleLeveldisco : ButtonHandleBase
     public void Continue()
     {
         // Continue Button has been pressed, load main menu: In the future, some overall ending screen.
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("StartScreenLeveldemo");
     }
 }

@@ -90,6 +90,8 @@ namespace Components
             Player = Instantiate(playerPrefab.GetComponent<Player>(),
                                  coords,
                                  Quaternion.identity);
+            // Activate the player
+            Player.gameObject.SetActive (true);
             // give the player a unique id
             Player.myID = numNPCs;
 

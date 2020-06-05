@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using Components;
-using UnityEngine.SceneManagement;
+using TMPro;
 
 /// <summary>
 /// The end level controller for level 1.
@@ -12,21 +12,26 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
     public GameObject CanvasProp;
     public GameObject CreateHumans;
 
-    public void Awake()
+    protected override void Awake()
     {
         base.Awake();
         CanvasProp.SetActive(false);
     }
-    public void Update()
+    protected override void Update()
     {
         base.Update();
+       
 
         // additonally we can fail this level if we are infected by propaganda smileys
-        if(playerInfectedByPropaganda && !playerExposed)
+        if (playerInfectedByPropaganda && !playerExposed)
         {
             CreateHumans.GetComponent<CreatePopLeveldemo>().CummulativeSpriteUpdate();
             CanvasProp.SetActive(true);
         }            
+    }
+    protected override bool LevelDependentEndGameConditionFulfilled()
+    {
+        return !playerInfectedByPropaganda;
     }
     /// <summary>
     /// Query whether the player is allowed to enter its home.
@@ -36,5 +41,12 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
     public override bool isPlayerAllowedHome(GameObject player)
     {
         return true;
+    }
+
+    public TMP_Text failText = null; //  or make public and drag
+    public override void EndLevel()
+    {
+        CanvasFail.SetActive(true);
+        failText.text = "You pressed the exit key.";
     }
 }

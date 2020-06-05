@@ -47,7 +47,7 @@ public class EndLevelControllerSandbox : EndLevelControllerBase
     }
 
 
-    public override void Update()
+    protected override void Update()
     {
         // call base class update first
         base.Update();
