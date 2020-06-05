@@ -24,6 +24,12 @@ public class EndLevelControllerBase : MonoBehaviour
     protected bool playerInfectedByPropaganda = false;
 
     /// <summary>
+    /// This variable stores whether the level has
+    /// already finished.
+    /// </summary>
+    protected bool levelHasFinished = false;
+
+    /// <summary>
     /// Constructor, sets this Controller as the active end level controller
     /// </summary>
     public EndLevelControllerBase()
@@ -135,7 +141,7 @@ public class EndLevelControllerBase : MonoBehaviour
     /// <summary>
     /// Calls the fail screen if the player is exposed
     /// </summary>
-    /// <returns></returns>
+    /// <returns>True if the level ends</returns>
     protected bool EndGamePlayerExposed()
     {
         // if the player is exposed we fail
@@ -161,11 +167,13 @@ public class EndLevelControllerBase : MonoBehaviour
     {
         return true;
     }
+
     /// <summary>
     /// Only if the player is at home, if the player is healthy and if
     /// some other level-dependent conditions are fulfilled we succeed
     /// </summary>
-    protected void EndGamePlayerAtHome()
+    /// <returns>True if the level ends</returns>
+    protected bool EndGamePlayerAtHome()
     {
         // if the player is at home and well we win
         if (CanvasSucc != null && playerHome && !playerExposed && LevelDependentEndGameConditionFulfilled())
@@ -173,31 +181,42 @@ public class EndLevelControllerBase : MonoBehaviour
             // all NPCs show true infection statuts
             CummulativeSpriteUpdate();
             CanvasSucc.SetActive(true);
+            return true;
         }
+        return false;
     }
 
     protected virtual void Update()
     {
+        if (levelHasFinished) {
+            // We do nothing if the level is already finished
+            return;
+        }
+
         // if the player is exposed we fail
-        EndGamePlayerExposed();
+        levelHasFinished = EndGamePlayerExposed();
 
         // if the player is at home and well we win
-        EndGamePlayerAtHome();
+        if (!levelHasFinished) {
+            levelHasFinished = EndGamePlayerAtHome();
+        }
 
         // if the user wants the game to end
         // we show the stats screen if we are in the sandbox
         // or the fail screen in the campaign mode
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (!levelHasFinished && Input.GetKeyDown(KeyCode.Q))
         {
             ExitKeyPressed();
+            levelHasFinished = true;
         }
         // TESTING ONLY TEST ONLY TEST ONLY
         // if the user wants the game to end
         // we show the stats screen if we are in the sandbox
         // or the fail screen in the campaign mode
-        if (Input.GetKeyDown(KeyCode.C))
+        if (!levelHasFinished && Input.GetKeyDown(KeyCode.C))
         {
             EndLevelWithSuccess();
+            levelHasFinished = true;
         }
     }
 
