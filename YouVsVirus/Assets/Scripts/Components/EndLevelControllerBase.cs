@@ -173,7 +173,7 @@ public class EndLevelControllerBase : MonoBehaviour
     {
         return true;
     }
-
+    
     /// <summary>
     /// Only if the player is at home, if the player is healthy and if
     /// some other level-dependent conditions are fulfilled we succeed
@@ -266,4 +266,3 @@ public class EndLevelControllerBase : MonoBehaviour
         }
     }
 }
-
