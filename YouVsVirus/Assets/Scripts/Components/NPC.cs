@@ -32,7 +32,6 @@ namespace Components
         /// </summary>
         private float curPosX;
 
-
         // Start is called before the first frame update
         public override void Start()
         {
@@ -68,7 +67,8 @@ namespace Components
 
         void Update()
         {
-            if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Leveldemo")
+            // let sprites reenter from right, frame count gives a smoother distribution of npcs
+            if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Leveldemo" && Time.frameCount % 10 == 0)
                 ReenterScreenFromRight();    
         }
 
@@ -119,7 +119,7 @@ namespace Components
             {
                 // increase the velocity in every call to this function
                 myRigidbody.velocity *= (1f + AccelerationFactor);                    
-            }             
+            }
         }
 
         /// <summary>

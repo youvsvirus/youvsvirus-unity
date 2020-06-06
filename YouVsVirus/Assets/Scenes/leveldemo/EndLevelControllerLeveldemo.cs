@@ -3,9 +3,7 @@ using Components;
 using TMPro;
 
 /// <summary>
-/// The end level controller for level 1.
-/// Level 1 just ends everybody was infected
-/// and when it ends call level 2.
+/// The end level controller for leveldemo
 /// </summary>
 public class EndLevelControllerLeveldemo : EndLevelControllerBase
 {
@@ -20,8 +18,6 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
     protected override void Update()
     {
         base.Update();
-       
-
         // additonally we can fail this level if we are infected by propaganda smileys
         if (playerInfectedByPropaganda && !playerExposed)
         {

@@ -50,7 +50,7 @@ namespace Components
         /// <summary>
         /// Number of instantiated NPCs.
         /// </summary>
-        public int npcNumber = 42;
+        public int npcNumber = 72;
 
         public CreatePopLeveldemo()
         {
@@ -170,8 +170,8 @@ namespace Components
                 }
             }
 
-           // infect 6
-            for(int i=0; i<6; i++)
+           // infect 8
+            for(int i=0; i<8; i++)
                 NPCs[i].SetInitialCondition(NPC.EXPOSED);
 
   

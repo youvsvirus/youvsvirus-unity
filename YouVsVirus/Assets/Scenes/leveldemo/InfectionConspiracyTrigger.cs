@@ -30,8 +30,8 @@ namespace Components
             {
                 HumanBase myHuman = GetComponentInParent<HumanBase>();
 
-                // the player is infected by propaganda not neccessarily by the virus, only those with a sign are dangerous
-                if (otherHuman.tag == "Player" && myHuman.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled == true)
+                // the player is infected by propaganda not neccessarily by the virus, only those with a sign are 100% dangerous, the other only 40%
+                if (otherHuman.tag == "Player" && (myHuman.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled == true || UnityEngine.Random.value < 0.4))
                 {
                     float dist = Vector3.Distance(myHuman.transform.position, otherHuman.transform.position);
                     float r = 2f * InfectionRadius * transform.parent.localScale.x;
