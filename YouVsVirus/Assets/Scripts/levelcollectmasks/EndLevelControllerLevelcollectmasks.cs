@@ -16,7 +16,7 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
     /// The number of masks that the player needs to collect
     /// to complete the level.
     /// </summary>
-    private const int numberOfMasksNeeded = 1;
+    private const int numberOfMasksNeeded = 8;
 
     /// <summary>
     /// Will get set to true if all masks were collected.
@@ -94,7 +94,20 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
             // Set internal bool that the player is now on its way home
             onWayHome = true;
         }
-        base.Update();
-            
+        base.Update();           
+    }
+
+    /// <summary>
+    /// In infection status is not shown all NCPs do no sprite update within the game
+    /// since we do not want the user to know if they are healthy or not.
+    /// Only when the game ends, we want them all to show their true color.
+    /// *FIXME*: This is another function that does not really belong to the CreateHumans
+    /// game object. But handling it in another way requires a lot more reconstruction than
+    /// we want to do at the moment.
+    /// </summary>
+    protected override void CummulativeSpriteUpdate()
+    {
+        // all NPCs show true infection statuts
+        CreateHumans.GetComponent<Components.CreatePopLevelcollectmasks>().CummulativeSpriteUpdate();
     }
 }

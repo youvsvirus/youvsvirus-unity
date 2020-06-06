@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class EndLevelControllerBase : MonoBehaviour
+public abstract class EndLevelControllerBase : MonoBehaviour
 {
 
     /// <summary>
@@ -147,12 +147,12 @@ public class EndLevelControllerBase : MonoBehaviour
         // This function intentionally left blank
     }
 
-    protected virtual void CummulativeSpriteUpdate()
-    {
-        // sometimes we do no need this, the other end level controlllers have to implement this if needed
-        // this is not nice and should be done differently in the future
-    }
-
+    /// <summary>
+    /// sometimes we do no need this, the other end level controlllers have to implement this if needed
+    /// this is not nice and should be done differently in the future
+    /// </summary>
+    protected abstract void CummulativeSpriteUpdate();
+ 
     /// <summary>
     /// Calls the fail screen if the player is exposed
     /// </summary>
