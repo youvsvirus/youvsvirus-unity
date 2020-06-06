@@ -27,11 +27,6 @@ namespace Components
         /// </summary>
         public float AccelerationFactor = 0.5f;
 
-        /// <summary>
-        /// the current x-coordinate of NPC needed for leveldemo
-        /// </summary>
-        private float curPosX;
-
         // Start is called before the first frame update
         public override void Start()
         {

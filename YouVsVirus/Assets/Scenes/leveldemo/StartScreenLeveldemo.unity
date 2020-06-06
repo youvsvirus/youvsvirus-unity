@@ -1258,10 +1258,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00010499358
-    y: 0
-    width: 0.99979
-    height: 1
+    x: 0
+    y: 0.00031727552
+    width: 1
+    height: 0.99936545
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1518,7 +1518,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You come home from you daily walk and you cannot believe your eyes: There
+  m_text: 'You come home from your daily walk and you cannot believe your eyes: There
     is some kind of demonstration going on and your house is right in the middle.
     Surly it won''t hurt to try to pass these strange people, will it? '
   m_isRightToLeft: 0
@@ -1565,7 +1565,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 23
+  m_firstOverflowCharacterIndex: 24
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1589,7 +1589,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1895023303}
-    characterCount: 218
+    characterCount: 219
     spriteCount: 0
     spaceCount: 42
     wordCount: 42

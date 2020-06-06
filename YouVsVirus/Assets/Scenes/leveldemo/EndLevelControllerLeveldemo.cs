@@ -23,7 +23,10 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
         {
             CreateHumans.GetComponent<CreatePopLeveldemo>().CummulativeSpriteUpdate();
             CanvasProp.SetActive(true);
-        }            
+        }
+        // make sure that not both canvases appear
+        if(playerExposed)
+            CanvasProp.SetActive(false);
     }
     protected override bool LevelDependentEndGameConditionFulfilled()
     {
