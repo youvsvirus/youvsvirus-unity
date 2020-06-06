@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -67,27 +65,33 @@ public class EndLevelControllerSandbox : EndLevelControllerBase
     {
         // call base class update first
         base.Update();
-        //  The level is already ending, so just do nothing and wait.
-        if (levelHasFinished) return;
-
-        //  If the level timeout has been reached, finish the level
-        if (LevelTimeoutReached())
+        if (!infectionIsInitialized)
+            UnityEngine.Debug.Log("Game would have finished early.");
+            // do not end the level before it has begun
+        if (infectionIsInitialized)
         {
-            levelHasFinished = true;
-            UnityEngine.Debug.Log ("ELC SB: LevelTimeoutReached");
-            EndLevel();
-        }
+            //  The level is already ending, so just do nothing and wait.
+            if (levelHasFinished) return;
 
-        //  If an end condition has been met this frame, end the level after a given delay.
-        if (!levelHasFinished && CheckEndCondition())
-        {
-            UnityEngine.Debug.Log ("ELC SB: CheckEndCondition");
-            UnityEngine.Debug.Log ("ELC SB: CheckEndCondition. PD: " + playerDied + " activeI: " + activeInfections);
-            levelHasFinished = true;
+            //  If the level timeout has been reached, finish the level
+            if (LevelTimeoutReached())
+            {
+                levelHasFinished = true;
+                UnityEngine.Debug.Log("ELC SB: LevelTimeoutReached");
+                EndLevel();
+            }
 
-            //  Starts the delayed EndLevel coroutine, which will wait for EndConditionMetDelay seconds
-            //  and then call EndLevel().
-            StartCoroutine(DelayedEndLevel(EndConditionMetDelay));
+            //  If an end condition has been met this frame, end the level after a given delay.
+            if (!levelHasFinished && CheckEndCondition())
+            {
+                UnityEngine.Debug.Log("ELC SB: CheckEndCondition");
+                UnityEngine.Debug.Log("ELC SB: CheckEndCondition. PD: " + playerDied + " activeI: " + activeInfections);
+                levelHasFinished = true;
+
+                //  Starts the delayed EndLevel coroutine, which will wait for EndConditionMetDelay seconds
+                //  and then call EndLevel().
+                StartCoroutine(DelayedEndLevel(EndConditionMetDelay));
+            }
         }
     }
 

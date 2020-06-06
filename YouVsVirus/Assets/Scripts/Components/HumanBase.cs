@@ -101,6 +101,7 @@ namespace Components
                         egc.NotifyHumanExposed();
                         GetComponent<AbstractInfection>().Expose();
                         levelStats.aHumanGotExposed();
+                        LevelSettings.GetActiveEndLevelController().infectionIsInitialized = true;
                         break;
                     }
                 case INFECTIOUS:

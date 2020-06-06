@@ -3,6 +3,15 @@ using UnityEngine;
 
 public class EndLevelControllerBase : MonoBehaviour
 {
+
+    /// <summary>
+    /// A bool to check that humans instants have been created on screen
+    /// and all humans are infected
+    /// otherwiese the end level controller might want to end the level
+    /// early because no infections are present
+    /// </summary>
+    public bool infectionIsInitialized = false;
+
     /// <summary>
     /// fails screen in campaign
     /// </summary>
