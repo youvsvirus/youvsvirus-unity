@@ -1,8 +1,17 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class EndLevelControllerBase : MonoBehaviour
+public abstract class EndLevelControllerBase : MonoBehaviour
 {
+
+    /// <summary>
+    /// A bool to check that humans instants have been created on screen
+    /// and all humans are infected
+    /// otherwiese the end level controller might want to end the level
+    /// early because no infections are present
+    /// </summary>
+    public bool infectionIsInitialized = false;
+
     /// <summary>
     /// fails screen in campaign
     /// </summary>
@@ -138,12 +147,12 @@ public class EndLevelControllerBase : MonoBehaviour
         // This function intentionally left blank
     }
 
-    protected virtual void CummulativeSpriteUpdate()
-    {
-        // sometimes we do no need this, the other end level controlllers have to implement this if needed
-        // this is not nice and should be done differently in the future
-    }
-
+    /// <summary>
+    /// sometimes we do no need this, the other end level controlllers have to implement this if needed
+    /// this is not nice and should be done differently in the future
+    /// </summary>
+    protected abstract void CummulativeSpriteUpdate();
+ 
     /// <summary>
     /// Calls the fail screen if the player is exposed
     /// </summary>

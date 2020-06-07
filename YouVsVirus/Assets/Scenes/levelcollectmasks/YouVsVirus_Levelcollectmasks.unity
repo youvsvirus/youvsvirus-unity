@@ -1397,11 +1397,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888889, y: -5}
-  - {x: -8.888889, y: 5}
-  - {x: 8.888889, y: 5}
-  - {x: 8.888889, y: -5}
-  - {x: -8.888889, y: -5}
+  - {x: -8.892965, y: -5.003171}
+  - {x: -8.892965, y: 5.003171}
+  - {x: 8.892965, y: 5.003171}
+  - {x: 8.892965, y: -5.003171}
+  - {x: -8.892965, y: -5.003171}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1422,9 +1422,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.00031727552
     width: 1
-    height: 1
+    height: 0.99936545
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -2957,6 +2957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212d2ad140b43ec41ac51e5353079206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infectionIsInitialized: 0
   CanvasFail: {fileID: 147468431}
   CanvasSucc: {fileID: 1196154525}
   PressSpaceCanv: {fileID: 1975869804}
