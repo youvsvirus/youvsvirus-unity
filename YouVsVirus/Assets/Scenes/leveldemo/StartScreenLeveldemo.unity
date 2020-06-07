@@ -1520,7 +1520,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'You come home from your daily walk and you cannot believe your eyes: There
     is some kind of demonstration going on and your house is right in the middle.
-    Surly it won''t hurt to try to pass these strange people, will it? '
+    Surely it won''t hurt to try to pass these strange people, will it? '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
