@@ -50,7 +50,7 @@ public class EndLevelControllerLeveldisco : EndLevelControllerBase
     }
 
     /// <summary>
-    /// In infection status is not shown all NCPs do no sprite update within the game
+    /// If infection status is not shown all NCPs do no sprite update within the game
     /// since we do not want the user to know if they are healthy or not.
     /// Only when the game ends, we want them all to show their true color.
     /// *FIXME*: This is another function that does not really belong to the CreateHumans
