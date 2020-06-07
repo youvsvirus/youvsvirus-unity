@@ -908,7 +908,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1246,11 +1246,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888889, y: -5}
-  - {x: -8.888889, y: 5}
-  - {x: 8.888889, y: 5}
-  - {x: 8.888889, y: -5}
-  - {x: -8.888889, y: -5}
+  - {x: -8.892965, y: -5.003171}
+  - {x: -8.892965, y: 5.003171}
+  - {x: 8.892965, y: 5.003171}
+  - {x: 8.892965, y: -5.003171}
+  - {x: -8.892965, y: -5.003171}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1271,9 +1271,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.00031727552
     width: 1
-    height: 1
+    height: 0.99936545
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
