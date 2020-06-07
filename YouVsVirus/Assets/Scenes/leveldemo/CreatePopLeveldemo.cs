@@ -149,7 +149,13 @@ namespace Components
                 if (i < 20)
                 {
                     // all of them have a hand
+                    // we also assign them their own sorting order in the layer
+                    // normal NPCs live in sorting order 1
+                    // those with a sign live in 2 .. 22
+                    // otherwise weird overlaps with the signs happen
                     NPCs[i - 1].transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
+                    NPCs[i - 1].transform.GetChild(1).GetComponent<SpriteRenderer>().sortingOrder = 1+i;
+                    NPCs[i - 1].transform.GetComponent<SpriteRenderer>().sortingOrder = 1+i;
                     // we have 7 different signs, one of them is the default one
                     // the other 6 are loaded here since they are called sign1, sign2, etc.
                     string whichSign = (i % 7).ToString();
@@ -160,6 +166,8 @@ namespace Components
                         Sprite sign = Resources.Load<Sprite>(Loader);
                         NPCs[i - 1].transform.GetChild(2).GetComponent<SpriteRenderer>().enabled = true;
                         NPCs[i - 1].transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = sign;
+                        NPCs[i - 1].transform.GetChild(2).GetComponent<SpriteRenderer>().sortingOrder = 1+i;
+
                     }
                 }
                 else
