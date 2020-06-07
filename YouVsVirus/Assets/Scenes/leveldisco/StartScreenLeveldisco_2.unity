@@ -324,9 +324,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Jeff is your best friend. Although you disagreed about going to that party
-    in times of the virus, you will make sure that he gets home safely. Enter the
-    party and take him to the exit without getting exposed to the virus.
+  m_text: Sandra is your best friend. Although you disagreed about going to that
+    party in times of the virus, you will make sure that she gets home safely. Enter
+    the party and take her to the exit without getting exposed to the virus.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -371,7 +371,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 200
+  m_firstOverflowCharacterIndex: 195
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: -116.44506}
   m_textInfo:
     textComponent: {fileID: 264120548}
-    characterCount: 221
+    characterCount: 224
     spriteCount: 0
     spaceCount: 41
     wordCount: 42
@@ -1006,9 +1006,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.00031727552
     width: 1
-    height: 1
+    height: 0.99936545
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
