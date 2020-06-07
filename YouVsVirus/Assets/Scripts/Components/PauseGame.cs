@@ -25,6 +25,7 @@ public class PauseGame : MonoBehaviour
             bufferedTimeScale = Time.timeScale;
             // Set time scale to 0
             Time.timeScale = 0;
+            gameIsPaused = true;
         }
     }
 

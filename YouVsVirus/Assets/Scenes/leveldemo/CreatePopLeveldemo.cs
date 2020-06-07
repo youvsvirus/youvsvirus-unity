@@ -1,10 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Linq;
-using UnityEditor.Experimental.GraphView;
-//using System.Numerics;
 
 namespace Components
 {
