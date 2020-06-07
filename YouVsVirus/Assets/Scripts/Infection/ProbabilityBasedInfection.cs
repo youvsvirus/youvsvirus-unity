@@ -34,10 +34,7 @@ namespace Infection
         {
             if (infectionControl.IsNewDay())
             {
-                // nobody becomes infectious or dies at the party
-                // due to the much shorter time scale
-                if(LevelSettings.GetActiveSceneName() != "YouVsVirus_Leveldisco")
-                    UpdateCondition();
+                UpdateCondition();
             }
         }
 

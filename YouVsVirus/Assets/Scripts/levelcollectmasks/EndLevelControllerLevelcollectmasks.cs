@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -47,33 +44,14 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
     }
 
     /// <summary>
-    /// Triggers the end of the level.
-    /// </summary>
-    public override void EndLevel()
-    {
-        // Load end screen
-        UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreenLevelcollectmasks");
-    }
-
-    /// <summary>
     /// Override CheckEndCondition.
     /// The level ends if all masks have been collected and 
     /// the player returned home safely.
     /// </summary>
     /// <return> True if and only if this level is won </return>
-    protected override bool CheckEndCondition ()
+    protected override bool LevelDependentEndGameConditionFulfilled()
     {
-        return onWayHome && playerHome && !playerExposed;
-    }
-
-    /// <summary>
-    /// Returns true when this level is lost.
-    /// This is the case if we did not collect all masks and are exposed.
-    /// </summary>
-    /// <return> True if and only if this level is lost </return>
-    private bool CheckLevelLost ()
-    {
-        return playerExposed && !CheckEndCondition ();
+        return onWayHome && allMaskscollected;
     }
 
     /// <summary>
@@ -97,18 +75,11 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
         return allMaskscollected;
     }
 
-    private void Update()
+    protected override void Update()
     {
-        // Check whether we lost and display lost screen
-        if (CheckLevelLost())
-        {
-            // all NPCs show true infection statuts
-            CreateHumans.GetComponent<Components.CreatePopLevelcollectmasks>().CummulativeSpriteUpdate();
-            CanvasFail.SetActive(true);
-        }
         // Check if we collected all masks and returned them to the hospital.
         // If so, pause the game and show a screen telling us to get home.
-        else if (ShowCanvasAllCollectedGetHome())
+        if (!EndGamePlayerExposed() && ShowCanvasAllCollectedGetHome())
         {
             // The player has collected all masks and brought them to the hospital.
             // Get a reference to the player.
@@ -123,14 +94,20 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
             // Set internal bool that the player is now on its way home
             onWayHome = true;
         }
-        // if the player has collect all masks, returned home
-        // and is not infected we win.
-        else if(CheckEndCondition ())
-        {
-            // all NPCs show true infection statuts
-            CreateHumans.GetComponent<Components.CreatePopLevelcollectmasks>().CummulativeSpriteUpdate();
-            CanvasSucc.SetActive(true);
-        }
-            
+        base.Update();           
+    }
+
+    /// <summary>
+    /// In infection status is not shown all NCPs do no sprite update within the game
+    /// since we do not want the user to know if they are healthy or not.
+    /// Only when the game ends, we want them all to show their true color.
+    /// *FIXME*: This is another function that does not really belong to the CreateHumans
+    /// game object. But handling it in another way requires a lot more reconstruction than
+    /// we want to do at the moment.
+    /// </summary>
+    protected override void CummulativeSpriteUpdate()
+    {
+        // all NPCs show true infection statuts
+        CreateHumans.GetComponent<Components.CreatePopLevelcollectmasks>().CummulativeSpriteUpdate();
     }
 }

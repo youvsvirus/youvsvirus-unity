@@ -843,11 +843,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888889, y: -5.000492}
-  - {x: -8.888889, y: 5.000492}
-  - {x: 8.888889, y: 5.000492}
-  - {x: 8.888889, y: -5.000492}
-  - {x: -8.888889, y: -5.000492}
+  - {x: -8.888889, y: -5}
+  - {x: -8.888889, y: 5}
+  - {x: 8.888889, y: 5}
+  - {x: 8.888889, y: -5}
+  - {x: -8.888889, y: -5}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -868,9 +868,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.00004929304
+    y: 0
     width: 1
-    height: 0.9999014
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1236,9 +1236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c95b0ba2a1f3bc4eada24f7b7b76675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 2318940163048237835, guid: bf11b32d68aa29c4d9453c107b77daa5,
+  playerPrefab: {fileID: 2318940163048237835, guid: e0c0d9db4a455494586c7f468169182e,
     type: 3}
-  npcPrefab: {fileID: 8900475433866948943, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+  npcPrefab: {fileID: 8900475433866948943, guid: 4faa91e79bd33a94787ca51716efbba7,
     type: 3}
   PlayerSpawnCoordinates: {x: -8, y: 4.5}
   nonSpawnableSpaceObj: {fileID: 702865890}
@@ -1764,7 +1764,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1293853907}
-  - component: {fileID: 1293853906}
   - component: {fileID: 1293853908}
   m_Layer: 0
   m_Name: EndLevelController
@@ -1773,18 +1772,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1293853906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293853905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ae52b6270c0ad148a94f5770b491669, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1293853907
 Transform:
   m_ObjectHideFlags: 0
@@ -1813,8 +1800,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanvasFail: {fileID: 2046121199}
   CanvasSucc: {fileID: 236133598}
-  LevelTimeout: 0
-  EndConditionMetDelay: 3
+  PressSpaceCanv: {fileID: 0}
+  testMode: 1
   playerExposed: 0
   CreateHumans: {fileID: 742637914}
 --- !u!1 &1342456105

@@ -101,6 +101,7 @@ namespace Components
                         egc.NotifyHumanExposed();
                         GetComponent<AbstractInfection>().Expose();
                         levelStats.aHumanGotExposed();
+                        LevelSettings.GetActiveEndLevelController().infectionIsInitialized = true;
                         break;
                     }
                 case INFECTIOUS:
@@ -203,7 +204,7 @@ namespace Components
                         }
                     }
                     // rest of npcs have increasing chance of getting infected
-                    else if (UnityEngine.Random.value < num_inf * 0.02)
+                    else if (UnityEngine.Random.value < num_inf * 0.028)
                     {
                         num_inf++;
                         SetCondition(EXPOSED);

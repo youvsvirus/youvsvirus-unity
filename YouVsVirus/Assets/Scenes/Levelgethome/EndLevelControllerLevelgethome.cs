@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Components;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// The end level controller for level 1.

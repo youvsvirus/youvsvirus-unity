@@ -973,11 +973,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888887, y: -5}
-  - {x: -8.888887, y: 5}
-  - {x: 8.888887, y: 5}
-  - {x: 8.888887, y: -5}
-  - {x: -8.888887, y: -5}
+  - {x: -8.888889, y: -5}
+  - {x: -8.888889, y: 5}
+  - {x: 8.888889, y: 5}
+  - {x: 8.888889, y: -5}
+  - {x: -8.888889, y: -5}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -997,9 +997,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00020959973
+    x: 0
     y: 0
-    width: 0.9995808
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -1675,9 +1675,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553ddfd7e4cd8c1489f2ee796a5c676b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 2318940163048237835, guid: bf11b32d68aa29c4d9453c107b77daa5,
+  playerPrefab: {fileID: 2318940163048237835, guid: e0c0d9db4a455494586c7f468169182e,
     type: 3}
-  npcPrefab: {fileID: 8900475433866948943, guid: ab9d2a99c32f65a43a4c99a9379ce533,
+  npcPrefab: {fileID: 8900475433866948943, guid: 4faa91e79bd33a94787ca51716efbba7,
     type: 3}
   friendPrefab: {fileID: 8900475433866948943, guid: 648c98b015011364b88e3d72f4d437e4,
     type: 3}
@@ -1773,7 +1773,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924041520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.9288874, y: -4.5095, z: 0}
+  m_LocalPosition: {x: 7.9288893, y: -4.5095, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2243,8 +2243,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanvasFail: {fileID: 488762195}
   CanvasSucc: {fileID: 211081271}
-  LevelTimeout: 0
-  EndConditionMetDelay: 3
+  PressSpaceCanv: {fileID: 0}
+  testMode: 1
   playerExposed: 0
   failText: {fileID: 1275687903}
 --- !u!4 &1293853907

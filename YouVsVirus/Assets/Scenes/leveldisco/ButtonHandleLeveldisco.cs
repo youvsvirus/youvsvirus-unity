@@ -10,7 +10,8 @@ public class ButtonHandleLeveldisco : ButtonHandleBase
     /// </summary>
     public void Continue()
     {
+        PauseGame.Unpause();
         // Continue Button has been pressed, load main menu: In the future, some overall ending screen.
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("StartScreenLeveldemo");
     }
 }

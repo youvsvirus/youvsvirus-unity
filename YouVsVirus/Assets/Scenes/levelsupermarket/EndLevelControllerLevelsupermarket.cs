@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using Components;
+using TMPro;
 
 /// <summary>
 /// The end level controller for level 2.
@@ -10,7 +11,6 @@ using Components;
 /// </summary>
 public class EndLevelControllerLevelsupermarket : EndLevelControllerBase
 {
-
     public GameObject CreateHumans;
 
     /// <summary>

@@ -11,15 +11,21 @@ public class PauseGame : MonoBehaviour
     private static float bufferedTimeScale;
 
     /// <summary>
+    /// True if the game is currently paused.
+    /// </summary>
+    private static bool gameIsPaused = false;
+
+    /// <summary>
     /// Pauses the game. All time dependent behavior will stop.
     /// </summary>
     public static void Pause()
     {
-        if (Time.timeScale != 0) {
+        if (!gameIsPaused) {
             // Store current time scale
             bufferedTimeScale = Time.timeScale;
             // Set time scale to 0
             Time.timeScale = 0;
+            gameIsPaused = true;
         }
     }
 
@@ -29,8 +35,11 @@ public class PauseGame : MonoBehaviour
     /// </summary>
     public static void Unpause()
     {
-        // Restore buffered time scale
-        Time.timeScale = bufferedTimeScale;
+        if (gameIsPaused) {
+            // Restore buffered time scale
+            Time.timeScale = bufferedTimeScale;
+            gameIsPaused = false;
+        }
     }
 
     /// <summary>

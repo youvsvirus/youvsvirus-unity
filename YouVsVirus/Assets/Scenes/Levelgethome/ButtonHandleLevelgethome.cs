@@ -10,6 +10,7 @@ public class ButtonHandleLevelgethome : ButtonHandleBase
     /// </summary>
     public void Continue()
     {
+        PauseGame.Unpause();
         // Continue Button has been pressed, load next scene
         SceneManager.LoadScene("StartScreenLevelsupermarket");
     }

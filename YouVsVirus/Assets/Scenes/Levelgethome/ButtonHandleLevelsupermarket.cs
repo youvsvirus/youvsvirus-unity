@@ -10,6 +10,7 @@ public class ButtonHandleLevelsupermarket : ButtonHandleBase
     /// </summary>
     public void Continue()
     {
+        PauseGame.Unpause();
         // Continue Button has been pressed
         SceneManager.LoadScene("StartScreenLevelcollectmasks");
     }

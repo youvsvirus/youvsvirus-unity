@@ -31,6 +31,11 @@ namespace Components
 		/// </summary>
 		public bool hasToiletpaper = false;
 
+		/// <summary>
+		/// Did the player get infected by conspiracy theories?
+		/// </summary>
+		public bool infectedByPropaganda = false;
+
 
 		/// <summary>
 		/// Start is called before the first frame update
@@ -44,15 +49,21 @@ namespace Components
 		{
 			base.SetCondition(condition);
 
-			if(condition == EXPOSED)
+			if (condition == EXPOSED)
 			{
 				LevelSettings.GetActiveEndLevelController().NotifyPlayerExposed();
 			}
-			if(condition == DEAD)
+			if (condition == DEAD)
 			{
 				LevelSettings.GetActiveEndLevelController().NotifyPlayerDied();
 			}
 		}
+		public void Update()
+		{
+			if(infectedByPropaganda)
+				LevelSettings.GetActiveEndLevelController().NotifyPlayerInfectedByPropaganda();
+		}
+
 
 
 		/// <summary>

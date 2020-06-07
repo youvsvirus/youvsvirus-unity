@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using TMPro.EditorUtilities;
-using UnityEditor.Animations;
+﻿using TMPro;
 using UnityEngine;
 
-public class EndLevelControllerBase : MonoBehaviour
+public abstract class EndLevelControllerBase : MonoBehaviour
 {
+
+    /// <summary>
+    /// A bool to check that humans instants have been created on screen
+    /// and all humans are infected
+    /// otherwiese the end level controller might want to end the level
+    /// early because no infections are present
+    /// </summary>
+    public bool infectionIsInitialized = false;
+
     /// <summary>
     /// fails screen in campaign
     /// </summary>
@@ -17,27 +21,28 @@ public class EndLevelControllerBase : MonoBehaviour
     /// </summary>
     public GameObject CanvasSucc = null;
 
-    protected float startTime = 0f;
+    /// <summary>
+    /// press space canv in some levels
+    /// </summary>
+    public GameObject PressSpaceCanv = null;
 
     /// <summary>
-    /// Maximum number of seconds after which the level ends. 
-    /// Zero means the level runs indefinitely, until another end condition is met.
+    /// Set this to true for testing.
+    /// Enables that pressing 'c' finishes the level.
     /// </summary>
-    public float LevelTimeout = 0f;
-
-    /// <summary>
-    /// Number of seconds of delay from the time an non-timeout end condition is met
-    /// until the level terminates.
-    /// </summary>
-    public float EndConditionMetDelay = 3f;
+    public bool testMode = false;
 
     protected bool playerDied = false;
     public bool playerExposed = false;
     protected int activeInfections = 0;
     protected bool playerHome = false;
+    protected bool playerInfectedByPropaganda = false;
 
-    //  Has an end condition been met?
-    protected bool endConditionMet = false;
+    /// <summary>
+    /// This variable stores whether the level has
+    /// already finished.
+    /// </summary>
+    protected bool levelHasFinished = false;
 
     /// <summary>
     /// Constructor, sets this Controller as the active end level controller
@@ -52,29 +57,14 @@ public class EndLevelControllerBase : MonoBehaviour
     /// <summary>
     /// if available deactivate both canvases before level starts
     /// </summary>
-    public void Awake()
+    protected virtual void Awake()
     {
-        if(CanvasFail != null)
+        if (CanvasFail != null)
             CanvasFail.SetActive(false);
         if (CanvasSucc != null)
             CanvasSucc.SetActive(false);
     }
 
-    public void Start()
-    {
-        // Remember the starting time to check for the timeout end condition
-        startTime = Time.time;
-    }
-
-    /// <summary>
-    /// Triggers the end of the level.
-    /// The base version calls the end screen of the game
-    /// </summary>
-    public virtual void EndLevel()
-    {
-        // Load the End Scene of the game
-        UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreen");
-    }
 
     /// <summary>
     /// Query whether the player is allowed to enter its home.
@@ -85,15 +75,9 @@ public class EndLevelControllerBase : MonoBehaviour
         return false;
     }
 
-    /// <summary>
-    /// Coroutine that waits for delay seconds and then ends the level.
-    /// </summary>
-    /// <param name="delay">The delay before EndLevel is called.</param>
-    protected IEnumerator DelayedEndLevel(float delay)
+    public void NotifyPlayerInfectedByPropaganda()
     {
-        UnityEngine.Debug.Log("Finishing up...");
-        yield return new WaitForSeconds(delay);
-        EndLevel();
+        playerInfectedByPropaganda = true;
     }
 
     /// <summary>
@@ -163,12 +147,17 @@ public class EndLevelControllerBase : MonoBehaviour
         // This function intentionally left blank
     }
 
-    protected virtual void CummulativeSpriteUpdate()
-    {
-        // sometimes we do no need this, the other end level controlllers have to implement this if needed
-    }
-
-    protected void EndGamePlayerExposed()
+    /// <summary>
+    /// sometimes we do no need this, the other end level controlllers have to implement this if needed
+    /// this is not nice and should be done differently in the future
+    /// </summary>
+    protected abstract void CummulativeSpriteUpdate();
+ 
+    /// <summary>
+    /// Calls the fail screen if the player is exposed
+    /// </summary>
+    /// <returns>True if the level ends</returns>
+    protected bool EndGamePlayerExposed()
     {
         // if the player is exposed we fail
         if (CanvasFail != null && playerExposed)
@@ -179,70 +168,110 @@ public class EndLevelControllerBase : MonoBehaviour
                 CummulativeSpriteUpdate();
             }
             CanvasFail.SetActive(true);
+            return true;
         }
+        return false;
     }
 
-    protected void EndGamePlayerAtHome()
+    /// <summary>
+    /// This condition can be implemented indidually by the levels
+    /// It will be checked to see if the player succeeded
+    /// </summary>
+    /// <returns></returns>
+    protected virtual bool LevelDependentEndGameConditionFulfilled()
+    {
+        return true;
+    }
+    
+    /// <summary>
+    /// Only if the player is at home, if the player is healthy and if
+    /// some other level-dependent conditions are fulfilled we succeed
+    /// </summary>
+    /// <returns>True if the level ends</returns>
+    protected bool EndGamePlayerAtHome()
     {
         // if the player is at home and well we win
-        if (CanvasSucc != null && playerHome && !playerExposed)
+        if (CanvasSucc != null && playerHome && !playerExposed && LevelDependentEndGameConditionFulfilled())
         {
             // all NPCs show true infection statuts
             CummulativeSpriteUpdate();
             CanvasSucc.SetActive(true);
+            return true;
         }
+        return false;
     }
 
-    void Update()
+    protected virtual void Update()
     {
+        if (levelHasFinished) {
+            // We do nothing if the level is already finished
+            return;
+        }
+
         // if the player is exposed we fail
-        EndGamePlayerExposed();
+        levelHasFinished = EndGamePlayerExposed();
 
         // if the player is at home and well we win
-        EndGamePlayerAtHome();
-
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            EndLevel();
+        if (!levelHasFinished) {
+            levelHasFinished = EndGamePlayerAtHome();
         }
 
-        //  The level is already ending, so just do nothing and wait.
-        if (endConditionMet) return;
-
-        //  If the level timeout has been reached, finish the level
-        if (LevelTimeoutReached())
+        // if the user wants the game to end
+        // we show the stats screen if we are in the sandbox
+        // or the fail screen in the campaign mode
+        if (!levelHasFinished && Input.GetKeyDown(KeyCode.Q))
         {
-            EndLevel();
+            ExitKeyPressed();
+            levelHasFinished = true;
         }
-
-        //  If an end condition has been met this frame, end the level after a given delay.
-        if (CheckEndCondition())
+        
+        // TESTING ONLY
+        // if the user wants the game to end
+        // we show the stats screen if we are in the sandbox
+        // or the fail screen in the campaign mode
+        if (testMode && !levelHasFinished && Input.GetKeyDown(KeyCode.C))
         {
-            endConditionMet = true;
-
-            //  Starts the delayed EndLevel coroutine, which will wait for EndConditionMetDelay seconds
-            //  and then call EndLevel().
-            StartCoroutine(DelayedEndLevel(EndConditionMetDelay));
+            EndLevelWithSuccess();
+            levelHasFinished = true;
         }
+    }
 
+    protected virtual void EndLevelWithSuccess()
+    {
+        // in campaign mode show success screen
+        if (CanvasSucc != null)
+        {
+            // disable press space begin canvas first
+            // otherwise this will disturb the button control
+            // of CanvasFail
+            if (PressSpaceCanv != null)
+                PressSpaceCanv.SetActive(false);
 
+            CanvasSucc.SetActive(true);
+            PauseGame.Pause();
+        }
     }
 
     /// <summary>
-    /// Checks if the level timeout has been reached.
+    /// The exit key is pressed
+    /// The behaviour in all campaign scenes is similar
+    /// Canvas Fail appears with exit-key text
+    /// In Sandbox the end screen is called
     /// </summary>
-    /// <returns></returns>
-    protected bool LevelTimeoutReached()
+    protected virtual void ExitKeyPressed()
     {
-        return LevelTimeout > 0f && Time.time - startTime > LevelTimeout;
-    }
+        // in campaign mode show fail screen
+        if (CanvasFail != null)
+        {
+            // disable press space begin canvas first
+            // otherwise this will disturb the button control
+            // of CanvasFail
+            if(PressSpaceCanv != null)
+                PressSpaceCanv.SetActive(false);
 
-    /// <summary>
-    /// Checks if any end condition has been met.
-    /// </summary> 
-    protected virtual bool CheckEndCondition()
-    {
-        return playerDied || activeInfections == 0;
+            CanvasFail.SetActive(true);
+            CanvasFail.GetComponentInChildren<TMP_Text>().text= "You pressed the exit key.";
+            PauseGame.Pause();
+        }
     }
 }
