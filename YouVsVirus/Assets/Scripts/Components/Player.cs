@@ -10,6 +10,11 @@ namespace Components
 	public class Player : HumanBase
 	{
 		/// <summary>
+		/// Decides if the player wears a mask or not
+		/// </summary>
+		public bool withMask = false;
+		
+		/// <summary>
 		/// // The player's input vector will be multiplied by this factor
 		/// </summary>
 		public float speedMultiplier = 5.0f;
@@ -97,11 +102,22 @@ namespace Components
 		/// </summary>
 		public override void SetSpriteImages()
 		{
-			WellSprite = Resources.Load<Sprite>("SmileyPictures/player_healthy");
-			ExposedSprite = Resources.Load<Sprite>("SmileyPictures/player_exposed");
-			InfectiousSprite = Resources.Load<Sprite>("SmileyPictures/player_infectious");
-			RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recoveredhat");
-			DeadSprite = Resources.Load<Sprite>("SmileyPictures/player_dead");
+			if (!withMask)
+			{
+				WellSprite = Resources.Load<Sprite>("SmileyPictures/player_healthy");
+				ExposedSprite = Resources.Load<Sprite>("SmileyPictures/player_exposed");
+				InfectiousSprite = Resources.Load<Sprite>("SmileyPictures/player_infectious");
+				RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recoveredhat");
+				DeadSprite = Resources.Load<Sprite>("SmileyPictures/player_dead");
+			}
+			else
+			{
+				WellSprite = Resources.Load<Sprite>("SmileyPictures/withMask/player_healthy_mask");
+				ExposedSprite = Resources.Load<Sprite>("SmileyPictures/withMask/player_exposed_mask");
+				InfectiousSprite = Resources.Load<Sprite>("SmileyPictures/withMask/player_infectious_mask");
+				RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/withMask/recoveredhat_mask");
+				DeadSprite = Resources.Load<Sprite>("SmileyPictures/withMask/player_dead_mask");
+			}
 		}
 
 		/// <summary>

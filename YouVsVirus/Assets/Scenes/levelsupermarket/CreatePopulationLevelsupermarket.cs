@@ -108,6 +108,7 @@ namespace Components
           
             // place humans on grid (NPC, NPC_AI, player)
             CreateHumans();
+            Player.withMask = true;
 
             // set the paths for the NPC_AIs
             // these are fixed floats at the moment
