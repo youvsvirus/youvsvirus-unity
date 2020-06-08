@@ -73,6 +73,10 @@ namespace Components
             MainCamera = Camera.main;
             // place the humans
             PlaceHumans();
+            // player wears a mask in this level
+            // human base calls SetCondition on start
+            // where the right picture with mask is loaded
+            Player.withMask = true;
 
         }
 
