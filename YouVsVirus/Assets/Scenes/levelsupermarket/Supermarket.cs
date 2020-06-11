@@ -25,16 +25,6 @@ public class Supermarket : MonoBehaviour
     /// </summary>
     public GameObject NumberOfRolls;
 
-    /// <summary>
-    /// marks supermarket 1 as out
-    /// </summary>
-    private bool supermarketOneOut = false;
-
-    /// <summary>
-    /// marks supermarket 2 as out
-    /// </summary>
-    private bool supermarketTwoOut = false;
-
     private void Start()
     {
         CanvasSupermarket.SetActive(false);
