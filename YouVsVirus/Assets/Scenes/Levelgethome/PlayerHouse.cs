@@ -216,8 +216,8 @@ public class PlayerHouse : MonoBehaviour
     {
         if (Time.time - lastTime >= timeBetweenUpdates)
         {
-            Debug.Log("House: inside " + isPlayerInside + " close " + playerIsClose + " crruns " + aCoroutineRuns + " allowed Home: " + endlevel.isPlayerAllowedHome(player)
-                      + " at will: " + EnterAndExitAtWill);
+            //Debug.Log("House: inside " + isPlayerInside + " close " + playerIsClose + " crruns " + aCoroutineRuns + " allowed Home: " + endlevel.isPlayerAllowedHome(player)
+            //          + " at will: " + EnterAndExitAtWill);
             lastTime = Time.time;
         }
         if (player == null) {

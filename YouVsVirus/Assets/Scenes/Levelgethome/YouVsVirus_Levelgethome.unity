@@ -843,11 +843,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888889, y: -5}
-  - {x: -8.888889, y: 5}
-  - {x: 8.888889, y: 5}
-  - {x: 8.888889, y: -5}
-  - {x: -8.888889, y: -5}
+  - {x: -8.892965, y: -5.003171}
+  - {x: -8.892965, y: 5.003171}
+  - {x: 8.892965, y: 5.003171}
+  - {x: 8.892965, y: -5.003171}
+  - {x: -8.892965, y: -5.003171}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -868,9 +868,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.00031727552
     width: 1
-    height: 1
+    height: 0.99936545
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1798,11 +1798,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30cc87a42b27f1842b3056b124e946ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infectionIsInitialized: 0
   CanvasFail: {fileID: 2046121199}
   CanvasSucc: {fileID: 236133598}
   PressSpaceCanv: {fileID: 0}
   testMode: 1
   playerExposed: 0
+  levelHasFinished: 0
   CreateHumans: {fileID: 742637914}
 --- !u!1 &1342456105
 GameObject:
@@ -1841,8 +1843,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -58.004, y: -8.1}
-  m_SizeDelta: {x: 433.19, y: 348.7}
+  m_AnchoredPosition: {x: -58.003983, y: -8.100006}
+  m_SizeDelta: {x: 433.19, y: 348.69998}
   m_Pivot: {x: 0.31163263, y: 0.5}
 --- !u!114 &1342456107
 MonoBehaviour:

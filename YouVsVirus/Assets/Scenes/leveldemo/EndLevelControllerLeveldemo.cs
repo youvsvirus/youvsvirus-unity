@@ -19,10 +19,12 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
     {
         base.Update();
         // additonally we can fail this level if we are infected by propaganda smileys
-        if (playerInfectedByPropaganda && !playerExposed)
+        if (!levelHasFinished && playerInfectedByPropaganda && !playerExposed)
         {
             CreateHumans.GetComponent<CreatePopLeveldemo>().CummulativeSpriteUpdate();
             CanvasProp.SetActive(true);
+            FindAndPlaceHuman(CanvasProp);
+            levelHasFinished = true;
         }
         // make sure that not both canvases appear
         if(playerExposed)

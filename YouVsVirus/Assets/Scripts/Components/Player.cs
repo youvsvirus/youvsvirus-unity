@@ -82,7 +82,7 @@ namespace Components
 		/// </summary>
 		void FixedUpdate()
 		{
-			if (CanMove())
+			if (CanMove() && !LevelSettings.GetActiveEndLevelController().levelHasFinished)
 			{
 				ProcessMovementInput();
 			}
