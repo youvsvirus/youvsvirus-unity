@@ -174,6 +174,7 @@ public abstract class EndLevelControllerBase : MonoBehaviour
         // Set position of player hardcoded, see below for how it might
         // work automatically
         human.transform.position = position;
+        Debug.Log(human.transform.localScale);
         // make player twice as large
         human.transform.localScale *= 2;
         // make player and every sprite attached to player appear on top of everything
@@ -287,7 +288,10 @@ public abstract class EndLevelControllerBase : MonoBehaviour
         }
 
         // if the player is exposed we fail
-        levelHasFinished = EndGamePlayerExposed();
+        if (!levelHasFinished)
+        {
+            levelHasFinished = EndGamePlayerExposed();
+        }
 
         // if the player is at home and well we win
         if (!levelHasFinished) {
@@ -349,6 +353,7 @@ public abstract class EndLevelControllerBase : MonoBehaviour
 
             CanvasFail.SetActive(true);
             CanvasFail.GetComponentInChildren<TMP_Text>().text= "You pressed the exit key.";
+            FindAndPlaceHuman(CanvasFail);
             PauseGame.Pause();
         }
     }

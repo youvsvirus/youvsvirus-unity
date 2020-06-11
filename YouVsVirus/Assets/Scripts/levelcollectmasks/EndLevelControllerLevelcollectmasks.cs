@@ -79,7 +79,7 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
     {
         // Check if we collected all masks and returned them to the hospital.
         // If so, pause the game and show a screen telling us to get home.
-        if (!EndGamePlayerExposed() && ShowCanvasAllCollectedGetHome())
+        if (!LevelSettings.GetActiveEndLevelController().levelHasFinished && ShowCanvasAllCollectedGetHome())
         {
             // The player has collected all masks and brought them to the hospital.
             // Get a reference to the player.
