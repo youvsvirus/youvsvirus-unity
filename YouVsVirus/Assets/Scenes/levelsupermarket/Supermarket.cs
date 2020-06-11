@@ -83,7 +83,7 @@ public class Supermarket : MonoBehaviour
             CanvasSupermarket.SetActive(true);
             CanvasSupermarket.GetComponentInChildren<TMP_Text>().text = "You got one last roll of " +
                                                                          "FeatherSoft Ultra Premium 3D Embossed StrawberryVanilla flavored" +
-                                                                          " toilet paper.\nPress 'space' to continue.";
+                                                                          " toilet paper.\nPress 'Space' to continue.";
             CanvasSupermarket.GetComponentInChildren<TMP_Text>().fontSize = 25;
             GetComponent<AlreadyWasHere>().PlayerWasHere();
         }

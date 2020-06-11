@@ -501,6 +501,7 @@ GameObject:
   - component: {fileID: 210712226}
   - component: {fileID: 210712225}
   - component: {fileID: 210712224}
+  - component: {fileID: 210712228}
   m_Layer: 17
   m_Name: CanvasSupermarket2
   m_TagString: Untagged
@@ -589,6 +590,19 @@ RectTransform:
   m_AnchoredPosition: {x: 9, y: -13}
   m_SizeDelta: {x: 1121, y: 629.99994}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &210712228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210712223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c5ed9ea87bd734c952fdd093f0b6fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Canvas: {fileID: 210712223}
 --- !u!1 &293632704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1717,6 +1731,7 @@ GameObject:
   - component: {fileID: 668028734}
   - component: {fileID: 668028733}
   - component: {fileID: 668028736}
+  - component: {fileID: 668028737}
   m_Layer: 17
   m_Name: Supermarket2
   m_TagString: Untagged
@@ -1831,6 +1846,18 @@ MonoBehaviour:
   CanvasSupermarket: {fileID: 210712223}
   Toiletpaper: {fileID: 165622690}
   NumberOfRolls: {fileID: 556195106}
+--- !u!114 &668028737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668028732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64c500db20a44145a307a4c1677fbc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &724270153
 GameObject:
   m_ObjectHideFlags: 0
@@ -2714,8 +2741,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 33, y: 70}
-  m_SizeDelta: {x: 331.49, y: 50}
+  m_AnchoredPosition: {x: 33, y: 75}
+  m_SizeDelta: {x: 340, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1109155730
 MonoBehaviour:
@@ -2736,7 +2763,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Oh no! The guy before you bought all six remaining packs of toilet paper!
-    The supermarket is out. \nPress 'space' to continue."
+    The supermarket is out. \r\nPress 'Space' to continue."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2805,7 +2832,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 61.017056, w: 0}
   m_textInfo:
     textComponent: {fileID: 1109155730}
-    characterCount: 125
+    characterCount: 126
     spriteCount: 0
     spaceCount: 22
     wordCount: 22
@@ -3667,8 +3694,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 29, y: 71}
-  m_SizeDelta: {x: 331.49, y: 50}
+  m_AnchoredPosition: {x: 29, y: 75}
+  m_SizeDelta: {x: 340, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1485913385
 MonoBehaviour:
@@ -3689,7 +3716,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Oh no! The guy before you bought all four remaining packs of toilet paper!
-    The supermarket is out. \nPress 'space' to continue."
+    The supermarket is out. \nPress 'Space' to continue."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4306,6 +4333,7 @@ GameObject:
   - component: {fileID: 1857607595}
   - component: {fileID: 1857607597}
   - component: {fileID: 1857607596}
+  - component: {fileID: 1857607598}
   m_Layer: 17
   m_Name: Panel
   m_TagString: Untagged
@@ -4369,6 +4397,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857607594}
   m_CullTransparentMesh: 0
+--- !u!114 &1857607598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857607594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c5ed9ea87bd734c952fdd093f0b6fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Canvas: {fileID: 787792447}
 --- !u!1 &1879672280
 GameObject:
   m_ObjectHideFlags: 0
@@ -4726,6 +4767,7 @@ GameObject:
   - component: {fileID: 1967281519}
   - component: {fileID: 1967281521}
   - component: {fileID: 1967281522}
+  - component: {fileID: 1967281523}
   m_Layer: 17
   m_Name: Supermarket1
   m_TagString: Untagged
@@ -4840,6 +4882,18 @@ MonoBehaviour:
   CanvasSupermarket: {fileID: 787792447}
   Toiletpaper: {fileID: 1373791874}
   NumberOfRolls: {fileID: 556195106}
+--- !u!114 &1967281523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967281518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64c500db20a44145a307a4c1677fbc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2002517580
 GameObject:
   m_ObjectHideFlags: 0
