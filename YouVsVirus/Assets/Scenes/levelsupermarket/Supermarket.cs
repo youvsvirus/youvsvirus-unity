@@ -24,7 +24,17 @@ public class Supermarket : MonoBehaviour
     /// the toilet paper counter
     /// </summary>
     public GameObject NumberOfRolls;
-   
+
+    /// <summary>
+    /// marks supermarket 1 as out
+    /// </summary>
+    private bool supermarketOneOut = false;
+
+    /// <summary>
+    /// marks supermarket 2 as out
+    /// </summary>
+    private bool supermarketTwoOut = false;
+
     private void Start()
     {
         CanvasSupermarket.SetActive(false);
@@ -41,7 +51,8 @@ public class Supermarket : MonoBehaviour
         // hence we have to get its "parent" and check if this is the player
         if (other.gameObject.GetComponentInParent<HumanBase>() != null)
         {
-            if (other.gameObject.GetComponentInParent<HumanBase>().tag == "Player")
+            // if the player has not been to this specific supermarket already
+            if (other.gameObject.GetComponentInParent<HumanBase>().tag == "Player" && !GetComponent<AlreadyWasHere>().wasHere)
             {
                 //activate player in supermarket
                 StartCoroutine(PlayerInSupermarket(other.gameObject.GetComponentInParent<Player>()));
@@ -57,6 +68,7 @@ public class Supermarket : MonoBehaviour
     private IEnumerator PlayerInSupermarket(Player p)
     {
         // player already hit one empty supermarket
+        // and make sure he was not here before
         if (p.wentToFirstSupermarket)
         {
             // player gets toilet paper
@@ -70,11 +82,10 @@ public class Supermarket : MonoBehaviour
             PauseGame.Pause();
             CanvasSupermarket.SetActive(true);
             CanvasSupermarket.GetComponentInChildren<TMP_Text>().text = "You got one last roll of " +
-                                                                         "'FeatherSoft Ultra Premium 3D Embossed StrawberryVanilla flavored'" +
+                                                                         "FeatherSoft Ultra Premium 3D Embossed StrawberryVanilla flavored" +
                                                                           " toilet paper.\nPress 'space' to continue.";
             CanvasSupermarket.GetComponentInChildren<TMP_Text>().fontSize = 25;
-
-
+            GetComponent<AlreadyWasHere>().PlayerWasHere();
         }
         else
         {
@@ -88,6 +99,8 @@ public class Supermarket : MonoBehaviour
             CanvasSupermarket.SetActive(true);
             // remember that we went to first supermarket
             p.wentToFirstSupermarket = true;
+            // remember that we went to this specific supermarket
+            GetComponent<AlreadyWasHere>().PlayerWasHere();
         }
     }
 }
