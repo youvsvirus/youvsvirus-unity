@@ -2692,7 +2692,7 @@ GameObject:
   - component: {fileID: 1109155731}
   - component: {fileID: 1109155730}
   m_Layer: 17
-  m_Name: 'Text: Congratulations'
+  m_Name: 'Text: OutOfpaper'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2714,7 +2714,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 30.5, y: 78.9}
+  m_AnchoredPosition: {x: 33, y: 70}
   m_SizeDelta: {x: 331.49, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1109155730
@@ -2735,8 +2735,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Oh no! The guy before you bought all six remaining packs of toilet paper!
-    The supermarket is out. '
+  m_text: "Oh no! The guy before you bought all six remaining packs of toilet paper!
+    The supermarket is out. \nPress 'space' to continue."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2764,8 +2764,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 27
+  m_fontSizeBase: 27
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2805,10 +2805,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 61.017056, w: 0}
   m_textInfo:
     textComponent: {fileID: 1109155730}
-    characterCount: 98
+    characterCount: 125
     spriteCount: 0
-    spaceCount: 18
-    wordCount: 18
+    spaceCount: 22
+    wordCount: 22
     linkCount: 0
     lineCount: 7
     pageCount: 1
@@ -3008,11 +3008,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0fe851c0396b74fba3521d5fda40ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infectionIsInitialized: 0
   CanvasFail: {fileID: 356522770}
   CanvasSucc: {fileID: 1481595197}
   PressSpaceCanv: {fileID: 1494719116}
   testMode: 1
   playerExposed: 0
+  levelHasFinished: 0
   CreateHumans: {fileID: 742637914}
 --- !u!4 &1293853907
 Transform:
@@ -3643,7 +3645,7 @@ GameObject:
   - component: {fileID: 1485913386}
   - component: {fileID: 1485913385}
   m_Layer: 17
-  m_Name: 'Text: Congratulations'
+  m_Name: 'Text: OutOfPaper'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3665,7 +3667,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 30.5, y: 78.9}
+  m_AnchoredPosition: {x: 29, y: 71}
   m_SizeDelta: {x: 331.49, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1485913385
@@ -3686,8 +3688,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Oh no! The guy before you bought all six remaining packs of toilet paper!
-    The supermarket is out. '
+  m_text: "Oh no! The guy before you bought all four remaining packs of toilet paper!
+    The supermarket is out. \nPress 'space' to continue."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3715,8 +3717,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 27
+  m_fontSizeBase: 27
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3756,10 +3758,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 61.017056, w: 0}
   m_textInfo:
     textComponent: {fileID: 1485913385}
-    characterCount: 98
+    characterCount: 126
     spriteCount: 0
-    spaceCount: 18
-    wordCount: 18
+    spaceCount: 22
+    wordCount: 22
     linkCount: 0
     lineCount: 7
     pageCount: 1

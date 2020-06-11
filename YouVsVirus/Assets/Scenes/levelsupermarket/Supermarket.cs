@@ -1,7 +1,7 @@
 ﻿using Components;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// Handles the distribution of toilet paper
@@ -66,6 +66,14 @@ public class Supermarket : MonoBehaviour
             Toiletpaper.SetActive(false);
             // player has toilet paper
             NumberOfRolls.GetComponent<TMPro.TMP_Text>().text = "1";
+            // Pause the game
+            PauseGame.Pause();
+            CanvasSupermarket.SetActive(true);
+            CanvasSupermarket.GetComponentInChildren<TMP_Text>().text = "You got one last roll of " +
+                                                                         "'FeatherSoft Ultra Premium 3D Embossed StrawberryVanilla flavored'" +
+                                                                          " toilet paper.\nPress 'space' to continue.";
+            CanvasSupermarket.GetComponentInChildren<TMP_Text>().fontSize = 25;
+
 
         }
         else
@@ -73,12 +81,11 @@ public class Supermarket : MonoBehaviour
             // wait a little to let the paper disappear
             yield return new WaitForSeconds(0.3f);
             Toiletpaper.SetActive(false);
+            // Pause the game
+            PauseGame.Pause();
             // show the canvas telling the player that the sm is out
-            yield return new WaitForSeconds(0.3f);
-            CanvasSupermarket.SetActive(true);        
-            // make the canvas disappear again
-            yield return new WaitForSeconds(5f);
-            CanvasSupermarket.SetActive(false);
+            // has press-space script attached to it
+            CanvasSupermarket.SetActive(true);
             // remember that we went to first supermarket
             p.wentToFirstSupermarket = true;
         }
