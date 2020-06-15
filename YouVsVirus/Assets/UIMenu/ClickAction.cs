@@ -60,6 +60,8 @@ public class ClickAction : MonoBehaviour
     private void retryAction ()
     {
         Debug.Log ("RETRY.");
+        int current_scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
+        UnityEngine.SceneManagement.SceneManager.LoadScene (current_scene);
     }
     
     /// <summary>
@@ -95,6 +97,8 @@ public class ClickAction : MonoBehaviour
     private void nextLevelAction ()
     {
         Debug.Log ("NEXT LEVEL.");
+        int current_scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
+        UnityEngine.SceneManagement.SceneManager.LoadScene (current_scene + 1);
     }
 
     /// <summary>
@@ -104,5 +108,7 @@ public class ClickAction : MonoBehaviour
     private void mainmenuAction ()
     {
         Debug.Log ("MAIN MENU.");
+        // Load the main menu
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }
