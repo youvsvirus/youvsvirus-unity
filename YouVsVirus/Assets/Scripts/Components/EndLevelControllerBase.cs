@@ -248,7 +248,6 @@ public abstract class EndLevelControllerBase : MonoBehaviour
                 PressSpaceCanv.SetActive(false);
 
             CanvasSucc.SetActive(true);
-            PauseGame.Pause();
         }
     }
 
