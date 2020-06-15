@@ -9,11 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/main/MainMenu.unity
     guid: a98e3222e608e524690d9999cc243393
   - enabled: 1
-    path: Assets/Scenes/levelgethome/StartScreenLevelgethome.unity
+    path: Assets/Scenes/Levelgethome/StartScreenLevelgethome.unity
     guid: b348f3fec426378469e1a878562d97b0
   - enabled: 1
-    path: Assets/Scenes/levelgethome/YouVsVirus_Levelgethome.unity
+    path: Assets/Scenes/Levelgethome/YouVsVirus_Levelgethome.unity
     guid: cbd250d7089e79c409e7a75903196f93
+  - enabled: 1
+    path: Assets/Scenes/levelsupermarket/StartScreenLevelsupermarket.unity
+    guid: d5d7754592060be489e28db9b5d88f16
   - enabled: 1
     path: Assets/Scenes/main/EndScreen.unity
     guid: 00ffe3be83ede3a42ac68a0cc5953f6e
@@ -45,16 +48,13 @@ EditorBuildSettings:
     path: Assets/Scenes/leveldisco/YouVsVirus_Leveldisco.unity
     guid: 6883f131ec1e3564bb7ad7ddb54eb8d9
   - enabled: 1
-    path: Assets/Scenes/sandbox/EndScreenSandbox.unity
+    path: Assets/Scenes/Sandbox/EndScreenSandbox.unity
     guid: f166d5edfa387ad42bf5d68a23d6f955
   - enabled: 1
-    path: Assets/Scenes/levelsupermarket/StartScreenLevelsupermarket.unity
-    guid: d5d7754592060be489e28db9b5d88f16
-  - enabled: 1
-    path: Assets/Scenes/sandbox/MainSandbox.unity
+    path: Assets/Scenes/Sandbox/MainSandbox.unity
     guid: 9cde2c99f156f04418a76ea6bc5ca908
   - enabled: 1
-    path: Assets/Scenes/sandbox/YouVsVirus_Sandbox.unity
+    path: Assets/Scenes/Sandbox/YouVsVirus_Sandbox.unity
     guid: daf57548ff731d149b1cb2d5ba551c3b
   - enabled: 1
     path: Assets/Scenes/leveldemo/YouVsVirus_Leveldemo.unity
