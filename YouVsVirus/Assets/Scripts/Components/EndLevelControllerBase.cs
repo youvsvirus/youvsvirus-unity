@@ -233,6 +233,7 @@ public abstract class EndLevelControllerBase : MonoBehaviour
         {
             EndLevelWithSuccess();
             levelHasFinished = true;
+            PauseGame.Pause();
         }
     }
 
