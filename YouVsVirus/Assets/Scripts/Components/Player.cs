@@ -61,15 +61,8 @@ namespace Components
 			if (condition == DEAD)
 			{
 				LevelSettings.GetActiveEndLevelController().NotifyPlayerDied();
-			}
+			}	
 		}
-		public void Update()
-		{
-			if(infectedByPropaganda)
-				LevelSettings.GetActiveEndLevelController().NotifyPlayerInfectedByPropaganda();
-		}
-
-
 
 		/// <summary>
 		/// FixedUpdate: FixedUpdate is often called more frequently than Update. 

@@ -54,7 +54,6 @@ public abstract class EndLevelControllerBase : MonoBehaviour
         // Set this controller to be the current active end level controller
         LevelSettings.ActiveEndLevelController = this;
         levelHasFinished = false;
-        Debug.Log(levelHasFinished);
     }
 
     /// <summary>
@@ -173,11 +172,10 @@ public abstract class EndLevelControllerBase : MonoBehaviour
         // Set position of player hardcoded, see below for how it might
         // work automatically
         human.transform.position = position;
-        Debug.Log(human.transform.localScale);
         // make player twice as large
         human.transform.localScale *= 2;
         // make player and every sprite attached to player appear on top of everything
-         SpriteRenderer[] renderers = human.transform.GetComponentsInChildren<SpriteRenderer>();
+        SpriteRenderer[] renderers = human.transform.GetComponentsInChildren<SpriteRenderer>();
         foreach (SpriteRenderer sr in renderers)
         {
             sr.sortingLayerName = "OnTop"; 
@@ -236,7 +234,7 @@ public abstract class EndLevelControllerBase : MonoBehaviour
     protected bool EndGamePlayerExposed()
     {
         // if the player is exposed we fail
-        if (CanvasFail != null && playerExposed)
+        if (CanvasFail != null && playerExposed && !playerInfectedByPropaganda)
         {
             // all NPCs show true infection statuts
             if (LevelSettings.GetActiveLevelSettings().ShowInfectionStatus == false)
