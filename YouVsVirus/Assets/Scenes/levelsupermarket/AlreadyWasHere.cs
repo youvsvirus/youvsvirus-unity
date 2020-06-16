@@ -6,7 +6,7 @@
 /// </summary>
 public class AlreadyWasHere : MonoBehaviour
 {
-   public bool wasHere { get; private set; }
+    public bool wasHere { get; private set; }
 
     private void Start()
     {
