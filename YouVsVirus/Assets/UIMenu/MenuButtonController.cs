@@ -45,7 +45,7 @@ public class MenuButtonController : MonoBehaviour
         // The first active button will be the start button
         activeButton = StartButton;
         // Now is the last time we accepted input
-        lastTime = Time.time;
+        lastTime = Time.unscaledTime;
         // Get the number of buttons as length of the button array        
         NumButtons = MenuButtons.Length;
         // Activate the first button
@@ -96,14 +96,20 @@ public class MenuButtonController : MonoBehaviour
         
         /* Check if vertical input is positive or negative and 
          * +1 or -1 the active button. */
-        if (Time.time - lastTime >= coolDownTime)
+        if (Time.unscaledTime - lastTime >= coolDownTime)
         {
-            lastTime = Time.time;
-            if (Input.GetAxis ("Vertical") > 0)
+            Debug.Log ("Time: " + Time.unscaledTime);
+            lastTime = Time.unscaledTime;
+            /* Note: We need to use GetAxisRaw here instead of GetAxis (which applies smoothing to the value).
+             * Reason: We also need the inpute when the game is paused. GetAxis however will return 0 when the game is paused,
+             *         while GetAxisRaw will still return a proper value.
+             * SideNote: For keyboard input GetAxisRaw will be +1, 0 or -1. For controller input it can be a float value in between.
+             */
+            if (Input.GetAxisRaw ("Vertical") > 0)
             {
                 SelectButton ((activeButton - 1 + NumButtons) % NumButtons);
             }
-            else if (Input.GetAxis ("Vertical") < 0)
+            else if (Input.GetAxisRaw ("Vertical") < 0)
             {
                 SelectButton ((activeButton + 1) % NumButtons);
             }
