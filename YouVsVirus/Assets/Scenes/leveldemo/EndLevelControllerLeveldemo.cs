@@ -18,11 +18,11 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
     protected override void Update()
     {
         base.Update();
+
         // the level ends with failure when
         // 1. the player catches the virus only (handled by base class)
         // 2. the player catches the virus and propaganda (below)
         // 3. the player catches proganda only (here)
- 
         if (!levelHasFinished && playerInfectedByPropaganda && !playerExposed)
         {
             CummulativeSpriteUpdate();
@@ -30,7 +30,6 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
             FindAndPlaceHuman(CanvasProp);
             levelHasFinished = true;
         }
-        // additonally we can fail this level if we are infected by the virus AND propaganda smileys
         else if (!levelHasFinished && playerInfectedByPropaganda && playerExposed)
         {
             CummulativeSpriteUpdate();

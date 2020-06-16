@@ -43,7 +43,7 @@ public abstract class EndLevelControllerBase : MonoBehaviour
     /// This variable stores whether the level has
     /// already finished.
     /// </summary>
-    public bool levelHasFinished { get; protected set; }
+    public bool levelHasFinished { get; protected set; } = false;
 
     /// <summary>
     /// Constructor, sets this Controller as the active end level controller
@@ -53,7 +53,6 @@ public abstract class EndLevelControllerBase : MonoBehaviour
         UnityEngine.Debug.Log("Set End Level Controller as active end level controller.");
         // Set this controller to be the current active end level controller
         LevelSettings.ActiveEndLevelController = this;
-        levelHasFinished = false;
     }
 
     /// <summary>
