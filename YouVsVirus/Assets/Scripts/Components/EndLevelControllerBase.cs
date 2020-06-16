@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Dynamic;
+using TMPro;
 using UnityEditor.U2D.Common;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.GameCenter;
@@ -46,12 +47,12 @@ public abstract class EndLevelControllerBase : MonoBehaviour
     /// This variable stores whether the level has
     /// already finished.
     /// </summary>
-    public bool levelHasFinished = false;
+    public bool levelHasFinished {get; protected set;}
 
-    /// <summary>
-    /// Constructor, sets this Controller as the active end level controller
-    /// </summary>
-    public EndLevelControllerBase()
+/// <summary>
+/// Constructor, sets this Controller as the active end level controller
+/// </summary>
+public EndLevelControllerBase()
     {
         UnityEngine.Debug.Log("Set End Level Controller as active end level controller.");
         // Set this controller to be the current active end level controller
