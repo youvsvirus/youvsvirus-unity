@@ -73,6 +73,8 @@ public class ClickAction : MonoBehaviour
     private void continueAction ()
     {
         Debug.Log ("CONTINUE.");
+        // If the game was paused, we continue it
+        PauseGame.Unpause ();
     }
     
     /// <summary>
