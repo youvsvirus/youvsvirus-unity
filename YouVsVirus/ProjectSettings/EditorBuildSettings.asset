@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/main/MainMenu.unity
     guid: a98e3222e608e524690d9999cc243393
   - enabled: 1
+    path: Assets/Scenes/main/ExplainScreenCampaign.unity
+    guid: c621fd051f005934ca46eff4d64b8af2
+  - enabled: 1
     path: Assets/Scenes/Levelgethome/StartScreenLevelgethome.unity
     guid: b348f3fec426378469e1a878562d97b0
   - enabled: 1
