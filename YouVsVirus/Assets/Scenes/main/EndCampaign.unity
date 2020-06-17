@@ -432,7 +432,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 47250216, guid: 2ecbd32e2c8b3b2419206425e04a9a44, type: 3}
       propertyPath: action
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2038999313, guid: 2ecbd32e2c8b3b2419206425e04a9a44, type: 3}
       propertyPath: MenuButtons.Array.size

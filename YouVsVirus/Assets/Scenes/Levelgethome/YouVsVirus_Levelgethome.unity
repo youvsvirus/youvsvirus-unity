@@ -559,11 +559,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888889, y: -5}
-  - {x: -8.888889, y: 5}
-  - {x: 8.888889, y: 5}
-  - {x: 8.888889, y: -5}
-  - {x: -8.888889, y: -5}
+  - {x: -8.888889, y: -5.002285}
+  - {x: -8.888889, y: 5.002285}
+  - {x: 8.888889, y: 5.002285}
+  - {x: 8.888889, y: -5.002285}
+  - {x: -8.888889, y: -5.002285}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -584,9 +584,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.00022852421
     width: 1
-    height: 1
+    height: 0.99954295
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -642,7 +642,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 47250216, guid: 2ecbd32e2c8b3b2419206425e04a9a44, type: 3}
       propertyPath: action
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2038999313, guid: 2ecbd32e2c8b3b2419206425e04a9a44, type: 3}
       propertyPath: MenuButtons.Array.size
@@ -1284,7 +1284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618be176e13bb60498c888ebf5c2e371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: 5
+  action: 6
 --- !u!95 &836294793
 Animator:
   serializedVersion: 3
@@ -1834,7 +1834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618be176e13bb60498c888ebf5c2e371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: 5
+  action: 6
 --- !u!95 &1156721598
 Animator:
   serializedVersion: 3
