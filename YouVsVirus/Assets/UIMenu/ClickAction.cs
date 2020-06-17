@@ -83,7 +83,7 @@ public class ClickAction : MonoBehaviour
     private void campaignAction ()
     {
         // Load the campaing level
-        UnityEngine.SceneManagement.SceneManager.LoadScene("StartScreenLevelgethome");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("ExplainScreenCampaign");
         // If the game was paused, we continue it
         PauseGame.Unpause ();
     }
