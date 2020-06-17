@@ -17,7 +17,7 @@ using UnityEngine;
 public class ClickAction : MonoBehaviour
 {
     /// <summary> The different types of click action provided. </summary>
-    public enum ActionType {RETRY, CONTINUE, CAMPAIGN, SANBOX, NEXT_LEVEL, BACK_TO_MAIN_MENU};
+    public enum ActionType {RETRY, CONTINUE, CONTROLS, CAMPAIGN, SANDBOX, NEXT_LEVEL, BACK_TO_MAIN_MENU};
 
     /// <summary> The selected action for this specific instance. </summary>
     public ActionType action;
@@ -35,10 +35,13 @@ public class ClickAction : MonoBehaviour
             case ActionType.CONTINUE:
                 continueAction ();
                 break;
+            case ActionType.CONTROLS:
+                controlsAction ();
+                break;
             case ActionType.CAMPAIGN:
                 campaignAction ();
                 break;
-            case ActionType.SANBOX:
+            case ActionType.SANDBOX:
                 sandboxAction ();
                 break;
             case ActionType.NEXT_LEVEL:
@@ -76,6 +79,18 @@ public class ClickAction : MonoBehaviour
         // If the game was paused, we continue it
         PauseGame.Unpause ();
     }
+
+    /// <summary>
+    /// Load the controls help screen
+    /// </summary>
+    private void controlsAction ()
+    {
+        // Load the campaing level
+        UnityEngine.SceneManagement.SceneManager.LoadScene("GamePlayScreen");
+        // If the game was paused, we continue it
+        PauseGame.Unpause ();
+    }
+    
     
     /// <summary>
     /// Load the first campaign level
