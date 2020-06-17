@@ -62,6 +62,8 @@ public class ClickAction : MonoBehaviour
         Debug.Log ("RETRY.");
         int current_scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
         UnityEngine.SceneManagement.SceneManager.LoadScene (current_scene);
+        // If the game was paused, we continue it
+        PauseGame.Unpause ();
     }
     
     /// <summary>
@@ -80,6 +82,8 @@ public class ClickAction : MonoBehaviour
     {
         // Load the campaing level
         UnityEngine.SceneManagement.SceneManager.LoadScene("StartScreenLevelgethome");
+        // If the game was paused, we continue it
+        PauseGame.Unpause ();
     }
     
     /// <summary>
@@ -99,6 +103,8 @@ public class ClickAction : MonoBehaviour
         Debug.Log ("NEXT LEVEL.");
         int current_scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().buildIndex;
         UnityEngine.SceneManagement.SceneManager.LoadScene (current_scene + 1);
+        // If the game was paused, we continue it
+        PauseGame.Unpause ();
     }
 
     /// <summary>

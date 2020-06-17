@@ -270,7 +270,7 @@ public abstract class EndLevelControllerBase : MonoBehaviour
                 PressSpaceCanv.SetActive(false);
 
             CanvasFail.SetActive(true);
-            CanvasFail.GetComponentInChildren<TMP_Text>().text= "You pressed the exit key.";
+            CanvasFail.transform.Find("Panel/Text: Failed").gameObject.GetComponent<TMP_Text>().text= "You pressed the exit key.";
             PauseGame.Pause();
         }
     }
