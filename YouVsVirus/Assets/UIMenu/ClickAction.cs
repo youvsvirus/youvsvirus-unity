@@ -94,7 +94,7 @@ public class ClickAction : MonoBehaviour
     private void sandboxAction ()
     {
         // Load the sandbox
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainSandbox");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("ExplainScreenExplore");
     }
 
     /// <summary>
