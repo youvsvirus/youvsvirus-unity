@@ -34,7 +34,7 @@ public class MenuButtonController : MonoBehaviour
     /// How long it will take until we accept the next keyboard input to
     /// select another button. Thus, this is the scroll speed through the menu.
     /// </summary>
-    private float coolDownTime = 0.3f;
+    private float coolDownTime = 0.15f;
 
     /// <summary> Keeps track of when we accepted a keyboard input for the last time. </summary>
     private float lastTime = 0.0f;
