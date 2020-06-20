@@ -9,15 +9,22 @@ using UnityEngine;
 /// We currently provide the actions:
 ///     RETRY:             Retry this level.
 ///     CONTINUE:          Continue with this level (usually when the game is paused).
+///     CONTROLS:          Show the controls help screen
+///     CAMPAING:          Start the campaign
+///     SANDBOX_EXPLAIN:   Load the sandbox explain screen
 ///     NEXT_LEVEL:        Continue to the next level.
 ///     BACK_TO_MAIN_MENU: Go back to the main menu.
+///     SANDBOX_MENU:      Go to the sandbox menu screen (the one with sliders)
 ///
 /// Feel free to add your own action when needed.
 /// </summary>
 public class ClickAction : MonoBehaviour
 {
     /// <summary> The different types of click action provided. </summary>
-    public enum ActionType {RETRY, CONTINUE, CONTROLS, CAMPAIGN, SANDBOX, NEXT_LEVEL, BACK_TO_MAIN_MENU};
+    // WARNING: If you add an ActionType add it AT THE END OF THIS LIST!
+    //          If you dont, you will have to recheck ALL THE OTHER BUTTONS. DONT DO IT!
+    //          (And if you do, dont say i didnt warn you!)
+    public enum ActionType {RETRY, CONTINUE, CONTROLS, CAMPAIGN, SANDBOX_EXPLAIN, NEXT_LEVEL, BACK_TO_MAIN_MENU, SANDBOX_MENU};
 
     /// <summary> The selected action for this specific instance. </summary>
     public ActionType action;
@@ -41,7 +48,7 @@ public class ClickAction : MonoBehaviour
             case ActionType.CAMPAIGN:
                 campaignAction ();
                 break;
-            case ActionType.SANDBOX:
+            case ActionType.SANDBOX_EXPLAIN:
                 sandboxAction ();
                 break;
             case ActionType.NEXT_LEVEL:
@@ -49,6 +56,9 @@ public class ClickAction : MonoBehaviour
                 break;
             case ActionType.BACK_TO_MAIN_MENU:
                 mainmenuAction ();
+                break;
+            case ActionType.SANDBOX_MENU:
+                sandboxMenuAction ();
                 break;
             default:
                 Debug.Log ("Unknown action");
@@ -134,4 +144,15 @@ public class ClickAction : MonoBehaviour
         // Load the main menu
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
+
+    /// <summary>
+    /// Back to the main menu.
+    /// Will load the main menu scene.
+    /// </summary>
+    private void sandboxMenuAction ()
+    {
+        Debug.Log ("SANDBOX MENU.");
+        // Load the main menu
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainSandbox");
+    }    
 }
