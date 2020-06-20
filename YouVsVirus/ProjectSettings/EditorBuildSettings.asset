@@ -27,13 +27,13 @@ EditorBuildSettings:
     path: Assets/Scenes/leveldisco/StartScreenLeveldisco_2.unity
     guid: 3832572e18debcc4c8b05f2177f6495a
   - enabled: 1
-    path: Assets/Scenes/levelcollectmasks/EndScreenLevelcollectmasks.unity
+    path: Assets/Scenes/levelcollectmasks/CoronaGlassesScreen.unity
     guid: cc22b6d4347f05b46a480a402e78f1cb
   - enabled: 1
     path: Assets/Scenes/levelcollectmasks/YouVsVirus_Levelcollectmasks.unity
     guid: abb8b2cb0675081409b4ec60e49b237a
   - enabled: 1
-    path: Assets/Scenes/levelcollectmasks/EndScreenLevelcollectmasks.unity
+    path: Assets/Scenes/levelcollectmasks/CoronaGlassesScreen.unity
     guid: cc22b6d4347f05b46a480a402e78f1cb
   - enabled: 1
     path: Assets/Scenes/levelcollectmasks/StartscreenLevelcollectmasks.unity
