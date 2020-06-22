@@ -90,8 +90,14 @@ namespace Components
 
 		private void ProcessMovementInput()
 		{
-			// What is the player doing?
-			Vector3 move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * speedMultiplier;
+			// Get the input via the horizontal and vertical axis
+			Vector2 rawMove =  new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+			// If this input is too large, we normalize it
+			if (rawMove.magnitude > 1) {
+				rawMove.Normalize ();
+			}
+			// Scale this movement with the speed
+			Vector2 move = rawMove * speedMultiplier;
 
 			// Find the rigidbody, update its velocity and let the physics engine do the rest.
 			myRigidbody.velocity = move;
