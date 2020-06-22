@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 61596771}
   - component: {fileID: 61596770}
   m_Layer: 0
-  m_Name: StartScript
+  m_Name: SliderScript
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
