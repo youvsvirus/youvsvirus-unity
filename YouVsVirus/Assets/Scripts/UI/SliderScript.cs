@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Load first level
 /// </summary>
-public class StartButton : MonoBehaviour
+public class SliderScript : MonoBehaviour
 {
     public Slider NumberOfNPCsSlider;
     public Slider SocialDistancingSlider;

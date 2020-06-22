@@ -792,7 +792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -256, y: -242}
+  m_AnchoredPosition: {x: -258, y: -242}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &489752097
@@ -1519,7 +1519,7 @@ PrefabInstance:
     - target: {fileID: 1688250008473386509, guid: 2ecbd32e2c8b3b2419206425e04a9a44,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -255.99998
+      value: -258.35
       objectReference: {fileID: 0}
     - target: {fileID: 1688250008473386509, guid: 2ecbd32e2c8b3b2419206425e04a9a44,
         type: 3}
@@ -2398,9 +2398,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.00022852421
+    y: 0.125
     width: 1
-    height: 0.99954295
+    height: 0.75
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -2638,7 +2638,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -256, y: -94.2}
+  m_AnchoredPosition: {x: -258.2, y: -94.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1944372033
