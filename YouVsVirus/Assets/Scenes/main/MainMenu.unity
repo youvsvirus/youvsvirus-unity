@@ -1519,12 +1519,12 @@ PrefabInstance:
     - target: {fileID: 1688250008473386509, guid: 2ecbd32e2c8b3b2419206425e04a9a44,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -258.35
+      value: -256
       objectReference: {fileID: 0}
     - target: {fileID: 1688250008473386509, guid: 2ecbd32e2c8b3b2419206425e04a9a44,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 49
+      value: 46.8
       objectReference: {fileID: 0}
     - target: {fileID: 1688250008473386510, guid: 2ecbd32e2c8b3b2419206425e04a9a44,
         type: 3}
@@ -1561,6 +1561,11 @@ PrefabInstance:
       propertyPath: m_text
       value: Start your adventure against the virus
       objectReference: {fileID: 0}
+    - target: {fileID: 1688250009894199968, guid: 2ecbd32e2c8b3b2419206425e04a9a44,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 258
+      objectReference: {fileID: 0}
     - target: {fileID: 1688250009894199969, guid: 2ecbd32e2c8b3b2419206425e04a9a44,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1569,7 +1574,7 @@ PrefabInstance:
     - target: {fileID: 1688250009894199969, guid: 2ecbd32e2c8b3b2419206425e04a9a44,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -9
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 1688250010093517575, guid: 2ecbd32e2c8b3b2419206425e04a9a44,
         type: 3}
@@ -1859,7 +1864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: 239}
+  m_AnchoredPosition: {x: -30, y: -51}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1182123030
@@ -1880,7 +1885,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Get help on how to play the game
+  m_text: 'How to play the game
 
 '
   m_isRightToLeft: 0
@@ -1917,7 +1922,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 257
+  m_textAlignment: 258
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -1927,7 +1932,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 24
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1951,12 +1956,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -62.07199, w: 0}
   m_textInfo:
     textComponent: {fileID: 1182123030}
-    characterCount: 33
+    characterCount: 21
     spriteCount: 0
-    spaceCount: 8
-    wordCount: 8
+    spaceCount: 5
+    wordCount: 5
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -2398,9 +2403,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.000052273273
+    y: 0.000105410814
     width: 1
-    height: 0.99989545
+    height: 0.9997892
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -2638,7 +2643,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -258.2, y: -94.2}
+  m_AnchoredPosition: {x: -256, y: -94.6}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1944372033
@@ -2868,7 +2873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.8, y: 94.2}
+  m_AnchoredPosition: {x: -30, y: -49}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2020995487
@@ -2926,7 +2931,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 257
+  m_textAlignment: 258
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
