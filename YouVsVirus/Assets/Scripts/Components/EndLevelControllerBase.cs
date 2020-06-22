@@ -274,4 +274,17 @@ public abstract class EndLevelControllerBase : MonoBehaviour
             PauseGame.Pause();
         }
     }
+
+    /// <summary>
+    /// The full screen key is pressed
+    /// Switches between full screen and no full screen
+    /// </summary>
+    protected virtual void FullScreenKeyPressed()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            // Toggle fullscreen
+            Screen.fullScreen = !Screen.fullScreen;
+        }
+    }
 }
