@@ -1494,11 +1494,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888889, y: -5.002285}
-  - {x: -8.888889, y: 5.002285}
-  - {x: 8.888889, y: 5.002285}
-  - {x: 8.888889, y: -5.002285}
-  - {x: -8.888889, y: -5.002285}
+  - {x: -8.891665, y: -5}
+  - {x: -8.891665, y: 5}
+  - {x: 8.891665, y: 5}
+  - {x: 8.891665, y: -5}
+  - {x: -8.891665, y: -5}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1518,10 +1518,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.00022852421
-    width: 1
-    height: 0.99954295
+    x: 0.00015616417
+    y: 0
+    width: 0.9996877
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -3272,6 +3272,7 @@ GameObject:
   - component: {fileID: 1676207407}
   - component: {fileID: 1676207406}
   - component: {fileID: 1676207409}
+  - component: {fileID: 1676207410}
   m_Layer: 0
   m_Name: hospital_cartoon_and_mask_collection
   m_TagString: Untagged
@@ -3384,7 +3385,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c653a5155b3c64983715ec1cf82a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1788118296
+--- !u!95 &1676207410
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676207405}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 44dadd0786d17ed41893b44a82d0edbe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1801674446
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
