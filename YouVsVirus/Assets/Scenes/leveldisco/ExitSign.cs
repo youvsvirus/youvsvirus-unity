@@ -117,19 +117,6 @@ namespace Components
                 endlevel.PlayerExitHealthyWithoutFriend();
                 player.SetActive(false);
             }
-            // player goes home without friend and is sick 
-            else if (friend.GetComponent<Friend>().friendFound == false && endlevel.playerExposed)
-            {
-                endlevel.PlayerExitSickWithoutFriend();
-                player.SetActive(false);
-            }
-            // player goes home with friend but he or friend is exposed
-            else if (friend.GetComponent<Friend>().friendFound == true || endlevel.playerExposed)
-            {
-                endlevel.PlayerOrFriendExitSick();
-                player.SetActive(false);
-                friend.SetActive(false);
-            }
         }
     }
 }

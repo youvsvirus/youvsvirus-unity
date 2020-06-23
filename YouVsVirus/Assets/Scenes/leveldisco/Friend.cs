@@ -33,7 +33,7 @@ namespace Components
             player = GameObject.FindGameObjectWithTag("Player");
         }
         
-		void FixedUpdate()
+		void Update()
         {
             // if the player has not found us
             if (friendFound == false)
@@ -41,7 +41,7 @@ namespace Components
                 // we move like the drunken bastard we are
                 RandomMovement();
             }
-            else
+            else if(!LevelSettings.GetActiveEndLevelController().levelHasFinished)
             {
                 // otherwise we follow the player
                 FollowPlayer();

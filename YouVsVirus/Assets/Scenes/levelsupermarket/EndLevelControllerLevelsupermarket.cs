@@ -25,6 +25,8 @@ public class EndLevelControllerLevelsupermarket : EndLevelControllerBase
     {
         // all NPCs show true infection statuts
         CreateHumans.GetComponent<CreatePopulationLevelsupermarket>().CummulativeSpriteUpdate();
+        // then start to update infection status again
+        LevelSettings.GetActiveLevelSettings().ShowInfectionStatus = true;
     }
 
     

@@ -16,10 +16,12 @@ public class EndLevelControllerLeveldisco : EndLevelControllerBase
     /// </summary>
     public void NotifyFriendExposed()
     {
-        if (!CanvasFail.activeInHierarchy)
+        if (!levelHasFinished && !CanvasFail.activeInHierarchy)
         {
             CanvasFail.SetActive(true);
             failText.text = "Sorry.\n\nYour friend is infected.";
+            FindAndPlaceHuman(CanvasFail);
+            levelHasFinished = true;
         }
     }
     /// <summary>
@@ -27,26 +29,13 @@ public class EndLevelControllerLeveldisco : EndLevelControllerBase
     /// </summary>
     public void PlayerExitHealthyWithoutFriend()
     {
-        CanvasFail.SetActive(true);
-        failText.text = "You got home safely but Sandra is still at the party.";
-    }
-
-    /// <summary>
-    /// Failure due to sick friend or player exit together
-    /// </summary>
-    public void PlayerOrFriendExitSick()
-    {
-        CanvasFail.SetActive(true);
-        failText.text = "Sorry.\nYou got out but were exposed to the virus.";
-    }
-
-    /// <summary>
-    /// Failure due to sick player exit withou friend
-    /// </summary>
-    public void PlayerExitSickWithoutFriend()
-    {
-        CanvasFail.SetActive(true);
-        failText.text = "You were exposed to the virus and Sandra is still at the party.";
+        if (!levelHasFinished)
+        {
+            CanvasFail.SetActive(true);
+            failText.text = "You got home safely but Sandra is still at the party.";
+            FindAndPlaceHuman(CanvasFail);
+            levelHasFinished = true;
+        }
     }
 
     /// <summary>

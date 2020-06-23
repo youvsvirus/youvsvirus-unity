@@ -24,6 +24,8 @@ public class EndLevelControllerLevelgethome : EndLevelControllerBase
     {
         // all NPCs show true infection statuts
         CreateHumans.GetComponent<CreatePopLevelgethome>().CummulativeSpriteUpdate();
+        // then start to update infection status again
+        LevelSettings.GetActiveLevelSettings().ShowInfectionStatus = true;
     }
 
     /// <summary>

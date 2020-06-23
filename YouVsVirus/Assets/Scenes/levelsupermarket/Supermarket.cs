@@ -1,7 +1,7 @@
 ﻿using Components;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// Handles the distribution of toilet paper
@@ -24,7 +24,7 @@ public class Supermarket : MonoBehaviour
     /// the toilet paper counter
     /// </summary>
     public GameObject NumberOfRolls;
-   
+
     private void Start()
     {
         CanvasSupermarket.SetActive(false);
@@ -41,7 +41,8 @@ public class Supermarket : MonoBehaviour
         // hence we have to get its "parent" and check if this is the player
         if (other.gameObject.GetComponentInParent<HumanBase>() != null)
         {
-            if (other.gameObject.GetComponentInParent<HumanBase>().tag == "Player")
+            // if the player has not been to this specific supermarket already
+            if (other.gameObject.GetComponentInParent<HumanBase>().tag == "Player" && !GetComponent<AlreadyWasHere>().wasHere)
             {
                 //activate player in supermarket
                 StartCoroutine(PlayerInSupermarket(other.gameObject.GetComponentInParent<Player>()));
@@ -57,6 +58,7 @@ public class Supermarket : MonoBehaviour
     private IEnumerator PlayerInSupermarket(Player p)
     {
         // player already hit one empty supermarket
+        // and make sure he was not here before
         if (p.wentToFirstSupermarket)
         {
             // player gets toilet paper
@@ -66,21 +68,29 @@ public class Supermarket : MonoBehaviour
             Toiletpaper.SetActive(false);
             // player has toilet paper
             NumberOfRolls.GetComponent<TMPro.TMP_Text>().text = "1";
-
+            // Pause the game
+            PauseGame.Pause();
+            CanvasSupermarket.SetActive(true);
+            CanvasSupermarket.GetComponentInChildren<TMP_Text>().text = "You got one last roll of " +
+                                                                         "FeatherSoft Ultra Premium 3D Embossed StrawberryVanilla flavored" +
+                                                                          " toilet paper.\nPress 'Space' to continue.";
+            CanvasSupermarket.GetComponentInChildren<TMP_Text>().fontSize = 25;
+            GetComponent<AlreadyWasHere>().PlayerWasHere();
         }
         else
         {
             // wait a little to let the paper disappear
             yield return new WaitForSeconds(0.3f);
             Toiletpaper.SetActive(false);
+            // Pause the game
+            PauseGame.Pause();
             // show the canvas telling the player that the sm is out
-            yield return new WaitForSeconds(0.3f);
-            CanvasSupermarket.SetActive(true);        
-            // make the canvas disappear again
-            yield return new WaitForSeconds(5f);
-            CanvasSupermarket.SetActive(false);
+            // has press-space script attached to it
+            CanvasSupermarket.SetActive(true);
             // remember that we went to first supermarket
             p.wentToFirstSupermarket = true;
+            // remember that we went to this specific supermarket
+            GetComponent<AlreadyWasHere>().PlayerWasHere();
         }
     }
 }

@@ -1312,11 +1312,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.892965, y: -5.003171}
-  - {x: -8.892965, y: 5.003171}
-  - {x: 8.892965, y: 5.003171}
-  - {x: 8.892965, y: -5.003171}
-  - {x: -8.892965, y: -5.003171}
+  - {x: -8.894543, y: -5.0042415}
+  - {x: -8.894543, y: 5.0042415}
+  - {x: 8.894543, y: 5.0042415}
+  - {x: 8.894543, y: -5.0042415}
+  - {x: -8.894543, y: -5.0042415}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1337,9 +1337,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.00031727552
+    y: 0.00042372942
     width: 1
-    height: 0.99936545
+    height: 0.99915254
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -5495,8 +5495,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You are infected by the virus and conspiracy theories: You think that
-    Bill Gates wants to take over the world by forced vaccination with nano chips.'
+  m_text: 'Sorry.
+
+
+    You are infected.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5524,8 +5526,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

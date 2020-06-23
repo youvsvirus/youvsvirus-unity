@@ -1823,6 +1823,7 @@ MonoBehaviour:
   PressSpaceCanv: {fileID: 0}
   testMode: 1
   playerExposed: 0
+  levelHasFinished: 0
   CreateHumans: {fileID: 742637914}
 --- !u!1 &1342456105
 GameObject:
@@ -1861,8 +1862,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -58.004, y: -8.1}
-  m_SizeDelta: {x: 433.19, y: 348.7}
+  m_AnchoredPosition: {x: -58.003983, y: -8.100006}
+  m_SizeDelta: {x: 433.19, y: 348.69998}
   m_Pivot: {x: 0.31163263, y: 0.5}
 --- !u!114 &1342456107
 MonoBehaviour:
