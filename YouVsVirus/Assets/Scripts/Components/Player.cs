@@ -17,7 +17,7 @@ namespace Components
 		/// <summary>
 		/// // The player's input vector will be multiplied by this factor
 		/// </summary>
-		public float speedMultiplier = 6.0f;
+		public float speedMultiplier = 0;
 
 		/// <summary>
 		/// How many masks the player has collected
