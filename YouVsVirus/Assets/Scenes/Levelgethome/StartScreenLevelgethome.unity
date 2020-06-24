@@ -929,7 +929,7 @@ PrefabInstance:
     - target: {fileID: 1688250008473386509, guid: 2ecbd32e2c8b3b2419206425e04a9a44,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.00000011921
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1688250008473386509, guid: 2ecbd32e2c8b3b2419206425e04a9a44,
         type: 3}
@@ -1151,10 +1151,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.00022852421
-    width: 1
-    height: 0.99954295
+    x: 0.00033405423
+    y: 0
+    width: 0.9993319
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1235,7 +1235,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6, y: 121}
+  m_AnchoredPosition: {x: 0, y: 121}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1895023303
