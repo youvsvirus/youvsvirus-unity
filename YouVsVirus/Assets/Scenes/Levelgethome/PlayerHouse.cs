@@ -58,15 +58,13 @@ public class PlayerHouse : MonoBehaviour
 
     private bool playerIsClose = false;
 
+    public bool playerCanExit;
+
 
     // Time variable used to perform update only every x seconds.
     // We store here the last time that update was executed.
     private float lastTime = 0;
     
-    // How much time should pass before the next update is
-    // performed.
-    private float timeBetweenUpdates = 0.1f;
-
     // The position at which the player will appear
     // when he exitst the house.
     private Vector3 playerAppearPosition;
@@ -83,6 +81,12 @@ public class PlayerHouse : MonoBehaviour
         UnshowPlayer ();
         // Initialize the player spawn position
         playerAppearPosition = gameObject.transform.position + new Vector3(0, -0.5f, 0);
+
+        // The player is allowed to exit the house if he starts in it
+        // or if he can enter and exit at will.
+        // If he starts in the house and is not allowed to enter and exit at will,
+        // then we will set playerCanExit to false as soon as he left the house for the first time.
+        playerCanExit = EnterAndExitAtWill || playerStartsInside;
 
         // Set this point in time as the last execution time of update.
         // This means, update is first performed at time Time.time + timeBetweenUpdates
@@ -148,6 +152,12 @@ public class PlayerHouse : MonoBehaviour
     {
         Debug.Log ("Starting coroutine OutHouse");
         aCoroutineRuns = true;
+
+        if (!EnterAndExitAtWill) {
+            // This is the only time the player is allowed to exit its house,
+            // we now disallow it for the future.
+            playerCanExit = false;
+        }
 
         // If still active, deactivate the PressSpace Canvas
         if (PressSpace != null)
@@ -222,8 +232,8 @@ public class PlayerHouse : MonoBehaviour
         }
         if (playerIsClose) {
             // Only do smth if the player is close
-            if (isPlayerInside && (EnterAndExitAtWill || playerStartsInside)) {
-                Debug.Log ("We may exit");
+            if (isPlayerInside && playerCanExit && !endlevel.levelHasFinished) {
+                Debug.Log ("We may exit. Coroutine runs: " + aCoroutineRuns);
             // We are inside, check space to get outside
                 if (Input.GetKeyDown(KeyCode.Space) && !aCoroutineRuns) { 
                     aCoroutineRuns = true;
@@ -231,16 +241,14 @@ public class PlayerHouse : MonoBehaviour
                 }
             }
             else if (endlevel.isPlayerAllowedHome(player)) {
-                Debug.Log ("We may enter");
+                Debug.Log ("We may enter. Coroutine runs: " + aCoroutineRuns);
                 // We are not inside, but are allowed to enter
-                if (!EnterAndExitAtWill || Input.GetKeyDown(KeyCode.Space) && !aCoroutineRuns) {
-                    if (!aCoroutineRuns) {
-                        // Either we are in enter-with-space mode and the space key was pressed,
-                        // or we are in just-enter mode.
-                        // we enter the house
-                        aCoroutineRuns = true;
-                        StartCoroutine(SetPlayerInHouse());
-                    }
+                if ((!EnterAndExitAtWill || Input.GetKeyDown(KeyCode.Space)) && !aCoroutineRuns) {
+                    // Either we are in enter-with-space mode and the space key was pressed,
+                    // or we are in just-enter mode.
+                    // we enter the house
+                    aCoroutineRuns = true;
+                    StartCoroutine(SetPlayerInHouse());
                 }
             }
         }

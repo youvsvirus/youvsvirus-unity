@@ -116,17 +116,6 @@ namespace Components
             SetPathsforNPC_AIs();
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                // player is no longer shown in the house
-                PlayerHouse.GetComponent<PlayerHouse>().UnshowPlayer();
-                // can start to play
-                Player.gameObject.SetActive(true);
-            }
-        }
-
         /// <summary>
         /// Places the player and all NPCs on the map
         /// </summary>
