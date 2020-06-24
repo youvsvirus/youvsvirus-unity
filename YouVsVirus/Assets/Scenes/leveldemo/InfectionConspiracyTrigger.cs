@@ -39,10 +39,12 @@ namespace Components
                     if (dist < r)
                     {
                         Player player = otherHuman.GetComponentInParent<Player>();
-                        player.infectedByPropaganda = true;
                         // now the player also shows their sign
                         player.transform.GetChild(1).GetComponent<SpriteRenderer>().enabled = true;
                         player.transform.GetChild(2).GetComponent<SpriteRenderer>().enabled = true;
+                        player.infectedByPropaganda = true;
+                        // notify end level controller
+                        LevelSettings.GetActiveEndLevelController().NotifyPlayerInfectedByPropaganda();
                     }
                 }
 

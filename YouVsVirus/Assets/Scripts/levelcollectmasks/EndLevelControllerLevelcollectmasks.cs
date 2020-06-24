@@ -79,7 +79,7 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
     {
         // Check if we collected all masks and returned them to the hospital.
         // If so, pause the game and show a screen telling us to get home.
-        if (!EndGamePlayerExposed() && ShowCanvasAllCollectedGetHome())
+        if (!LevelSettings.GetActiveEndLevelController().levelHasFinished && ShowCanvasAllCollectedGetHome())
         {
             // The player has collected all masks and brought them to the hospital.
             // Get a reference to the player.
@@ -90,6 +90,7 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
             // Pause the game
             PauseGame.Pause();
             // Show the pause message that tells him to get home.
+            // This canvas has a "space-to-continue"-script attached
             CanvasAllCollectedGetHome.SetActive(true);
             // Set internal bool that the player is now on its way home
             onWayHome = true;
@@ -109,5 +110,7 @@ public class EndLevelControllerLevelcollectmasks : EndLevelControllerBase
     {
         // all NPCs show true infection statuts
         CreateHumans.GetComponent<Components.CreatePopLevelcollectmasks>().CummulativeSpriteUpdate();
+        // then start to update infection status again
+        LevelSettings.GetActiveLevelSettings().ShowInfectionStatus = true;
     }
 }

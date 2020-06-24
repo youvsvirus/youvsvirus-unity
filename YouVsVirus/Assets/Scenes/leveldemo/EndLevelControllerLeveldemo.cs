@@ -17,16 +17,27 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
     }
     protected override void Update()
     {
+            CummulativeSpriteUpdate();
         base.Update();
-        // additonally we can fail this level if we are infected by propaganda smileys
-        if (playerInfectedByPropaganda && !playerExposed)
+
+        // the level ends with failure when
+        // 1. the player catches the virus only (handled by base class)
+        // 2. the player catches the virus and propaganda (below)
+        // 3. the player catches proganda only (here)
+        if (!levelHasFinished && playerInfectedByPropaganda && !playerExposed)
         {
-            CreateHumans.GetComponent<CreatePopLeveldemo>().CummulativeSpriteUpdate();
             CanvasProp.SetActive(true);
+            FindAndPlaceHuman(CanvasProp);
+            levelHasFinished = true;
         }
-        // make sure that not both canvases appear
-        if(playerExposed)
-            CanvasProp.SetActive(false);
+        else if (!levelHasFinished && playerInfectedByPropaganda && playerExposed)
+        {
+            CummulativeSpriteUpdate();
+            CanvasProp.SetActive(true);
+            CanvasProp.transform.Find("Panel/Text: Failed").gameObject.GetComponent<TMP_Text>().text= "You are infected by the virus and conspiracy theories: You think that Bill Gates wants to take over the world by forced vaccination with nano chips.";
+            FindAndPlaceHuman(CanvasProp);
+            levelHasFinished = true;
+        }
     }
     protected override bool LevelDependentEndGameConditionFulfilled()
     {
@@ -54,5 +65,7 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
     {
         // all NPCs show true infection statuts
         CreateHumans.GetComponent<Components.CreatePopLeveldemo>().CummulativeSpriteUpdate();
+        // then start to update infection status again
+        LevelSettings.GetActiveLevelSettings().ShowInfectionStatus = true;
     }
 }

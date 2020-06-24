@@ -6,6 +6,9 @@ using UnityEngine;
 // and disables the associated canvas.
 public class SpaceToContinue : MonoBehaviour
 {
+    //FIXME: If this script is always attached to the canvas it handles
+    //we should get the canvas it is attached to in the script and not
+    //assign in the editor
     public GameObject Canvas;
 
     // Update is called once per frame
