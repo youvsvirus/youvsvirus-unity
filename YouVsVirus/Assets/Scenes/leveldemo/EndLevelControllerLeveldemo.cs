@@ -17,7 +17,6 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
     }
     protected override void Update()
     {
-            CummulativeSpriteUpdate();
         base.Update();
 
         // the level ends with failure when
