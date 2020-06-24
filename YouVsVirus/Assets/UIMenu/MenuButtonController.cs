@@ -98,7 +98,6 @@ public class MenuButtonController : MonoBehaviour
          * +1 or -1 the active button. */
         if (Time.unscaledTime - lastTime >= coolDownTime)
         {
-            Debug.Log ("Time: " + Time.unscaledTime);
             lastTime = Time.unscaledTime;
             /* Note: We need to use GetAxisRaw here instead of GetAxis (which applies smoothing to the value).
              * Reason: We also need the inpute when the game is paused. GetAxis however will return 0 when the game is paused,

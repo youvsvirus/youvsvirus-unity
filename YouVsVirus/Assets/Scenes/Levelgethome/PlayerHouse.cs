@@ -214,12 +214,6 @@ public class PlayerHouse : MonoBehaviour
 
     void Update ()
     {
-        if (Time.time - lastTime >= timeBetweenUpdates)
-        {
-            Debug.Log("House: inside " + isPlayerInside + " close " + playerIsClose + " crruns " + aCoroutineRuns + " allowed Home: " + endlevel.isPlayerAllowedHome(player)
-                      + " at will: " + EnterAndExitAtWill);
-            lastTime = Time.time;
-        }
         if (player == null) {
             // Do nothing is we do not have a reference of the player.
             // This reference can be set with the setPlayer function,
