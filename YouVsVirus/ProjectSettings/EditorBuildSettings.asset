@@ -62,6 +62,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sandbox/EndScreenSandbox.unity
     guid: f166d5edfa387ad42bf5d68a23d6f955
+  - enabled: 1
+    path: Assets/Scenes/main/GamePlayScreen.unity
+    guid: 3f88a6400d999d340b14c139e13d7e30
   - enabled: 0
     path: Assets/Scenes/levelcollectmasks/EndScreenLevelcollectmasks.unity
     guid: cc22b6d4347f05b46a480a402e78f1cb
