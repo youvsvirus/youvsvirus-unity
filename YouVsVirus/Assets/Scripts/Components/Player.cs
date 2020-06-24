@@ -13,7 +13,12 @@ namespace Components
 		/// Decides if the player wears a mask or not
 		/// </summary>
 		public bool withMask = false;
-		
+
+		/// <summary>
+		/// Decides if the player wears a mask and glasses or not
+		/// </summary>
+		public bool withGlassesAndMask = false;
+
 		/// <summary>
 		/// // The player's input vector will be multiplied by this factor
 		/// </summary>
@@ -101,7 +106,7 @@ namespace Components
 		/// </summary>
 		public override void SetSpriteImages()
 		{
-			if (!withMask)
+			if (!withMask && !withGlassesAndMask)
 			{
 				WellSprite = Resources.Load<Sprite>("SmileyPictures/player_healthy");
 				ExposedSprite = Resources.Load<Sprite>("SmileyPictures/player_exposed");
@@ -109,13 +114,19 @@ namespace Components
 				RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recoveredhat");
 				DeadSprite = Resources.Load<Sprite>("SmileyPictures/player_dead");
 			}
-			else
+			else if (withMask)
 			{
 				WellSprite = Resources.Load<Sprite>("SmileyPictures/withMask/player_healthy_mask");
 				ExposedSprite = Resources.Load<Sprite>("SmileyPictures/withMask/player_exposed_mask");
 				InfectiousSprite = Resources.Load<Sprite>("SmileyPictures/withMask/player_infectious_mask");
 				RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/withMask/recoveredhat_mask");
 				DeadSprite = Resources.Load<Sprite>("SmileyPictures/withMask/player_dead_mask");
+			}
+			else if (withGlassesAndMask) 
+			{
+				WellSprite = Resources.Load<Sprite>("SmileyPictures/withMask/player_healthy_mask_glass");
+				ExposedSprite = Resources.Load<Sprite>("SmileyPictures/withMask/player_exposed_mask_glass");
+				// the others do not exist since the level ends when the player is infected
 			}
 		}
 
