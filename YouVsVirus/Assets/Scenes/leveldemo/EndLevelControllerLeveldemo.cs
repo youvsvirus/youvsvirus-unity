@@ -25,7 +25,6 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
         // 3. the player catches proganda only (here)
         if (!levelHasFinished && playerInfectedByPropaganda && !playerExposed)
         {
-            CummulativeSpriteUpdate();
             CanvasProp.SetActive(true);
             FindAndPlaceHuman(CanvasProp);
             levelHasFinished = true;
@@ -34,7 +33,7 @@ public class EndLevelControllerLeveldemo : EndLevelControllerBase
         {
             CummulativeSpriteUpdate();
             CanvasProp.SetActive(true);
-            CanvasProp.GetComponentInChildren<TMP_Text>().text = "You are infected by the virus and conspiracy theories: You think that Bill Gates wants to take over the world by forced vaccination with nano chips.";
+            CanvasProp.transform.Find("Panel/Text: Failed").gameObject.GetComponent<TMP_Text>().text= "You are infected by the virus and conspiracy theories: You think that Bill Gates wants to take over the world by forced vaccination with nano chips.";
             FindAndPlaceHuman(CanvasProp);
             levelHasFinished = true;
         }
