@@ -22,6 +22,12 @@ public abstract class EndLevelControllerBase : MonoBehaviour
     /// </summary>
     public GameObject CanvasSucc = null;
 
+    
+    /// <summary>
+    /// The canvas that we show when the escape screen is pressed
+    /// </summary>
+    public GameObject CanvasEscape = null;
+
     /// <summary>
     /// press space canv in some levels
     /// </summary>
@@ -64,6 +70,8 @@ public abstract class EndLevelControllerBase : MonoBehaviour
             CanvasFail.SetActive(false);
         if (CanvasSucc != null)
             CanvasSucc.SetActive(false);
+        if (CanvasEscape != null)
+            CanvasEscape.SetActive(false);
     }
 
 
@@ -338,7 +346,7 @@ public abstract class EndLevelControllerBase : MonoBehaviour
     protected virtual void ExitKeyPressed()
     {
         // in campaign mode show fail screen
-        if (CanvasFail != null)
+        if (CanvasEscape != null)
         {
             // disable press space begin canvas first
             // otherwise this will disturb the button control
@@ -346,9 +354,8 @@ public abstract class EndLevelControllerBase : MonoBehaviour
             if(PressSpaceCanv != null)
                 PressSpaceCanv.SetActive(false);
 
-            CanvasFail.SetActive(true);
-            CanvasFail.transform.Find("Panel/Text: Failed").gameObject.GetComponent<TMP_Text>().text= "You pressed the exit key.";
-            FindAndPlaceHuman(CanvasFail);
+            CanvasEscape.SetActive(true);
+            FindAndPlaceHuman(CanvasEscape);
             PauseGame.Pause();
         }
     }
