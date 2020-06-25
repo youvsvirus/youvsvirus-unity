@@ -39,6 +39,12 @@ public class MenuButtonController : MonoBehaviour
     /// <summary> Keeps track of when we accepted a keyboard input for the last time. </summary>
     private float lastTime = 0.0f;
 
+    /// <summary> When we are first allowed to register keyboard input. Is Set in Start. </summary>
+    private float firstTime = 0.0f;
+
+    /// <summary> The time that we should wait after start until we accept keyboard input </summary>
+    // We introduce this, since some users accidentally clicked the wrong button, bc the Menu accepted input too early.
+    private float waitTillStart = 0.2f;
 
     void Start()
     {
@@ -46,6 +52,8 @@ public class MenuButtonController : MonoBehaviour
         activeButton = StartButton;
         // Now is the last time we accepted input
         lastTime = Time.unscaledTime;
+        // When will be the first time, we are allowed to take input
+        firstTime = lastTime + waitTillStart;
         // Get the number of buttons as length of the button array        
         NumButtons = MenuButtons.Length;
         // Activate the first button
@@ -93,7 +101,11 @@ public class MenuButtonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Time.unscaledTime - firstTime < 0)
+        {
+            // We have a turn on time, until this is reached, we do nothing.
+            return;
+        }
         /* Check if vertical input is positive or negative and 
          * +1 or -1 the active button. */
         if (Time.unscaledTime - lastTime >= coolDownTime)
