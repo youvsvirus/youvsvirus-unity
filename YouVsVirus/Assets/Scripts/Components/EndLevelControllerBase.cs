@@ -31,7 +31,7 @@ public abstract class EndLevelControllerBase : MonoBehaviour
     /// Set this to true for testing.
     /// Enables that pressing 'c' finishes the level.
     /// </summary>
-    public bool testMode = false;
+    protected bool testMode = false;
 
     protected bool playerDied = false;
     public bool playerExposed = false;
