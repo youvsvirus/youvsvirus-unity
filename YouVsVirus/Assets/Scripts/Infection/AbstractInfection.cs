@@ -20,17 +20,22 @@ namespace Infection
         protected HumanBase myHuman { get; private set; }
 
 
-        public virtual void Start()
+        public abstract bool IsInfectious(int condition, float incubation_time);
+
+        public abstract bool IsInfectionSuccessful();
+
+
+        public virtual void Awake()
         {
             myHuman = GetComponent<HumanBase>();
         }
 
-        public abstract void Update();
 
         /// <summary>
         /// Notify the infection that the human has been exposed.
         /// </summary>
-        public abstract void Expose();
+        public abstract void StartExposeTimer(HumanBase human);
 
+        public abstract void StartInfectiousTimer(HumanBase human);
     }
 }

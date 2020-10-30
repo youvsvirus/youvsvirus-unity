@@ -19,6 +19,25 @@ namespace Components
 
         protected Rigidbody2D myRigidbody = null;
 
+        /// <summary>
+        /// Time that passes until I am infectious
+        /// </summary>
+        public float t_personal_incubation = float.MaxValue;
+
+        /// <summary>
+        /// Time that passes until I recover or die
+        /// </summary>
+        public float t_personal_infectious = float.MaxValue;
+
+        /// <summary>
+        /// At this point int time I was exposed to the virus
+        /// </summary>
+        public float t_start_incubation = float.MaxValue;
+
+        /// <summary>
+        /// At this point int time I showed symptoms and was a clear danger to others
+        /// </summary>
+        public float t_start_infectious = float.MaxValue;
 
         // The statistics object that counts the number of infected humans
         public LevelStats levelStats;
@@ -43,7 +62,7 @@ namespace Components
         /// </summary>
         private int num_inf = 1;
 
-
+        AbstractInfection myInfectionModel;
         /// <summary>
         /// This human's inital condition
         /// </summary>
@@ -99,13 +118,16 @@ namespace Components
                 case EXPOSED:
                     {
                         egc.NotifyHumanExposed();
-                        GetComponent<AbstractInfection>().Expose();
+                       // if (myInfectionModel)
+                        myInfectionModel.StartExposeTimer(this);
                         levelStats.aHumanGotExposed();
                         LevelSettings.GetActiveEndLevelController().infectionIsInitialized = true;
                         break;
                     }
                 case INFECTIOUS:
                     {
+                    
+                        myInfectionModel.StartInfectiousTimer(this);
                         levelStats.aHumanGotInfected();
                         break;
                     }
@@ -170,6 +192,18 @@ namespace Components
             // and again in the corresponding function
             mySpriteRenderer = GetComponent<SpriteRenderer>();
             myRigidbody = GetComponent<Rigidbody2D>();
+            if (myInfectionModel == null)
+            {
+                // Chooses infection model based on the level settings
+                if (LevelSettings.GetActiveLevelSettings().UseProbabilityBasedInfection)
+                {
+                    myInfectionModel = new ProbabilityBasedInfection();
+                }
+                else
+                {
+                    myInfectionModel = new TimeDelayInfection();
+                }
+            }
             // The player and npc class set their corresponding sprite images
             SetSpriteImages();
             // _initialCondition may have been modified by base classes
@@ -183,20 +217,20 @@ namespace Components
         /// </summary>
         public void Infect()
         {
-            // the standard non-party case
-            if (LevelSettings.GetActiveSceneName() != "YouVsVirus_Leveldisco")
+            if (IsSusceptible() && myInfectionModel.IsInfectionSuccessful())
             {
-                if (IsSusceptible())
+                // the standard non-party case
+                if (LevelSettings.GetActiveSceneName() != "YouVsVirus_Leveldisco")
                 {
+
                     SetCondition(EXPOSED);
+
                 }
-            }
-            else // the party case
-            {
-                if (IsSusceptible())
+                else // the party case
                 {
+
                     // both friend and player have a 10% chance of getting exposed
-                    if (this.tag == "Player" || this.tag ==  "Friend")
+                    if (this.tag == "Player" || this.tag == "Friend")
                     {
                         if (UnityEngine.Random.value < 0.2)
                         {
@@ -210,10 +244,10 @@ namespace Components
                         SetCondition(EXPOSED);
 
                     }
-                }   
+
+                }
             }
         }
-
 
         /// <summary>
         /// Checks if this human is infectious.
@@ -221,7 +255,7 @@ namespace Components
         /// <returns>True if this human is infectious, false otherwise.</returns>
         public bool IsInfectious()
         {
-            return GetCondition() == EXPOSED || GetCondition() == INFECTIOUS;
+           return myInfectionModel.IsInfectious(GetCondition(), t_personal_incubation);
         }
 
         /// <summary>
