@@ -60,8 +60,9 @@ namespace Components
             }
         }
 
-        void Update()
+        public override void Update()
         {
+            base.Update();
             // let sprites reenter from right, frame count gives a smoother distribution of npcs
             if (LevelSettings.GetActiveSceneName() == "YouVsVirus_Leveldemo" && Time.frameCount % 10 == 0)
                 ReenterScreenFromRight();    
@@ -72,11 +73,22 @@ namespace Components
         /// </summary>
         public override void SetSpriteImages()
         {
-            WellSprite = Resources.Load<Sprite>("SmileyPictures/npc_healthy");
-            ExposedSprite = Resources.Load<Sprite>("SmileyPictures/npc_exposed");
-            InfectiousSprite = Resources.Load<Sprite>("SmileyPictures/npc_infectious");
-            RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recovered");
-            DeadSprite = Resources.Load<Sprite>("SmileyPictures/npc_dead");
+            if (!withMask)
+            {
+                WellSprite = Resources.Load<Sprite>("SmileyPictures/npc_healthy");
+                ExposedSprite = Resources.Load<Sprite>("SmileyPictures/npc_exposed");
+                InfectiousSprite = Resources.Load<Sprite>("SmileyPictures/npc_infectious");
+                RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recovered");
+                DeadSprite = Resources.Load<Sprite>("SmileyPictures/npc_dead");
+            }
+            else
+            {
+                WellSprite = Resources.Load<Sprite>("SmileyPictures/withMask/npc_healthy_mask");
+                ExposedSprite = Resources.Load<Sprite>("SmileyPictures/withMask/npc_exposed_mask");
+                InfectiousSprite = Resources.Load<Sprite>("SmileyPictures/withMask/npc_infectious_mask");
+                RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/withMask/npc_mask");
+                DeadSprite = Resources.Load<Sprite>("SmileyPictures/withMask/npc_dead");
+            }
         }
         /// <summary>
         /// NPC random movement

@@ -9,10 +9,6 @@ namespace Components
 	/// </summary>
 	public class Player : HumanBase
 	{
-		/// <summary>
-		/// Decides if the player wears a mask or not
-		/// </summary>
-		public bool withMask = false;
 
 		/// <summary>
 		/// Decides if the player wears a mask and glasses or not

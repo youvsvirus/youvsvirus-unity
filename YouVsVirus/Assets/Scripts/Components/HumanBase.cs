@@ -20,9 +20,16 @@ namespace Components
         protected Rigidbody2D myRigidbody = null;
 
         /// <summary>
+        /// Decides if the human wears a mask or not
+        /// </summary>
+        public bool withMask = false;
+
+        /// <summary>
         /// Time that passes until I am infectious
         /// </summary>
         public float t_personal_incubation = float.MaxValue;
+
+        public int daysSinceExposure = 0;
 
         /// <summary>
         /// Time that passes until I recover or die
@@ -195,12 +202,14 @@ namespace Components
             if (myInfectionModel == null)
             {
                 // Chooses infection model based on the level settings
-                if (LevelSettings.GetActiveLevelSettings().UseProbabilityBasedInfection)
+                if (LevelSettings.GetActiveLevelSettings().UseProbabilityBasedInfection == true)
                 {
+                    Debug.Log("Probab");
                     myInfectionModel = new ProbabilityBasedInfection();
                 }
                 else
                 {
+                    Debug.Log("TimeDelay");
                     myInfectionModel = new TimeDelayInfection();
                 }
             }
@@ -209,6 +218,17 @@ namespace Components
             // _initialCondition may have been modified by base classes
             // this becomes _mycondition during Start()
             SetCondition(_initialCondition);
+        }
+
+        public virtual void Update()
+        {
+            // does the condition of the human change?
+            // handled by infection model
+            int newCondition = myInfectionModel.UpdateCondition(GetCondition(), this);
+            // my condition has changed and needs to be updated
+            if (GetCondition() != newCondition)
+             SetCondition(newCondition);
+
         }
 
 

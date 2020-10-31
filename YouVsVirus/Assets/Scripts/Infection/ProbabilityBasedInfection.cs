@@ -4,6 +4,7 @@ using System.Text;
 
 using UnityEngine;
 using Components;
+using System.Diagnostics;
 
 namespace Infection
 {
@@ -45,7 +46,7 @@ namespace Infection
         /// <summary>
         /// How long my human has been exposed to the virus
         /// </summary>
-        private int daysSinceExposure = 0;
+        //private int daysSinceExposure = 0;
 
  
 
@@ -79,20 +80,14 @@ namespace Infection
             }
         }
 
-        public void Update()
-        {
-            if (IsNewDay())
-            {
-                UpdateCondition();
-            }
-        }
+
 
         /// <summary>
         /// Notify the infection that the human has been exposed.
         /// </summary>
         public override void StartExposeTimer(HumanBase human)
         {
-            daysSinceExposure = 0;
+            human.daysSinceExposure = 0;
         }
         public override void StartInfectiousTimer(HumanBase human)
         {
@@ -120,53 +115,56 @@ namespace Infection
         /// <summary>
         /// Update my human's condition
         /// </summary>
-        private void UpdateCondition()
+        public override int UpdateCondition(int condition, HumanBase human)
         {
-
-            switch (myHuman.GetCondition())
+            if (IsNewDay())
             {
-                case HumanBase.EXPOSED:
-                    {
-                        // Damn, we're EXPOSED. But will the sickness actually break out?
-                        //  Incubation time has passed without infection --> recovered!
-                        if (daysSinceExposure > TimeToRecovery)
+                switch (condition)
+                {
+                    case HumanBase.EXPOSED:
                         {
-                            myHuman.SetCondition(HumanBase.RECOVERED);
-                            return;
+                            // Damn, we're EXPOSED. But will the sickness actually break out?
+                            //  Incubation time has passed without infection --> recovered!
+                            if (human.daysSinceExposure > TimeToRecovery)
+                            {
+                                return (HumanBase.RECOVERED);
+
+                            }
+
+                            //  Maybe it breaks out today?
+                            if (Random.value <= OutbreakRate)
+                            {
+                                return (HumanBase.INFECTIOUS);
+
+                            }
+
+                            human.daysSinceExposure++;
+                            return (condition);
                         }
 
-                        //  Maybe it breaks out today?
-                        if (Random.value <= OutbreakRate)
+                    case HumanBase.INFECTIOUS:
                         {
-                            myHuman.SetCondition(HumanBase.INFECTIOUS);
-                            return;
+                            // Maybe we recover today...
+                            if (Random.value <= RecoveryRate)
+                            {
+                                return (HumanBase.RECOVERED);
+
+                            }
+
+                            // Maybe we die today.
+                            if (Random.value <= DeathRate)
+                            {
+                                return (HumanBase.DEAD);
+                            }
+
+                            return condition;
                         }
 
-                        daysSinceExposure++;
-                        return;
-                    }
-
-                case HumanBase.INFECTIOUS:
-                    {
-                        // Maybe we recover today...
-                        if (Random.value <= RecoveryRate)
-                        {
-                            myHuman.SetCondition(HumanBase.RECOVERED);
-                            return;
-                        }
-
-                        // Maybe we die today.
-                        if (Random.value <= DeathRate)
-                        {
-                            myHuman.SetCondition(HumanBase.DEAD);
-                            return;
-                        }
-
-                        return;
-                    }
-
-                default: return;
+                    default: return condition;
+                }
             }
+            else 
+                return condition;
         }
     }
 }

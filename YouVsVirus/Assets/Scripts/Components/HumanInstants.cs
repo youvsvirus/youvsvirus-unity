@@ -88,12 +88,15 @@ namespace Components
                                        Quaternion.identity));
                 // give all NPCs a unique id
                 NPCs[i - 1].myID = i - 1; ;
+                if (i < levelSettings.NumberOfNPCs * 10f / 100f)
+                    NPCs[i-1].withMask = true;
             }
             //  Expose a few of them to the virus.
             //  If (for some reason) NumberInitiallyExposed > NumberOfNPCs, just infect all of them.
             for (int i = 0; i < Math.Min(npcNumber, levelSettings.NumberInitiallyExposed); i++)
             {
                 NPCs[i].SetInitialCondition(NPC.EXPOSED);
+               
             }
         }
 

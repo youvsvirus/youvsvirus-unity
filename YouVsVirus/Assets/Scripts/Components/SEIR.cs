@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 
 /// <summary>
 /// The SEIR model differential equations with social distancing factor rho.
@@ -57,11 +57,19 @@ public class SEIR : MonoBehaviour
 	/// </summary>
 	private float rho;
 
+	private const string FILE_NAME = "infection.txt";
+	StreamWriter sr;
+	// The statistics object that counts the number of infected humans
+	public LevelStats levelStats;
+
+
 	// Start is called before the first frame update
 	void Start()
 	{
 		// population is npcs plus player
 		levelSettings = LevelSettings.GetActiveLevelSettings();
+		// Get the statistics object that counts the numbers of infected/dead etc players
+		levelStats = LevelStats.GetActiveLevelStats();
 		N = levelSettings.NumberOfNPCs+1;
 
 		// Initial values for ODE
@@ -123,6 +131,14 @@ public class SEIR : MonoBehaviour
 			max_R = R;
 
 
+		//if (!File.Exists(FILE_NAME))
+		//{
+		//	sr = File.CreateText(FILE_NAME);
+		//	sr.WriteLine("# t \t  E \t I \t EA \t IA \t \n");
+		//	System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
+		//}
+		//sr.WriteLine("{0:f} \t {1:f} \t {2:f} \t {3:f} \t {4:f} \n", Time.fixedTime, E, I, levelStats.GetExposed(), levelStats.GetInfected());
 		//if (Time.frameCount % 100 == 0)
 		//{
 		//	print(Time.fixedTime);
@@ -130,5 +146,4 @@ public class SEIR : MonoBehaviour
 		//	print(I);
 		//	print(R);
 		//}
-	}
-}
+	}}

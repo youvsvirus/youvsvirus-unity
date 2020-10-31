@@ -34,7 +34,7 @@ public class LevelSettings : MonoBehaviour
     /// <summary>
     /// Probability based infection model (true) or time-delay infection model (false)
     /// </summary>
-    public bool UseProbabilityBasedInfection = false;
+    public bool UseProbabilityBasedInfection = true;
 
     /// <summary>
     /// The length of a simulated day in seconds.

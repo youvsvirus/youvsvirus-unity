@@ -66,7 +66,7 @@ namespace Infection
         {
             base.Awake();
             // probability of infection during one contact
-            InfectionRate = 3f;
+            InfectionRate = 0.016f;
         }
 
        
@@ -119,25 +119,28 @@ namespace Infection
         public void Update()
         {
             // update my human's condition
-            UpdateCondition();
+           // UpdateCondition();
         }
 
         /// <summary>
         /// Update my human's condition
         /// </summary>
-        public void UpdateCondition()
+        public override int UpdateCondition(int condition, HumanBase myHuman)
         {
-            switch (myHuman.GetCondition())
+
+            switch (condition)
             {
                 case HumanBase.EXPOSED:
                     {
+
+                        Debug.Log(myHuman.t_personal_incubation);
                         // check if the human's personal incubation time has passed
                         if (Time.fixedTime - myHuman.t_start_incubation > myHuman.t_personal_incubation)
                         {
-                            myHuman.SetCondition(HumanBase.INFECTIOUS);
-                            return;
+                           return(HumanBase.INFECTIOUS);
+                         
                         }
-                        return;
+                        return(condition);
                     }
 
                 case HumanBase.INFECTIOUS:
@@ -149,16 +152,14 @@ namespace Infection
                             // there is a chance we die
                             if (UnityEngine.Random.value <= DeathRate)
                             {
-                                myHuman.SetCondition(HumanBase.DEAD);
-                                return;
+                                return(HumanBase.DEAD);
                             }
                             // or a chance to recover
-                            myHuman.SetCondition(HumanBase.RECOVERED);
-                            return;
+                            return(HumanBase.RECOVERED);
                         }
-                        return;
+                        return(condition); 
                     }
-                default: return;
+                default: return(condition); 
             }
         }
 

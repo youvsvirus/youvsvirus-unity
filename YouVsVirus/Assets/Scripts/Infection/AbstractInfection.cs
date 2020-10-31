@@ -17,17 +17,18 @@ namespace Infection
         /// <summary>
         /// My Human. Is set once in Start() and can be accessed by derived classes.
         /// </summary>
-        protected HumanBase myHuman { get; private set; }
+       // protected HumanBase myHuman { get; private set; }
 
 
         public abstract bool IsInfectious(int condition, float incubation_time);
 
         public abstract bool IsInfectionSuccessful();
 
+        public abstract int UpdateCondition(int condition, HumanBase human);
 
         public virtual void Awake()
         {
-            myHuman = GetComponent<HumanBase>();
+            //myHuman = GetComponent<HumanBase>();
         }
 
 
