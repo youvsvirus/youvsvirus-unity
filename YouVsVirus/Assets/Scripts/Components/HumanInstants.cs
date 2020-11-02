@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using Infection;
 
 namespace Components
 {
@@ -64,8 +65,20 @@ namespace Components
             randomGridForHumans.GenerateRandomCoords(playerPrefab.transform.localScale.x,
                                                             playerPrefab.GetComponentInChildren<InfectionTrigger>().InfectionRadius,
                                                             npcNumber);
-            // place humans on the grid
-            CreateHumans();
+            // depending on level settings add infection model to player and npc prefab
+            if (levelSettings.ProbabilityBasedInfection)
+            {
+                playerPrefab.AddComponent<ProbabilityBasedInfection>();
+                npcPrefab.AddComponent<ProbabilityBasedInfection>();
+            }
+            else
+            {
+                playerPrefab.AddComponent<TimeDelayInfection>();
+                npcPrefab.AddComponent<TimeDelayInfection>();
+            }
+
+                // place humans on the grid
+                CreateHumans();
         }
 
         /// <summary>
@@ -87,14 +100,21 @@ namespace Components
                                        randomGridForHumans.RandomCoords[i],
                                        Quaternion.identity));
                 // give all NPCs a unique id
-                NPCs[i - 1].myID = i - 1; ;
+                NPCs[i - 1].myID = i - 1;                  
             }
+
+            for(int i=1; i<=(int)(levelSettings.NumberOfNPCs*0.8f); i++)
+            {
+                NPCs[UnityEngine.Random.Range(0, levelSettings.NumberOfNPCs)].withMask = true;
+            }
+
             //  Expose a few of them to the virus.
             //  If (for some reason) NumberInitiallyExposed > NumberOfNPCs, just infect all of them.
             for (int i = 0; i < Math.Min(npcNumber, levelSettings.NumberInitiallyExposed); i++)
             {
                 NPCs[i].SetInitialCondition(NPC.EXPOSED);
             }
+
         }
 
     }

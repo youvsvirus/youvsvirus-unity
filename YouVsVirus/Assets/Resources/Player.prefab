@@ -73,8 +73,10 @@ GameObject:
   - component: {fileID: 2318940163048237837}
   - component: {fileID: 2318940163048237834}
   - component: {fileID: 2318940163048237839}
-  - component: {fileID: 1017713336214978533}
   - component: {fileID: 2318940163048237838}
+  - component: {fileID: -1198171433140853538}
+  - component: {fileID: -5407620494068190536}
+  - component: {fileID: 335283382679112853}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -183,21 +185,12 @@ MonoBehaviour:
   myID: 0
   levelStats: {fileID: 0}
   wasInfectedByPlayer: 0
+  withMask: 0
+  withGlassesAndMask: 0
   speedMultiplier: 2
   wentToFirstSupermarket: 0
   hasToiletpaper: 0
---- !u!114 &1017713336214978533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2318940163048237835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed3fe4065ace2fa42967794e10238f6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  infectedByPropaganda: 0
 --- !u!58 &2318940163048237838
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -214,3 +207,57 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.56
+--- !u!114 &-1198171433140853538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2318940163048237835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a4f8564d138e4088f1b369dc7bb40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  t_personal_infectious: 3.4028235e+38
+  t_start_incubation: 3.4028235e+38
+  t_start_infectious: 3.4028235e+38
+  t_personal_incubation: 3.4028235e+38
+  InfectionRate: 0.16
+  DeathRate: 0.02
+--- !u!114 &-5407620494068190536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2318940163048237835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a4f8564d138e4088f1b369dc7bb40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  t_personal_infectious: 3.4028235e+38
+  t_start_incubation: 3.4028235e+38
+  t_start_infectious: 3.4028235e+38
+  t_personal_incubation: 3.4028235e+38
+  InfectionRate: 1
+  DeathRate: 0.02
+--- !u!114 &335283382679112853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2318940163048237835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a4f8564d138e4088f1b369dc7bb40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  t_personal_infectious: 3.4028235e+38
+  t_start_incubation: 3.4028235e+38
+  t_start_infectious: 3.4028235e+38
+  t_personal_incubation: 3.4028235e+38
+  InfectionRate: 0.1
+  DeathRate: 0.03

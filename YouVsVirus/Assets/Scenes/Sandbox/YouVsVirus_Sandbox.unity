@@ -181,9 +181,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.0006171465
     width: 1
-    height: 1
+    height: 0.9987657
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -234,11 +234,65 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -8.888889, y: -5}
-  - {x: -8.888889, y: 5}
-  - {x: 8.888889, y: 5}
-  - {x: 8.888889, y: -5}
-  - {x: -8.888889, y: -5}
+  - {x: -8.896875, y: -5.0061774}
+  - {x: -8.896875, y: 5.0061774}
+  - {x: 8.896875, y: 5.0061774}
+  - {x: 8.896875, y: -5.0061774}
+  - {x: -8.896875, y: -5.0061774}
+--- !u!1 &728303572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 728303574}
+  - component: {fileID: 728303573}
+  m_Layer: 0
+  m_Name: SEIR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &728303573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728303572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38101bb614de8af4592155c505869548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  r_0: 0
+  S: 0
+  E: 0
+  I: 0
+  R: 0
+  max_E: 0
+  max_I: 0
+  max_R: 0
+  t_incubation: 0
+  t_infectious: 0
+  levelStats: {fileID: 0}
+--- !u!4 &728303574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728303572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.5449295, y: -3.5748384, z: -14.479555}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &742637914
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,10 +370,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4422b2b149cdc94297f2dd633b10b92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InfectionRate: 0.8
-  OutbreakRate: 0.05
+  InfectionRate: 0.2
+  OutbreakRate: 0.01
   IncubationTime: 20
-  RecoveryRate: 0.1
+  RecoveryRate: 0.04
   DeathRate: 0.02
 --- !u!4 &934205704
 Transform:
@@ -410,10 +464,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28dd20075ffd071478e771963e8a4072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infectionIsInitialized: 0
   CanvasFail: {fileID: 0}
   CanvasSucc: {fileID: 0}
+  CanvasEscape: {fileID: 0}
   PressSpaceCanv: {fileID: 0}
-  testMode: 1
   playerExposed: 0
   LevelTimeout: 0
   EndConditionMetDelay: 3

@@ -19,7 +19,6 @@ namespace Components
 
         protected Rigidbody2D myRigidbody = null;
 
-
         // The statistics object that counts the number of infected humans
         public LevelStats levelStats;
 
@@ -39,6 +38,10 @@ namespace Components
         public bool wasInfectedByPlayer = false;
 
         /// <summary>
+        /// human has mask?
+        /// </summary>
+        public bool withMask = false;
+        /// <summary>
         /// count number of infections for level 3
         /// </summary>
         private int num_inf = 1;
@@ -48,6 +51,8 @@ namespace Components
         /// This human's inital condition
         /// </summary>
         protected int _initialCondition = WELL;
+
+        //AbstractInfection myInfectionModel;
 
         /// <summary>
         /// Set the human's initial condition
@@ -92,7 +97,6 @@ namespace Components
         {
             _mycondition = condition;
             EndLevelControllerBase egc = LevelSettings.GetActiveEndLevelController();
-
             // Update the stats
             switch (condition)
             {
@@ -170,6 +174,7 @@ namespace Components
             // and again in the corresponding function
             mySpriteRenderer = GetComponent<SpriteRenderer>();
             myRigidbody = GetComponent<Rigidbody2D>();
+           
             // The player and npc class set their corresponding sprite images
             SetSpriteImages();
             // _initialCondition may have been modified by base classes
@@ -196,7 +201,7 @@ namespace Components
                 if (IsSusceptible())
                 {
                     // both friend and player have a 10% chance of getting exposed
-                    if (this.tag == "Player" || this.tag ==  "Friend")
+                    if (this.tag == "Player" || this.tag == "Friend")
                     {
                         if (UnityEngine.Random.value < 0.2)
                         {
@@ -210,8 +215,9 @@ namespace Components
                         SetCondition(EXPOSED);
 
                     }
-                }   
+                }
             }
+            
         }
 
 
@@ -221,7 +227,8 @@ namespace Components
         /// <returns>True if this human is infectious, false otherwise.</returns>
         public bool IsInfectious()
         {
-            return GetCondition() == EXPOSED || GetCondition() == INFECTIOUS;
+            return GetComponent<AbstractInfection>().IsInfectious(GetCondition());
+                //GetCondition() == EXPOSED || GetCondition() == INFECTIOUS;
         }
 
         /// <summary>

@@ -19,7 +19,7 @@ public class LevelSettings : MonoBehaviour
     /// <summary>
     /// Number of initially exposed NPCs.
     /// </summary>
-    public int NumberInitiallyExposed = 1;
+    public int NumberInitiallyExposed = 4;
 
     /// <summary>
     /// The social distancing factor for the level
@@ -36,6 +36,12 @@ public class LevelSettings : MonoBehaviour
     /// </summary>
     public float DayLength = 1f;
 
+
+    /// <summary>
+    /// Which infection model to use
+    /// </summary>
+    public bool ProbabilityBasedInfection = false;
+
     /// <summary>
     /// the current active scene
     /// </summary>
@@ -48,6 +54,7 @@ public class LevelSettings : MonoBehaviour
     {
         //  Make sure this object survives the scene change
         DontDestroyOnLoad(gameObject);
+
     }
 
     //  The globally unique, single LevelSettings object.

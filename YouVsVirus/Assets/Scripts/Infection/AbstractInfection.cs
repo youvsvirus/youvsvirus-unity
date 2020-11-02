@@ -19,7 +19,11 @@ namespace Infection
         /// </summary>
         protected HumanBase myHuman { get; private set; }
 
-
+        /// <summary>
+        /// Infects this human with a probability of InfectionRate per contact.
+        /// </summary>
+        public abstract bool IsInfectionSuccessful();
+  
         public virtual void Start()
         {
             myHuman = GetComponent<HumanBase>();
@@ -31,6 +35,6 @@ namespace Infection
         /// Notify the infection that the human has been exposed.
         /// </summary>
         public abstract void Expose();
-
+        public abstract bool IsInfectious(int condition);
     }
 }

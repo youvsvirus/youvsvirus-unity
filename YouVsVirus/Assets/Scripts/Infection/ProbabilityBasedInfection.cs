@@ -45,6 +45,17 @@ namespace Infection
         {
             daysSinceExposure = 0;
         }
+        public override bool IsInfectious(int condition)
+        {
+            return condition == HumanBase.EXPOSED || condition == HumanBase.INFECTIOUS;
+        }
+        /// <summary>
+        /// Infects this human with a probability of InfectionRate per contact.
+        /// </summary>
+        public override bool IsInfectionSuccessful()
+        {
+            return true;
+        }
 
         /// <summary>
         /// Update my human's condition

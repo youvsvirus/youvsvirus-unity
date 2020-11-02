@@ -17,6 +17,7 @@ namespace Components
         /// </summary>
         public float MinVelocity = 1.0f;
 
+
         /// <summary>
         /// the maximum velocity we allow for the npcs
         /// </summary>
@@ -72,11 +73,22 @@ namespace Components
         /// </summary>
         public override void SetSpriteImages()
         {
-            WellSprite = Resources.Load<Sprite>("SmileyPictures/npc_healthy");
-            ExposedSprite = Resources.Load<Sprite>("SmileyPictures/npc_exposed");
-            InfectiousSprite = Resources.Load<Sprite>("SmileyPictures/npc_infectious");
-            RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recovered");
-            DeadSprite = Resources.Load<Sprite>("SmileyPictures/npc_dead");
+            if (!withMask)
+            {
+                WellSprite = Resources.Load<Sprite>("SmileyPictures/npc_healthy");
+                ExposedSprite = Resources.Load<Sprite>("SmileyPictures/npc_exposed");
+                InfectiousSprite = Resources.Load<Sprite>("SmileyPictures/npc_infectious");
+                RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/recovered");
+                DeadSprite = Resources.Load<Sprite>("SmileyPictures/npc_dead");
+            }
+            else
+            {
+                WellSprite = Resources.Load<Sprite>("SmileyPictures/withMask/npc_healthy_mask");
+                ExposedSprite = Resources.Load<Sprite>("SmileyPictures//withMask/npc_exposed_mask");
+                InfectiousSprite = Resources.Load<Sprite>("SmileyPictures/withMask/npc_infectious_mask");
+                RecoveredSprite = Resources.Load<Sprite>("SmileyPictures/withMask/recovered_mask");
+                DeadSprite = Resources.Load<Sprite>("SmileyPictures/npc_dead");
+            }
         }
         /// <summary>
         /// NPC random movement
